@@ -9,4 +9,4 @@ SendMode "Event"
 #Include %A_ScriptDir%\lib/webhooksettings.ahk
 #Include %A_ScriptDir%\Lib\FindText.ahk
 #include %A_ScriptDir%\Lib\OCR-main\Lib\OCR.ahk
-#include %A_ScriptDir%\Lib\OCR-main\Lib\OCR.ahk 
+#include %A_ScriptDir%\Lib\PriorityPicker.ahk 

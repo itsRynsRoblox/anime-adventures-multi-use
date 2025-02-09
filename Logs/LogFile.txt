@@ -371,3 +371,69 @@ Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
 Configuration settings loaded successfully 00:00
 Selected Winter Event 00:01
 Don't forget to enable Click to Move! (I forget sometimes too!) 00:01
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.59m.19s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.01m.23s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.01m.50s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.02m.32s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.03m.45s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.04m.31s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.05m.06s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.05m.41s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.06m.04s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.06m.16s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.07m.55s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.10m.36s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:05
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.12m.07s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.15m.58s]
+Configuration settings loaded successfully 00:00
+Priority 19 set to regen 00:07
+Priority 19 set to yen 00:09
+Configuration settings saved successfully 00:15
+Priority 19 set to regen 00:53
+Configuration settings saved successfully 00:55
+Priority 19 set to yen 01:06
+Please select a gamemode before confirming 01:10
+Configuration settings saved successfully 01:11

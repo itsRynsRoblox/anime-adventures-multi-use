@@ -144,6 +144,12 @@ ShowSettingsGUI(*) {
     SettingsGUI.Add("Text", "x20 y30 c" uiTheme[1], "Navigation Key")
     global UINavBox := SettingsGUI.Add("Edit", "x20 y50 w20 h20 c" uiTheme[6], "\")
 
+    SettingsGUI.Add("GroupBox", "x160 y10 w115 h70 c" uiTheme[1], "Card Priority")
+    ;SettingsGUI.Add("Text", "x170 y30 c" uiTheme[1], "Navigation Key")
+    global PriorityPicker := SettingsGUI.Add("Button", "x170 y50 w95 h20", "Edit")
+
+    PriorityPicker.OnEvent("Click", (*) => OpenPriorityPicker())
+
     ; Save buttons
     webhookSaveBtn := SettingsGUI.Add("Button", "x460 y135 w120 h25", "Save Webhook")
     webhookSaveBtn.OnEvent("Click", (*) => SaveWebhookSettings())

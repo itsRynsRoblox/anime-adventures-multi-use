@@ -103,6 +103,12 @@ SaveSettings(*) {
         content .= "`nPriority4=" priority4.Text
         content .= "`nPriority5=" priority5.Text
         content .= "`nPriority6=" priority6.Text
+
+        content .= "`n[CardPriority]"
+        for index, dropDown in dropDowns
+            {
+                content .= (Format("`nCard{}={}", index+1, dropDown.Text))
+            }
         
         FileAppend(content, settingsFile)
         ProcessLog("Configuration settings saved successfully")
@@ -121,9 +127,30 @@ LoadSettings() {
         sections := StrSplit(content, "`n`n")
         
         for section in sections {
-            if (InStr(section, "Index=")) {
+            if (InStr(section, "CardPriority")) {
                 lines := StrSplit(section, "`n")
-                index := ""
+                
+                for line in lines {
+                    if line = "" {
+                        continue
+                    }
+                    
+                    if RegExMatch(line, "Card(\d+)=(\w+)", &match) {
+                        slot := match.1
+                        value := match.2
+                        
+                        priorityOrder[slot - 1] := value
+                        
+                        dropDown := dropDowns[slot - 1]
+                        
+                        if (dropDown) {
+                            dropDown.Text := value
+                        }
+                    }
+                }
+            }
+            else if (InStr(section, "Index=")) {
+                lines := StrSplit(section, "`n")
                 
                 for line in lines {
                     if line = "" {
