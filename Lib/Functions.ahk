@@ -384,6 +384,12 @@ OnConfirmClick(*) {
         MatchMaking.Visible := false
         ReturnLobbyBox.Visible := true
     }
+    ; Winter Event
+    else if (ModeDropdown.Text = "Winter Event") {
+        ProcessLog("Selected Winter Event")
+        MatchMaking.Visible := true
+        ReturnLobbyBox.Visible := true
+    }
     else {
         ProcessLog("Selected " ModeDropdown.Text " mode")
         MatchMaking.Visible := false

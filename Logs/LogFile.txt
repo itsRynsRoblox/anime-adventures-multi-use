@@ -137,3 +137,237 @@ Configuration settings loaded successfully 00:00
 ==Ryn's Anime Adventures v0.1==
   Start Time: [10h.54m.41s]
 Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.57m.55s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.07m.34s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:11
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.08m.27s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event mode 00:09
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:09
+Configuration settings saved successfully 00:10
+Moving to position for Winter Event 00:14
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.09m.10s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.10m.03s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event mode 00:04
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:04
+Moving to position for Winter Event 00:05
+Starting Winter Event 00:16
+Determining Movement Necessity on Map... 00:16
+No Map Found or Movement Unnecessary 01:02
+Successfully Loaded In 01:05
+Found Teleport to Spawn button 01:12
+Game started 01:15
+Placing Unit 1 (0/1) 01:16
+Unit Placed Successfully 01:25
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.11m.30s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.13m.46s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Act 1 00:10
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:10
+Moving to position for Haunted Academy 00:17
+Starting Haunted Academy - Act 1 00:24
+Determining Movement Necessity on Map... 00:33
+Detected map: Haunted Academy 00:36
+Successfully Loaded In 00:50
+Found Teleport to Spawn button 00:57
+Executing Movement for: Haunted Academy 00:58
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.14m.53s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.16m.45s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.17m.09s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:09
+Selected Winter Event mode 00:10
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:10
+Moving to position for Winter Event 00:12
+Starting Winter Event 00:23
+Determining Movement Necessity on Map... 00:23
+No Map Found or Movement Unnecessary 01:05
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.18m.21s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.19m.58s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event mode 00:04
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:04
+Moving to position for Winter Event 00:06
+Starting Winter Event 00:16
+Determining Movement Necessity on Map... 00:41
+No Map Found or Movement Unnecessary 01:03
+Successfully Loaded In 01:05
+Found Teleport to Spawn button 01:11
+Game started 01:15
+Placing Unit 1 (0/1) 01:15
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.21m.17s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.21m.47s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event mode 00:02
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:02
+Moving to position for Winter Event 00:04
+Starting Winter Event 00:14
+Determining Movement Necessity on Map... 00:46
+No Map Found or Movement Unnecessary 00:57
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.22m.47s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.23m.16s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event mode 00:03
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:03
+Moving to position for Winter Event 00:04
+Starting Winter Event 00:15
+Determining Movement Necessity on Map... 00:50
+No Map Found or Movement Unnecessary 00:58
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.24m.19s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.27m.08s]
+Configuration settings loaded successfully 00:00
+Selected Planet Greenie - Act 1 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Moving to position for Planet Greenie 00:10
+Starting Planet Greenie - Act 1 00:24
+Determining Movement Necessity on Map... 00:31
+No Map Found or Movement Unnecessary 00:44
+Successfully Loaded In 00:49
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.28m.02s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.28m.36s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Act 1 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
+Moving to position for Haunted Academy 00:08
+Starting Haunted Academy - Act 1 00:22
+Determining Movement Necessity on Map... 00:31
+Detected map: Haunted Academy 00:33
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.29m.22s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.33m.33s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event mode 00:35
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:35
+Moving to position for Winter Event 00:36
+Starting Winter Event 00:47
+Determining Movement Necessity on Map... 01:22
+Detected map: Winter Event 01:22
+Successfully Loaded In 01:34
+Found Teleport to Spawn button 01:41
+Executing Movement for: Winter Event 01:42
+Color not found. Turning again. 01:42
+Color found and clicked at: X542 Y469 01:44
+Game started 01:47
+Placing Unit 1 (0/1) 01:47
+Unit Placed Successfully 02:01
+Placed Unit 1 (1/1) 02:01
+Placing Unit 2 (0/1) 02:02
+Unit Placed Successfully 02:07
+Placed Unit 2 (1/1) 02:07
+Placing Unit 3 (0/1) 02:08
+Unit Placed Successfully 02:28
+Placed Unit 3 (1/1) 02:28
+All units placed to requested amounts 02:29
+Initiating Unit Upgrades... 02:29
+Auto Ability Enabled 02:33
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.36m.12s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.37m.57s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.38m.41s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.39m.14s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.39m.59s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.41m.28s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.42m.09s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.43m.41s]
+Configuration settings loaded successfully 00:00
+Please select both Story and Act before confirming 00:07
+Selected Planet Greenie - Act 2 00:11
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:11
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.44m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.44m.57s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.46m.47s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.47m.45s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:01
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:01

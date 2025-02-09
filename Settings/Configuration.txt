@@ -1,5 +1,5 @@
-Mode=Story
-Map=Haunted Academy
+Mode=
+
 
 Enabled1=1
 Enabled2=1

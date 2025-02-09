@@ -343,6 +343,27 @@ InfinityCastleMode() {
     RestartStage()
 }
 
+WinterEvent() {
+    ; Execute the movement pattern
+    ProcessLog("Moving to position for Winter Event")
+    WinterEventMovement()
+
+    ; Handle play mode selection
+    if (MatchMaking.Value) {
+        FindMatch()
+        Sleep 35000
+    } else {
+        PlayHere()
+    }
+    
+    ; Start stage
+    while !(ok := FindText(&X, &Y, 325, 520, 489, 587, 0, 0, ModeCancel)) {
+        WinterEventMovement()
+    }
+    ProcessLog("Starting Winter Event")
+    RestartStage()
+}
+
 ContractMode() {
    Sleep(15000)
    FixClick(33, 400)
@@ -527,6 +548,18 @@ InfCastleMovement() {
     sleep (4000)
     SendInput ("{a up}")
     Sleep (500)
+}
+
+WinterEventMovement() {
+    FixClick(85, 295) ; Click Play
+    sleep (1000)
+    SendInput ("{a up}")
+    Sleep 100
+    SendInput ("{a down}")
+    Sleep 6000
+    SendInput ("{a up}")
+    KeyWait "a" ; Wait for "d" to be fully processed
+    Sleep 1200
 }
 
 StartStory(map, StoryActDropdown) {
@@ -861,13 +894,21 @@ DetectMap() {
             "Cursed Festival", Cursed,
             "Nightmare Train", Nightmare,
             "Air Craft", AirCraft,
-            "Hellish City", Hellish
+            "Hellish City", Hellish,
+            "Winter Event", Winter
         )
 
         for mapName, pattern in mapPatterns {
-            if (ok := FindText(&X, &Y, 10, 90, 415, 160, 0, 0, pattern)) {
-                ProcessLog("Detected map: " mapName)
-                return mapName
+            if (ModeDropdown.Text = "Winter Event") {
+                if (ok := FindText(&X, &Y, 10, 70, 350, 205, 0, 0, pattern)) {
+                    ProcessLog("Detected map: " mapName)
+                    return mapName
+                }
+            } else {
+                if (ok := FindText(&X, &Y, 10, 90, 415, 160, 0, 0, pattern)) {
+                    ProcessLog("Detected map: " mapName)
+                    return mapName
+                }
             }
         }
         
@@ -910,6 +951,8 @@ HandleMapMovement(MapName) {
             MoveForAirCraft()
         case "Hellish City":
             MoveForHellish()
+        case "Winter Event":
+            MoveForWinterEvent()
     }
 }
 
@@ -1035,6 +1078,24 @@ MoveForAirCraft() {
 MoveForHellish() {
     Fixclick(600, 300, "Right")
     Sleep (7000)
+}
+
+MoveForWinterEvent() {
+    loop {
+        if FindAndClickColor() {
+            break
+        }
+        else {
+            ProcessLog("Color not found. Turning again.")
+            SendInput ("{Left up}")
+            Sleep 200
+            SendInput ("{Left down}")
+            Sleep 750
+            SendInput ("{Left up}")
+            KeyWait "Left" ; Wait for key to be fully processed
+            Sleep 200
+        }
+    }
 }
 
     
@@ -1225,6 +1286,9 @@ StartSelectedMode() {
     }
     else if (ModeDropdown.Text = "Contract") {
         ContractMode()
+    }
+    else if (ModeDropdown.Text = "Winter Event") {
+        WinterEvent()
     }
     else if (ModeDropdown.Text = "Cursed Womb") {
        ; CursedWomb()
