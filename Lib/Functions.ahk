@@ -524,3 +524,104 @@ FindAndClickColor(targetColor := (ModeDropdown.Text = "Winter Event" ? 0x006783 
 
     }
 }
+
+cardSelector() {
+    ProcessLog("Picking card in priority order")
+    if (ok := FindText(&X, &Y, 200, 239, 276, 270, 0, 0, UnitExistence)) {
+        FixClick(329, 184) ; close upg menu
+        sleep 100
+    }
+
+    FixClick(59, 572) ; Untarget Mouse
+    sleep 100
+
+    for index, priority in priorityOrder {
+        if (!textCards.Has(priority)) {
+			ProcessLog(Format("Card {} not available in textCards", priority))																
+            continue
+        }
+        if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, textCards.Get(priority))) {
+			
+			if (priority == "shield") {
+                if (RadioHighest.Value == 1) {
+                    ProcessLog("Picking highest shield debuff")
+                    if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, shield3)) {
+                        ProcessLog("Found shield 3")
+                    }
+                    else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, shield2)) {
+                        ProcessLog("Found shield 2")
+                    }
+                    else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, shield1)) {
+                        ProcessLog("Found shield 1")
+                    }
+                }
+
+            }
+
+            else if (priority == "speed") {
+                if (RadioHighest.Value == 1) {
+                    ProcessLog("Picking highest speed debuff")
+                    if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, speed3)) {
+                        ProcessLog("Found speed 3")
+                    }
+                    else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, speed2)) {
+                        ProcessLog("Found speed 2")
+                    }
+                    else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, speed1)) {
+                        ProcessLog("Found speed 1")
+                    }
+                }
+            }
+
+            else if (priority == "health") {
+                if (RadioHighest.Value == 1) {
+                    ProcessLog("Picking highest health debuff")
+                    if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, health3)) {
+                        ProcessLog("Found health 3")
+                    }
+                    else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, health2)) {
+                        ProcessLog("Found health 2")
+                    }
+                    else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, health1)) {
+                        ProcessLog("Found health 1")
+                    }
+                }
+            }
+
+            else if (priority == "regen") {
+                if (RadioHighest.Value == 1) {
+                    ProcessLog("Picking highest regen debuff")
+                    if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, regen3)) {
+                        ProcessLog("Found regen 3")
+                    }
+                    else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, regen2)) {
+                        ProcessLog("Found regen 2")
+                    }
+                    else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, regen1)) {
+                        ProcessLog("Found regen 1")
+                    }
+                }
+            }
+            
+            else if (priority == "yen") {
+				if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, yen2)) {
+					ProcessLog("Found yen 2")
+				}
+				else {
+					ProcessLog("Found yen 1")
+				}
+			}
+
+            FindText().Click(cardX, cardY, 0)
+            MouseMove 0, 10, 2, "R"
+            Click 2
+            sleep 1000
+            MouseMove 0, 120, 2, "R"
+            Click 2
+            ProcessLog(Format("Picked card: {}", priority))
+            sleep 5000
+            return
+        }
+    }
+    ProcessLog("Failed to pick a card")
+}

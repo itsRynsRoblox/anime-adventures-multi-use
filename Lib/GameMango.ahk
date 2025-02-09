@@ -41,9 +41,7 @@ PlacingUnits() {
         return MonitorStage()
     }
 
-    placementPoints := PlacementPatternDropdown.Text = "Circle" ? GenerateCirclePoints() : 
-                  PlacementPatternDropdown.Text = "Grid" ? GenerateGridPoints() : 
-                  GenerateRandomPoints()
+    placementPoints := PlacementPatternDropdown.Text = "Circle" ? GenerateCirclePoints() : PlacementPatternDropdown.Text = "Grid" ? GenerateGridPoints() : GenerateRandomPoints()
     
     ; Go through each slot
     for slotNum in [1, 2, 3, 4, 5, 6] {
@@ -85,6 +83,7 @@ PlacingUnits() {
                         
                         CheckAbility()
                         FixClick(560, 560) ; Move Click
+                        CheckForCardSelection()
                         break
                     }
                     
@@ -172,6 +171,7 @@ UpgradeUnits() {
                                 Sleep(200)
                                 CheckAbility()
                                 FixClick(560, 560) ; Move Click
+                                CheckForCardSelection()
                                 Reconnect()
                                 CheckEndAndRoute()
                             }
@@ -217,6 +217,7 @@ UpgradeUnits() {
                 Sleep(200)
                 CheckAbility()
                 FixClick(560, 560) ; Move Click
+                CheckForCardSelection()
                 Reconnect()
                 CheckEndAndRoute()
             }
@@ -1205,6 +1206,12 @@ CheckAbility() {
             FixClick(373, 237)  ; Turn ability on
             ProcessLog("Auto Ability Enabled")
         }
+    }
+}
+
+CheckForCardSelection() {
+    if (ok := FindText(&cardX, &cardY, 196, 204, 568, 278, 0, 0, pick_card)) {
+        cardSelector()
     }
 }
 
