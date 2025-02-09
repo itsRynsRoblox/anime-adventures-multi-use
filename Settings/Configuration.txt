@@ -1,0 +1,22 @@
+Mode=Story
+Map=Haunted Academy
+
+Enabled1=1
+Enabled2=1
+Enabled3=1
+Enabled4=0
+Enabled5=0
+Enabled6=0
+
+Placement1=1
+Placement2=1
+Placement3=1
+Placement4=1
+Placement5=1
+Placement6=1
+Priority1=1
+Priority2=2
+Priority3=3
+Priority4=4
+Priority5=5
+Priority6=6
