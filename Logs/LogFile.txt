@@ -1205,3 +1205,539 @@ Configuration settings loaded successfully 00:00
 ==Ryn's Anime Adventures v0.1==
   Start Time: [19h.45m.02s]
 Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.51m.35s]
+Configuration settings loaded successfully 00:00
+Selected Sacred Planet - Act 5 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.53m.43s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.58m.09s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.07m.52s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:26
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:27
+Configuration settings saved successfully 00:29
+Moving to position for Winter Event 00:40
+Starting Winter Event 00:50
+Determining Movement Necessity on Map... 00:51
+Detected map: Winter Event 01:23
+Successfully Loaded In 01:37
+Found Teleport to Spawn button 01:44
+Executing Movement for: Winter Event 01:45
+Color not found. Turning again. 01:45
+Color not found. Turning again. 01:46
+Color found and clicked at: X268 Y138 01:48
+Game started 01:51
+Placing Unit 1 (0/1) 01:51
+Unit Placed Successfully 02:14
+Placed Unit 1 (1/1) 02:15
+Picking card in priority order 02:15
+Picked card: speed 02:17
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.10m.15s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.20m.37s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:11
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:11
+Configuration settings saved successfully 00:14
+Moving to position for Winter Event 00:16
+Starting Winter Event 00:27
+Determining Movement Necessity on Map... 00:27
+Detected map: Winter Event 01:00
+Successfully Loaded In 01:14
+Found Teleport to Spawn button 01:20
+Executing Movement for: Winter Event 01:21
+Color not found. Turning again. 01:21
+Color found and clicked at: X573 Y471 01:23
+Game started 01:26
+Placing Unit 1 (0/1) 01:26
+Unit Placed Successfully 01:34
+Placed Unit 1 (1/1) 01:34
+Placing Unit 2 (0/1) 01:35
+Unit Placed Successfully 01:38
+Placed Unit 2 (1/1) 01:38
+Placing Unit 3 (0/1) 01:39
+Unit Placed Successfully 01:44
+Placed Unit 3 (1/1) 01:45
+Placing Unit 4 (0/1) 01:46
+Unit Placed Successfully 01:56
+Placed Unit 4 (1/1) 01:57
+Picking card in priority order 01:57
+Picked card: explosive_death_21 01:59
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.22m.38s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.24m.14s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:27
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:27
+Moving to position for Winter Event 00:31
+Checking for numbers... 00:41
+Sending number: 9963427 00:42
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.25m.00s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.25m.01s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:20
+Configuration settings saved successfully 00:23
+Selected Winter Event 00:25
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:25
+Moving to position for Winter Event 00:59
+Starting Winter Event 01:10
+Determining Movement Necessity on Map... 01:10
+Detected map: Winter Event 01:42
+Successfully Loaded In 01:57
+Found Teleport to Spawn button 02:03
+Executing Movement for: Winter Event 02:04
+Color not found. Turning again. 02:04
+Color found and clicked at: X226 Y450 02:06
+Game started 02:09
+Placing Unit 1 (0/3) 02:09
+Unit Placed Successfully 02:19
+Placed Unit 1 (1/3) 02:20
+Unit Placed Successfully 02:23
+Placed Unit 1 (2/3) 02:24
+Unit Placed Successfully 02:30
+Placed Unit 1 (3/3) 02:30
+Picking card in priority order 02:31
+Picked card: speed 02:33
+Placing Unit 2 (0/3) 02:38
+Unit Placed Successfully 02:44
+Placed Unit 2 (1/3) 02:44
+Unit Placed Successfully 02:50
+Placed Unit 2 (2/3) 02:51
+Unit Placed Successfully 02:57
+Placed Unit 2 (3/3) 02:57
+Placing Unit 3 (0/1) 02:58
+Unit Placed Successfully 03:03
+Placed Unit 3 (1/1) 03:04
+Placing Unit 4 (0/1) 03:05
+Unit Placed Successfully 03:15
+Placed Unit 4 (1/1) 03:16
+Placing Unit 5 (0/3) 03:16
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.28m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.29m.17s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:26
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:26
+Configuration settings saved successfully 00:31
+Moving to position for Winter Event 00:33
+Starting Winter Event 00:44
+Determining Movement Necessity on Map... 00:44
+Detected map: Winter Event 01:16
+Successfully Loaded In 01:30
+Found Teleport to Spawn button 01:37
+Executing Movement for: Winter Event 01:38
+Color not found. Turning again. 01:38
+Color found and clicked at: X538 Y484 01:40
+Game started 01:43
+Placing Unit 1 (0/3) 01:43
+Unit Placed Successfully 01:53
+Placed Unit 1 (1/3) 01:53
+Unit Placed Successfully 01:57
+Placed Unit 1 (2/3) 01:57
+Unit Placed Successfully 02:04
+Placed Unit 1 (3/3) 02:04
+Picking card in priority order 02:05
+Picked card: speed 02:07
+Placing Unit 2 (0/3) 02:12
+Unit Placed Successfully 02:17
+Placed Unit 2 (1/3) 02:18
+Unit Placed Successfully 02:24
+Placed Unit 2 (2/3) 02:24
+Unit Placed Successfully 02:30
+Placed Unit 2 (3/3) 02:31
+Placing Unit 3 (0/1) 02:32
+Unit Placed Successfully 02:37
+Placed Unit 3 (1/1) 02:37
+Placing Unit 4 (0/1) 02:38
+Unit Placed Successfully 02:46
+Placed Unit 4 (1/1) 02:47
+Placing Unit 5 (0/3) 02:47
+Unit Placed Successfully 03:14
+Placed Unit 5 (1/3) 03:14
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.32m.43s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.32m.54s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.33m.56s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:11
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:11
+Moving to position for Winter Event 00:17
+Starting Winter Event 00:27
+Determining Movement Necessity on Map... 00:27
+Detected map: Winter Event 01:01
+Successfully Loaded In 01:17
+Found Teleport to Spawn button 01:24
+Executing Movement for: Winter Event 01:25
+Color found and clicked at: X578 Y466 01:25
+Game started 02:11
+Placing Unit 1 (0/3) 02:11
+Unit Placed Successfully 02:21
+Placed Unit 1 (1/3) 02:22
+Unit Placed Successfully 02:25
+Placed Unit 1 (2/3) 02:26
+Unit Placed Successfully 02:32
+Placed Unit 1 (3/3) 02:32
+Placing Unit 2 (0/3) 02:33
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.36m.41s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.37m.57s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:07
+Selected Winter Event 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Moving to position for Winter Event 00:11
+Starting Winter Event 00:21
+Determining Movement Necessity on Map... 00:21
+Detected map: Winter Event 00:54
+Successfully Loaded In 01:08
+Found Teleport to Spawn button 01:15
+Executing Movement for: Winter Event 01:16
+Color not found. Turning again. 01:16
+Color found and clicked at: X578 Y470 01:18
+Game started 01:20
+Placing Unit 1 (0/3) 01:20
+Unit Placed Successfully 01:31
+Placed Unit 1 (1/3) 01:31
+Unit Placed Successfully 01:35
+Placed Unit 1 (2/3) 01:35
+Unit Placed Successfully 01:41
+Placed Unit 1 (3/3) 01:42
+Picking card in priority order 01:43
+Picked card: speed 01:45
+Placing Unit 2 (0/3) 01:50
+Unit Placed Successfully 01:55
+Placed Unit 2 (1/3) 01:55
+Unit Placed Successfully 02:04
+Placed Unit 2 (2/3) 02:05
+Unit Placed Successfully 02:13
+Placed Unit 2 (3/3) 02:14
+Placing Unit 3 (0/1) 02:15
+Unit Placed Successfully 02:25
+Placed Unit 3 (1/1) 02:26
+Placing Unit 4 (0/1) 02:27
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.40m.45s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.42m.00s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:13
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:13
+Configuration settings saved successfully 00:19
+Moving to position for Winter Event 00:21
+Starting Winter Event 00:32
+Determining Movement Necessity on Map... 00:32
+Detected map: Winter Event 01:04
+Successfully Loaded In 01:19
+Found Teleport to Spawn button 01:25
+Executing Movement for: Winter Event 01:26
+Color not found. Turning again. 01:26
+Color found and clicked at: X575 Y467 01:28
+Game started 01:31
+Placing Unit 1 (0/3) 01:31
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.43m.37s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.44m.59s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:07
+Selected Winter Event 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:09
+Moving to position for Winter Event 00:17
+Starting Winter Event 00:27
+Determining Movement Necessity on Map... 00:27
+Detected map: Winter Event 01:00
+Successfully Loaded In 01:14
+Found Teleport to Spawn button 01:21
+Executing Movement for: Winter Event 01:22
+Color not found. Turning again. 01:22
+Color found and clicked at: X233 Y450 01:23
+Game started 01:26
+Placing Unit 1 (0/3) 01:26
+Winter Event Testing 01:26
+Winter Event Testing 01:29
+Winter Event Testing 01:32
+Unit Placed Successfully 01:34
+Placed Unit 1 (1/3) 01:35
+Winter Event Testing 01:36
+Unit Placed Successfully 01:38
+Placed Unit 1 (2/3) 01:39
+Winter Event Testing 01:40
+Winter Event Testing 01:42
+Unit Placed Successfully 01:45
+Placed Unit 1 (3/3) 01:45
+Placing Unit 2 (0/3) 01:46
+Winter Event Testing 01:46
+Winter Event Testing 01:49
+Picking card in priority order 01:49
+Picked card: shield 01:51
+Unit Placed Successfully 01:59
+Placed Unit 2 (1/3) 01:59
+Winter Event Testing 02:00
+Winter Event Testing 02:03
+Unit Placed Successfully 02:05
+Placed Unit 2 (2/3) 02:06
+Winter Event Testing 02:07
+Winter Event Testing 02:09
+Unit Placed Successfully 02:12
+Placed Unit 2 (3/3) 02:12
+Placing Unit 3 (0/1) 02:13
+Winter Event Testing 02:13
+Winter Event Testing 02:16
+Unit Placed Successfully 02:19
+Placed Unit 3 (1/1) 02:19
+Placing Unit 4 (0/1) 02:20
+Winter Event Testing 02:20
+Winter Event Testing 02:23
+Winter Event Testing 02:26
+Winter Event Testing 02:28
+Unit Placed Successfully 02:31
+Placed Unit 4 (1/1) 02:31
+Placing Unit 5 (0/3) 02:32
+Winter Event Testing 02:32
+Winter Event Testing 02:35
+Winter Event Testing 02:38
+Winter Event Testing 02:40
+Picking card in priority order 02:40
+Picked card: health 02:42
+Winter Event Testing 02:50
+Winter Event Testing 02:53
+Winter Event Testing 02:56
+Winter Event Testing 02:58
+Winter Event Testing 03:01
+Winter Event Testing 03:04
+Winter Event Testing 03:06
+Winter Event Testing 03:09
+Winter Event Testing 03:12
+Winter Event Testing 03:15
+Winter Event Testing 03:18
+Winter Event Testing 03:21
+Winter Event Testing 03:23
+Winter Event Testing 03:26
+Winter Event Testing 03:29
+Winter Event Testing 03:31
+Winter Event Testing 03:34
+Winter Event Testing 03:37
+Winter Event Testing 03:39
+Winter Event Testing 03:42
+Winter Event Testing 03:45
+Winter Event Testing 03:48
+Winter Event Testing 03:51
+Winter Event Testing 03:54
+Winter Event Testing 03:56
+Winter Event Testing 03:59
+Winter Event Testing 04:02
+Winter Event Testing 04:04
+Winter Event Testing 04:07
+Winter Event Testing 04:10
+Winter Event Testing 04:13
+Winter Event Testing 04:15
+Winter Event Testing 04:19
+Winter Event Testing 04:21
+Winter Event Testing 04:24
+Winter Event Testing 04:27
+Winter Event Testing 04:29
+Winter Event Testing 04:32
+Picking card in priority order 04:32
+Picked card: range_1 04:34
+Winter Event Testing 04:42
+Winter Event Testing 04:45
+Winter Event Testing 04:47
+Winter Event Testing 04:50
+Winter Event Testing 04:53
+Winter Event Testing 04:56
+Winter Event Testing 04:59
+Winter Event Testing 05:02
+Winter Event Testing 05:04
+Winter Event Testing 05:07
+Winter Event Testing 05:10
+Winter Event Testing 05:12
+Winter Event Testing 05:15
+Winter Event Testing 05:18
+Winter Event Testing 05:20
+Winter Event Testing 05:23
+Winter Event Testing 05:26
+Winter Event Testing 05:29
+Winter Event Testing 05:32
+Winter Event Testing 05:35
+Winter Event Testing 05:37
+Winter Event Testing 05:40
+Winter Event Testing 05:43
+Winter Event Testing 05:45
+Winter Event Testing 05:48
+Winter Event Testing 05:51
+Winter Event Testing 05:54
+Winter Event Testing 05:56
+Winter Event Testing 05:59
+Winter Event Testing 06:02
+Winter Event Testing 06:05
+Winter Event Testing 06:08
+Winter Event Testing 06:10
+Winter Event Testing 06:13
+Winter Event Testing 06:16
+Winter Event Testing 06:19
+Winter Event Testing 06:21
+Winter Event Testing 06:24
+Picking card in priority order 06:24
+Picked card: new_path 06:26
+Winter Event Testing 06:34
+Winter Event Testing 06:36
+Winter Event Testing 06:39
+Winter Event Testing 06:42
+Winter Event Testing 06:45
+Winter Event Testing 06:48
+Winter Event Testing 06:50
+Winter Event Testing 06:53
+Winter Event Testing 06:56
+Winter Event Testing 06:59
+Winter Event Testing 07:01
+Winter Event Testing 07:04
+Winter Event Testing 07:07
+Winter Event Testing 07:09
+Winter Event Testing 07:12
+Winter Event Testing 07:15
+Winter Event Testing 07:18
+Checking win/loss status 07:23
+Defeat detected - Stage Length: 00:05:56 07:23
+No webhook configured - skipping webhook 07:23
+Found Lobby Text - Current Mode:  07:28
+Handling end case 07:28
+Return to lobby enabled 07:28
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [10h.52m.30s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.06m.04s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.08m.34s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:22
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:22
+Moving to position for Haunted Academy 00:26
+Starting Haunted Academy - Infinity 00:33
+Determining Movement Necessity on Map... 00:41
+Detected map: Contracts 00:45
+Successfully Loaded In 00:59
+Found Teleport to Spawn button 01:06
+Executing Movement for: Contracts 01:07
+Color not found. Turning again. 01:07
+Color not found. Turning again. 01:09
+Color not found. Turning again. 01:10
+Color not found. Turning again. 01:11
+Color not found. Turning again. 01:12
+Color not found. Turning again. 01:14
+Color not found. Turning again. 01:15
+Color not found. Turning again. 01:16
+Color not found. Turning again. 01:17
+Color not found. Turning again. 01:19
+Color not found. Turning again. 01:20
+Color not found. Turning again. 01:21
+Color not found. Turning again. 01:22
+Color not found. Turning again. 01:23
+Color not found. Turning again. 01:25
+Color not found. Turning again. 01:26
+Color not found. Turning again. 01:27
+Color not found. Turning again. 01:28
+Color not found. Turning again. 01:30
+Color not found. Turning again. 01:31
+Color not found. Turning again. 01:32
+Color not found. Turning again. 01:33
+Color not found. Turning again. 01:35
+Color not found. Turning again. 01:36
+Color not found. Turning again. 01:37
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.10m.14s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.12m.52s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:27
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:27
+Configuration settings saved successfully 00:29
+Moving to position for Haunted Academy 00:31
+Starting Haunted Academy - Infinity 00:45
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.13m.47s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:14
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:14
+Configuration settings saved successfully 00:32
+Moving to position for Haunted Academy 00:34
+Starting Haunted Academy - Infinity 00:41
+Determining Movement Necessity on Map... 00:50
+Detected map: Contracts 00:53
+Successfully Loaded In 01:06
+Found Teleport to Spawn button 01:13
+Executing Movement for: Contracts 01:14
+Color not found. Turning again. 01:14
+Color not found. Turning again. 01:16
+Color not found. Turning again. 01:17
+Color not found. Turning again. 01:18
+Color not found. Turning again. 01:19
+Color not found. Turning again. 01:21
+Color not found. Turning again. 01:22
+Color not found. Turning again. 01:23
+Color not found. Turning again. 01:24
+Color not found. Turning again. 01:26
+Color not found. Turning again. 01:27
+Color not found. Turning again. 01:28
+Color not found. Turning again. 01:29
+Color not found. Turning again. 01:31
+Color not found. Turning again. 01:32
+Color not found. Turning again. 01:33
+Color not found. Turning again. 01:34
+Color not found. Turning again. 01:36
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.15m.25s]
+Configuration settings loaded successfully 00:00

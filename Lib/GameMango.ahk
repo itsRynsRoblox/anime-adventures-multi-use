@@ -21,6 +21,7 @@ F3:: {
 }
 
 PlacingUnits() {
+    CheckForCardSelection()
     global successfulCoordinates
     successfulCoordinates := []
     placedCounts := Map()  
@@ -61,7 +62,7 @@ PlacingUnits() {
         ; If enabled, place all units for this slot
         if (enabled && placements > 0) {
             AddToLog("Placing Unit " slotNum " (0/" placements ")")
-            
+            CheckForCardSelection()
             ; Place all units for this slot
             while (placedCounts[slotNum] < placements) {
                 for point in placementPoints {
@@ -77,13 +78,12 @@ PlacingUnits() {
                         continue
                 
                     if PlaceUnit(point.x, point.y, slotNum) {
+                        CheckForCardSelection()
                         successfulCoordinates.Push({x: point.x, y: point.y, slot: slotNum})
                         placedCounts[slotNum] += 1
                         AddToLog("Placed Unit " slotNum " (" placedCounts[slotNum] "/" placements ")")
-                        
                         CheckAbility()
                         FixClick(560, 560) ; Move Click
-                        CheckForCardSelection()
                         break
                     }
                     
@@ -162,6 +162,7 @@ UpgradeUnits() {
                                 }
 
                                 if MaxUpgrade() {
+                                    CheckForCardSelection()
                                     upgradedCount[coord.slot]++
                                     AddToLog("Max upgrade reached for Unit " coord.slot " (" upgradedCount[coord.slot] "/" totalUnits[coord.slot] ")")
                                     successfulCoordinates.RemoveAt(index)
@@ -502,6 +503,10 @@ MonitorStage() {
             }
         }
 
+        if (mode = "Winter Event") {
+            CheckForCardSelection()
+        }
+
         ; Check for XP screen
         if CheckForXp() {
             AddToLog("Checking win/loss status")
@@ -511,7 +516,7 @@ MonitorStage() {
             stageLength := FormatStageTime(stageEndTime - stageStartTime)
 
             if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
-            ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
+                ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
             } 
             
             ; Check for Victory or Defeat
@@ -1241,6 +1246,10 @@ Reconnect() {
 }
 
 PlaceUnit(x, y, slot := 1) {
+    if (ModeDropdown.Text = "Winter Event") {
+        AddToLog("Test")
+        CheckForCardSelection()
+    }
     SendInput(slot)
     Sleep 50
     FixClick(x, y)
