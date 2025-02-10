@@ -63,14 +63,16 @@ setupOutputFile()
 aaMainUI.BackColor := uiTheme[2]
 global Webhookdiverter := aaMainUI.Add("Edit", "x0 y0 w1 h1 +Hidden", "") ; diversion
 uiBorders.Push(aaMainUI.Add("Text", "x0 y0 w1364 h1 +Background" uiTheme[3]))  ;Top line
-uiBorders.Push(aaMainUI.Add("Text", "x0 y0 w1 h630 +Background" uiTheme[3]))   ;Left line
+uiBorders.Push(aaMainUI.Add("Text", "x0 y0 w1 h697 +Background" uiTheme[3]))   ;Left line
 uiBorders.Push(aaMainUI.Add("Text", "x1363 y0 w1 h630 +Background" uiTheme[3])) ;Right line
+uiBorders.Push(aaMainUI.Add("Text", "x1363 y0 w1 h697 +Background" uiTheme[3])) ;Second Right line
 uiBackgrounds.Push(aaMainUI.Add("Text", "x3 y3 w1360 h27 +Background" uiTheme[2])) ;Title Top
 uiBorders.Push(aaMainUI.Add("Text", "x0 y30 w1363 h1 +Background" uiTheme[3])) ;Title bottom
 uiBorders.Push(aaMainUI.Add("Text", "x802 y30 w1 h600 +Background" uiTheme[3])) ;Roblox Right
 uiBorders.Push(aaMainUI.Add("Text", "x803 y433 w560 h1 +Background" uiTheme[3])) ;Process Top
 uiBorders.Push(aaMainUI.Add("Text", "x803 y461 w560 h1 +Background" uiTheme[3])) ;Process bottom
 uiBorders.Push(aaMainUI.Add("Text", "x0 y630 w1364 h1 +Background" uiTheme[3], "")) ;Roblox bottom
+uiBorders.Push(aaMainUI.Add("Text", "x0 y697 w1364 h1 +Background" uiTheme[3], "")) ;Roblox second bottom
 
 global robloxHolder := aaMainUI.Add("Text", "x3 y33 w797 h597 +Background" uiTheme[5], "") ;Roblox window box
 Global Discord := aaMainUI.Add("Picture", "x1255 y-4 w42 h42 +BackgroundTrans", Discord) ;Discord logo
@@ -81,10 +83,11 @@ global minimizeButton := aaMainUI.Add("Picture", "x1300 y3 w27 h27 +Background" 
 minimizeButton.OnEvent("Click", (*) => minimizeUI()) ;Minimize gui
 aaMainUI.SetFont("Bold s16 c" uiTheme[1], "Verdana") ;Font
 global windowTitle := aaMainUI.Add("Text", "x10 y3 w1200 h29 +BackgroundTrans", aaTitle "" . "" version) ;Title
+
 aaMainUI.Add("Text", "x805 y435 w558 h25 +Center +BackgroundTrans", "Process") ;Process header
 aaMainUI.SetFont("norm s11 c" uiTheme[1]) ;Font
-global process1 := aaMainUI.Add("Text", "x810 y470 w538 h18 +BackgroundTrans c" uiTheme[7], "➤ Created by Mist_Yuu (discord.gg/mistdomain)") ;Processes
-global process2 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") ;Processes 
+global process1 := aaMainUI.Add("Text", "x810 y470 w538 h18 +BackgroundTrans c" uiTheme[7], "➤ Original Creator: Mist_Yuu (discord.gg/mistdomain)") ;Processes
+global process2 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "➤ Version edited and maintained by Ryn") ;Processes 
 global process3 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
 global process4 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
 global process5 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
@@ -221,8 +224,10 @@ global MatchMaking := aaMainUI.Add("Checkbox", "x1035 y385 cffffff Hidden Checke
 global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y385 cffffff Checked", "Return To Lobby")
 global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y410 cffffff Checked", "Auto Ability")
 global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1005 y410 cffffff", "Priority Upgrade")
-global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1250 y405 w100 h180 Choose1 +Center", ["Random", "Grid", "Circle"])
-PlacementPatternText := aaMainUI.Add("Text", "x1250 y385 w105 h20", "Placement type")
+global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1250 y662 w100 h180 Choose1 +Center", ["Random", "Grid", "Circle", "Spiral", "Up and Down"])
+PlacementPatternText := aaMainUI.Add("Text", "x1250 y642 w105 h20", "Placement Type")
+PlaceSpeedText := aaMainUI.Add("Text", "x1123 y642 w115 h20", "Placement Speed")
+global PlaceSpeed := aaMainUI.Add("DropDownList", "x1130 y662 w100 h180 Choose1 +Center", ["2.25 sec", "2 sec", "2.5 sec", "2.75 sec", "3 sec"])
 placementSaveText := aaMainUI.Add("Text", "x807 y385 w80 h20", "Save Config")
 Hotkeytext := aaMainUI.Add("Text", "x807 y35 w200 h30", "F1: Position roblox")
 Hotkeytext2 := aaMainUI.Add("Text", "x807 y50 w200 h30", "F2: Start mango")
@@ -240,7 +245,7 @@ global RaidDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 
 global RaidActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Act 1", "Act 2", "Act 3", "Act 4", "Act 5"])
 global InfinityCastleDropdown := aaMainUI.Add("DropDownList", "x968 y53 w80 h180 Choose0 +Center", ["Normal", "Hard"])
 global ContractPageDropdown := aaMainUI.Add("DropDownList", "x968 y53 w80 h180 Choose0 +Center", ["Page 1", "Page 2","Page 3","Page 4","Page 5","Page 6", "Page 4-5"])
-global ContractJoinDropdown := aaMainUI.Add("DropDownList", "x1057 y53 w120 h180 Choose0 +Center", ["Creating", "Joining","Matchmaking"])
+global ContractJoinDropdown := aaMainUI.Add("DropDownList", "x1057 y53 w120 h180 Choose0 +Center", ["Creating", "Joining","Matchmaking", "Solo"])
 global ConfirmButton := aaMainUI.Add("Button", "x1218 y53 w80 h25", "Confirm")
 
 StoryDropdown.Visible := false
@@ -274,6 +279,7 @@ AddUnitCard(aaMainUI, index, x, y) {
     unit.BorderBottom := aaMainUI.Add("Text", Format("x{} y{} w552 h2 +Background{}", x, y+45, uiTheme[3]))
     unit.BorderLeft := aaMainUI.Add("Text", Format("x{} y{} w2 h45 +Background{}", x, y, uiTheme[3]))
     unit.BorderRight := aaMainUI.Add("Text", Format("x{} y{} w2 h45 +Background{}", x+550, y, uiTheme[3]))
+    unit.BorderRight := aaMainUI.Add("Text", Format("x{} y{} w2 h45 +Background{}", x+250, y, uiTheme[3]))
     aaMainUI.SetFont("s11 Bold c" uiTheme[1])
     unit.Title := aaMainUI.Add("Text", Format("x{} y{} w60 h25 +BackgroundTrans", x+30, y+18), "Unit " index)
 
@@ -318,7 +324,7 @@ Priority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose6 +Center Hi
 PriorityUpgrade.OnEvent("Click", TogglePriorityDropdowns)
 
 readInSettings()
-aaMainUI.Show("w1366 h633")
+aaMainUI.Show("w1366 h700")
 WinMove(0, 0,,, "ahk_id " aaMainUIHwnd)
 forceRobloxSize()  ; Initial force size and position
 SetTimer(checkRobloxSize, 600000)  ; Check every 10 minutes
@@ -326,7 +332,7 @@ SetTimer(checkRobloxSize, 600000)  ; Check every 10 minutes
 ;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS
 
 ;Process text
-ProcessLog(current) { 
+AddToLog(current) { 
     global process1, process2, process3, process4, process5, process6, process7, currentOutputFile, lastlog
 
     ; Remove arrow from all lines first
@@ -393,7 +399,7 @@ moveRobloxWindow() {
     global aaMainUIHwnd, offsetX, offsetY, rblxID
     
     if !WinExist(rblxID) {
-        ProcessLog("Waiting for Roblox window...")
+        AddToLog("Waiting for Roblox window...")
         return
     }
 
@@ -414,15 +420,15 @@ forceRobloxSize() {
         While !WinExist(rblxID) {
             Sleep(5000)
             if(checkCount >= 5) {
-                ProcessLog("Attempting to locate the Roblox window")
+                AddToLog("Attempting to locate the Roblox window")
             } 
             checkCount += 1
             if (checkCount > 12) { ; Give up after 1 minute
-                ProcessLog("Could not find Roblox window")
+                AddToLog("Could not find Roblox window")
                 return
             }
         }
-        ProcessLog("Found Roblox window")
+        AddToLog("Found Roblox window")
     }
 
     WinActivate(rblxID)
@@ -455,7 +461,7 @@ checkSizeTimer() {
     if (WinExist("ahk_exe RobloxPlayerBeta.exe")) {
         WinGetPos(&X, &Y, &OutWidth, &OutHeight, "ahk_exe RobloxPlayerBeta.exe")
         if (OutWidth != 816 || OutHeight != 638) {
-            ProcessLog("Fixing Roblox window size")
+            AddToLog("Fixing Roblox window size")
             moveRobloxWindow()
         }
     }

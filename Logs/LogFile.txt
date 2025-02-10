@@ -437,3 +437,771 @@ Configuration settings saved successfully 00:55
 Priority 19 set to yen 01:06
 Please select a gamemode before confirming 01:10
 Configuration settings saved successfully 01:11
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [13h.09m.47s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:53
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:53
+Configuration settings saved successfully 00:56
+Moving to position for Winter Event 01:00
+Starting Winter Event 01:10
+Determining Movement Necessity on Map... 01:10
+Detected map: Winter Event 01:44
+Successfully Loaded In 02:00
+Found Teleport to Spawn button 02:07
+Executing Movement for: Winter Event 02:08
+Color not found. Turning again. 02:08
+Color found and clicked at: X550 Y476 02:10
+Game started 02:12
+Placing Unit 1 (0/1) 02:12
+Unit Placed Successfully 02:58
+Placed Unit 1 (1/1) 02:59
+Placing Unit 2 (0/1) 03:00
+Unit Placed Successfully 03:07
+Placed Unit 2 (1/1) 03:07
+Placing Unit 3 (0/1) 03:08
+Unit Placed Successfully 03:18
+Placed Unit 3 (1/1) 03:18
+All units placed to requested amounts 03:19
+Initiating Unit Upgrades... 03:19
+Auto Ability Enabled 03:23
+Picking card in priority order 03:27
+Card range_3 not available in textCards 03:28
+Card attack_3 not available in textCards 03:28
+Card cooldown_3 not available in textCards 03:28
+Card range_2 not available in textCards 03:28
+Card attack_2 not available in textCards 03:28
+Card cooldown_2 not available in textCards 03:28
+Card blessing_2 not available in textCards 03:28
+Card range_1 not available in textCards 03:28
+Card attack_1 not available in textCards 03:28
+Card cooldown_1 not available in textCards 03:28
+Card blessing_1 not available in textCards 03:28
+Card shield not available in textCards 03:28
+Card explosive_death_21 not available in textCards 03:28
+Card explosive_death_3 not available in textCards 03:28
+Card speed not available in textCards 03:28
+Card health not available in textCards 03:28
+Card regen not available in textCards 03:28
+Found yen 1 03:28
+Picked card: yen 03:30
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [13h.13m.52s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:12
+Selected Winter Event 00:38
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:38
+Configuration settings saved successfully 00:42
+Moving to position for Winter Event 00:53
+Starting Winter Event 01:03
+Determining Movement Necessity on Map... 01:03
+Detected map: Winter Event 01:36
+Successfully Loaded In 01:51
+Found Teleport to Spawn button 01:58
+Executing Movement for: Winter Event 01:59
+Color not found. Turning again. 01:59
+Color found and clicked at: X194 Y442 02:01
+Game started 02:04
+Placing Unit 1 (0/1) 02:04
+Unit Placed Successfully 02:16
+Placed Unit 1 (1/1) 02:16
+Placing Unit 2 (0/1) 02:17
+Unit Placed Successfully 02:22
+Placed Unit 2 (1/1) 02:22
+Placing Unit 3 (0/1) 02:23
+Unit Placed Successfully 02:38
+Placed Unit 3 (1/1) 02:38
+All units placed to requested amounts 02:39
+Initiating Unit Upgrades... 02:39
+Auto Ability Enabled 02:43
+Picking card in priority order 03:25
+Card range_3 not available in textCards 03:26
+Card attack_3 not available in textCards 03:26
+Card cooldown_3 not available in textCards 03:26
+Card range_2 not available in textCards 03:26
+Card attack_2 not available in textCards 03:26
+Card cooldown_2 not available in textCards 03:26
+Card blessing_2 not available in textCards 03:26
+Card range_1 not available in textCards 03:26
+Card attack_1 not available in textCards 03:26
+Card cooldown_1 not available in textCards 03:26
+Card blessing_1 not available in textCards 03:26
+Card shield not available in textCards 03:26
+Card explosive_death_21 not available in textCards 03:26
+Card explosive_death_3 not available in textCards 03:26
+Card speed not available in textCards 03:26
+Card health not available in textCards 03:26
+Card regen not available in textCards 03:26
+Found yen 1 03:27
+Picked card: yen 03:28
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [13h.17m.30s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [13h.34m.01s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [14h.34m.49s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [14h.39m.29s]
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [14h.39m.40s]
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [14h.40m.33s]
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [14h.41m.21s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [14h.43m.43s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [14h.44m.06s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [14h.44m.29s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [14h.45m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [14h.46m.12s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [15h.36m.09s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [15h.37m.07s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [15h.37m.38s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:28
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:28
+Configuration settings saved successfully 00:34
+Moving to position for Winter Event 00:38
+Starting Winter Event 00:48
+Determining Movement Necessity on Map... 00:48
+Detected map: Winter Event 01:31
+Successfully Loaded In 01:46
+Found Teleport to Spawn button 01:53
+Executing Movement for: Winter Event 01:54
+Color not found. Turning again. 01:54
+Color found and clicked at: X568 Y464 01:56
+Game started 01:58
+Placing Unit 1 (0/1) 01:59
+Unit Placed Successfully 02:13
+Placed Unit 1 (1/1) 02:13
+Placing Unit 2 (0/1) 02:14
+Unit Placed Successfully 02:17
+Placed Unit 2 (1/1) 02:17
+Placing Unit 3 (0/1) 02:18
+Unit Placed Successfully 02:33
+Placed Unit 3 (1/1) 02:33
+All units placed to requested amounts 02:34
+Initiating Unit Upgrades... 02:34
+Auto Ability Enabled 02:38
+Picking card in priority order 03:20
+Picked card: range_1 03:22
+Stage ended during upgrades, proceeding to results 04:44
+Checking win/loss status 04:46
+Defeat detected - Stage Length: 00:02:47 04:46
+No webhook configured - skipping webhook 04:46
+Found Lobby Text - Current Mode:  04:50
+Handling end case 04:50
+Replaying 04:50
+Determining Movement Necessity on Map... 04:54
+Detected map: Winter Event 04:54
+Successfully Loaded In 05:09
+Found Teleport to Spawn button 05:15
+Executing Movement for: Winter Event 05:16
+Color not found. Turning again. 05:17
+Color found and clicked at: X543 Y476 05:18
+Game started 05:21
+Placing Unit 1 (0/1) 05:21
+Unit Placed Successfully 05:33
+Placed Unit 1 (1/1) 05:33
+Placing Unit 2 (0/1) 05:34
+Unit Placed Successfully 05:37
+Placed Unit 2 (1/1) 05:37
+Placing Unit 3 (0/1) 05:38
+Unit Placed Successfully 05:48
+Placed Unit 3 (1/1) 05:48
+Picking card in priority order 05:48
+Picked card: speed 05:50
+All units placed to requested amounts 05:56
+Initiating Unit Upgrades... 05:56
+Auto Ability Enabled 06:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [15h.43m.42s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [16h.25m.10s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [16h.27m.36s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:12
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:12
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [16h.33m.08s]
+Configuration settings loaded successfully 00:00
+Selected Planet Greenie - Infinity 00:09
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:09
+Configuration settings saved successfully 00:20
+Moving to position for Planet Greenie 00:22
+Starting Planet Greenie - Infinity 00:36
+Determining Movement Necessity on Map... 00:43
+No Map Found or Movement Unnecessary 01:03
+Successfully Loaded In 01:04
+Found Teleport to Spawn button 01:10
+Game started 01:14
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [16h.34m.27s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [16h.35m.50s]
+Configuration settings loaded successfully 00:00
+Selected Planet Greenie - Infinity 00:11
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:11
+Configuration settings saved successfully 00:15
+Moving to position for Planet Greenie 00:20
+Starting Planet Greenie - Infinity 00:27
+Determining Movement Necessity on Map... 00:34
+No Map Found or Movement Unnecessary 00:51
+Successfully Loaded In 00:52
+Found Teleport to Spawn button 00:59
+Game started 01:03
+Placing Unit 1 (0/1) 01:03
+Unit Placed Successfully 01:13
+Placed Unit 1 (1/1) 01:13
+Placing Unit 2 (0/1) 01:14
+Unit Placed Successfully 01:16
+Placed Unit 2 (1/1) 01:17
+Placing Unit 3 (0/1) 01:18
+Unit Placed Successfully 01:25
+Placed Unit 3 (1/1) 01:25
+All units placed to requested amounts 01:26
+Initiating Unit Upgrades... 01:26
+Auto Ability Enabled 01:30
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [16h.38m.15s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [16h.45m.06s]
+Configuration settings loaded successfully 00:00
+Selected Planet Greenie - Infinity 00:14
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:14
+Configuration settings saved successfully 00:18
+Moving to position for Planet Greenie 00:25
+Starting Planet Greenie - Infinity 00:39
+Determining Movement Necessity on Map... 00:45
+No Map Found or Movement Unnecessary 01:03
+Successfully Loaded In 01:04
+Found Teleport to Spawn button 01:11
+Game started 01:15
+Placing Unit 1 (0/1) 01:15
+Unit Placed Successfully 01:24
+Placed Unit 1 (1/1) 01:25
+Placing Unit 2 (0/1) 01:26
+Unit Placed Successfully 01:28
+Placed Unit 2 (1/1) 01:29
+Placing Unit 3 (0/1) 01:29
+Unit Placed Successfully 01:34
+Placed Unit 3 (1/1) 01:35
+All units placed to requested amounts 01:36
+Initiating Unit Upgrades... 01:36
+Auto Ability Enabled 01:39
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [16h.46m.48s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [17h.09m.49s]
+Configuration settings loaded successfully 00:00
+Please select both Story and Act before confirming 00:04
+Selected Planet Greenie - Act 1 00:06
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:06
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [17h.10m.05s]
+Configuration settings loaded successfully 00:00
+Selected Planet Greenie - Infinity 00:06
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:06
+Configuration settings saved successfully 00:10
+Moving to position for Planet Greenie 00:14
+Starting Planet Greenie - Infinity 00:27
+Determining Movement Necessity on Map... 00:34
+No Map Found or Movement Unnecessary 00:52
+Successfully Loaded In 00:53
+Found Teleport to Spawn button 01:00
+Game started 01:03
+Placing Unit 1 (0/1) 01:04
+Unit Placed Successfully 01:15
+Placed Unit 1 (1/1) 01:16
+Placing Unit 2 (0/1) 01:17
+Unit Placed Successfully 01:19
+Placed Unit 2 (1/1) 01:19
+Placing Unit 3 (0/1) 01:20
+Unit Placed Successfully 01:25
+Placed Unit 3 (1/1) 01:26
+All units placed to requested amounts 01:26
+Initiating Unit Upgrades... 01:26
+Auto Ability Enabled 01:30
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [17h.11m.46s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [17h.32m.04s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [17h.32m.14s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [17h.39m.08s]
+Configuration settings loaded successfully 00:00
+Selected Planet Greenie - Infinity 01:16
+Don't forget to enable Click to Move! (I forget sometimes too!) 01:16
+Configuration settings saved successfully 01:17
+Configuration settings saved successfully 01:19
+Moving to position for Planet Greenie 01:20
+Starting Planet Greenie - Infinity 01:27
+Determining Movement Necessity on Map... 01:33
+No Map Found or Movement Unnecessary 01:43
+Successfully Loaded In 01:44
+Found Teleport to Spawn button 01:51
+Game started 01:54
+Placing Unit 1 (0/1) 01:55
+Unit Placed Successfully 02:14
+Placed Unit 1 (1/1) 02:14
+Placing Unit 2 (0/1) 02:15
+Unit Placed Successfully 02:27
+Placed Unit 2 (1/1) 02:27
+Placing Unit 3 (0/1) 02:28
+Unit Placed Successfully 02:40
+Placed Unit 3 (1/1) 02:41
+All units placed to requested amounts 02:42
+Initiating Unit Upgrades... 02:42
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [17h.41m.56s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [17h.47m.52s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.04m.10s]
+Configuration settings loaded successfully 00:00
+Selected  -  01:26
+Don't forget to enable Click to Move! (I forget sometimes too!) 01:26
+Configuration settings saved successfully 01:29
+Moving to Cursed womb 01:31
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.05m.52s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.06m.39s]
+Configuration settings loaded successfully 00:00
+Selected  -  00:09
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:10
+Moving to Cursed womb 00:12
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.07m.07s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.09m.18s]
+Configuration settings loaded successfully 00:00
+Selected  -  00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+Configuration settings saved successfully 00:06
+Moving to Cursed womb 00:08
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.09m.52s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.11m.00s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:07
+Selected  -  00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
+Moving to Cursed womb 00:09
+Found Key Purchase Attempt 00:27
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.11m.31s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.18m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.29m.05s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.31m.00s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.31m.59s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.32m.55s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.33m.08s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.35m.31s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.35m.59s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.36m.14s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.36m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.40m.19s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.45m.35s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.52m.04s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.52m.52s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.53m.56s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.55m.26s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 01:26
+Don't forget to enable Click to Move! (I forget sometimes too!) 01:26
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.57m.37s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.57m.55s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.58m.41s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [18h.59m.13s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.00m.34s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.01m.17s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.02m.03s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.02m.15s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.02m.29s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.02m.41s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.02m.58s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.03m.16s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.03m.34s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.04m.45s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.05m.22s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.06m.25s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.07m.08s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.07m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.07m.56s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.08m.20s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.08m.37s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.10m.00s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 01:02
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.11m.06s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.12m.21s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.14m.31s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4-5 - Creating 00:12
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:12
+Pattern selected: Page 4 00:33
+Creating contract portal on page 4 00:35
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.15m.17s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4-5 - Creating 00:16
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:16
+Pattern selected: Page 4 00:38
+Creating contract portal on page 4 00:39
+Waiting 20 seconds for others to join 01:00
+Joining Contract Mode 01:00
+Determining Movement Necessity on Map... 01:03
+No Map Found or Movement Unnecessary 01:09
+Successfully Loaded In 01:10
+Found Teleport to Spawn button 01:17
+Game started 01:20
+Placing Unit 1 (0/1) 01:21
+Unit Placed Successfully 01:23
+Placed Unit 1 (1/1) 01:24
+Placing Unit 2 (0/1) 01:25
+Unit Placed Successfully 01:30
+Placed Unit 2 (1/1) 01:30
+Placing Unit 3 (0/1) 01:31
+Unit Placed Successfully 01:36
+Placed Unit 3 (1/1) 01:37
+Placing Unit 4 (0/1) 01:38
+Unit Placed Successfully 01:48
+Placed Unit 4 (1/1) 01:49
+Placing Unit 5 (0/1) 01:49
+Unit Placed Successfully 02:00
+Placed Unit 5 (1/1) 02:00
+Placing Unit 6 (0/1) 02:01
+Unit Placed Successfully 02:15
+Placed Unit 6 (1/1) 02:15
+All units placed to requested amounts 02:16
+Initiating Unit Upgrades... 02:16
+Auto Ability Enabled 02:20
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.18m.09s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.28m.49s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4-5 - Solo 00:37
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:37
+Pattern selected: Page 4 01:01
+Attempting to start solo 01:02
+Joining Contract Mode 01:03
+Determining Movement Necessity on Map... 01:06
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.30m.03s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.30m.27s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4-5 - Solo 00:19
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:19
+Configuration settings saved successfully 00:22
+Pattern selected: Page 4 00:43
+Attempting to start solo 00:44
+Joining Contract Mode 00:45
+Determining Movement Necessity on Map... 00:48
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.31m.22s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.33m.22s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4-5 - Solo 00:16
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:16
+Configuration settings saved successfully 00:17
+Pattern selected: Page 4 00:38
+Attempting to start solo 00:40
+Joining Contract Mode 00:41
+Determining Movement Necessity on Map... 00:44
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.34m.19s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4-5 - Solo 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Pattern selected: Page 4 00:33
+Attempting to start solo 00:34
+Joining Contract Mode 00:36
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.34m.59s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.35m.56s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4-5 - Solo 00:09
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:09
+Pattern selected: Page 4 00:29
+Attempting to start solo 00:31
+Joining Contract Mode 00:32
+Determining Movement Necessity on Map... 00:35
+Detected map: Contracts 00:36
+Successfully Loaded In 00:50
+Found Teleport to Spawn button 00:57
+Executing Movement for: Contracts 00:58
+Color not found. Turning again. 00:58
+Color not found. Turning again. 01:00
+Color not found. Turning again. 01:01
+Color not found. Turning again. 01:02
+Color not found. Turning again. 01:03
+Color not found. Turning again. 01:05
+Color found and clicked at: X579 Y436 01:06
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.37m.06s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.38m.23s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4-5 - Solo 01:00
+Don't forget to enable Click to Move! (I forget sometimes too!) 01:00
+Pattern selected: Page 4 01:22
+Attempting to start solo 01:24
+Joining Contract Mode 01:25
+Determining Movement Necessity on Map... 01:28
+Detected map: Contracts 01:29
+Successfully Loaded In 01:43
+Found Teleport to Spawn button 01:50
+Executing Movement for: Contracts 01:51
+Color found and clicked at: X130 Y159 01:52
+Game started 01:55
+Placing Unit 1 (0/1) 01:55
+Unit Placed Successfully 01:57
+Placed Unit 1 (1/1) 01:58
+Placing Unit 2 (0/1) 01:59
+Unit Placed Successfully 02:04
+Placed Unit 2 (1/1) 02:04
+Placing Unit 3 (0/1) 02:05
+Unit Placed Successfully 02:11
+Placed Unit 3 (1/1) 02:11
+Placing Unit 4 (0/1) 02:12
+Unit Placed Successfully 02:22
+Placed Unit 4 (1/1) 02:23
+Placing Unit 5 (0/1) 02:24
+Unit Placed Successfully 02:37
+Placed Unit 5 (1/1) 02:37
+Placing Unit 6 (0/1) 02:38
+Unit Placed Successfully 02:51
+Placed Unit 6 (1/1) 02:52
+All units placed to requested amounts 02:53
+Initiating Unit Upgrades... 02:53
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.41m.25s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.42m.25s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [19h.45m.02s]
+Configuration settings loaded successfully 00:00

@@ -57,7 +57,7 @@ readInSettings() {
                 case "Priority6": priority6.Text := parts[2]
             }
         }
-        ProcessLog("Configuration settings loaded successfully")
+        AddToLog("Configuration settings loaded successfully")
     }
 }
 
@@ -111,7 +111,7 @@ SaveSettings(*) {
             }
         
         FileAppend(content, settingsFile)
-        ProcessLog("Configuration settings saved successfully")
+        AddToLog("Configuration settings saved successfully")
     }
 }
 
@@ -169,7 +169,7 @@ LoadSettings() {
                 }
             }
         }
-        ProcessLog("Auto settings loaded successfully")
+        AddToLog("Auto settings loaded successfully")
     }
 }
 
@@ -177,7 +177,7 @@ CheckBanner(unitName) {
 
     ; First check if Roblox window exists
     if !WinExist(rblxID) {
-        ProcessLog("Roblox window not found - skipping banner check")
+        AddToLog("Roblox window not found - skipping banner check")
         return false
     }
 
@@ -185,7 +185,7 @@ CheckBanner(unitName) {
     WinGetPos(&robloxX, &robloxY, &rblxW, &rblxH, rblxID)
     
     detectionCount := 0
-    ProcessLog("Checking for: " unitName)
+    AddToLog("Checking for: " unitName)
 
     ; Split unit name into individual words
     unitName := Trim(unitName)  ; Remove spaces
@@ -216,19 +216,19 @@ CheckBanner(unitName) {
     }
 
     if (detectionCount >= 1) {
-        ProcessLog("Found " unitName " in banner")
+        AddToLog("Found " unitName " in banner")
         try {
             BannerFound()
         }
         return true
     }
 
-    ProcessLog("Did not find " unitName " in banner")
+    AddToLog("Did not find " unitName " in banner")
     return false
 }
 
 SaveBannerSettings(*) {
-    ProcessLog("Saving Banner Configuration")
+    AddToLog("Saving Banner Configuration")
     
     if FileExist("Settings\BannerUnit.txt")
         FileDelete("Settings\BannerUnit.txt")
@@ -237,7 +237,7 @@ SaveBannerSettings(*) {
 }
 
 SavePsSettings(*) {
-    ProcessLog("Saving Private Server")
+    AddToLog("Saving Private Server")
     
     if FileExist("Settings\PrivateServer.txt")
         FileDelete("Settings\PrivateServer.txt")
@@ -246,7 +246,7 @@ SavePsSettings(*) {
 }
 
 SaveUINavSettings(*) {
-    ProcessLog("Saving UI Navigation Key")
+    AddToLog("Saving UI Navigation Key")
     
     if FileExist("Settings\UINavigation.txt")
         FileDelete("Settings\UINavigation.txt")
@@ -352,17 +352,17 @@ OnRaidChange(*) {
 
 OnConfirmClick(*) {
     if (ModeDropdown.Text = "") {
-        ProcessLog("Please select a gamemode before confirming")
+        AddToLog("Please select a gamemode before confirming")
         return
     }
 
     ; For Story mode, check if both Story and Act are selected
     if (ModeDropdown.Text = "Story") {
         if (StoryDropdown.Text = "" || StoryActDropdown.Text = "") {
-            ProcessLog("Please select both Story and Act before confirming")
+            AddToLog("Please select both Story and Act before confirming")
             return
         }
-        ProcessLog("Selected " StoryDropdown.Text " - " StoryActDropdown.Text)
+        AddToLog("Selected " StoryDropdown.Text " - " StoryActDropdown.Text)
         MatchMaking.Visible := (StoryActDropdown.Text = "Infinity")
         ReturnLobbyBox.Visible := (StoryActDropdown.Text = "Infinity")
         NextLevelBox.Visible := (StoryActDropdown.Text != "Infinity")
@@ -370,60 +370,60 @@ OnConfirmClick(*) {
     ; For Legend mode, check if both Legend and Act are selected
     else if (ModeDropdown.Text = "Legend") {
         if (LegendDropDown.Text = "" || LegendActDropdown.Text = "") {
-            ProcessLog("Please select both Legend Stage and Act before confirming")
+            AddToLog("Please select both Legend Stage and Act before confirming")
             return
         }
-        ProcessLog("Selected " LegendDropDown.Text " - " LegendActDropdown.Text)
+        AddToLog("Selected " LegendDropDown.Text " - " LegendActDropdown.Text)
         MatchMaking.Visible := true
         ReturnLobbyBox.Visible := true
     }
         ; For Cursed Womb, check if both Legend and Act are selected
     else if (ModeDropdown.Text = "Cursed Womb") {
-        ProcessLog("Selected " LegendDropDown.Text " - " LegendActDropdown.Text)
+        AddToLog("Selected " LegendDropDown.Text " - " LegendActDropdown.Text)
     }
     ; For Raid mode, check if both Raid and RaidAct are selected
     else if (ModeDropdown.Text = "Raid") {
         if (RaidDropdown.Text = "" || RaidActDropdown.Text = "") {
-            ProcessLog("Please select both Raid and Act before confirming")
+            AddToLog("Please select both Raid and Act before confirming")
             return
         }
-        ProcessLog("Selected " RaidDropdown.Text " - " RaidActDropdown.Text)
+        AddToLog("Selected " RaidDropdown.Text " - " RaidActDropdown.Text)
         MatchMaking.Visible := true
         ReturnLobbyBox.Visible := true
     }
     ; For Infinity Castle, check if mode is selected
     else if (ModeDropdown.Text = "Infinity Castle") {
     if (InfinityCastleDropdown.Text = "") {
-        ProcessLog("Please select an Infinity Castle difficulty before confirming")
+        AddToLog("Please select an Infinity Castle difficulty before confirming")
         return
     }
-    ProcessLog("Selected Infinity Castle - " InfinityCastleDropdown.Text)
+    AddToLog("Selected Infinity Castle - " InfinityCastleDropdown.Text)
     MatchMaking.Visible := false  
     ReturnLobbyBox.Visible := false
     }
     ; For Contract mode
     else if (ModeDropdown.Text = "Contract") {
         if (ContractPageDropdown.Text = "" || ContractJoinDropdown.Text = "") {
-            ProcessLog("Please select both Contract Page and Join Type before confirming")
+            AddToLog("Please select both Contract Page and Join Type before confirming")
             return
         }
-        ProcessLog("Selected Contract Page " ContractPageDropdown.Text " - " ContractJoinDropdown.Text)
+        AddToLog("Selected Contract Page " ContractPageDropdown.Text " - " ContractJoinDropdown.Text)
         MatchMaking.Visible := false
         ReturnLobbyBox.Visible := true
     }
     ; Winter Event
     else if (ModeDropdown.Text = "Winter Event") {
-        ProcessLog("Selected Winter Event")
+        AddToLog("Selected Winter Event")
         MatchMaking.Visible := true
         ReturnLobbyBox.Visible := true
     }
     else {
-        ProcessLog("Selected " ModeDropdown.Text " mode")
+        AddToLog("Selected " ModeDropdown.Text " mode")
         MatchMaking.Visible := false
         ReturnLobbyBox.Visible := false
     }
 
-    ProcessLog("Don't forget to enable Click to Move! (I forget sometimes too!)")
+    AddToLog("Don't forget to enable Click to Move! (I forget sometimes too!)")
 
     ; Hide all controls if validation passes
     ModeDropdown.Visible := false
@@ -454,7 +454,7 @@ FixClick(x, y, LR := "Left") {
  
 CaptchaDetect(x, y, w, h, inputX, inputY) {
     detectionCount := 0
-    ProcessLog("Checking for numbers...")
+    AddToLog("Checking for numbers...")
     Loop 10 {
         try {
             result := OCR.FromRect(x, y, w, h, "FirstFromAvailableLanguages", 
@@ -478,7 +478,7 @@ CaptchaDetect(x, y, w, h, inputX, inputY) {
                         FixClick(inputX, inputY)
                         Sleep(300)
                         
-                        ProcessLog("Sending number: " number)
+                        AddToLog("Sending number: " number)
                         for digit in StrSplit(number) {
                             Send(digit)
                             Sleep(120)
@@ -491,7 +491,7 @@ CaptchaDetect(x, y, w, h, inputX, inputY) {
         }
         Sleep(200)  
     }
-    ProcessLog("Could not detect valid captcha")
+    AddToLog("Could not detect valid captcha")
     return false
 }
 
@@ -519,14 +519,14 @@ FindAndClickColor(targetColor := (ModeDropdown.Text = "Winter Event" ? 0x006783 
     if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, targetColor, 0)) {
         ; Color found, click on the detected coordinates
         FixClick(foundX, foundY, "Right")
-        ProcessLog("Color found and clicked at: X" foundX " Y" foundY)
+        AddToLog("Color found and clicked at: X" foundX " Y" foundY)
         return true
 
     }
 }
 
 cardSelector() {
-    ProcessLog("Picking card in priority order")
+    AddToLog("Picking card in priority order")
     if (ok := FindText(&X, &Y, 200, 239, 276, 270, 0, 0, UnitExistence)) {
         FixClick(329, 184) ; close upg menu
         sleep 100
@@ -537,22 +537,22 @@ cardSelector() {
 
     for index, priority in priorityOrder {
         if (!textCards.Has(priority)) {
-			ProcessLog(Format("Card {} not available in textCards", priority))																
+			;AddToLog(Format("Card {} not available in textCards", priority))																
             continue
         }
         if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, textCards.Get(priority))) {
 			
 			if (priority == "shield") {
                 if (RadioHighest.Value == 1) {
-                    ProcessLog("Picking highest shield debuff")
+                    AddToLog("Picking highest shield debuff")
                     if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, shield3)) {
-                        ProcessLog("Found shield 3")
+                        AddToLog("Found shield 3")
                     }
                     else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, shield2)) {
-                        ProcessLog("Found shield 2")
+                        AddToLog("Found shield 2")
                     }
                     else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, shield1)) {
-                        ProcessLog("Found shield 1")
+                        AddToLog("Found shield 1")
                     }
                 }
 
@@ -560,55 +560,55 @@ cardSelector() {
 
             else if (priority == "speed") {
                 if (RadioHighest.Value == 1) {
-                    ProcessLog("Picking highest speed debuff")
+                    AddToLog("Picking highest speed debuff")
                     if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, speed3)) {
-                        ProcessLog("Found speed 3")
+                        AddToLog("Found speed 3")
                     }
                     else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, speed2)) {
-                        ProcessLog("Found speed 2")
+                        AddToLog("Found speed 2")
                     }
                     else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, speed1)) {
-                        ProcessLog("Found speed 1")
+                        AddToLog("Found speed 1")
                     }
                 }
             }
 
             else if (priority == "health") {
                 if (RadioHighest.Value == 1) {
-                    ProcessLog("Picking highest health debuff")
+                    AddToLog("Picking highest health debuff")
                     if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, health3)) {
-                        ProcessLog("Found health 3")
+                        AddToLog("Found health 3")
                     }
                     else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, health2)) {
-                        ProcessLog("Found health 2")
+                        AddToLog("Found health 2")
                     }
                     else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, health1)) {
-                        ProcessLog("Found health 1")
+                        AddToLog("Found health 1")
                     }
                 }
             }
 
             else if (priority == "regen") {
                 if (RadioHighest.Value == 1) {
-                    ProcessLog("Picking highest regen debuff")
+                    AddToLog("Picking highest regen debuff")
                     if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, regen3)) {
-                        ProcessLog("Found regen 3")
+                        AddToLog("Found regen 3")
                     }
                     else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, regen2)) {
-                        ProcessLog("Found regen 2")
+                        AddToLog("Found regen 2")
                     }
                     else if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, regen1)) {
-                        ProcessLog("Found regen 1")
+                        AddToLog("Found regen 1")
                     }
                 }
             }
             
             else if (priority == "yen") {
 				if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, yen2)) {
-					ProcessLog("Found yen 2")
+					AddToLog("Found yen 2")
 				}
 				else {
-					ProcessLog("Found yen 1")
+					AddToLog("Found yen 1")
 				}
 			}
 
@@ -618,10 +618,18 @@ cardSelector() {
             sleep 1000
             MouseMove 0, 120, 2, "R"
             Click 2
-            ProcessLog(Format("Picked card: {}", priority))
+            AddToLog(Format("Picked card: {}", priority))
             sleep 5000
             return
         }
     }
-    ProcessLog("Failed to pick a card")
+    AddToLog("Failed to pick a card")
+}
+
+CheckForEmptyKeys() {
+    AddToLog("Looking for key purchase prompt")
+    if (ok:=FindText(&X, &Y, 434-150000, 383-150000, 434+150000, 383+150000, 0, 0, RobuxPurchaseKey)) {
+        AddToLog("Found an attempt to purchase key for robux, closing macro.")
+        return
+    }
 }

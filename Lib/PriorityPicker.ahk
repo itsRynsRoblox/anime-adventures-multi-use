@@ -56,9 +56,9 @@ RemoveEmptyStrings(array) {
 OnDropDownChange(ctrl, index) {
     if (index >= 0 and index <= 19) {
         priorityOrder[index] := ctrl.Text
-        ProcessLog(Format("Priority {} set to {}", index, ctrl.Text))
+        AddToLog(Format("Priority {} set to {}", index, ctrl.Text))
         RemoveEmptyStrings(priorityOrder)
     } else {
-        ProcessLog(Format("Invalid index {} for dropdown", index))
+        AddToLog(Format("Invalid index {} for dropdown", index))
     }
 }

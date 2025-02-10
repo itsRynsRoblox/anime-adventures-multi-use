@@ -145,14 +145,14 @@ SendWebhookWithTime(isWin, stageLength) {
 
     ; Check if webhook file exists first
     if (!FileExist(WebhookURLFile)) {
-    ProcessLog("No webhook configured - skipping webhook")
+    AddToLog("No webhook configured - skipping webhook")
     return  ; Just return if no webhook file
     }
 
     ; Read webhook URL from file
     WebhookURL := FileRead(WebhookURLFile, "UTF-8")
     if !(WebhookURL ~= 'i)https?:\/\/discord\.com\/api\/webhooks\/(\d{18,19})\/[\w-]{68}') {
-        ProcessLog("Invalid webhook URL - skipping webhook")
+        AddToLog("Invalid webhook URL - skipping webhook")
         return
     }
     
@@ -269,7 +269,7 @@ SaveWebhookSettings() {
         return
     }
 
-    ProcessLog("Saving Webhook Configuration")
+    AddToLog("Saving Webhook Configuration")
     
     ; Delete old files if they exist
     if FileExist(WebhookURLFile)
@@ -359,9 +359,9 @@ BannerFound() {
 }
 
 SaveWebhookBtnClick() {
-    ProcessLog("Attempting to save webhook settings...")
+    AddToLog("Attempting to save webhook settings...")
     SaveWebhookSettings()
-    ProcessLog("Webhook settings saved")
+    AddToLog("Webhook settings saved")
 }
 ;Discord webhooks, above
 
@@ -491,10 +491,10 @@ SendWebhookRequest(webhook, params, maxRetries := 3) {
         whr.Open("POST", webhook, false)
         whr.SetRequestHeader("Content-Type", "application/json")
         whr.Send(JSON.Stringify(params))
-        ProcessLog("Webhook sent successfully")
+        AddToLog("Webhook sent successfully")
         return true
     } catch {
-        ProcessLog("Unable to send webhook - continuing without sending")
+        AddToLog("Unable to send webhook - continuing without sending")
         return false
     }
 }
