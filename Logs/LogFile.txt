@@ -1741,3 +1741,777 @@ Color not found. Turning again. 01:36
 ==Ryn's Anime Adventures v0.1==
   Start Time: [11h.15m.25s]
 Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.50m.03s]
+Configuration settings loaded successfully 00:00
+Selected Planet Greenie - Act 1 00:30
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:30
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [11h.51m.22s]
+Configuration settings loaded successfully 00:00
+Selected Planet Greenie - Infinity 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
+Configuration settings saved successfully 00:19
+Auto Challenge enabled - starting with challenge 00:22
+Moving to Challenge mode 00:22
+Determining Movement Necessity on Map... 00:54
+No Map Found or Movement Unnecessary 01:41
+Successfully Loaded In 01:42
+Found Teleport to Spawn button 01:49
+Game started 01:53
+Placing Unit 1 (0/3) 01:53
+Unit Placed Successfully 02:19
+Placed Unit 1 (1/3) 02:19
+Unit Placed Successfully 02:31
+Placed Unit 1 (2/3) 02:31
+Unit Placed Successfully 02:45
+Placed Unit 1 (3/3) 02:46
+Placing Unit 2 (0/3) 02:46
+Unit Placed Successfully 03:18
+Placed Unit 2 (1/3) 03:19
+Unit Placed Successfully 03:22
+Placed Unit 2 (2/3) 03:22
+Unit Placed Successfully 04:12
+Placed Unit 2 (3/3) 04:12
+Placing Unit 3 (0/1) 04:13
+Checking win/loss status 09:38
+Victory detected - Stage Length: 00:07:45 09:38
+No webhook configured - skipping webhook 09:38
+Found Lobby Text - Current Mode: Challenge 09:59
+Challenge completed - returning to Story mode 10:01
+Returned to lobby, restarting selected mode 10:21
+Moving to position for Planet Greenie 10:22
+Starting Planet Greenie - Infinity 10:35
+Determining Movement Necessity on Map... 10:42
+
+==Ryn's Anime Adventures v0.1==
+  Start Time: [12h.02m.22s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v1.0==
+  Start Time: [13h.16m.17s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v1.0==
+  Start Time: [13h.26m.04s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v1.0==
+  Start Time: [13h.27m.17s]
+Configuration settings loaded successfully 00:00
+Selected Walled City - Act 1 00:04
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:04
+
+==Ryn's Anime Adventures v1.0==
+  Start Time: [13h.30m.56s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:01
+
+==Ryn's Anime Adventures v1.0==
+  Start Time: [13h.31m.16s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v1.0==
+  Start Time: [13h.32m.12s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Anime Adventures v1.0==
+  Start Time: [13h.33m.03s]
+Configuration settings loaded successfully 00:00
+Selected Space Center - Act 1 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
+
+==Ryn's Anime Adventures v1.0==
+  Start Time: [13h.34m.51s]
+Configuration settings loaded successfully 00:00
+Please select both Legend Stage and Act before confirming 00:04
+Selected Space Center - Act 3 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [13h.43m.13s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [13h.44m.50s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [13h.52m.41s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [13h.53m.09s]
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [13h.53m.49s]
+Please select a gamemode before confirming 00:10
+Selected Strange Town - Act 2 00:15
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:15
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [13h.55m.28s]
+Configuration settings saved successfully 00:02
+Configuration settings saved successfully 00:07
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [13h.55m.41s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [13h.58m.03s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [13h.58m.17s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [13h.59m.48s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.01m.11s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:01
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.03m.34s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:04
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.03m.47s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:03
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.04m.35s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:16
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.05m.33s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:01
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.06m.25s]
+Configuration settings loaded successfully 00:00
+Selected Planet Greenie - Act 1 00:02
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:02
+Configuration settings saved successfully 00:03
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.06m.39s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.07m.49s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.08m.36s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.09m.27s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:08
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.12m.37s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.13m.48s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.15m.26s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:01
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.15m.39s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.17m.38s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:01
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.18m.07s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.18m.23s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.18m.50s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.19m.27s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.19m.35s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.20m.04s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:07
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.21m.43s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.21m.50s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.24m.14s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.24m.25s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.30m.23s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.30m.32s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.31m.18s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.34m.14s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:03
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.34m.21s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:03
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [14h.57m.46s]
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.01m.51s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.05m.05s]
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.06m.35s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.07m.23s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.10m.43s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.12m.03s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.28m.05s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.28m.32s]
+Configuration settings loaded successfully 00:00
+Saving Webhook Configuration 00:23
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.29m.04s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.30m.14s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.43m.24s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:15
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.43m.44s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Moving to position for Haunted Academy 00:10
+Starting Haunted Academy - Infinity 00:17
+Checking for numbers... 00:24
+Sending number: 39786 00:25
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.44m.12s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:14
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:14
+Moving to position for Haunted Academy 00:19
+Starting Haunted Academy - Infinity 00:26
+Determining Movement Necessity on Map... 00:35
+Detected map: Contracts 00:38
+Successfully Loaded In 00:53
+Found Teleport to Spawn button 00:59
+Executing Movement for: Contracts 01:00
+Color not found. Turning again. 01:01
+Color not found. Turning again. 01:02
+Color not found. Turning again. 01:03
+Color not found. Turning again. 01:05
+Color not found. Turning again. 01:06
+Color not found. Turning again. 01:07
+Color not found. Turning again. 01:08
+Color not found. Turning again. 01:09
+Color not found. Turning again. 01:11
+Color not found. Turning again. 01:12
+Color not found. Turning again. 01:13
+Color not found. Turning again. 01:14
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.45m.28s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.46m.32s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.48m.00s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:10
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:10
+Configuration settings saved successfully 00:13
+Moving to position for Haunted Academy 00:14
+Starting Haunted Academy - Infinity 00:21
+Determining Movement Necessity on Map... 00:30
+Detected map: Contracts 00:33
+Successfully Loaded In 00:47
+Found Teleport to Spawn button 00:54
+Executing Movement for: Contracts 00:55
+Color not found. Turning again. 00:55
+Color not found. Turning again. 00:57
+Color not found. Turning again. 00:58
+Color not found. Turning again. 00:59
+Color not found. Turning again. 01:00
+Color not found. Turning again. 01:02
+Color not found. Turning again. 01:03
+Color not found. Turning again. 01:04
+Color not found. Turning again. 01:05
+Color not found. Turning again. 01:07
+Color not found. Turning again. 01:08
+Color not found. Turning again. 01:09
+Color not found. Turning again. 01:10
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.49m.13s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.50m.14s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.50m.37s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:15
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:15
+Moving to position for Haunted Academy 00:26
+Starting Haunted Academy - Infinity 00:33
+Determining Movement Necessity on Map... 00:41
+Detected map: Contracts 00:45
+Successfully Loaded In 00:58
+Found Teleport to Spawn button 01:04
+Executing Movement for: Contracts 01:06
+Color not found. Turning again. 01:06
+Color not found. Turning again. 01:07
+Color not found. Turning again. 01:08
+Color not found. Turning again. 01:10
+Color not found. Turning again. 01:11
+Color not found. Turning again. 01:12
+Color not found. Turning again. 01:13
+Color not found. Turning again. 01:15
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.51m.55s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.52m.51s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:09
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:09
+Moving to position for Haunted Academy 00:12
+Starting Haunted Academy - Infinity 00:19
+Determining Movement Necessity on Map... 00:28
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.53m.22s]
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.53m.23s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.53m.33s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:20
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:20
+Moving to position for Haunted Academy 00:24
+Starting Haunted Academy - Infinity 00:31
+Determining Movement Necessity on Map... 00:39
+Detected map: Contracts 00:43
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.54m.22s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.54m.26s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.58m.20s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:20
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:20
+Moving to position for Haunted Academy 00:24
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [15h.58m.54s]
+Configuration settings loaded successfully 00:00
+Please select a gamemode before starting the macro! 01:04
+Selected Haunted Academy - Infinity 01:15
+Don't forget to enable Click to Move! (I forget sometimes too!) 01:15
+Moving to position for Haunted Academy 01:18
+Starting Haunted Academy - Infinity 01:32
+Determining Movement Necessity on Map... 01:40
+Detected map: Contracts 01:44
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.00m.43s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.06m.38s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.12m.07s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:06
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:06
+Moving to position for Haunted Academy 00:09
+Starting Haunted Academy - Infinity 00:23
+Determining Movement Necessity on Map... 00:31
+Detected map: Contracts 00:35
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.12m.46s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.19m.37s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:28
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:28
+Moving to position for Haunted Academy 00:30
+Starting Haunted Academy - Infinity 00:37
+Determining Movement Necessity on Map... 00:46
+Detected map: Haunted Academy 00:49
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.20m.36s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4-5 - Solo 00:49
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:49
+Pattern selected: Page 4 01:12
+Attempting to start solo 01:13
+Joining Contract Mode 01:15
+Determining Movement Necessity on Map... 01:17
+Detected map: Contracts 01:19
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.21m.58s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.27m.22s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:23
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:23
+Moving to position for Haunted Academy 00:30
+Starting Haunted Academy - Infinity 00:37
+Determining Movement Necessity on Map... 00:45
+Detected map: Haunted Academy 00:49
+Successfully Loaded In 01:03
+Found Teleport to Spawn button 01:09
+Executing Movement for: Haunted Academy 01:11
+Color not found. Turning again. 01:11
+Color not found. Turning again. 01:12
+Color found and clicked at: X715 Y350 01:13
+Game started 01:16
+Placing Unit 1 (0/1) 01:16
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.28m.41s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.31m.28s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.32m.16s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+Moving to position for Haunted Academy 00:08
+Starting Haunted Academy - Infinity 00:21
+Determining Movement Necessity on Map... 00:30
+Detected map: Haunted Academy 00:35
+Successfully Loaded In 00:50
+Found Teleport to Spawn button 00:56
+Executing Movement for: Haunted Academy 00:58
+Color not found. Turning again. 00:58
+Color not found. Turning again. 00:59
+Color not found. Turning again. 01:00
+Color not found. Turning again. 01:01
+Color not found. Turning again. 01:02
+Color not found. Turning again. 01:04
+Color not found. Turning again. 01:05
+Color not found. Turning again. 01:06
+Color not found. Turning again. 01:07
+Color not found. Turning again. 01:08
+Color not found. Turning again. 01:10
+Color not found. Turning again. 01:11
+Color not found. Turning again. 01:12
+Color not found. Turning again. 01:13
+Color not found. Turning again. 01:15
+Color not found. Turning again. 01:16
+Color not found. Turning again. 01:17
+Color not found. Turning again. 01:18
+Color not found. Turning again. 01:19
+Color not found. Turning again. 01:21
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.33m.40s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.36m.58s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.37m.07s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:06
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:06
+Moving to position for Haunted Academy 00:11
+Starting Haunted Academy - Infinity 00:25
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.37m.42s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:13
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:13
+Moving to position for Haunted Academy 00:15
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.38m.00s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
+Moving to position for Haunted Academy 00:09
+Starting Haunted Academy - Infinity 00:16
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.38m.23s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.38m.57s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+Moving to position for Haunted Academy 00:07
+Starting Haunted Academy - Infinity 00:14
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.39m.18s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.39m.44s]
+Configuration settings loaded successfully 00:00
+Found Roblox window 00:05
+Please select a gamemode before starting the macro! 00:10
+Selected Haunted Academy - Infinity 00:17
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:17
+Moving to position for Haunted Academy 00:20
+Starting Haunted Academy - Infinity 00:34
+Determining Movement Necessity on Map... 00:42
+Detected map: Haunted Academy 00:46
+Successfully Loaded In 01:01
+Found Teleport to Spawn button 01:08
+Executing Movement for: Haunted Academy 01:09
+Boo 01:09
+Color not found. Turning again. 01:09
+Boo 01:10
+Color not found. Turning again. 01:10
+Boo 01:12
+Color not found. Turning again. 01:12
+Boo 01:13
+Color not found. Turning again. 01:13
+Boo 01:14
+Color found at: X720 Y341 01:14
+Game started 01:22
+Placing Unit 1 (0/1) 01:22
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.41m.14s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.42m.31s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:24
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:24
+Moving to position for Haunted Academy 00:26
+Starting Haunted Academy - Infinity 00:33
+Checking for numbers... 00:40
+Sending number: 4160261 00:41
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.43m.15s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.45m.58s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:06
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:06
+Configuration settings saved successfully 00:07
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.46m.11s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.47m.00s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Act 1 00:04
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:04
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.47m.14s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:04
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:04
+Configuration settings saved successfully 00:06
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.47m.25s]
+Configuration settings loaded successfully 00:00
+Selected Haunted Academy - Infinity 00:04
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:04
+Moving to position for Haunted Academy 00:21
+Starting Haunted Academy - Infinity 00:28
+Determining Movement Necessity on Map... 00:37
+Detected map: Haunted Academy 00:40
+Successfully Loaded In 00:55
+Found Teleport to Spawn button 01:02
+Executing Movement for: Haunted Academy 01:03
+Boo 01:03
+Color not found. Turning again. 01:03
+Boo 01:05
+Color not found. Turning again. 01:05
+Boo 01:06
+Color not found. Turning again. 01:06
+Boo 01:07
+Color not found. Turning again. 01:07
+Boo 01:08
+Color not found. Turning again. 01:08
+Boo 01:10
+Color not found. Turning again. 01:10
+Boo 01:11
+Color not found. Turning again. 01:11
+Boo 01:12
+Color not found. Turning again. 01:12
+Boo 01:13
+Color not found. Turning again. 01:13
+Boo 01:15
+Color not found. Turning again. 01:15
+Boo 01:16
+Color not found. Turning again. 01:16
+Boo 01:17
+Color not found. Turning again. 01:17
+Boo 01:18
+Color not found. Turning again. 01:18
+Boo 01:20
+Color not found. Turning again. 01:20
+Boo 01:21
+Color not found. Turning again. 01:21
+Boo 01:22
+Color not found. Turning again. 01:22
+Boo 01:23
+Color not found. Turning again. 01:23
+Boo 01:25
+Color not found. Turning again. 01:25
+Boo 01:26
+Color not found. Turning again. 01:26
+Boo 01:27
+Color not found. Turning again. 01:27
+Boo 01:28
+Color not found. Turning again. 01:29
+Boo 01:30
+Color not found. Turning again. 01:30
+Boo 01:31
+Color not found. Turning again. 01:31
+Boo 01:32
+Color not found. Turning again. 01:32
+Boo 01:33
+Color not found. Turning again. 01:34
+Boo 01:35
+Color not found. Turning again. 01:35
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [16h.49m.04s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.0==
+  Start Time: [17h.02m.50s]
+Configuration settings loaded successfully 00:00

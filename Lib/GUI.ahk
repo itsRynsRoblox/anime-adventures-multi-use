@@ -4,8 +4,8 @@
 #Include Functions.ahk
 
 ; Basic Application Info
-global aaTitle := "Ryn's Anime Adventures "
-global version := "v0.1"
+global aaTitle := "Anime Adventures - Mist - Ryn Edition "
+global version := "v1.0"
 global rblxID := "ahk_exe RobloxPlayerBeta.exe"
 ;Coordinate and Positioning Variables
 global targetWidth := 816
@@ -26,6 +26,10 @@ global loss := 0
 global mode := ""
 global StartTime := A_TickCount
 global currentTime := GetCurrentTime()
+;Auto Challenge
+global challengeStartTime := A_TickCount
+global inChallengeMode := false
+global firstStartup := true
 ;Gui creation
 global uiBorders := []
 global uiBackgrounds := []
@@ -49,6 +53,9 @@ global currentOutputFile := A_ScriptDir "\Logs\LogFile.txt"
 global WebhookURLFile := "Settings\WebhookURL.txt"
 global DiscordUserIDFile := "Settings\DiscordUSERID.txt"
 global SendActivityLogsFile := "Settings\SendActivityLogs.txt"
+;Custom Pictures
+GithubImage := "Images\github-logo.png"
+DiscordImage := "Images\another_discord.png"
 
 if !DirExist(A_ScriptDir "\Logs") {
     DirCreate(A_ScriptDir "\Logs")
@@ -223,8 +230,9 @@ global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y385 cffffff Checked", "Ne
 global MatchMaking := aaMainUI.Add("Checkbox", "x1035 y385 cffffff Hidden Checked", "Matchmaking")
 global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y385 cffffff Checked", "Return To Lobby")
 global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y410 cffffff Checked", "Auto Ability")
+global ChallengeBox := aaMainUI.Add("CheckBox", "x1143 y410 cffffff", "Auto Challenge")
 global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1005 y410 cffffff", "Priority Upgrade")
-global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1250 y662 w100 h180 Choose1 +Center", ["Random", "Grid", "Circle", "Spiral", "Up and Down"])
+global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1250 y662 w100 h180 Choose2 +Center", ["Random", "Grid", "Circle", "Spiral", "Up and Down"])
 PlacementPatternText := aaMainUI.Add("Text", "x1250 y642 w105 h20", "Placement Type")
 PlaceSpeedText := aaMainUI.Add("Text", "x1123 y642 w115 h20", "Placement Speed")
 global PlaceSpeed := aaMainUI.Add("DropDownList", "x1130 y662 w100 h180 Choose1 +Center", ["2.25 sec", "2 sec", "2.5 sec", "2.75 sec", "3 sec"])
@@ -232,6 +240,11 @@ placementSaveText := aaMainUI.Add("Text", "x807 y385 w80 h20", "Save Config")
 Hotkeytext := aaMainUI.Add("Text", "x807 y35 w200 h30", "F1: Position roblox")
 Hotkeytext2 := aaMainUI.Add("Text", "x807 y50 w200 h30", "F2: Start mango")
 Hotkeytext3 := aaMainUI.Add("Text", "x807 y65 w200 h30", "F3: Stop mango")
+GithubButton := aaMainUI.Add("Picture", "x30 y640 w40 h40 +BackgroundTrans cffffff", GithubImage)
+DiscordButton := aaMainUI.Add("Picture", "x112 y645 w60 h34 +BackgroundTrans cffffff", DiscordImage)
+
+GithubButton.OnEvent("Click", (*) => OpenGithub())
+DiscordButton.OnEvent("Click", (*) => OpenDiscord())
 ;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT
 global modeSelectionGroup := aaMainUI.Add("GroupBox", "x808 y38 w500 h45 Background" uiTheme[2], "Mode Select")

@@ -1,176 +1,15 @@
 #Include %A_ScriptDir%\Lib\GUI.ahk
-global settingsFile := "" 
 global confirmClicked := false
 
-
-setupFilePath() {
-    global settingsFile
-    
-    if !DirExist(A_ScriptDir "\Settings") {
-        DirCreate(A_ScriptDir "\Settings")
-    }
-
-    settingsFile := A_ScriptDir "\Settings\Configuration.txt"
-    return settingsFile
+;HotKeys
+F1:: {
+    moveRobloxWindow()
 }
-
-readInSettings() {
-    global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
-    global placement1, placement2, placement3, placement4, placement5, placement6
-    global priority1, priority2, priority3, priority4, priority5, priority6
-    global mode
-
-    try {
-        settingsFile := setupFilePath()
-        if !FileExist(settingsFile) {
-            return
-        }
-
-        content := FileRead(settingsFile)
-        lines := StrSplit(content, "`n")
-        
-        for line in lines {
-            if line = "" {
-                continue
-            }
-            
-            parts := StrSplit(line, "=")
-            switch parts[1] {
-                case "Mode": mode := parts[2]
-                case "Enabled1": enabled1.Value := parts[2]
-                case "Enabled2": enabled2.Value := parts[2]
-                case "Enabled3": enabled3.Value := parts[2]
-                case "Enabled4": enabled4.Value := parts[2]
-                case "Enabled5": enabled5.Value := parts[2]
-                case "Enabled6": enabled6.Value := parts[2]
-                case "Placement1": placement1.Text := parts[2]
-                case "Placement2": placement2.Text := parts[2]
-                case "Placement3": placement3.Text := parts[2]
-                case "Placement4": placement4.Text := parts[2]
-                case "Placement5": placement5.Text := parts[2]
-                case "Placement6": placement6.Text := parts[2]
-                case "Priority1": priority1.Text := parts[2]
-                case "Priority2": priority2.Text := parts[2]
-                case "Priority3": priority3.Text := parts[2]
-                case "Priority4": priority4.Text := parts[2]
-                case "Priority5": priority5.Text := parts[2]
-                case "Priority6": priority6.Text := parts[2]
-            }
-        }
-        AddToLog("Configuration settings loaded successfully")
-    }
+F2:: {
+    InitializeMacro()
 }
-
-
-SaveSettings(*) {
-    global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
-    global placement1, placement2, placement3, placement4, placement5, placement6
-    global priority1, priority2, priority3, priority4, priority5, priority6
-    global mode
-
-    try {
-        settingsFile := A_ScriptDir "\Settings\Configuration.txt"
-        if FileExist(settingsFile) {
-            FileDelete(settingsFile)
-        }
-
-        ; Save mode and map selection
-        content := "Mode=" mode "`n"
-        if (mode = "Story") {
-            content .= "Map=" StoryDropdown.Text
-        } else if (mode = "Raid") {
-            content .= "Map=" RaidDropdown.Text
-        }
-        
-        ; Save settings for each unit
-        content .= "`n`nEnabled1=" enabled1.Value
-        content .= "`nEnabled2=" enabled2.Value
-        content .= "`nEnabled3=" enabled3.Value
-        content .= "`nEnabled4=" enabled4.Value
-        content .= "`nEnabled5=" enabled5.Value
-        content .= "`nEnabled6=" enabled6.Value
-
-        content .= "`n`nPlacement1=" placement1.Text
-        content .= "`nPlacement2=" placement2.Text
-        content .= "`nPlacement3=" placement3.Text
-        content .= "`nPlacement4=" placement4.Text
-        content .= "`nPlacement5=" placement5.Text
-        content .= "`nPlacement6=" placement6.Text
-
-        content .= "`nPriority1=" priority1.Text
-        content .= "`nPriority2=" priority2.Text
-        content .= "`nPriority3=" priority3.Text
-        content .= "`nPriority4=" priority4.Text
-        content .= "`nPriority5=" priority5.Text
-        content .= "`nPriority6=" priority6.Text
-
-        content .= "`n[CardPriority]"
-        for index, dropDown in dropDowns
-            {
-                content .= (Format("`nCard{}={}", index+1, dropDown.Text))
-            }
-        
-        FileAppend(content, settingsFile)
-        AddToLog("Configuration settings saved successfully")
-    }
-}
-
-LoadSettings() {
-    global UnitData, mode
-    try {
-        settingsFile := A_ScriptDir "\Settings\Configuration.txt"
-        if !FileExist(settingsFile) {
-            return
-        }
-
-        content := FileRead(settingsFile)
-        sections := StrSplit(content, "`n`n")
-        
-        for section in sections {
-            if (InStr(section, "CardPriority")) {
-                lines := StrSplit(section, "`n")
-                
-                for line in lines {
-                    if line = "" {
-                        continue
-                    }
-                    
-                    if RegExMatch(line, "Card(\d+)=(\w+)", &match) {
-                        slot := match.1
-                        value := match.2
-                        
-                        priorityOrder[slot - 1] := value
-                        
-                        dropDown := dropDowns[slot - 1]
-                        
-                        if (dropDown) {
-                            dropDown.Text := value
-                        }
-                    }
-                }
-            }
-            else if (InStr(section, "Index=")) {
-                lines := StrSplit(section, "`n")
-                
-                for line in lines {
-                    if line = "" {
-                        continue
-                    }
-                    
-                    parts := StrSplit(line, "=")
-                    if (parts[1] = "Index") {
-                        index := parts[2]
-                    } else if (index && UnitData.Has(Integer(index))) {
-                        switch parts[1] {
-                            case "Enabled": UnitData[index].Enabled.Value := parts[2]
-                            case "Placement": UnitData[index].PlacementBox.Value := parts[2]
-                        }
-                    }
-                }
-            }
-        }
-        AddToLog("Auto settings loaded successfully")
-    }
+F3:: {
+    Reload()
 }
 
 CheckBanner(unitName) {
@@ -525,6 +364,22 @@ FindAndClickColor(targetColor := (ModeDropdown.Text = "Winter Event" ? 0x006783 
     }
 }
 
+FindAndClickHauntedPath(targetColor := (mode = "Story" ? 0x191622 : 0x1D1414), searchArea := (mode = "Story" ? [708, 332, 833, 365] : [558, 335, 694, 369])) {
+    if (mode = "Story") {
+        AddToLog("Boo")
+    }
+    ; Extract the search area boundaries
+    x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
+
+    ; Perform the pixel search
+    if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, targetColor, 0)) {
+        ; Color found, click on the detected coordinates
+        AddToLog("Color found at: X" foundX " Y" foundY)
+        return true
+
+    }
+}
+
 cardSelector() {
     AddToLog("Picking card in priority order")
     if (ok := FindText(&X, &Y, 200, 239, 276, 270, 0, 0, UnitExistence)) {
@@ -632,4 +487,12 @@ CheckForEmptyKeys() {
         AddToLog("Found an attempt to purchase key for robux, closing macro.")
         return
     }
+}
+
+OpenGithub() {
+    Run("https://github.com/itsRynsRoblox?tab=repositories")
+}
+
+OpenDiscord() {
+    Run("https://discord.gg/6DWgB9XMTV")
 }

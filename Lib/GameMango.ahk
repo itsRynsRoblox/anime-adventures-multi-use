@@ -5,19 +5,11 @@ global stageStartTime := A_TickCount
 global contractPageCounter := 0
 global contractSwitchPattern := 0
 
-
-;HotKeys
-F1:: {
-    moveRobloxWindow()
-}
-F2:: {
+InitializeMacro() {
     if (!ValidateMode()) {
         return
     }
     StartSelectedMode()
-}
-F3:: {
-    Reload()
 }
 
 PlacingUnits() {
@@ -227,6 +219,17 @@ UpgradeUnits() {
     }
 }
 
+ChallengeMode() {    
+    AddToLog("Moving to Challenge mode")
+    ChallengeMovement()
+    
+    while !(ok := FindText(&X, &Y, 325, 520, 489, 587, 0, 0, ModeCancel)) {
+        ChallengeMovement()
+    }
+
+    RestartStage()
+}
+
 StoryMode() {
     global StoryDropdown, StoryActDropdown
     
@@ -403,7 +406,7 @@ ContractMode() {
 }
 
 MonitorEndScreen() {
-    global mode, StoryDropdown, StoryActDropdown, ReturnLobbyBox, MatchMaking
+    global mode, StoryDropdown, StoryActDropdown, ReturnLobbyBox, MatchMaking, challengeStartTime, inChallengeMode
 
     Loop {
         Sleep(3000)  
@@ -421,7 +424,31 @@ MonitorEndScreen() {
 
         ; Now handle each mode
         if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
-            AddToLog("Found Lobby Text - Current Mode: " mode)
+            AddToLog("Found Lobby Text - Current Mode: " (inChallengeMode ? "Challenge" : mode))
+            Sleep(2000)
+
+            ; Challenge mode logic first
+            if (inChallengeMode) {
+                 AddToLog("Challenge completed - returning to " mode " mode")
+                inChallengeMode := false
+                challengeStartTime := A_TickCount
+                ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                return CheckLobby()
+            }
+
+            ; Check if it's time for challenge mode
+            if (!inChallengeMode && ChallengeBox.Value) {
+                timeElapsed := A_TickCount - challengeStartTime
+                if (timeElapsed >= 1800000) {
+                    AddToLog("30 minutes passed - switching to Challenge mode")
+                    inChallengeMode := true
+                    challengeStartTime := A_TickCount
+                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                    return CheckLobby()
+                }
+            }
+
+
             if (mode = "Story") {
                 AddToLog("Handling Story mode end")
                 if (StoryActDropdown.Text != "Infinity") {
@@ -558,6 +585,15 @@ StoryMovement() {
     SendInput ("{d up}")
     SendInput ("{w up}")
     Sleep(500)
+}
+
+ChallengeMovement() {
+    FixClick(765, 475)
+    Sleep (500)
+    FixClick(300, 415)
+    SendInput ("{a down}")
+    sleep (7000)
+    SendInput ("{a up}")
 }
 
 RaidMovement() {
@@ -954,13 +990,7 @@ DetectMap() {
         )
 
         for mapName, pattern in mapPatterns {
-            if (ModeDropdown.Text = "Winter Event") {
-                if (ok := FindText(&X, &Y, 10, 70, 350, 205, 0, 0, pattern)) {
-                    AddToLog("Detected map: " mapName)
-                    return mapName
-                }
-            }
-            if (ModeDropdown.Text = "Contracts") {
+            if (ModeDropdown.Text = "Winter Event") && (ModeDropdown.Text = "Contracts") {
                 if (ok := FindText(&X, &Y, 10, 70, 350, 205, 0, 0, pattern)) {
                     AddToLog("Detected map: " mapName)
                     return mapName
@@ -1363,9 +1393,25 @@ StartedGame() {
 }
 
 StartSelectedMode() {
+    global inChallengeMode, firstStartup, challengeStartTime
     FixClick(400,340)
     FixClick(400,390)
-    if (ModeDropdown.Text = "Story") {
+
+    if (ChallengeBox.Value && firstStartup) {
+        AddToLog("Auto Challenge enabled - starting with challenge")
+        inChallengeMode := true
+        firstStartup := false
+        challengeStartTime := A_TickCount  ; Set initial challenge time
+        ChallengeMode()
+        return
+    }
+    ; If we're in challenge mode, do challenge
+    if (inChallengeMode) {
+        AddToLog("Starting Challenge Mode")
+        ChallengeMode()
+        return
+    }    
+    else if (ModeDropdown.Text = "Story") {
         StoryMode()
     }
     else if (ModeDropdown.Text = "Legend") {
@@ -1548,6 +1594,7 @@ HandleNextContract() {
 }
 
 HandleContractEnd() {
+    global inChallengeMode, challengeStartTime
 
     Loop {
         Sleep(3000)  
@@ -1567,6 +1614,27 @@ HandleContractEnd() {
         if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
             AddToLog("Found Lobby Text - proceeding with contract end options")
             Sleep(2000)  ; Wait for UI to settle
+
+            if (inChallengeMode) {
+                AddToLog("Challenge completed - returning to selected mode")
+                inChallengeMode := false
+                challengeStartTime := A_TickCount
+                Sleep(1500)
+                ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                return CheckLobby()
+            }
+
+            if (!inChallengeMode && ChallengeBox.Value) {
+                timeElapsed := A_TickCount - challengeStartTime
+                if (timeElapsed >= 1800000) {  ; 30 minutes in milliseconds
+                    AddToLog("30 minutes passed - switching to Challenge mode")
+                    inChallengeMode := true
+                    challengeStartTime := A_TickCount
+                    Sleep(1500)
+                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                    return CheckLobby()
+                }
+            }
 
             if (ReturnLobbyBox.Value) {
                 AddToLog("Contract complete - returning to lobby")
