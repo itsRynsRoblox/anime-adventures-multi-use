@@ -471,7 +471,7 @@ WebhookScreenshot(title, description, color := 0x0dffff, status := "") {
     myEmbed.setDescription(description)
     myEmbed.setColor(color)
     myEmbed.setImage(attachment)
-    myEmbed.setFooter({ text: footerText " • Mist Macro" })
+    myEmbed.setFooter({ text: footerText })
 
     webhook.send({
         content: UserIDSent,

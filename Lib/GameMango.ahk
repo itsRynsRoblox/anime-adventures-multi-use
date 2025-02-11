@@ -865,6 +865,7 @@ GetLegendActDownArrows(LegendActDropdown) {
 
 GetRaidDownArrows(map) {
     switch map {
+        case "The Spider": return 1
         case "Sacred Planet": return 2
         case "Strange Town": return 3
         case "Ruined City": return 4
@@ -990,7 +991,7 @@ DetectMap() {
         )
 
         for mapName, pattern in mapPatterns {
-            if (ModeDropdown.Text = "Winter Event") && (ModeDropdown.Text = "Contracts") {
+            if (ModeDropdown.Text = "Winter Event" or ModeDropdown.Text = "Contracts") {
                 if (ok := FindText(&X, &Y, 10, 70, 350, 205, 0, 0, pattern)) {
                     AddToLog("Detected map: " mapName)
                     return mapName
@@ -1277,7 +1278,6 @@ Reconnect() {
 
 PlaceUnit(x, y, slot := 1) {
     if (ModeDropdown.Text = "Winter Event") {
-        AddToLog("Test")
         CheckForCardSelection()
     }
     SendInput(slot)

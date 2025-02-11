@@ -1,5 +1,5 @@
-Mode=Story
-Map=Haunted Academy
+Mode=Contract
+
 
 Enabled1=1
 Enabled2=1
@@ -14,10 +14,10 @@ Placement3=1
 Placement4=1
 Placement5=1
 Placement6=1
-Priority1=1
-Priority2=2
+Priority1=2
+Priority2=4
 Priority3=3
-Priority4=4
+Priority4=1
 Priority5=5
 Priority6=6
 

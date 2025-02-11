@@ -350,7 +350,17 @@ TogglePriorityDropdowns(*) {
     }
 }
 
-FindAndClickColor(targetColor := (ModeDropdown.Text = "Winter Event" ? 0x006783 : 0xFAFF4D), searchArea := [0, 0, A_ScreenWidth, A_ScreenHeight]) { ;targetColor := Winter Event Color : 0x006783 / Contracts Color : 0xFAFF4D
+GetWindowCenter(WinTitle) {
+    x := 0 y := 0 Width := 0 Height := 0
+    WinGetPos(&X, &Y, &Width, &Height, WinTitle)
+
+    centerX := X + (Width / 2)
+    centerY := Y + (Height / 2)
+
+    return { x: centerX, y: centerY, width: Width, height: Height }
+}
+
+FindAndClickColor(targetColor := (ModeDropdown.Text = "Winter Event" ? 0x006783 : 0xFAFF4D), searchArea := [0, 0, GetWindowCenter(rblxID).Width, GetWindowCenter(rblxID).Height]) { ;targetColor := Winter Event Color : 0x006783 / Contracts Color : 0xFAFF4D
     ; Extract the search area boundaries
     x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
 
@@ -365,9 +375,7 @@ FindAndClickColor(targetColor := (ModeDropdown.Text = "Winter Event" ? 0x006783 
 }
 
 FindAndClickHauntedPath(targetColor := (mode = "Story" ? 0x191622 : 0x1D1414), searchArea := (mode = "Story" ? [708, 332, 833, 365] : [558, 335, 694, 369])) {
-    if (mode = "Story") {
-        AddToLog("Boo")
-    }
+    
     ; Extract the search area boundaries
     x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
 
