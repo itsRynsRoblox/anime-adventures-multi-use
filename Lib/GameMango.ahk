@@ -5,11 +5,28 @@ global stageStartTime := A_TickCount
 global contractPageCounter := 0
 global contractSwitchPattern := 0
 
-InitializeMacro() {
+LoadKeybindSettings()  ; Load saved keybinds
+Hotkey(F1Key, (*) => moveRobloxWindow())
+Hotkey(F2Key, (*) => StartMacro())
+Hotkey(F3Key, (*) => Reload())
+Hotkey(F4Key, (*) => TogglePause())
+
+StartMacro(*) {
     if (!ValidateMode()) {
         return
     }
     StartSelectedMode()
+}
+
+TogglePause(*) {
+    Pause -1
+    if (A_IsPaused) {
+        AddToLog("Macro Paused")
+        Sleep(1000)
+    } else {
+        AddToLog("Macro Resumed")
+        Sleep(1000)
+    }
 }
 
 PlacingUnits() {
@@ -97,6 +114,7 @@ PlacingUnits() {
 
 UpgradeUnits() {
     global successfulCoordinates, PriorityUpgrade, priority1, priority2, priority3, priority4, priority5, priority6
+    global challengepriority1, challengepriority2, challengepriority3, challengepriority4, challengepriority5, challengepriority6
 
     totalUnits := Map()    
     upgradedCount := Map()  
@@ -114,12 +132,11 @@ UpgradeUnits() {
 
     if (PriorityUpgrade.Value) {
         AddToLog("Using priority upgrade system")
-        
         ; Go through each priority level (1-6)
         for priorityNum in [1, 2, 3, 4, 5, 6] {
             ; Find which slot has this priority number
             for slot in [1, 2, 3, 4, 5, 6] {
-                priority := "priority" slot
+                priority := inChallengeMode && ChallengeBox.Value ? "challengepriority" slot : "priority" slot
                 priority := %priority%
                 if (priority.Text = priorityNum) {
                     ; Skip if no units in this slot
@@ -353,19 +370,19 @@ WinterEvent() {
     ; Execute the movement pattern
     AddToLog("Moving to position for Winter Event")
     WinterEventMovement()
+    
+    ; Start stage
+    while !(ok:=FindText(&X, &Y, 468-150000, 386-150000, 468+150000, 386+150000, 0, 0, JoinMatchmaking)) {
+        WinterEventMovement()
+    }
 
     ; Handle play mode selection
     if (MatchMaking.Value) {
         FindMatch()
-        Sleep 35000
     } else {
         PlayHere()
     }
-    
-    ; Start stage
-    while !(ok := FindText(&X, &Y, 325, 520, 489, 587, 0, 0, ModeCancel)) {
-        WinterEventMovement()
-    }
+
     AddToLog("Starting Winter Event")
     RestartStage()
 }
@@ -404,6 +421,12 @@ ContractMode() {
    Sleep(2500)
    RestartStage()
 }
+
+PortalMode() {
+    HandlePortalJoin()
+    Sleep(2500)
+    RestartStage()
+  }
 
 MonitorEndScreen() {
     global mode, StoryDropdown, StoryActDropdown, ReturnLobbyBox, MatchMaking, challengeStartTime, inChallengeMode
@@ -551,20 +574,24 @@ MonitorStage() {
                 AddToLog("Victory detected - Stage Length: " stageLength)
                 Wins += 1
                 SendWebhookWithTime(true, stageLength)
-                if (mode = "Contract") {
-                    return HandleContractEnd()  ; new function for contract endings
+                if (mode = "Portal") {
+                    return HandlePortalEnd()            
+                } else if (mode = "Contract") {
+                    return HandleContractEnd() 
                 } else {
-                    return MonitorEndScreen()  ; Original behavior for other modes
+                    return MonitorEndScreen() 
                 }
             }
             else if (ok := FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText) or (ok:=FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText2))) {
                 AddToLog("Defeat detected - Stage Length: " stageLength)
                 loss += 1
                 SendWebhookWithTime(false, stageLength) 
-                if (mode = "Contract") {
-                    return HandleContractEnd()  ; new function for contract endings
+                if (mode = "Portal") {
+                    return HandlePortalEnd()            
+                } else if (mode = "Contract") {
+                    return HandleContractEnd() 
                 } else {
-                    return MonitorEndScreen()  ; Original behavior for other modes
+                    return MonitorEndScreen() 
                 }
             }
         }
@@ -638,6 +665,8 @@ CursedWombMovement() {
 }
 
 WinterEventMovement() {
+    FixClick(592, 204) ; Close Matchmaking UI (Just in case)
+    Sleep (200)
     FixClick(85, 295) ; Click Play
     sleep (1000)
     SendInput ("{a up}")
@@ -1125,20 +1154,51 @@ MoveForMagicTown() {
 }
 
 MoveForMagicHill() {
-    Fixclick(45, 185, "Right")
-    Sleep (3000)
-    Fixclick(140, 250, "Right")
-    Sleep (2500)
-    Fixclick(25, 485, "Right")
-    Sleep (3000)
-    Fixclick(110, 455, "Right")
-    Sleep (3000)
+    color := PixelGetColor(630, 125)
+    if (!IsColorInRange(color, 0xFFD100)) {
+        Fixclick(500, 20, "Right")
+        Sleep (3000)
+        Fixclick(500, 20, "Right")
+        Sleep (3500)
+        Fixclick(285, 15, "Right")
+        Sleep (2500)
+        Fixclick(285, 25, "Right")
+        Sleep (3000)
+        Fixclick(410, 25, "Right")
+        Sleep (3000)
+        Fixclick(765, 150, "Right")
+        Sleep (3000)
+        Fixclick(545, 30, "Right")
+        Sleep (3000)
+    } else {
+        Fixclick(45, 185, "Right")
+        Sleep (3000)
+        Fixclick(140, 250, "Right")
+        Sleep (2500)
+        Fixclick(25, 485, "Right")
+        Sleep (3000)
+        Fixclick(110, 455, "Right")
+        Sleep (3000)
+        Fixclick(40, 340, "Right")
+        Sleep (3000)
+        Fixclick(250, 80, "Right")
+        Sleep (3000)
+        Fixclick(230, 110, "Right")
+        Sleep (3000)
+    }
 }
 
 MoveForHauntedAcademy() {
-    SendInput ("{d down}")
-    sleep (3500)
-    SendInput ("{d up}")
+    color := PixelGetColor(647, 187)
+    if (!IsColorInRange(color, 0xFDF0B3)) {
+        SendInput ("{s down}")
+        sleep (3500)
+        SendInput ("{s up}")
+    } else {
+        SendInput ("{d down}")
+        sleep (3500)
+        SendInput ("{d up}")
+    }
 }
 
 MoveForSpaceCenter() {
@@ -1272,6 +1332,43 @@ Reconnect() {
                 ; If not in lobby, try reconnecting again
                 Reconnect()
             }
+        }
+    }
+}
+
+RejoinPrivateServer() {   
+    ; Check for Disconnected Screen using FindText
+    AddToLog("Attempting To Reconnect To Private Server...")
+
+    psLink := FileExist("Settings\PrivateServer.txt") ? FileRead("Settings\PrivateServer.txt", "UTF-8") : ""
+
+    ; Reconnect to Ps
+    if FileExist("Settings\PrivateServer.txt") && (psLink := FileRead("Settings\PrivateServer.txt", "UTF-8")) {
+        AddToLog("Connecting to private server...")
+           Run(psLink)
+    } else {
+        Run("roblox://placeID=8304191830")  ; Public server if no PS file or empty
+    }
+
+    Sleep(300000)
+    ; Restore window if it exists
+    if WinExist(rblxID) {
+        forceRobloxSize() 
+        Sleep(1000)
+    }
+        
+    ; Keep checking until we're back in
+        loop {
+            AddToLog("Reconnecting to Roblox...")
+            Sleep(5000)
+            
+            ; Check if we're back in lobby
+            if (ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
+                AddToLog("Reconnected Successfully!")
+                return StartSelectedMode() ; Return to raids
+            } else {
+            ; If not in lobby, try reconnecting again
+            Reconnect()
         }
     }
 }
@@ -1432,6 +1529,9 @@ StartSelectedMode() {
     else if (ModeDropdown.Text = "Cursed Womb") {
         CursedWombMode()
     }
+    else if (ModeDropdown.Text = "Portal") {
+        PortalMode()
+    }
 }
 
 FormatStageTime(ms) {
@@ -1459,6 +1559,86 @@ ValidateMode() {
 
 GetNavKeys() {
     return StrSplit(FileExist("Settings\UINavigation.txt") ? FileRead("Settings\UINavigation.txt", "UTF-8") : "\,#,}", ",")
+}
+
+HandlePortalEnd() {
+    selectedPortal := PortalDropdown.Text
+
+    Loop {
+        Sleep(3000)  
+        
+        FixClick(560, 560)
+
+        if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
+            ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
+        }
+
+        if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
+            ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
+        }
+
+        if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
+            AddToLog("Found Lobby Text - creating/joining new portal")
+            Sleep(2000)
+
+        if (PortalJoinDropdown.Text = "Creating") {
+            FixClick(485, 120) ;Select New Portal
+            Sleep(1500)
+            FixClick(510, 190) ; Click search
+            Sleep(1500)
+            SendInput(selectedPortal)
+            Sleep(1500)
+            FixClick(215, 285)  ; Click On Portal
+            Sleep (1500)
+            FixClick(350, 410)  ; Click On Use
+            Sleep(5000)
+        } else {
+            AddToLog("Waiting for next portal")
+            Sleep(5000)
+        }
+        return RestartStage()
+        }
+        
+        Reconnect()
+        CheckEndAndRoute()
+    }
+}
+
+HandlePortalJoin() {
+    selectedPortal := PortalDropdown.Text
+    joinType := PortalJoinDropdown.Text
+
+    if (joinType = "Creating") {
+
+        ; Click items
+        FixClick(33, 300)
+        Sleep(1500)
+
+        ; Click portals tab
+        FixClick(435, 230)
+        Sleep(1500)
+        
+        ; Click search
+        FixClick(510, 190)
+        Sleep(1500)
+        
+        ; Type portal name
+        SendInput(selectedPortal)
+        Sleep(1500)
+
+        AddToLog("Creating " selectedPortal)
+        FixClick(215, 285)  ; Click On Portal
+        Sleep (1500)
+        FixClick(350, 370)  ; Click On Use
+        Sleep (1500)
+        FixClick(250, 350)  ; Click On Open
+        AddToLog("Waiting 15 seconds for others to join")
+        Sleep(15000)
+        FixClick(400, 460)  ; Start portal
+    } else {
+        AddToLog("Please join " selectedPortal " manually")
+        Sleep(5000)
+    }
 }
 
 HandleContractJoin() {
@@ -1883,6 +2063,23 @@ ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX
         }
         Sleep(1000)
     }
+}
+
+IsColorInRange(color, targetColor, tolerance := 50) {
+    ; Extract RGB components
+    r1 := (color >> 16) & 0xFF
+    g1 := (color >> 8) & 0xFF
+    b1 := color & 0xFF
+    
+    ; Extract target RGB components
+    r2 := (targetColor >> 16) & 0xFF
+    g2 := (targetColor >> 8) & 0xFF
+    b2 := targetColor & 0xFF
+    
+    ; Check if within tolerance range
+    return Abs(r1 - r2) <= tolerance 
+        && Abs(g1 - g2) <= tolerance 
+        && Abs(b1 - b2) <= tolerance
 }
 
 PlacementSpeed() {

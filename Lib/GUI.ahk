@@ -5,7 +5,7 @@
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn Edition "
-global version := "v1.0"
+global version := "v1.2"
 global rblxID := "ahk_exe RobloxPlayerBeta.exe"
 ;Coordinate and Positioning Variables
 global targetWidth := 816
@@ -20,6 +20,11 @@ global successfulCoordinates := []
 ;State Variables
 global enabledUnits := Map()  
 global placementValues := Map()  
+;Hotkeys
+global F1Key := "F1"
+global F2Key := "F2"
+global F3Key := "F3"
+global F4Key := "F4"
 ;Statistics Tracking
 global Wins := 0
 global loss := 0
@@ -138,6 +143,17 @@ ShowSettingsGUI(*) {
     global DiscordUserIDBox := SettingsGUI.Add("Edit", "x320 y103 w260 h20 c" uiTheme[6])  ; Store Discord ID
     global SendActivityLogsBox := SettingsGUI.Add("Checkbox", "x320 y135 c" uiTheme[1], "Send Process")  ; Enable Activity
 
+    ; HotKeys
+    SettingsGUI.Add("GroupBox", "x10 y90 w160 h160 c" uiTheme[1], "Keybinds")
+    SettingsGUI.Add("Text", "x20 y110 c" uiTheme[1], "Position Roblox:")
+    global F1Box := SettingsGUI.Add("Edit", "x125 y110 w30 h20 c" uiTheme[6], F1Key)
+    SettingsGUI.Add("Text", "x20 y140 c" uiTheme[1], "Start Macro:")
+    global F2Box := SettingsGUI.Add("Edit", "x100 y140 w30 h20 c" uiTheme[6], F2Key)
+    SettingsGUI.Add("Text", "x20 y170 c" uiTheme[1], "Stop Macro:")
+    global F3Box := SettingsGUI.Add("Edit", "x100 y170 w30 h20 c" uiTheme[6], F3Key)
+    SettingsGUI.Add("Text", "x20 y200 c" uiTheme[1], "Pause Macro:")
+    global F4Box := SettingsGUI.Add("Edit", "x110 y200 w30 h20 c" uiTheme[6], F4Key)
+
     ; Banner section
     SettingsGUI.Add("GroupBox", "x310 y175 w280 h100 c" uiTheme[1], "Banner Checker")  ; Box
     SettingsGUI.Add("Text", "x320 y195 c" uiTheme[1], "Banner Unit Name (Adding later)")  ; Banner Text
@@ -163,6 +179,9 @@ ShowSettingsGUI(*) {
     ; Save buttons
     webhookSaveBtn := SettingsGUI.Add("Button", "x460 y135 w120 h25", "Save Webhook")
     webhookSaveBtn.OnEvent("Click", (*) => SaveWebhookSettings())
+
+    keybindSaveBtn := SettingsGUI.Add("Button", "x20 y220 w50 h20", "Save")
+    keybindSaveBtn.OnEvent("Click", SaveKeybindSettings)
 
     bannerSaveBtn := SettingsGUI.Add("Button", "x460 y240 w120 h25", "Save Banner")
     bannerSaveBtn.OnEvent("Click", (*) => SaveBannerSettings())
@@ -237,9 +256,8 @@ PlacementPatternText := aaMainUI.Add("Text", "x1250 y642 w105 h20", "Placement T
 PlaceSpeedText := aaMainUI.Add("Text", "x1123 y642 w115 h20", "Placement Speed")
 global PlaceSpeed := aaMainUI.Add("DropDownList", "x1130 y662 w100 h180 Choose1 +Center", ["2.25 sec", "2 sec", "2.5 sec", "2.75 sec", "3 sec"])
 placementSaveText := aaMainUI.Add("Text", "x807 y385 w80 h20", "Save Config")
-Hotkeytext := aaMainUI.Add("Text", "x807 y35 w200 h30", "F1: Position roblox")
-Hotkeytext2 := aaMainUI.Add("Text", "x807 y50 w200 h30", "F2: Start mango")
-Hotkeytext3 := aaMainUI.Add("Text", "x807 y65 w200 h30", "F3: Stop mango")
+Hotkeytext := aaMainUI.Add("Text", "x807 y35 w530 h30", "To change keybinds click top right settings, Below are default hotkey settings ")
+Hotkeytext2 := aaMainUI.Add("Text", "x807 y50 w530 h30", "F1:Reposition roblox window|F2:Start Macro|F3:Stop Macro|F4:Pause Macro")
 GithubButton := aaMainUI.Add("Picture", "x30 y640 w40 h40 +BackgroundTrans cffffff", GithubImage)
 DiscordButton := aaMainUI.Add("Picture", "x112 y645 w60 h34 +BackgroundTrans cffffff", DiscordImage)
 
@@ -249,7 +267,7 @@ DiscordButton.OnEvent("Click", (*) => OpenDiscord())
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT
 global modeSelectionGroup := aaMainUI.Add("GroupBox", "x808 y38 w500 h45 Background" uiTheme[2], "Mode Select")
 aaMainUI.SetFont("s10 c" uiTheme[6])
-global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["Story", "Legend", "Raid", "Infinity Castle", "Contract", "Winter Event", "Cursed Womb"])
+global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["Story", "Legend", "Raid", "Infinity Castle", "Contract", "Cursed Womb", "Portal", "Winter Event"])
 global StoryDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Planet Greenie", "Walled City", "Snowy Town", "Sand Village", "Navy Bay", "Fiend City", "Spirit World", "Ant Kingdom", "Magic Town", "Haunted Academy", "Magic Hills", "Space Center", "Alien Spaceship", "Fabled Kingdom", "Ruined City", "Puppet Island", "Virtual Dungeon", "Snowy Kingdom", "Dungeon Throne", "Mountain Temple", "Rain Village"])
 global StoryActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Act 1", "Act 2", "Act 3", "Act 4", "Act 5", "Act 6", "Infinity"])
 global LegendDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Magic Hills", "Space Center", "Fabled Kingdom", "Virtual Dungeon", "Dungeon Throne", "Rain Village"] )
@@ -257,6 +275,8 @@ global LegendActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Cho
 global RaidDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["The Spider", "Sacred Planet", "Strange Town", "Ruined City"])
 global RaidActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Act 1", "Act 2", "Act 3", "Act 4", "Act 5"])
 global InfinityCastleDropdown := aaMainUI.Add("DropDownList", "x968 y53 w80 h180 Choose0 +Center", ["Normal", "Hard"])
+global PortalDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Alien Portal", "Puppet Portal", "Demon Leader's Portal", "Eclipse Portal", "Nobel Portal"])
+global PortalJoinDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Creating", "Joining"])
 global ContractPageDropdown := aaMainUI.Add("DropDownList", "x968 y53 w80 h180 Choose0 +Center", ["Page 1", "Page 2","Page 3","Page 4","Page 5","Page 6", "Page 4-5"])
 global ContractJoinDropdown := aaMainUI.Add("DropDownList", "x1057 y53 w120 h180 Choose0 +Center", ["Creating", "Joining","Matchmaking", "Solo"])
 global ConfirmButton := aaMainUI.Add("Button", "x1218 y53 w80 h25", "Confirm")
@@ -270,12 +290,13 @@ RaidActDropdown.Visible := false
 InfinityCastleDropdown.Visible := false
 ContractPageDropdown.Visible := false
 ContractJoinDropdown.Visible := false
+PortalDropdown.Visible := false
+PortalJoinDropdown.Visible := false
 MatchMaking.Visible := false
 ReturnLobbyBox.Visible := false
 NextLevelBox.Visible := false
 Hotkeytext.Visible := false
 Hotkeytext2.Visible := false
-Hotkeytext3.Visible := false
 ModeDropdown.OnEvent("Change", OnModeChange)
 StoryDropdown.OnEvent("Change", OnStoryChange)
 LegendDropDown.OnEvent("Change", OnLegendChange)
@@ -299,6 +320,8 @@ AddUnitCard(aaMainUI, index, x, y) {
     aaMainUI.SetFont("s9 c" uiTheme[1])
     unit.PlacementText := aaMainUI.Add("Text", Format("x{} y{} w70 h20 +BackgroundTrans", x+100, y+2), "Placement")
     unit.PriorityText := aaMainUI.Add("Text", Format("x{} y{} w60 h20 BackgroundTrans hidden", x+180, y+2), "Upgrade")
+
+    unit.ChallengePriorityText := aaMainUI.Add("Text", Format("x{} y{} w130 h20 BackgroundTrans hidden", x+260, y+2), "Challenge Upgrade")
     
     UnitData.Push(unit)
     return unit
@@ -334,7 +357,16 @@ Priority3 := aaMainUI.Add("DropDownList", "x990 y205 w60 h180 Choose3 +Center Hi
 Priority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose4 +Center Hidden", ["1","2","3","4","5","6"])
 Priority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose5 +Center Hidden", ["1","2","3","4","5","6"])
 Priority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose6 +Center Hidden", ["1","2","3","4","5","6"])
+; Upgrade priority dropdowns
+ChallengePriority1 := aaMainUI.Add("DropDownList", "x1072 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority2 := aaMainUI.Add("DropDownList", "x1072 y155 w60 h180 Choose2 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority3 := aaMainUI.Add("DropDownList", "x1072 y205 w60 h180 Choose3 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority4 := aaMainUI.Add("DropDownList", "x1072 y255 w60 h180 Choose4 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority5 := aaMainUI.Add("DropDownList", "x1072 y305 w60 h180 Choose5 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority6 := aaMainUI.Add("DropDownList", "x1072 y355 w60 h180 Choose6 +Center Hidden", ["1","2","3","4","5","6"])
+
 PriorityUpgrade.OnEvent("Click", TogglePriorityDropdowns)
+ChallengeBox.OnEvent("Click", ToggleChallengePriorityDropdowns)
 
 readInSettings()
 aaMainUI.Show("w1366 h700")

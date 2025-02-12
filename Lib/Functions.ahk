@@ -1,17 +1,6 @@
 #Include %A_ScriptDir%\Lib\GUI.ahk
 global confirmClicked := false
 
-;HotKeys
-F1:: {
-    moveRobloxWindow()
-}
-F2:: {
-    InitializeMacro()
-}
-F3:: {
-    Reload()
-}
-
 CheckBanner(unitName) {
 
     ; First check if Roblox window exists
@@ -138,6 +127,8 @@ OpenDiscordLink() {
     InfinityCastleDropdown.Visible := false
     MatchMaking.Visible := false
     ReturnLobbyBox.Visible := false
+    PortalDropdown.Visible := false 
+    PortalJoinDropdown.Visible := false  
     ContractPageDropdown.Visible := false  
     ContractJoinDropdown.Visible := false 
     
@@ -160,6 +151,10 @@ OpenDiscordLink() {
         ContractPageDropdown.Visible := true
         ContractJoinDropdown.Visible := true
         mode := "Contract"
+    } else if (selected = "Portal") {
+        PortalDropdown.Visible := true
+        PortalJoinDropdown.Visible := true
+        mode := "Portal"
     } else if (selected = "Cursed Womb") {
         mode := "Cursed Womb"
     }
@@ -240,6 +235,14 @@ OnConfirmClick(*) {
     MatchMaking.Visible := false  
     ReturnLobbyBox.Visible := false
     }
+    ; For Portal, check if both Portal and Join Type are selected
+    else if (ModeDropdown.Text = "Portal") {
+    if (PortalDropdown.Text = "" || PortalJoinDropdown.Text = "") {
+        AddToLog("Please select both Portal and Join Type before confirming")
+        return
+    }
+    AddToLog("Selected " PortalDropdown.Text " - " PortalJoinDropdown.Text)
+    } 
     ; For Contract mode
     else if (ModeDropdown.Text = "Contract") {
         if (ContractPageDropdown.Text = "" || ContractJoinDropdown.Text = "") {
@@ -273,13 +276,14 @@ OnConfirmClick(*) {
     RaidDropdown.Visible := false
     RaidActDropdown.Visible := false
     InfinityCastleDropdown.Visible := false
+    PortalDropdown.Visible := false
+    PortalJoinDropdown.Visible := false
     ConfirmButton.Visible := false
     modeSelectionGroup.Visible := false
     ContractPageDropdown.Visible := false
     ContractJoinDropdown.Visible := false
     Hotkeytext.Visible := true
     Hotkeytext2.Visible := true
-    Hotkeytext3.Visible := true
     global confirmClicked := true
 }
 
@@ -332,6 +336,22 @@ CaptchaDetect(x, y, w, h, inputX, inputY) {
     }
     AddToLog("Could not detect valid captcha")
     return false
+}
+
+ToggleChallengePriorityDropdowns(*) {
+    global PriorityUpgrade, ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
+    shouldShow := ChallengeBox.Value
+
+    ChallengePriority1.Visible := shouldShow
+    ChallengePriority2.Visible := shouldShow
+    ChallengePriority3.Visible := shouldShow
+    ChallengePriority4.Visible := shouldShow
+    ChallengePriority5.Visible := shouldShow
+    ChallengePriority6.Visible := shouldShow
+
+    for unit in UnitData {
+        unit.ChallengePriorityText.Visible := shouldShow
+    }
 }
 
 TogglePriorityDropdowns(*) {

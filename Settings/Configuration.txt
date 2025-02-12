@@ -1,4 +1,4 @@
-Mode=Contract
+Mode=
 
 
 Enabled1=1
@@ -14,12 +14,20 @@ Placement3=1
 Placement4=1
 Placement5=1
 Placement6=1
-Priority1=2
-Priority2=4
+Priority1=1
+Priority2=2
 Priority3=3
-Priority4=1
+Priority4=4
 Priority5=5
 Priority6=6
+
+[ChallengePriority]
+ChallengePriority1=1
+ChallengePriority2=2
+ChallengePriority3=3
+ChallengePriority4=4
+ChallengePriority5=5
+ChallengePriority6=6
 
 [CardPriority]
 Card2=new_path
@@ -51,4 +59,4 @@ Speed=1
 
 
 [Matchmaking]
-Matchmake=0
+Matchmake=1
