@@ -2515,3 +2515,24 @@ Configuration settings loaded successfully 00:00
 ==Anime Adventures - Mist - Ryn Edition v1.0==
   Start Time: [17h.02m.50s]
 Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.2==
+  Start Time: [14h.39m.31s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.2==
+  Start Time: [14h.40m.11s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.2==
+  Start Time: [14h.45m.06s]
+Configuration settings loaded successfully 00:00
+Attempting to locate the Roblox window 00:30
+Attempting to locate the Roblox window 00:35
+Attempting to locate the Roblox window 00:40
+Attempting to locate the Roblox window 00:45
+Attempting to locate the Roblox window 00:50
+Attempting to locate the Roblox window 00:55
+Attempting to locate the Roblox window 01:00
+Attempting to locate the Roblox window 01:05
+Could not find Roblox window 01:05

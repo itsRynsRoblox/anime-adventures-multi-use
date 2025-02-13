@@ -340,7 +340,7 @@ CaptchaDetect(x, y, w, h, inputX, inputY) {
 
 ToggleChallengePriorityDropdowns(*) {
     global PriorityUpgrade, ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
-    shouldShow := ChallengeBox.Value
+    shouldShow := PriorityUpgrade.Value
 
     ChallengePriority1.Visible := shouldShow
     ChallengePriority2.Visible := shouldShow
@@ -356,6 +356,7 @@ ToggleChallengePriorityDropdowns(*) {
 
 TogglePriorityDropdowns(*) {
     global PriorityUpgrade, priority1, priority2, priority3, priority4, priority5, priority6
+    global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
     shouldShow := PriorityUpgrade.Value
 
     priority1.Visible := shouldShow
@@ -365,8 +366,16 @@ TogglePriorityDropdowns(*) {
     priority5.Visible := shouldShow
     priority6.Visible := shouldShow
 
+    ChallengePriority1.Visible := shouldShow
+    ChallengePriority2.Visible := shouldShow
+    ChallengePriority3.Visible := shouldShow
+    ChallengePriority4.Visible := shouldShow
+    ChallengePriority5.Visible := shouldShow
+    ChallengePriority6.Visible := shouldShow
+
     for unit in UnitData {
         unit.PriorityText.Visible := shouldShow
+        unit.ChallengePriorityText.Visible := shouldShow
     }
 }
 

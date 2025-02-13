@@ -166,9 +166,11 @@ SendWebhookWithTime(isWin, stageLength) {
     sessionData := "⌛ Macro Runtime: " macroLength "`n"
     . "⏱️ Stage Length: " stageLength "`n"
     . "🔄 Current Streak: " (currentStreak > 0 ? currentStreak " Win Streak" : Abs(currentStreak) " Loss Streak") "`n"
+    . ":video_game: Current Game: " mode "`n"
     . ":white_check_mark: Successful Runs: " Wins "`n"
     . "❌ Failed Runs: " loss "`n"
     . ":bar_chart: Total Runs: " (loss+Wins)
+    . ":scales: Win Rate: " Format("{:.1f}%", (Wins/(Wins+loss))*100) "`n"
     isWin ? 0x0AB02D : 0xB00A0A,
     isWin ? "win" : "lose"
     

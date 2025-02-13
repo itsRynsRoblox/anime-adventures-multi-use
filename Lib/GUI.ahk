@@ -319,9 +319,10 @@ AddUnitCard(aaMainUI, index, x, y) {
 
     aaMainUI.SetFont("s9 c" uiTheme[1])
     unit.PlacementText := aaMainUI.Add("Text", Format("x{} y{} w70 h20 +BackgroundTrans", x+100, y+2), "Placement")
-    unit.PriorityText := aaMainUI.Add("Text", Format("x{} y{} w60 h20 BackgroundTrans hidden", x+180, y+2), "Upgrade")
+    unit.PriorityText := aaMainUI.Add("Text", Format("x{} y{} w60 h20 BackgroundTrans hidden", x+183, y+2), "Priority")
 
-    unit.ChallengePriorityText := aaMainUI.Add("Text", Format("x{} y{} w130 h20 BackgroundTrans hidden", x+260, y+2), "Challenge Upgrade")
+    unit.ChallengePlacementText := aaMainUI.Add("Text", Format("x{} y{} w140 h20 +BackgroundTrans", x+257, y+2), "Challenge Placement")
+    unit.ChallengePriorityText := aaMainUI.Add("Text", Format("x{} y{} w140 h20 BackgroundTrans hidden", x+400, y+2), "Challenge Priority")
     
     UnitData.Push(unit)
     return unit
@@ -357,16 +358,23 @@ Priority3 := aaMainUI.Add("DropDownList", "x990 y205 w60 h180 Choose3 +Center Hi
 Priority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose4 +Center Hidden", ["1","2","3","4","5","6"])
 Priority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose5 +Center Hidden", ["1","2","3","4","5","6"])
 Priority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose6 +Center Hidden", ["1","2","3","4","5","6"])
-; Upgrade priority dropdowns
-ChallengePriority1 := aaMainUI.Add("DropDownList", "x1072 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
-ChallengePriority2 := aaMainUI.Add("DropDownList", "x1072 y155 w60 h180 Choose2 +Center Hidden", ["1","2","3","4","5","6"])
-ChallengePriority3 := aaMainUI.Add("DropDownList", "x1072 y205 w60 h180 Choose3 +Center Hidden", ["1","2","3","4","5","6"])
-ChallengePriority4 := aaMainUI.Add("DropDownList", "x1072 y255 w60 h180 Choose4 +Center Hidden", ["1","2","3","4","5","6"])
-ChallengePriority5 := aaMainUI.Add("DropDownList", "x1072 y305 w60 h180 Choose5 +Center Hidden", ["1","2","3","4","5","6"])
-ChallengePriority6 := aaMainUI.Add("DropDownList", "x1072 y355 w60 h180 Choose6 +Center Hidden", ["1","2","3","4","5","6"])
+; Challenge placement dropdowns
+ChallengePlacement1 := aaMainUI.Add("DropDownList", "x1111 y105 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+ChallengePlacement2 := aaMainUI.Add("DropDownList", "x1111 y155 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+ChallengePlacement3 := aaMainUI.Add("DropDownList", "x1111 y205 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+ChallengePlacement4 := aaMainUI.Add("DropDownList", "x1111 y255 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+ChallengePlacement5 := aaMainUI.Add("DropDownList", "x1111 y305 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+ChallengePlacement6 := aaMainUI.Add("DropDownList", "x1111 y355 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+
+; Challenge upgrade priority dropdowns
+ChallengePriority1 := aaMainUI.Add("DropDownList", "x1241 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority2 := aaMainUI.Add("DropDownList", "x1241 y155 w60 h180 Choose2 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority3 := aaMainUI.Add("DropDownList", "x1241 y205 w60 h180 Choose3 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority4 := aaMainUI.Add("DropDownList", "x1241 y255 w60 h180 Choose4 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority5 := aaMainUI.Add("DropDownList", "x1241 y305 w60 h180 Choose5 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority6 := aaMainUI.Add("DropDownList", "x1241 y355 w60 h180 Choose6 +Center Hidden", ["1","2","3","4","5","6"])
 
 PriorityUpgrade.OnEvent("Click", TogglePriorityDropdowns)
-ChallengeBox.OnEvent("Click", ToggleChallengePriorityDropdowns)
 
 readInSettings()
 aaMainUI.Show("w1366 h700")

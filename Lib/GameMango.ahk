@@ -60,7 +60,7 @@ PlacingUnits() {
         enabled := enabled.Value
         
         ; Get number of placements wanted for this slot
-        placements := "placement" slotNum
+        placements := inChallengeMode && ChallengeBox.Value ? "challengeplacement" slotNum : "placement" slotNum
         placements := %placements%
         placements := Integer(placements.Text)
         

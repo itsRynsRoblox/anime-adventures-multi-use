@@ -17,6 +17,7 @@ readInSettings() {
     global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
     global placement1, placement2, placement3, placement4, placement5, placement6
     global priority1, priority2, priority3, priority4, priority5, priority6
+    global ChallengePlacement1, ChallengePlacement2, ChallengePlacement3, ChallengePlacement4, ChallengePlacement5, ChallengePlacement6
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
     global mode
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking
@@ -56,6 +57,12 @@ readInSettings() {
                 case "Priority4": priority4.Text := parts[2]
                 case "Priority5": priority5.Text := parts[2]
                 case "Priority6": priority6.Text := parts[2]
+                case "ChallengePlacement1": ChallengePlacement1.Text := parts[2]
+                case "ChallengePlacement2": ChallengePlacement2.Text := parts[2]
+                case "ChallengePlacement3": ChallengePlacement3.Text := parts[2]
+                case "ChallengePlacement4": ChallengePlacement4.Text := parts[2]
+                case "ChallengePlacement5": ChallengePlacement5.Text := parts[2]
+                case "ChallengePlacement6": ChallengePlacement6.Text := parts[2]
                 case "ChallengePriority1": ChallengePriority1.Text := parts[2]
                 case "ChallengePriority2": ChallengePriority2.Text := parts[2]
                 case "ChallengePriority3": ChallengePriority3.Text := parts[2]
@@ -77,6 +84,7 @@ SaveSettings(*) {
     global placement1, placement2, placement3, placement4, placement5, placement6
     global priority1, priority2, priority3, priority4, priority5, priority6
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
+    global ChallengePlacement1, ChallengePlacement2, ChallengePlacement3, ChallengePlacement4, ChallengePlacement5, ChallengePlacement6
     global mode
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking
 
@@ -115,6 +123,14 @@ SaveSettings(*) {
         content .= "`nPriority4=" priority4.Text
         content .= "`nPriority5=" priority5.Text
         content .= "`nPriority6=" priority6.Text
+
+        content .= "`n`n[ChallengePlacement]"
+        content .= "`nChallengePlacement1=" ChallengePlacement1.Text
+        content .= "`nChallengePlacement2=" ChallengePlacement2.Text
+        content .= "`nChallengePlacement3=" ChallengePlacement3.Text
+        content .= "`nChallengePlacement4=" ChallengePlacement4.Text
+        content .= "`nChallengePlacement5=" ChallengePlacement5.Text
+        content .= "`nChallengePlacement6=" ChallengePlacement6.Text
 
         content .= "`n`n[ChallengePriority]"
         content .= "`nChallengePriority1=" ChallengePriority1.Text
