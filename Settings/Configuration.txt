@@ -2,11 +2,11 @@ Mode=
 
 
 Enabled1=1
-Enabled2=1
-Enabled3=1
-Enabled4=1
-Enabled5=1
-Enabled6=1
+Enabled2=0
+Enabled3=0
+Enabled4=0
+Enabled5=0
+Enabled6=0
 
 Placement1=1
 Placement2=1
@@ -20,6 +20,14 @@ Priority3=3
 Priority4=4
 Priority5=5
 Priority6=6
+
+[ChallengePlacement]
+ChallengePlacement1=1
+ChallengePlacement2=1
+ChallengePlacement3=1
+ChallengePlacement4=1
+ChallengePlacement5=1
+ChallengePlacement6=1
 
 [ChallengePriority]
 ChallengePriority1=1
@@ -51,12 +59,18 @@ Card19=regen
 Card20=yen
 
 [PlacementLogic]
-Logic=4
+Logic=1
 
 
 [PlaceSpeed]
-Speed=1
+Speed=5
 
 
 [Matchmaking]
-Matchmake=1
+Matchmake=0
+
+[PhysicalTeam]
+PhyTeam=6
+
+[MagicTeam]
+MagTeam=5

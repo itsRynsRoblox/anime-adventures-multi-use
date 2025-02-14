@@ -2536,3 +2536,1126 @@ Attempting to locate the Roblox window 00:55
 Attempting to locate the Roblox window 01:00
 Attempting to locate the Roblox window 01:05
 Could not find Roblox window 01:05
+
+==Anime Adventures - Mist - Ryn Edition v1.2==
+  Start Time: [15h.20m.07s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.2==
+  Start Time: [9h.57m.31s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.2==
+  Start Time: [11h.35m.44s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.09m.45s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.14m.10s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.17m.56s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.18m.39s]
+Configuration settings loaded successfully 00:00
+Please select a gamemode before starting the macro! 00:01
+Selected Winter Event 00:25
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:25
+Configuration settings saved successfully 00:29
+Moving to position for Winter Event 00:32
+Starting Winter Event 00:43
+Determining Movement Necessity on Map... 00:43
+Detected map: Winter Event 01:17
+Successfully Loaded In 01:30
+Found Teleport to Spawn button 01:36
+Executing Movement for: Winter Event 01:38
+Color not found. Turning again. 01:38
+Color not found. Turning again. 01:39
+Color found and clicked at: X277 Y125 01:40
+Game started 01:43
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.20m.51s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.22m.25s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:04
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:04
+Moving to position for Winter Event 00:07
+Starting Winter Event 00:18
+Determining Movement Necessity on Map... 00:18
+Detected map: Winter Event 00:51
+Successfully Loaded In 01:05
+Found Teleport to Spawn button 01:11
+Executing Movement for: Winter Event 01:12
+Color not found. Turning again. 01:12
+Color found and clicked at: X190 Y435 01:14
+Game started 01:17
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.28m.33s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:29
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:29
+Moving to position for Winter Event 00:30
+Starting Winter Event 00:41
+Determining Movement Necessity on Map... 00:41
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.29m.19s]
+Configuration settings loaded successfully 00:00
+Selected Winter Event 00:26
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:26
+Moving to position for Winter Event 00:28
+Starting Winter Event 00:39
+Determining Movement Necessity on Map... 00:39
+Detected map: Winter Event 01:11
+Successfully Loaded In 01:25
+Found Teleport to Spawn button 01:32
+Executing Movement for: Winter Event 01:33
+Color not found. Turning again. 01:33
+Color found and clicked at: X189 Y439 01:35
+Game started 01:38
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.31m.19s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.32m.04s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:27
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:27
+Attempting to start solo 00:49
+Joining Contract Mode 00:51
+Determining Movement Necessity on Map... 00:53
+Detected map: Contracts 01:02
+Successfully Loaded In 01:16
+Found Teleport to Spawn button 01:22
+Executing Movement for: Contracts 01:24
+Color found and clicked at: X130 Y159 01:24
+Game started 01:27
+Placing Unit 1 (0/1) 01:27
+Unit Placed Successfully 01:30
+Placed Unit 1 (1/1) 01:30
+Unit Placed Successfully 01:41
+Placed Unit 1 (2/1) 01:42
+Unit Placed Successfully 01:45
+Placed Unit 1 (3/1) 01:45
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.34m.05s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:09
+Selected Contract Page Page 4 - Solo 00:32
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:32
+Attempting to start solo 00:53
+Joining Contract Mode 00:55
+Determining Movement Necessity on Map... 00:57
+Detected map: Contracts 00:59
+Successfully Loaded In 01:12
+Found Teleport to Spawn button 01:19
+Executing Movement for: Contracts 01:20
+Color found and clicked at: X141 Y168 01:20
+Game started 01:23
+Placing Unit 1 (0/1) 01:24
+Unit Placed Successfully 01:27
+Placed Unit 1 (1/1) 01:27
+Unit Placed Successfully 01:45
+Placed Unit 1 (2/1) 01:45
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.35m.55s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:09
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.37m.03s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:04
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.37m.19s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.38m.46s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:10
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:10
+Attempting to start solo 00:32
+Joining Contract Mode 00:33
+Determining Movement Necessity on Map... 00:36
+Detected map: Contracts 00:37
+Successfully Loaded In 00:51
+Found Teleport to Spawn button 00:58
+Executing Movement for: Contracts 00:59
+Color found and clicked at: X130 Y159 01:00
+Game started 01:03
+Placing Unit 1 (0/1) 01:03
+Unit Placed Successfully 01:06
+Placed Unit 1 (1/1) 01:07
+Placing Unit 2 (0/1) 01:08
+Unit Placed Successfully 01:21
+Placed Unit 2 (1/1) 01:22
+Placing Unit 3 (0/1) 01:22
+Unit Placed Successfully 01:36
+Placed Unit 3 (1/1) 01:36
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.40m.25s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.50m.21s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.50m.29s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Attempting to start solo 00:28
+Joining Contract Mode 00:30
+Determining Movement Necessity on Map... 00:32
+Detected map: Contracts 00:34
+Successfully Loaded In 00:47
+Found Teleport to Spawn button 00:53
+Executing Movement for: Contracts 00:55
+Color found and clicked at: X585 Y425 00:55
+Game started 00:58
+Placing Unit 1 (0/1) 00:58
+Unit Placed Successfully 01:02
+Placed Unit 1 (1/1) 01:02
+Placing Unit 2 (0/1) 01:03
+Unit Placed Successfully 01:13
+Placed Unit 2 (1/1) 01:14
+Placing Unit 3 (0/1) 01:15
+Unit Placed Successfully 01:25
+Placed Unit 3 (1/1) 01:25
+Placing Unit 4 (0/1) 01:26
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.51m.59s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [13h.58m.43s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:06
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:06
+Attempting to start solo 00:27
+Joining Contract Mode 00:28
+Determining Movement Necessity on Map... 00:31
+Detected map: Contracts 00:32
+Successfully Loaded In 00:45
+Found Teleport to Spawn button 00:52
+Executing Movement for: Contracts 00:53
+Color found and clicked at: X141 Y168 00:54
+Game started 00:57
+Placing Unit 1 (0/1) 00:57
+Unit Placed Successfully 01:00
+Placed Unit 1 (1/1) 01:01
+Placing Unit 2 (0/1) 01:02
+Unit Placed Successfully 01:18
+Placed Unit 2 (1/1) 01:19
+Placing Unit 3 (0/1) 01:20
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.00m.10s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.00m.33s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:35
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:35
+Attempting to start solo 00:57
+Joining Contract Mode 00:58
+Determining Movement Necessity on Map... 01:01
+Detected map: Contracts 01:02
+Successfully Loaded In 01:15
+Found Teleport to Spawn button 01:22
+Executing Movement for: Contracts 01:23
+Color found and clicked at: X159 Y169 01:24
+Game started 01:27
+Placing Unit 1 (0/1) 01:27
+Unit Placed Successfully 01:30
+Placed Unit 1 (1/1) 01:30
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.02m.11s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.06m.54s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:04
+Selected Contract Page Page 4 - Solo 00:12
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:12
+Attempting to start solo 00:33
+Joining Contract Mode 00:35
+Determining Movement Necessity on Map... 00:37
+Detected map: Contracts 00:39
+Successfully Loaded In 00:52
+Found Teleport to Spawn button 00:59
+Executing Movement for: Contracts 01:00
+Color found and clicked at: X141 Y168 01:01
+Game started 01:04
+Placing Unit 1 (0/1) 01:04
+Unit Placed Successfully 01:07
+Placed Unit 1 (1/1) 01:07
+Placing Unit 2 (0/1) 01:08
+Unit Placed Successfully 01:15
+Placed Unit 2 (1/1) 01:16
+Placing Unit 3 (0/1) 01:16
+Unit Placed Successfully 01:27
+Placed Unit 3 (1/1) 01:27
+Placing Unit 4 (0/1) 01:28
+Unit Placed Successfully 01:41
+Placed Unit 4 (1/1) 01:42
+Placing Unit 5 (0/1) 01:43
+Unit Placed Successfully 02:00
+Placed Unit 5 (1/1) 02:00
+Placing Unit 6 (0/1) 02:01
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.10m.12s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.14m.00s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Attempting to start solo 00:37
+Joining Contract Mode 00:38
+Determining Movement Necessity on Map... 00:41
+Detected map: Contracts 00:42
+Successfully Loaded In 00:56
+Found Teleport to Spawn button 01:03
+Executing Movement for: Contracts 01:04
+Color found and clicked at: X141 Y168 01:05
+Game started 01:08
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.17m.01s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.17m.29s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+Attempting to start solo 00:15
+Joining Contract Mode 00:17
+Determining Movement Necessity on Map... 00:19
+Detected map: Contracts 00:20
+Successfully Loaded In 00:35
+Found Teleport to Spawn button 00:41
+Executing Movement for: Contracts 00:43
+Color found and clicked at: X141 Y168 00:43
+Game started 00:46
+Placing Unit 1 (0/1) 00:46
+Unit Placed Successfully 00:56
+Placed Unit 1 (1/1) 00:57
+Placing Unit 2 (0/1) 00:58
+Unit Placed Successfully 01:08
+Placed Unit 2 (1/1) 01:08
+Placing Unit 3 (0/1) 01:09
+Unit Placed Successfully 01:19
+Placed Unit 3 (1/1) 01:20
+Placing Unit 4 (0/1) 01:21
+Unit Placed Successfully 01:34
+Placed Unit 4 (1/1) 01:34
+Placing Unit 5 (0/1) 01:35
+Unit Placed Successfully 01:49
+Placed Unit 5 (1/1) 01:49
+Placing Unit 6 (0/1) 01:50
+Unit Placed Successfully 02:07
+Placed Unit 6 (1/1) 02:07
+All units placed to requested amounts 02:08
+Initiating Unit Upgrades... 02:08
+Auto Ability Enabled 02:12
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.19m.51s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.21m.46s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.22m.32s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+Attempting to start solo 00:13
+Joining Contract Mode 00:15
+Determining Movement Necessity on Map... 00:17
+Detected map: Contracts 00:18
+Successfully Loaded In 00:32
+Found Teleport to Spawn button 00:38
+Executing Movement for: Contracts 00:40
+Color found and clicked at: X141 Y168 00:40
+Game started 00:43
+Placing Unit 1 (0/1) 00:43
+Unit Placed Successfully 00:53
+Placed Unit 1 (1/1) 00:54
+Placing Unit 2 (0/1) 00:55
+Unit Placed Successfully 01:05
+Placed Unit 2 (1/1) 01:05
+Placing Unit 3 (0/1) 01:06
+Unit Placed Successfully 01:16
+Placed Unit 3 (1/1) 01:17
+Placing Unit 4 (0/1) 01:18
+Unit Placed Successfully 01:31
+Placed Unit 4 (1/1) 01:31
+Placing Unit 5 (0/1) 01:32
+Unit Placed Successfully 01:46
+Placed Unit 5 (1/1) 01:46
+Placing Unit 6 (0/1) 01:47
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.24m.22s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.26m.32s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.26m.40s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:06
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:06
+Attempting to start solo 00:15
+Joining Contract Mode 00:16
+Determining Movement Necessity on Map... 00:19
+Detected map: Contracts 00:20
+Successfully Loaded In 00:34
+Found Teleport to Spawn button 00:40
+Executing Movement for: Contracts 00:41
+Color found and clicked at: X141 Y168 00:42
+Game started 00:45
+Placing Unit 1 (0/1) 00:45
+Unit Placed Successfully 00:55
+Placed Unit 1 (1/1) 00:56
+Placing Unit 2 (0/1) 00:57
+Unit Placed Successfully 01:07
+Placed Unit 2 (1/1) 01:07
+Placing Unit 3 (0/1) 01:08
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.27m.51s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.28m.51s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
+Attempting to start solo 00:24
+Joining Contract Mode 00:26
+Determining Movement Necessity on Map... 00:28
+Detected map: Contracts 00:30
+Successfully Loaded In 00:43
+Found Teleport to Spawn button 00:50
+Executing Movement for: Contracts 00:51
+Color found and clicked at: X159 Y169 00:51
+Game started 00:54
+Placing Unit 1 (0/1) 00:54
+Unit Placed Successfully 01:05
+Placed Unit 1 (1/1) 01:05
+Placing Unit 2 (0/1) 01:06
+Unit Placed Successfully 01:09
+Placed Unit 2 (1/1) 01:10
+Placing Unit 3 (0/1) 01:11
+Unit Placed Successfully 01:14
+Placed Unit 3 (1/1) 01:14
+Placing Unit 4 (0/1) 01:15
+Unit Placed Successfully 01:22
+Placed Unit 4 (1/1) 01:22
+Placing Unit 5 (0/1) 01:23
+Unit Placed Successfully 01:27
+Placed Unit 5 (1/1) 01:27
+Placing Unit 6 (0/1) 01:28
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [14h.30m.31s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.00m.30s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+Selected Contract Page Page 4 - Solo 00:10
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:10
+Attempting to start solo 00:21
+Joining Contract Mode 00:22
+Determining Movement Necessity on Map... 00:25
+Detected map: Contracts 00:26
+Successfully Loaded In 00:42
+Found Teleport to Spawn button 00:49
+Executing Movement for: Contracts 00:50
+Color found and clicked at: X130 Y159 00:51
+Game started 00:54
+Starting placements for Slot 1 with 1 placements. 00:54
+Unit Placed Successfully 00:57
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.03m.59s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 1 - Solo 00:10
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:10
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.04m.28s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:04
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:04
+Attempting to start solo 00:12
+Joining Contract Mode 00:14
+Determining Movement Necessity on Map... 00:17
+Detected map: Contracts 00:18
+Successfully Loaded In 00:32
+Found Teleport to Spawn button 00:39
+Executing Movement for: Contracts 00:40
+Color found and clicked at: X584 Y424 00:41
+Game started 00:44
+Starting placements for Slot 1 with 1 placements. 00:44
+Unit Placed Successfully 00:47
+CheckForXp 2 00:47
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.05m.24s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.05m.56s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:29
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:29
+Attempting to start solo 00:38
+Joining Contract Mode 00:39
+Determining Movement Necessity on Map... 00:42
+Detected map: Contracts 00:43
+Successfully Loaded In 00:56
+Found Teleport to Spawn button 01:03
+Executing Movement for: Contracts 01:04
+Color found and clicked at: X130 Y159 01:05
+Game started 01:08
+Starting placements for Slot 1 with 1 placements. 01:08
+Unit Placed Successfully 01:11
+Completed 1 placements for Slot 1. 01:11
+Starting placements for Slot 2 with 1 placements. 01:11
+Unit Placed Successfully 01:19
+Completed 1 placements for Slot 2. 01:19
+Starting placements for Slot 3 with 1 placements. 01:19
+Unit Placed Successfully 01:35
+Completed 1 placements for Slot 3. 01:35
+Starting placements for Slot 4 with 1 placements. 01:35
+Unit Placed Successfully 01:47
+Completed 1 placements for Slot 4. 01:47
+Starting placements for Slot 5 with 1 placements. 01:47
+Unit Placed Successfully 01:54
+Completed 1 placements for Slot 5. 01:55
+Starting placements for Slot 6 with 1 placements. 01:55
+Unit Placed Successfully 02:06
+Completed 1 placements for Slot 6. 02:07
+Initiating Unit Upgrades... 02:07
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.08m.08s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.11m.07s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:08
+Selected Contract Page Page 4 - Solo 00:09
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:10
+Attempting to start solo 00:19
+Joining Contract Mode 00:20
+Determining Movement Necessity on Map... 00:23
+Detected map: Contracts 00:24
+Successfully Loaded In 00:38
+Found Teleport to Spawn button 00:45
+Executing Movement for: Contracts 00:46
+Color found and clicked at: X584 Y424 00:47
+Game started 00:50
+Placing Unit 1 (0/1) 00:50
+Unit Placed Successfully 00:53
+Placed Unit 1 (1/1) 00:54
+Placing Unit 2 (0/1) 00:54
+Unit Placed Successfully 00:58
+Placed Unit 2 (1/1) 00:58
+Placing Unit 3 (0/1) 00:59
+Unit Placed Successfully 01:03
+Placed Unit 3 (1/1) 01:03
+Placing Unit 4 (0/1) 01:04
+Unit Placed Successfully 01:11
+Placed Unit 4 (1/1) 01:11
+Placing Unit 5 (0/1) 01:12
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.12m.23s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.20m.51s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:09
+Attempting to start solo 00:17
+Joining Contract Mode 00:19
+Determining Movement Necessity on Map... 00:22
+Detected map: Contracts 00:23
+Successfully Loaded In 00:36
+Found Teleport to Spawn button 00:43
+Executing Movement for: Contracts 00:44
+Color found and clicked at: X141 Y168 00:45
+Game started 00:48
+Placing Unit 1 (0/1) 00:48
+Unit Placed Successfully 00:54
+Placed Unit 1 (1/1) 00:55
+Placing Unit 2 (0/1) 00:56
+Unit Placed Successfully 01:03
+Placed Unit 2 (1/1) 01:03
+Placing Unit 3 (0/1) 01:04
+Unit Placed Successfully 01:11
+Placed Unit 3 (1/1) 01:11
+Placing Unit 4 (0/1) 01:12
+Unit Placed Successfully 01:22
+Placed Unit 4 (1/1) 01:22
+Placing Unit 5 (0/1) 01:23
+Unit Placed Successfully 01:34
+Placed Unit 5 (1/1) 01:34
+Placing Unit 6 (0/1) 01:35
+Unit Placed Successfully 01:52
+Placed Unit 6 (1/1) 01:52
+All units placed to requested amounts 01:53
+Initiating Unit Upgrades... 01:53
+Auto Ability Enabled 01:55
+Auto Ability Enabled 01:57
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.22m.59s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.24m.19s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.24m.25s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:11
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:11
+Attempting to start solo 00:28
+Joining Contract Mode 00:29
+Determining Movement Necessity on Map... 00:32
+Detected map: Contracts 00:33
+Successfully Loaded In 00:47
+Found Teleport to Spawn button 00:54
+Executing Movement for: Contracts 00:55
+Color found and clicked at: X159 Y169 00:56
+Game started 00:59
+Placing Unit 1 (0/1) 00:59
+Unit Placed Successfully 01:06
+Placed Unit 1 (1/1) 01:06
+Placing Unit 2 (0/1) 01:07
+Unit Placed Successfully 01:14
+Placed Unit 2 (1/1) 01:14
+Placing Unit 3 (0/1) 01:15
+Unit Placed Successfully 01:22
+Placed Unit 3 (1/1) 01:22
+Placing Unit 4 (0/1) 01:23
+Unit Placed Successfully 01:33
+Placed Unit 4 (1/1) 01:34
+Placing Unit 5 (0/1) 01:35
+Unit Placed Successfully 01:45
+Placed Unit 5 (1/1) 01:45
+Placing Unit 6 (0/1) 01:46
+Unit Placed Successfully 02:03
+Placed Unit 6 (1/1) 02:04
+All units placed to requested amounts 02:04
+Initiating Unit Upgrades... 02:05
+Auto Ability Enabled 02:06
+Auto Ability Enabled 02:09
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.26m.41s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.29m.24s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:07
+Selected Contract Page Page 4 - Solo 00:16
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:17
+Attempting to start solo 00:26
+Joining Contract Mode 00:27
+Determining Movement Necessity on Map... 00:30
+Detected map: Contracts 00:32
+Successfully Loaded In 00:46
+Found Teleport to Spawn button 00:52
+Executing Movement for: Contracts 00:53
+Color found and clicked at: X141 Y168 00:54
+Game started 00:57
+Placing Unit 1 (0/1) 00:57
+Unit Placed Successfully 01:04
+Placed Unit 1 (1/1) 01:04
+Placing Unit 5 (0/1) 01:05
+Unit Placed Successfully 01:12
+Placed Unit 5 (1/1) 01:12
+All units placed to requested amounts 01:13
+Initiating Unit Upgrades... 01:13
+Skipping Erwin Ability 01:15
+Auto Ability Enabled 01:16
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.30m.44s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.32m.35s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+Selected Contract Page Page 4 - Solo 00:09
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:09
+Attempting to start solo 00:26
+Joining Contract Mode 00:28
+Determining Movement Necessity on Map... 00:30
+Detected map: Contracts 00:32
+Successfully Loaded In 00:45
+Found Teleport to Spawn button 00:51
+Executing Movement for: Contracts 00:53
+Color found and clicked at: X584 Y424 00:53
+Game started 00:56
+Placing Unit 1 (0/1) 00:56
+Unit Placed Successfully 01:00
+Placed Unit 1 (1/1) 01:00
+All units placed to requested amounts 01:01
+Initiating Unit Upgrades... 01:01
+Skipping Erwin Ability, Skipping 01:03
+Skipping Erwin Ability, Skipping 01:05
+Skipping Erwin Ability, Skipping 01:07
+Skipping Erwin Ability, Skipping 01:09
+Skipping Erwin Ability, Skipping 01:11
+Skipping Erwin Ability, Skipping 01:13
+Skipping Erwin Ability, Skipping 01:15
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.33m.54s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.37m.07s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.38m.07s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.42m.48s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.56m.00s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
+Found Physical Buff for Page 4 00:16
+Attempting to start solo 00:18
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [15h.56m.21s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.03m.50s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:20
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:20
+Found Physical Buff 00:30
+Loaded Physical Team 00:31
+Attempting to start solo 00:34
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.04m.27s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.05m.44s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:19
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:19
+Found Physical Buff 00:28
+Loaded Physical Team 00:31
+Attempting to start solo 00:36
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.06m.23s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.17m.49s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Found Physical Buff 00:16
+Loaded Physical Team 00:20
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.18m.57s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.20m.07s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:20
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:20
+Found Physical Buff 00:29
+Loaded Physical Team 00:32
+Attempting to start solo 00:37
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.20m.47s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.21m.32s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 3 - Solo 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Attempting to start solo 00:18
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.21m.52s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.32m.48s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.33m.27s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.34m.26s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.35m.09s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.35m.56s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.36m.39s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.37m.19s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.38m.15s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.38m.58s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.39m.20s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.40m.22s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.40m.38s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.40m.56s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.42m.49s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.43m.10s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.43m.39s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.44m.49s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.45m.32s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.48m.48s]
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.50m.52s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.51m.24s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.55m.21s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.55m.29s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:04
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.58m.36s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:13
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:13
+Found Physical Buff 00:22
+Loaded Magic Team 00:26
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.59m.08s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.59m.16s]
+Configuration settings loaded successfully 00:00
+Configuration settings saved successfully 00:02
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.59m.22s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+Found Physical Buff 00:19
+Loaded Magic Team 00:22
+Attempting to start solo 00:27
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [16h.59m.53s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.04m.37s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Attempting to start solo 00:18
+Joining Contract Mode 00:20
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.04m.59s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:33
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:33
+Attempting to start solo 00:50
+Joining Contract Mode 00:51
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.05m.53s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.05m.55s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.07m.04s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Found Magic Buff 00:17
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.07m.34s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.07m.55s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:03
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:03
+Found Magic Buff 00:12
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.08m.49s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+Found Magic Buff 00:14
+Magic Team:5 Physical Team:6 00:16
+Attempting to start solo 00:18
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.09m.10s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.10m.45s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.10m.53s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+Found Physical Buff 00:14
+Loaded Magic Team 00:17
+Attempting to start solo 00:22
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.11m.18s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.12m.26s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Found Physical Buff 00:16
+Loaded Magic Team 00:20
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.12m.49s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.17m.53s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Found Physical Buff 00:16
+Loaded Magic Team 00:20
+Attempting to start solo 00:25
+Joining Contract Mode 00:26
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.18m.23s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.20m.09s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.20m.17s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:18
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:18
+Found Physical Buff 00:28
+Loaded Magic Team 00:32
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.20m.53s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.21m.17s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:09
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:09
+Found Physical Buff 00:17
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.21m.52s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.22m.09s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:07
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:07
+Found Physical Buff 00:18
+Magic Team:5 Physical Team:6 00:19
+1 00:21
+Attempting to start solo 00:25
+Joining Contract Mode 00:26
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.22m.38s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.24m.15s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:06
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:06
+Found Physical Buff 00:16
+Magic Team:5 Physical Team:6 00:17
+1 00:19
+Attempting to start solo 00:22
+Joining Contract Mode 00:24
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.24m.41s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.27m.07s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:05
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:05
+Found Physical Buff 00:14
+Magic Team:5 Physical Team:6 00:15
+Attempting to start solo 00:21
+Joining Contract Mode 00:23
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.27m.33s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.28m.30s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.28m.53s]
+Configuration settings loaded successfully 00:00
+Selected Contract Page Page 4 - Solo 00:08
+Don't forget to enable Click to Move! (I forget sometimes too!) 00:08
+Found Physical Buff 00:16
+Equipped Physical Team 00:21
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.29m.19s]
+Configuration settings loaded successfully 00:00
+
+==Anime Adventures - Mist - Ryn Edition v1.4==
+  Start Time: [17h.51m.09s]
+Configuration settings loaded successfully 00:00

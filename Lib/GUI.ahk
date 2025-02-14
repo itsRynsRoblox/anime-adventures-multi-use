@@ -5,7 +5,7 @@
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn Edition "
-global version := "v1.2"
+global version := "v1.4"
 global rblxID := "ahk_exe RobloxPlayerBeta.exe"
 ;Coordinate and Positioning Variables
 global targetWidth := 816
@@ -251,7 +251,7 @@ global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y385 cffffff Checked", "
 global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y410 cffffff Checked", "Auto Ability")
 global ChallengeBox := aaMainUI.Add("CheckBox", "x1143 y410 cffffff", "Auto Challenge")
 global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1005 y410 cffffff", "Priority Upgrade")
-global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1250 y662 w100 h180 Choose2 +Center", ["Random", "Grid", "Circle", "Spiral", "Up and Down"])
+global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1250 y662 w100 h180 Choose2 +Center", ["Circle", "Grid", "Spiral + 3x3", "Up and Down", "Random"])
 PlacementPatternText := aaMainUI.Add("Text", "x1250 y642 w105 h20", "Placement Type")
 PlaceSpeedText := aaMainUI.Add("Text", "x1123 y642 w115 h20", "Placement Speed")
 global PlaceSpeed := aaMainUI.Add("DropDownList", "x1130 y662 w100 h180 Choose1 +Center", ["2.25 sec", "2 sec", "2.5 sec", "2.75 sec", "3 sec"])
@@ -263,6 +263,14 @@ DiscordButton := aaMainUI.Add("Picture", "x112 y645 w60 h34 +BackgroundTrans cff
 
 GithubButton.OnEvent("Click", (*) => OpenGithub())
 DiscordButton.OnEvent("Click", (*) => OpenDiscord())
+
+;----------TEAM SWAPPING-----------;
+PhysicalTeamText := aaMainUI.Add("Text", "x996 y642 w115 h20 +Center", "Physical Team")
+global physicalTeam := aaMainUI.Add("DropDownList", "x1031 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
+
+MagicTeamText := aaMainUI.Add("Text", "x880 y642 w115 h20 +Center", "Magic Team")
+global magicTeam := aaMainUI.Add("DropDownList", "x911 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
+
 ;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT
 global modeSelectionGroup := aaMainUI.Add("GroupBox", "x808 y38 w500 h45 Background" uiTheme[2], "Mode Select")

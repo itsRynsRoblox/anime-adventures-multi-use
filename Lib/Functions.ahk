@@ -533,3 +533,78 @@ OpenGithub() {
 OpenDiscord() {
     Run("https://discord.gg/6DWgB9XMTV")
 }
+
+CheckBuffs() {
+    pages := [
+        {name: "Page 1", coords: [131, 232, 286, 477]},
+        {name: "Page 2", coords: [292, 232, 443, 477]},
+        {name: "Page 3", coords: [450, 231, 605, 477]},
+        {name: "Page 4", coords: [196, 229, 351, 477]},
+        {name: "Page 5", coords: [358, 229, 510, 477]},
+        {name: "Page 6", coords: [517, 232, 668, 476]}
+        ; Add more pages as needed
+    ]
+
+    for index, page in pages {
+        if (ContractPageDropdown.Text = page.name) {
+            if (ok := FindText(&X, &Y, page.coords[1], page.coords[2], page.coords[3], page.coords[4], 0, 0, PhysicalBuff)) {
+                AddToLog("Found Physical Buff")
+                Sleep 1000
+                SwapTeam(false)
+            } else {
+                if (ok := FindText(&X, &Y, page.coords[1], page.coords[2], page.coords[3], page.coords[4], 0, 0, MagicBuff)) {
+                    AddToLog("Found Magic Buff")
+                    Sleep 1000
+                    SwapTeam(true)
+                }
+            }
+        }
+    }
+}
+
+SwapTeam(magic := false) {
+    global physicalTeam, magicTeam
+    teamNum := magic ? magicTeam.Text : physicalTeam.Text
+    teamNum := Integer(RegExReplace(RegExReplace(teamNum, "", ""), "", ""))
+
+    SendInput("K") ; Open Units
+    Sleep 1000
+    FixClick(398, 223) ; Click Teams
+    Sleep 1000
+
+    teams := [
+        {name: "1", coords: [556, 230]},
+        {name: "2", coords: [556, 320]},
+        {name: "3", coords: [556, 410]},
+        {name: "4", coords: [556, 256]},
+        {name: "5", coords: [566, 340]},
+        {name: "6", coords: [566, 427]},
+    ]
+
+    if (teamNum >= 3) {
+        FixClick(390, 245)
+        Sleep(200)
+        Loop 5 {
+            SendInput("{WheelDown}")
+            Sleep(150)
+        }
+        Sleep(300)
+    }
+    for index, team in teams {
+        if (magic) {
+            if (magicTeam.Text = team.name) {
+                AddToLog("Equipped Magic Team")
+                FixClick(team.coords[1], team.coords[2])
+                Sleep 300
+            }
+        } else {
+            if (physicalTeam.Text = team.name) {
+                AddToLog("Equipped Physical Team")
+                FixClick(team.coords[1], team.coords[2])
+                Sleep 300
+            }
+        }
+    }
+    FixClick(33, 400) ; Reopen Contracts
+    Sleep 1000
+}

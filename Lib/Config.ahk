@@ -21,6 +21,7 @@ readInSettings() {
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
     global mode
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking
+    global physicalTeam, magicTeam
 
     try {
         settingsFile := setupFilePath()
@@ -72,6 +73,8 @@ readInSettings() {
                 case "Speed": PlaceSpeed.Value := parts[2] ; Set the dropdown value
                 case "Logic": PlacementPatternDropdown.Value := parts[2] ; Set the dropdown value
                 case "Matchmake": MatchMaking.Value := parts[2] ; Set the checkbox value
+                case "PhyTeam": physicalTeam.Text := parts[2]
+                case "MagTeam": magicTeam.Text := parts[2]
             }
         }
         AddToLog("Configuration settings loaded successfully")
@@ -87,6 +90,7 @@ SaveSettings(*) {
     global ChallengePlacement1, ChallengePlacement2, ChallengePlacement3, ChallengePlacement4, ChallengePlacement5, ChallengePlacement6
     global mode
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking
+    global physicalTeam, magicTeam
 
     try {
         settingsFile := A_ScriptDir "\Settings\Configuration.txt"
@@ -154,7 +158,13 @@ SaveSettings(*) {
 
         content .= "`n`n[Matchmaking]"
         content .= "`nMatchmake=" MatchMaking.Value "`n"
+
+        content .= "`n[PhysicalTeam]"
+        content .= "`nPhyTeam=" physicalTeam.Value "`n"
         
+        content .= "`n[MagicTeam]"
+        content .= "`nMagTeam=" magicTeam.Value "`n"
+
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")
     }
@@ -197,6 +207,16 @@ LoadSettings() {
             else if (InStr(section, "PlacementLogic")) {
                 if RegExMatch(line, "Logic=(\w+)", &match) {
                     PlacementPatternDropdown.Value := match.1 ; Set the dropdown value
+                }
+            }
+            else if (InStr(section, "MagicTeam")) {
+                if RegExMatch(line, "MagTeam=(\w+)", &match) {
+                    magicTeam.Value := match.1 ; Set the dropdown value
+                }
+            }
+            else if (InStr(section, "PhysicalTeam")) {
+                if RegExMatch(line, "PhyTeam=(\w+)", &match) {
+                    physicalTeam.Value := match.1 ; Set the dropdown value
                 }
             }
             else if (InStr(section, "PlaceSpeed")) {

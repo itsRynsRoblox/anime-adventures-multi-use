@@ -174,6 +174,7 @@ SendWebhookWithTime(isWin, stageLength) {
     isWin ? 0x0AB02D : 0xB00A0A,
     isWin ? "win" : "lose"
     
+    
     ; Send webhook
     WebhookScreenshot(
         isWin ? "Stage Complete!" : "Stage Failed",
