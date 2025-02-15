@@ -535,18 +535,22 @@ OpenDiscord() {
 }
 
 CheckBuffs() {
+    contractPage := ContractPageDropdown.Text
+        ; Handle 4-5 Page pattern selection
+        if (contractPage = "Page 4-5") {
+            contractPage := GetContractPage()
+        }
     pages := [
         {name: "Page 1", coords: [131, 232, 286, 477]},
         {name: "Page 2", coords: [292, 232, 443, 477]},
         {name: "Page 3", coords: [450, 231, 605, 477]},
         {name: "Page 4", coords: [196, 229, 351, 477]},
         {name: "Page 5", coords: [358, 229, 510, 477]},
-        {name: "Page 6", coords: [517, 232, 668, 476]}
-        ; Add more pages as needed
+        {name: "Page 6", coords: [517, 232, 668, 476]},
     ]
 
     for index, page in pages {
-        if (ContractPageDropdown.Text = page.name) {
+        if (contractPage = page.name) {
             if (ok := FindText(&X, &Y, page.coords[1], page.coords[2], page.coords[3], page.coords[4], 0, 0, PhysicalBuff)) {
                 AddToLog("Found Physical Buff")
                 Sleep 1000

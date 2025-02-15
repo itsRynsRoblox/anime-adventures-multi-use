@@ -80,10 +80,9 @@ uiBorders.Push(aaMainUI.Add("Text", "x1363 y0 w1 h630 +Background" uiTheme[3])) 
 uiBorders.Push(aaMainUI.Add("Text", "x1363 y0 w1 h697 +Background" uiTheme[3])) ;Second Right line
 uiBackgrounds.Push(aaMainUI.Add("Text", "x3 y3 w1360 h27 +Background" uiTheme[2])) ;Title Top
 uiBorders.Push(aaMainUI.Add("Text", "x0 y30 w1363 h1 +Background" uiTheme[3])) ;Title bottom
-uiBorders.Push(aaMainUI.Add("Text", "x802 y30 w1 h600 +Background" uiTheme[3])) ;Roblox Right
-uiBorders.Push(aaMainUI.Add("Text", "x803 y433 w560 h1 +Background" uiTheme[3])) ;Process Top
-uiBorders.Push(aaMainUI.Add("Text", "x803 y461 w560 h1 +Background" uiTheme[3])) ;Process bottom
-uiBorders.Push(aaMainUI.Add("Text", "x0 y630 w1364 h1 +Background" uiTheme[3], "")) ;Roblox bottom
+uiBorders.Push(aaMainUI.Add("Text", "x803 y443 w560 h1 +Background" uiTheme[3])) ;Placement bottom
+uiBorders.Push(aaMainUI.Add("Text", "x803 y527 w560 h1 +Background" uiTheme[3])) ;Process bottom
+uiBorders.Push(aaMainUI.Add("Text", "x802 y30 w1 h667 +Background" uiTheme[3])) ;Roblox Right
 uiBorders.Push(aaMainUI.Add("Text", "x0 y697 w1364 h1 +Background" uiTheme[3], "")) ;Roblox second bottom
 
 global robloxHolder := aaMainUI.Add("Text", "x3 y33 w797 h597 +Background" uiTheme[5], "") ;Roblox window box
@@ -96,9 +95,10 @@ minimizeButton.OnEvent("Click", (*) => minimizeUI()) ;Minimize gui
 aaMainUI.SetFont("Bold s16 c" uiTheme[1], "Verdana") ;Font
 global windowTitle := aaMainUI.Add("Text", "x10 y3 w1200 h29 +BackgroundTrans", aaTitle "" . "" version) ;Title
 
-aaMainUI.Add("Text", "x805 y435 w558 h25 +Center +BackgroundTrans", "Process") ;Process header
+aaMainUI.Add("Text", "x805 y501 w558 h25 +Center +BackgroundTrans", "Process") ;Process header
+uiBorders.Push(aaMainUI.Add("Text", "x803 y499 w560 h1 +Background" uiTheme[3])) ;Process Top
 aaMainUI.SetFont("norm s11 c" uiTheme[1]) ;Font
-global process1 := aaMainUI.Add("Text", "x810 y470 w538 h18 +BackgroundTrans c" uiTheme[7], "➤ Original Creator: Mist_Yuu (discord.gg/mistdomain)") ;Processes
+global process1 := aaMainUI.Add("Text", "x810 y536 w538 h18 +BackgroundTrans c" uiTheme[7], "➤ Original Creator: Mist_Yuu (discord.gg/mistdomain)") ;Processes
 global process2 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "➤ Version edited and maintained by Ryn") ;Processes 
 global process3 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
 global process4 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
@@ -242,20 +242,24 @@ settingsBtn.OnEvent("Click", ShowSettingsGUI)
 global guideBtn := aaMainUI.Add("Button", "x1060 y0 w90 h30", "Guide")
 guideBtn.OnEvent("Click", OpenGuide)
 
-placementSaveBtn := aaMainUI.Add("Button", "x807 y405 w80 h20", "Save")
+placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
 aaMainUI.SetFont("s9")
-global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y385 cffffff Checked", "Next Level")
-global MatchMaking := aaMainUI.Add("Checkbox", "x1035 y385 cffffff Hidden Checked", "Matchmaking")
-global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y385 cffffff Checked", "Return To Lobby")
-global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y410 cffffff Checked", "Auto Ability")
-global ChallengeBox := aaMainUI.Add("CheckBox", "x1143 y410 cffffff", "Auto Challenge")
-global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1005 y410 cffffff", "Priority Upgrade")
-global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1250 y662 w100 h180 Choose2 +Center", ["Circle", "Grid", "Spiral + 3x3", "Up and Down", "Random"])
-PlacementPatternText := aaMainUI.Add("Text", "x1250 y642 w105 h20", "Placement Type")
-PlaceSpeedText := aaMainUI.Add("Text", "x1123 y642 w115 h20", "Placement Speed")
-global PlaceSpeed := aaMainUI.Add("DropDownList", "x1130 y662 w100 h180 Choose1 +Center", ["2.25 sec", "2 sec", "2.5 sec", "2.75 sec", "3 sec"])
-placementSaveText := aaMainUI.Add("Text", "x807 y385 w80 h20", "Save Config")
+global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Next Level")
+global MatchMaking := aaMainUI.Add("Checkbox", "x1035 y451 cffffff Hidden Checked", "Matchmaking")
+global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Return To Lobby")
+global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Auto Ability")
+global ChallengeBox := aaMainUI.Add("CheckBox", "x1143 y476 cffffff", "Auto Challenge")
+global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1005 y476 cffffff", "Priority Upgrade")
+PlacementPatternText := aaMainUI.Add("Text", "x1032 y390 w115 h20", "Placement Type")
+global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Map Specific", "Spiral", "Up and Down", "Random", ])
+PlaceSpeedText := aaMainUI.Add("Text", "x1193 y390 w115 h20", "Placement Speed")
+global PlaceSpeed := aaMainUI.Add("DropDownList", "x1205 y410 w100 h180 Choose1 +Center", ["2.25 sec", "2 sec", "2.5 sec", "2.75 sec", "3 sec"])
+
+PlacementSelectionText := aaMainUI.Add("Text", "x857 y390 w130 h20", "Placement Settings")
+PlacementSelection := aaMainUI.Add("DropDownList", "x865 y410 w100 h180 Choose1 +Center", ["Normal", "Challenge"])
+placementSaveText := aaMainUI.Add("Text", "x807 y451 w80 h20", "Save Config")
+
 Hotkeytext := aaMainUI.Add("Text", "x807 y35 w530 h30", "To change keybinds click top right settings, Below are default hotkey settings ")
 Hotkeytext2 := aaMainUI.Add("Text", "x807 y50 w530 h30", "F1:Reposition roblox window|F2:Start Macro|F3:Stop Macro|F4:Pause Macro")
 GithubButton := aaMainUI.Add("Picture", "x30 y640 w40 h40 +BackgroundTrans cffffff", GithubImage)
@@ -265,11 +269,11 @@ GithubButton.OnEvent("Click", (*) => OpenGithub())
 DiscordButton.OnEvent("Click", (*) => OpenDiscord())
 
 ;----------TEAM SWAPPING-----------;
-PhysicalTeamText := aaMainUI.Add("Text", "x996 y642 w115 h20 +Center", "Physical Team")
-global physicalTeam := aaMainUI.Add("DropDownList", "x1031 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
+PhysicalTeamText := aaMainUI.Add("Text", "x576 y642 w115 h20 +Center", "Physical Team")
+global physicalTeam := aaMainUI.Add("DropDownList", "x611 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
 
-MagicTeamText := aaMainUI.Add("Text", "x880 y642 w115 h20 +Center", "Magic Team")
-global magicTeam := aaMainUI.Add("DropDownList", "x911 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
+MagicTeamText := aaMainUI.Add("Text", "x680 y642 w115 h20 +Center", "Magic Team")
+global magicTeam := aaMainUI.Add("DropDownList", "x711 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
 
 ;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT
@@ -283,7 +287,7 @@ global LegendActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Cho
 global RaidDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["The Spider", "Sacred Planet", "Strange Town", "Ruined City"])
 global RaidActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Act 1", "Act 2", "Act 3", "Act 4", "Act 5"])
 global InfinityCastleDropdown := aaMainUI.Add("DropDownList", "x968 y53 w80 h180 Choose0 +Center", ["Normal", "Hard"])
-global PortalDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Alien Portal", "Puppet Portal", "Demon Leader's Portal", "Eclipse Portal", "Nobel Portal"])
+global PortalDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Alien Portal", "Puppet Portal", "Demon Leader's Portal", "Eclipse Portal", "Noble Portal"])
 global PortalJoinDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Creating", "Joining"])
 global ContractPageDropdown := aaMainUI.Add("DropDownList", "x968 y53 w80 h180 Choose0 +Center", ["Page 1", "Page 2","Page 3","Page 4","Page 5","Page 6", "Page 4-5"])
 global ContractJoinDropdown := aaMainUI.Add("DropDownList", "x1057 y53 w120 h180 Choose0 +Center", ["Creating", "Joining","Matchmaking", "Solo"])
@@ -328,9 +332,6 @@ AddUnitCard(aaMainUI, index, x, y) {
     aaMainUI.SetFont("s9 c" uiTheme[1])
     unit.PlacementText := aaMainUI.Add("Text", Format("x{} y{} w70 h20 +BackgroundTrans", x+100, y+2), "Placement")
     unit.PriorityText := aaMainUI.Add("Text", Format("x{} y{} w60 h20 BackgroundTrans hidden", x+183, y+2), "Priority")
-
-    unit.ChallengePlacementText := aaMainUI.Add("Text", Format("x{} y{} w140 h20 +BackgroundTrans", x+257, y+2), "Challenge Placement")
-    unit.ChallengePriorityText := aaMainUI.Add("Text", Format("x{} y{} w140 h20 BackgroundTrans hidden", x+400, y+2), "Challenge Priority")
     
     UnitData.Push(unit)
     return unit
@@ -352,37 +353,50 @@ enabled6 := aaMainUI.Add("CheckBox", "x818 y355 w15 h15", "")
 
 aaMainUI.SetFont("s8 c" uiTheme[6])
 
-; Placement dropdowns (x+100 = 908)
-placement1 := aaMainUI.Add("DropDownList", "x908 y105 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-placement2 := aaMainUI.Add("DropDownList", "x908 y155 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-placement3 := aaMainUI.Add("DropDownList", "x908 y205 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-placement4 := aaMainUI.Add("DropDownList", "x908 y255 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-placement5 := aaMainUI.Add("DropDownList", "x908 y305 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-placement6 := aaMainUI.Add("DropDownList", "x908 y355 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-; Upgrade priority dropdowns
-Priority1 := aaMainUI.Add("DropDownList", "x990 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
-Priority2 := aaMainUI.Add("DropDownList", "x990 y155 w60 h180 Choose2 +Center Hidden", ["1","2","3","4","5","6"])
-Priority3 := aaMainUI.Add("DropDownList", "x990 y205 w60 h180 Choose3 +Center Hidden", ["1","2","3","4","5","6"])
-Priority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose4 +Center Hidden", ["1","2","3","4","5","6"])
-Priority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose5 +Center Hidden", ["1","2","3","4","5","6"])
-Priority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose6 +Center Hidden", ["1","2","3","4","5","6"])
-; Challenge placement dropdowns
-ChallengePlacement1 := aaMainUI.Add("DropDownList", "x1111 y105 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-ChallengePlacement2 := aaMainUI.Add("DropDownList", "x1111 y155 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-ChallengePlacement3 := aaMainUI.Add("DropDownList", "x1111 y205 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-ChallengePlacement4 := aaMainUI.Add("DropDownList", "x1111 y255 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-ChallengePlacement5 := aaMainUI.Add("DropDownList", "x1111 y305 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
-ChallengePlacement6 := aaMainUI.Add("DropDownList", "x1111 y355 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+; Mode selection dropdown
+PlacementSelection.OnEvent("Change", ToggleMode)
 
-; Challenge upgrade priority dropdowns
-ChallengePriority1 := aaMainUI.Add("DropDownList", "x1241 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
-ChallengePriority2 := aaMainUI.Add("DropDownList", "x1241 y155 w60 h180 Choose2 +Center Hidden", ["1","2","3","4","5","6"])
-ChallengePriority3 := aaMainUI.Add("DropDownList", "x1241 y205 w60 h180 Choose3 +Center Hidden", ["1","2","3","4","5","6"])
-ChallengePriority4 := aaMainUI.Add("DropDownList", "x1241 y255 w60 h180 Choose4 +Center Hidden", ["1","2","3","4","5","6"])
-ChallengePriority5 := aaMainUI.Add("DropDownList", "x1241 y305 w60 h180 Choose5 +Center Hidden", ["1","2","3","4","5","6"])
-ChallengePriority6 := aaMainUI.Add("DropDownList", "x1241 y355 w60 h180 Choose6 +Center Hidden", ["1","2","3","4","5","6"])
+; Placement dropdowns
+Placement1 := aaMainUI.Add("DropDownList", "x908 y105 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+Placement2 := aaMainUI.Add("DropDownList", "x908 y155 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+Placement3 := aaMainUI.Add("DropDownList", "x908 y205 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+Placement4 := aaMainUI.Add("DropDownList", "x908 y255 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+Placement5 := aaMainUI.Add("DropDownList", "x908 y305 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+Placement6 := aaMainUI.Add("DropDownList", "x908 y355 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+
+Priority1 := aaMainUI.Add("DropDownList", "x990 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+Priority2 := aaMainUI.Add("DropDownList", "x990 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+Priority3 := aaMainUI.Add("DropDownList", "x990 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+Priority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+Priority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+Priority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+
+ChallengePlacement1 := aaMainUI.Add("DropDownList", "x908 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePlacement2 := aaMainUI.Add("DropDownList", "x908 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePlacement3 := aaMainUI.Add("DropDownList", "x908 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePlacement4 := aaMainUI.Add("DropDownList", "x908 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePlacement5 := aaMainUI.Add("DropDownList", "x908 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePlacement6 := aaMainUI.Add("DropDownList", "x908 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+
+ChallengePriority1 := aaMainUI.Add("DropDownList", "x990 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority2 := aaMainUI.Add("DropDownList", "x990 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority3 := aaMainUI.Add("DropDownList", "x990 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ChallengePriority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
 
 PriorityUpgrade.OnEvent("Click", TogglePriorityDropdowns)
+
+ToggleMode(*) {
+    mode := PlacementSelection.Text
+    isChallenge := (mode = "Challenge")
+    Loop 6 {
+        Placement%A_Index%.Visible := !isChallenge
+        Priority%A_Index%.Visible := !isChallenge & PriorityUpgrade.Value
+        ChallengePlacement%A_Index%.Visible := isChallenge
+        ChallengePriority%A_Index%.Visible := isChallenge & PriorityUpgrade.Value
+    }
+}
 
 readInSettings()
 aaMainUI.Show("w1366 h700")

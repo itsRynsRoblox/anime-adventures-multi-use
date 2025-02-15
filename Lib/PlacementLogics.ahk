@@ -236,6 +236,77 @@ GenerateSpiralPoints(rectX := 4, rectY := 123, rectWidth := 795, rectHeight := 4
     return points
 }
 
+GenerateUpandDownPoints() {
+    points := []
+    gridSize := 40  ; Space between points
+    squaresPerSide := 7  ; How many points per row/column (odd number recommended)
+    
+    ; Center point coordinates
+    centerX := 408
+    centerY := 320
+    
+    ; Calculate starting position for top-left point of the grid
+    startX := centerX - ((squaresPerSide - 1) / 2 * gridSize)
+    startY := centerY - ((squaresPerSide - 1) / 2 * gridSize)
+    
+    ; Generate grid points column by column (left to right)
+    Loop squaresPerSide {
+        currentColumn := A_Index
+        x := startX + ((currentColumn - 1) * gridSize)
+        
+        ; Generate each point in the current column
+        Loop squaresPerSide {
+            y := startY + ((A_Index - 1) * gridSize)
+            points.Push({x: x, y: y})
+        }
+    }
+    
+    return points
+}
+
+GenerateRandomPoints() {
+    points := []
+    gridSize := 40  ; Minimum spacing between units
+    
+    ; Center point coordinates
+    centerX := 408
+    centerY := 320
+    
+    ; Define placement area boundaries (adjust these as needed)
+    minX := centerX - 180  ; Left boundary
+    maxX := centerX + 180  ; Right boundary
+    minY := centerY - 140  ; Top boundary
+    maxY := centerY + 140  ; Bottom boundary
+    
+    ; Generate 40 random points
+    Loop 40 {
+        ; Generate random coordinates
+        x := Random(minX, maxX)
+        y := Random(minY, maxY)
+        
+        ; Check if point is too close to existing points
+        tooClose := false
+        for existingPoint in points {
+            ; Calculate distance to existing point
+            distance := Sqrt((x - existingPoint.x)**2 + (y - existingPoint.y)**2)
+            if (distance < gridSize) {
+                tooClose := true
+                break
+            }
+        }
+        
+        ; If point is not too close to others, add it
+        if (!tooClose)
+            points.Push({x: x, y: y})
+    }
+    
+    ; Always add center point last (so it's used last)
+    points.Push({x: centerX, y: centerY})
+    
+    return points
+}
+
+;---------LEGACY PLACEMENT CODE---------;
 rect1 := { x: 37, y: 45, width: 254, height: 69 }
 rect2 := { x: 591, y: 45, width: 243, height: 47 }
 rect3 := { x: 36, y: 594, width: 105, height: 51 }
@@ -417,74 +488,4 @@ PlaceInGrid(startX, startY, slotNum, &placementCount, &successfulCoordinates, &s
 
     }
 
-}
-
-GenerateUpandDownPoints() {
-    points := []
-    gridSize := 40  ; Space between points
-    squaresPerSide := 7  ; How many points per row/column (odd number recommended)
-    
-    ; Center point coordinates
-    centerX := 408
-    centerY := 320
-    
-    ; Calculate starting position for top-left point of the grid
-    startX := centerX - ((squaresPerSide - 1) / 2 * gridSize)
-    startY := centerY - ((squaresPerSide - 1) / 2 * gridSize)
-    
-    ; Generate grid points column by column (left to right)
-    Loop squaresPerSide {
-        currentColumn := A_Index
-        x := startX + ((currentColumn - 1) * gridSize)
-        
-        ; Generate each point in the current column
-        Loop squaresPerSide {
-            y := startY + ((A_Index - 1) * gridSize)
-            points.Push({x: x, y: y})
-        }
-    }
-    
-    return points
-}
-
-GenerateRandomPoints() {
-    points := []
-    gridSize := 40  ; Minimum spacing between units
-    
-    ; Center point coordinates
-    centerX := 408
-    centerY := 320
-    
-    ; Define placement area boundaries (adjust these as needed)
-    minX := centerX - 180  ; Left boundary
-    maxX := centerX + 180  ; Right boundary
-    minY := centerY - 140  ; Top boundary
-    maxY := centerY + 140  ; Bottom boundary
-    
-    ; Generate 40 random points
-    Loop 40 {
-        ; Generate random coordinates
-        x := Random(minX, maxX)
-        y := Random(minY, maxY)
-        
-        ; Check if point is too close to existing points
-        tooClose := false
-        for existingPoint in points {
-            ; Calculate distance to existing point
-            distance := Sqrt((x - existingPoint.x)**2 + (y - existingPoint.y)**2)
-            if (distance < gridSize) {
-                tooClose := true
-                break
-            }
-        }
-        
-        ; If point is not too close to others, add it
-        if (!tooClose)
-            points.Push({x: x, y: y})
-    }
-    
-    ; Always add center point last (so it's used last)
-    points.Push({x: centerX, y: centerY})
-    
-    return points
 }
