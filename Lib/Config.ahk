@@ -20,6 +20,7 @@ readInSettings() {
     global ChallengePlacement1, ChallengePlacement2, ChallengePlacement3, ChallengePlacement4, ChallengePlacement5, ChallengePlacement6
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
     global mode
+    global ChallengeBox, PriorityUpgrade
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking
     global physicalTeam, magicTeam
 
@@ -72,7 +73,9 @@ readInSettings() {
                 case "ChallengePriority6": ChallengePriority6.Text := parts[2]
                 case "Speed": PlaceSpeed.Value := parts[2] ; Set the dropdown value
                 case "Logic": PlacementPatternDropdown.Value := parts[2] ; Set the dropdown value
+                case "Upgrade": PriorityUpgrade.Value := parts[2] ; Set the checkbox value
                 case "Matchmake": MatchMaking.Value := parts[2] ; Set the checkbox value
+                case "Challenge": ChallengeBox.Value := parts[2] ; Set the checkbox value
                 case "PhyTeam": physicalTeam.Text := parts[2]
                 case "MagTeam": magicTeam.Text := parts[2]
             }
@@ -89,6 +92,7 @@ SaveSettings(*) {
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
     global ChallengePlacement1, ChallengePlacement2, ChallengePlacement3, ChallengePlacement4, ChallengePlacement5, ChallengePlacement6
     global mode
+    global ChallengeBox, PriorityUpgrade
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking
     global physicalTeam, magicTeam
 
@@ -156,8 +160,14 @@ SaveSettings(*) {
         content .= "`n`n[PlaceSpeed]"
         content .= "`nSpeed=" PlaceSpeed.Value "`n"
 
-        content .= "`n`n[Matchmaking]"
+        content .= "`n[Matchmaking]"
         content .= "`nMatchmake=" MatchMaking.Value "`n"
+
+        content .= "`n[PriorityUpgrade]"
+        content .= "`nUpgrade=" PriorityUpgrade.Value "`n"
+
+        content .= "`n[AutoChallenge]"
+        content .= "`nChallenge=" ChallengeBox.Value "`n"
 
         content .= "`n[PhysicalTeam]"
         content .= "`nPhyTeam=" physicalTeam.Value "`n"
@@ -227,6 +237,16 @@ LoadSettings() {
             else if (InStr(section, "Matchmaking")) {
                 if RegExMatch(line, "Matchmake=(\w+)", &match) {
                     MatchMaking.Value := match.1 ; Set the dropdown value
+                }
+            }
+            else if (InStr(section, "PriorityUpgrade")) {
+                if RegExMatch(line, "Upgrade=(\w+)", &match) {
+                    PriorityUpgrade.Value := match.1 ; Set the dropdown value
+                }
+            }
+            else if (InStr(section, "AutoChallenge")) {
+                if RegExMatch(line, "Challenge=(\w+)", &match) {
+                    ChallengeBox.Value := match.1 ; Set the dropdown value
                 }
             }
             else if (InStr(section, "Index=")) {

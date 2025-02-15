@@ -34,7 +34,7 @@ ChallengePriority1=1
 ChallengePriority2=2
 ChallengePriority3=3
 ChallengePriority4=4
-ChallengePriority5=5
+ChallengePriority5=2
 ChallengePriority6=6
 
 [CardPriority]
@@ -65,9 +65,14 @@ Logic=1
 [PlaceSpeed]
 Speed=5
 
-
 [Matchmaking]
 Matchmake=0
+
+[PriorityUpgrade]
+Upgrade=1
+
+[AutoChallenge]
+Challenge=0
 
 [PhysicalTeam]
 PhyTeam=6

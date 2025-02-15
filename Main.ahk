@@ -12,3 +12,4 @@ SendMode "Event"
 #include %A_ScriptDir%\Lib\OCR-main\Lib\OCR.ahk
 #include %A_ScriptDir%\Lib\PriorityPicker.ahk 
 #include %A_ScriptDir%\Lib\PlacementLogics.ahk 
+#include %A_ScriptDir%\Lib\Toggles.ahk
