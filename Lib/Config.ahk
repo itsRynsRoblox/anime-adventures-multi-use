@@ -214,39 +214,23 @@ LoadSettings() {
                     }
                 }
             }
-            else if (InStr(section, "PlacementLogic")) {
-                if RegExMatch(line, "Logic=(\w+)", &match) {
-                    PlacementPatternDropdown.Value := match.1 ; Set the dropdown value
-                }
+            ; Define a mapping of section names to dropdown controls
+            sectionDropdownMap := {
+                PlacementLogic: PlacementPatternDropdown,
+                MagicTeam: magicTeam,
+                PhysicalTeam: physicalTeam,
+                PlaceSpeed: PlaceSpeed,
+                Matchmaking: MatchMaking,
+                PriorityUpgrade: PriorityUpgrade,
+                AutoChallenge: ChallengeBox
             }
-            else if (InStr(section, "MagicTeam")) {
-                if RegExMatch(line, "MagTeam=(\w+)", &match) {
-                    magicTeam.Value := match.1 ; Set the dropdown value
-                }
-            }
-            else if (InStr(section, "PhysicalTeam")) {
-                if RegExMatch(line, "PhyTeam=(\w+)", &match) {
-                    physicalTeam.Value := match.1 ; Set the dropdown value
-                }
-            }
-            else if (InStr(section, "PlaceSpeed")) {
-                if RegExMatch(line, "Speed=(\w+)", &match) {
-                    PlaceSpeed.Value := match.1 ; Set the dropdown value
-                }
-            }
-            else if (InStr(section, "Matchmaking")) {
-                if RegExMatch(line, "Matchmake=(\w+)", &match) {
-                    MatchMaking.Value := match.1 ; Set the dropdown value
-                }
-            }
-            else if (InStr(section, "PriorityUpgrade")) {
-                if RegExMatch(line, "Upgrade=(\w+)", &match) {
-                    PriorityUpgrade.Value := match.1 ; Set the dropdown value
-                }
-            }
-            else if (InStr(section, "AutoChallenge")) {
-                if RegExMatch(line, "Challenge=(\w+)", &match) {
-                    ChallengeBox.Value := match.1 ; Set the dropdown value
+
+            ; Loop through the section names and dropdown controls
+            for section, dropdownControl in sectionDropdownMap {
+                if InStr(section, section) {
+                    if RegExMatch(line, section . "=(\w+)", &match) {
+                        dropdownControl.Value := match.1 ; Set the dropdown value
+                    }
                 }
             }
             else if (InStr(section, "Index=")) {

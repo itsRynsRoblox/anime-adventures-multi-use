@@ -6,6 +6,8 @@ global isHalloween := false
 
 global isSummer := false
 
+global contractsEnabled := true
+
 global debugMessages := false
 
 

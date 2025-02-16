@@ -85,7 +85,6 @@ PlacingUnits() {
                     }
                     if (alreadyUsed)
                         continue
-                
                     if PlaceUnit(point.x, point.y, slotNum) {
                         CheckForCardSelection()
                         successfulCoordinates.Push({x: point.x, y: point.y, slot: slotNum})
@@ -170,6 +169,11 @@ UpgradeUnits() {
                                     return
                                 }
 
+                                if CheckForDisconnect() {
+                                    Reconnect() ; Added Disconnect Check
+                                    return
+                                }
+
                                 if MaxUpgrade() {
                                     CheckForCardSelection()
                                     upgradedCount[coord.slot]++
@@ -210,6 +214,11 @@ UpgradeUnits() {
             for index, coord in successfulCoordinates {
                 UpgradeUnit(coord.x, coord.y)
 
+                if CheckForDisconnect() {
+                    Reconnect() ; Added Disconnect Check
+                    return
+                }
+
                 if CheckForXp() {
                     AddToLog("Stage ended during upgrades, proceeding to results")
                     successfulCoordinates := []
@@ -239,8 +248,9 @@ UpgradeUnits() {
 ChallengeMode() {    
     AddToLog("Moving to Challenge mode")
     ChallengeMovement()
-    
+
     while !(ok := FindText(&X, &Y, 325, 520, 489, 587, 0, 0, ModeCancel)) {
+        Reconnect() ; Added Disconnect Check
         ChallengeMovement()
     }
 
@@ -260,6 +270,7 @@ StoryMode() {
     
     ; Start stage
     while !(ok := FindText(&X, &Y, 325, 520, 489, 587, 0, 0, ModeCancel)) {
+        Reconnect() ; Added Disconnect Check
         StoryMovement()
     }
     AddToLog("Starting " currentStoryMap " - " currentStoryAct)
@@ -293,6 +304,7 @@ LegendMode() {
     
     ; Start stage
     while !(ok := FindText(&X, &Y, 325, 520, 489, 587, 0, 0, ModeCancel)) {
+        Reconnect() ; Added Disconnect Check
         StoryMovement()
     }
     AddToLog("Starting " currentLegendMap " - " currentLegendAct)
@@ -321,6 +333,7 @@ RaidMode() {
     
     ; Start stage
     while !(ok := FindText(&X, &Y, 325, 520, 489, 587, 0, 0, ModeCancel)) {
+        Reconnect() ; Added Disconnect Check
         RaidMovement()
     }
     AddToLog("Starting " currentRaidMap " - " currentRaidAct)
@@ -347,6 +360,7 @@ InfinityCastleMode() {
     
     ; Start stage
     while !(ok := FindText(&X, &Y, 325, 520, 489, 587, 0, 0, ModeCancel)) {
+        Reconnect() ; Added Disconnect Check
         InfCastleMovement()
     }
     AddToLog("Starting Infinity Castle - " currentDifficulty)
@@ -373,6 +387,7 @@ WinterEvent() {
     
     ; Start stage
     while !(ok:=FindText(&X, &Y, 468-150000, 386-150000, 468+150000, 386+150000, 0, 0, JoinMatchmaking)) {
+        Reconnect() ; Added Disconnect Check
         WinterEventMovement()
     }
 
@@ -392,6 +407,7 @@ CursedWombMode() {
     CursedWombMovement()
 
     while !(ok := FindText(&X, &Y, 445, 440, 650, 487, 0, 0, Capacity)) {
+        Reconnect() ; Added Disconnect Check
         if (ok := FindText(&X, &Y, 434-150000, 383-150000, 434+150000, 383+150000, 0, 0, RobuxPurchaseKey)) {
             AddToLog("Found Key Purchase Attempt")
             Sleep 50000
@@ -1315,9 +1331,16 @@ RestartStage() {
     MonitorStage()
 }
 
+CheckForDisconnect() {
+    if (ok := FindText(&X, &Y, 450, 410, 539, 427, 0, 0, Disconnect)) {
+        return true
+    }
+    return false
+}
+
 Reconnect() {   
     ; Check for Disconnected Screen using FindText
-    if (ok := FindText(&X, &Y, 330, 218, 474, 247, 0, 0, Disconnect)) {
+    if (ok := FindText(&X, &Y, 450, 410, 539, 427, 0, 0, Disconnect)) {
         AddToLog("Lost Connection! Attempting To Reconnect To Private Server...")
 
         psLink := FileExist("Settings\PrivateServer.txt") ? FileRead("Settings\PrivateServer.txt", "UTF-8") : ""
@@ -1330,7 +1353,7 @@ Reconnect() {
             Run("roblox://placeID=8304191830")  ; Public server if no PS file or empty
         }
 
-        Sleep(300000)
+        Sleep(150000)
         
         ; Restore window if it exists
         if WinExist(rblxID) {
@@ -1569,13 +1592,17 @@ StartSelectedMode() {
         InfinityCastleMode()
     }
     else if (ModeDropdown.Text = "Contract") {
-        ContractMode()
+        if (contractsEnabled) {
+            ContractMode()
+        } else {
+            AddToLog("Contracts are is not currently in Anime Adventures!")
+        }
     }
     else if (ModeDropdown.Text = "Winter Event") {
         if (isWinter) {
             WinterEvent()
         } else {
-            AddToLog("This mode is not currently in Anime Adventures!")
+            AddToLog("The Winter Event is not currently in Anime Adventures!")
         }
     }
     else if (ModeDropdown.Text = "Cursed Womb") {

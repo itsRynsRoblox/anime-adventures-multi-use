@@ -12,6 +12,9 @@ GenerateCirclePoints() {
     
     ; Angles for 8 evenly spaced points (in degrees)
     angles := [0, 45, 90, 135, 180, 225, 270, 315]
+
+    ; Angles for 16 evenly spaced points (in degrees)
+    ;angles := [0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5]
     
     ; First circle points
     for angle in angles {
