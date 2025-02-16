@@ -5,7 +5,7 @@
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn Edition "
-global version := "v1.4"
+global version := "v1.5"
 global rblxID := "ahk_exe RobloxPlayerBeta.exe"
 ;Coordinate and Positioning Variables
 global targetWidth := 816
