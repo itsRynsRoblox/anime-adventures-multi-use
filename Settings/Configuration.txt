@@ -1,4 +1,4 @@
-Mode=
+Mode=Contract
 
 
 Enabled1=1
@@ -72,7 +72,7 @@ Matchmake=0
 Upgrade=1
 
 [AutoChallenge]
-Challenge=0
+Challenge=1
 
 [PhysicalTeam]
 PhyTeam=6

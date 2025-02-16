@@ -469,7 +469,7 @@ MonitorEndScreen() {
                 currentHour := A_Hour
                 
                 ; Check if the current time is near the top of the hour or the 30-minute mark
-                if ((currentMinute >= 28 && currentMinute <= 31) || currentMinute == 0) {
+                if ((currentMinute >= 28 && currentMinute <= 31) || currentMinute >= 57 || currentMinute == 0) {
                     AddToLog("It's close to reset time, skipping challenge mode switch")
                 } else {
                     ; If time remaining is more than 5 minutes (300,000 milliseconds), proceed with switching
@@ -1538,7 +1538,7 @@ StartSelectedMode() {
         currentHour := A_Hour
         
         ; Check if the current time is near the top of the hour or the 30-minute mark
-        if ((currentMinute >= 28 && currentMinute <= 31) || currentMinute == 0) {
+        if ((currentMinute >= 28 && currentMinute <= 31) || currentMinute >= 57 || currentMinute == 0) {
             AddToLog("It's close to reset time, skipping challenge mode start")
         } else {
             AddToLog("Auto Challenge enabled - starting with challenge")
@@ -1869,7 +1869,7 @@ HandleContractEnd() {
                 currentHour := A_Hour
                 
                 ; Check if the current time is near the top of the hour or the 30-minute mark
-                if ((currentMinute >= 28 && currentMinute <= 31) || currentMinute == 0) {
+                if ((currentMinute >= 28 && currentMinute <= 31) || currentMinute >= 57 || currentMinute == 0) {
                     AddToLog("It's close to reset time, skipping challenge mode switch")
                 } else {
                     ; If time remaining is more than 5 minutes (300,000 milliseconds), proceed with switching
