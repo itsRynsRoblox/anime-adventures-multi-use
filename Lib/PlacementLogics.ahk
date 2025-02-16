@@ -4,33 +4,31 @@
 GenerateCirclePoints() {
     points := []
     
-    ; Define each circle's radius
-    radius1 := 45    ; First circle 
-    radius2 := 90    ; Second circle 
-    radius3 := 135   ; Third circle 
-    radius4 := 180   ; Fourth circle 
-    
-    ; Angles for 8 evenly spaced points (in degrees)
-    angles := [0, 45, 90, 135, 180, 225, 270, 315]
+; Define each circle's radius
+radius1 := 45    ; First circle 
+radius2 := 90    ; Second circle 
+radius3 := 135   ; Third circle 
+radius4 := 180   ; Fourth circle 
 
-    ; Angles for 16 evenly spaced points (in degrees)
-    ;angles := [0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5]
-    
-    ; First circle points
-    for angle in angles {
-        radians := angle * 3.14159 / 180
-        x := centerX + radius1 * Cos(radians)
-        y := centerY + radius1 * Sin(radians)
-        points.Push({ x: Round(x), y: Round(y) })
-    }
-    
-    ; second circle points
-    for angle in angles {
-        radians := angle * 3.14159 / 180
-        x := centerX + radius2 * Cos(radians)
-        y := centerY + radius2 * Sin(radians)
-        points.Push({ x: Round(x), y: Round(y) })
-    }
+; Angles for 8 evenly spaced points (in degrees)
+angles := [0, 45, 90, 135, 180, 225, 270, 315]
+
+; First circle points
+for angle in angles {
+    radians := angle * 3.14159 / 180
+    x := centerX + radius1 * Cos(radians)
+    y := centerY + radius1 * Sin(radians)
+    points.Push({ x: Round(x), y: Round(y) })
+}
+
+; Second circle points with more angles
+angles2 := [0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5]
+for angle in angles2 {
+    radians := angle * 3.14159 / 180
+    x := centerX + radius2 * Cos(radians)
+    y := centerY + radius2 * Sin(radians)
+    points.Push({ x: Round(x), y: Round(y) })
+}
     
     ; third circle points
     for angle in angles {
@@ -47,7 +45,6 @@ GenerateCirclePoints() {
         y := centerY + radius4 * Sin(radians)
         points.Push({ x: Round(x), y: Round(y) })
     }
-    
     return points
 }
 

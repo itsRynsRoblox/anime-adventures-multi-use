@@ -9,7 +9,7 @@ LoadKeybindSettings()  ; Load saved keybinds
 Hotkey(F1Key, (*) => moveRobloxWindow())
 Hotkey(F2Key, (*) => StartMacro())
 Hotkey(F3Key, (*) => Reload())
-Hotkey(F4Key, (*) => TogglePause())
+Hotkey(F4Key, (*) => PlacingUnits())
 
 StartMacro(*) {
     if (!ValidateMode()) {
@@ -1443,11 +1443,11 @@ MaxUpgrade() {
 }
 
 ReachedUpgradeLimit() {
-    if (ok:=FindText(&X, &Y, 166, 272, 289, 297, 0, 0, Upgrade6)) {
-        return true
-    }
-    if (ok:=FindText(&X, &Y, 166, 272, 289, 297, 0, 0, Upgrade9)) {
-        return true
+    upgradesToCheck := [1,2,3,4,5,6,7,8,9]
+    for i, upgradeNum in upgradesToCheck {
+        if (ok := FindText(&X, &Y, 166, 272, 289, 297, 0, 0, "Upgrade" . upgradeNum)) {
+            return true
+        }
     }
     return false
 }
