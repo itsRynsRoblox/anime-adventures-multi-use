@@ -1,6 +1,6 @@
 # Ryn's Anime Adventures Macro
 
-A quality-of-life rewrite of the **Anime Adventures Macro** originally developed by [Taxi Macro](https://discord.gg/taximacro). This version adds community-requested features and additional improvements to enhance usability and functionality.
+My personal version of the **Anime Adventures Macro** originally developed by [Mist](https://discord.gg/mistdomain). This version adds community-requested features and additional improvements to enhance usability and functionality.
 
 This macro is specifically designed for Anime Adventures.
 
@@ -18,19 +18,13 @@ This macro is specifically designed for Anime Adventures.
 
 ---
 
-## Removed Features
-
-- **Auto Updates**: Never trust an autohotkey script to auto update.
-
----
-
 ## Installation
 
 1. Download the macro file from the [Releases](#) section.
 2. Install **AutoHotkey v2** (required to run the macro).
    - [Download AutoHotkey](https://www.autohotkey.com/download/)
 3. Run the script using AutoHotkey:
-   - Double-click the `Macro.ahk` file to launch the macro.
+   - Double-click the `Main.ahk` file to launch the macro.
 
 ---
 
@@ -54,13 +48,13 @@ The macro includes configurable options for a personalized experience:
 - **Unit placement**: Adjust what units the macro should use in-game.
 - **Placement count preferences**: Adjust how many units should the macro place of each selected unit.
 - **Upgrade priority preferences**: Adjust what units should the macro upgrade first.
-- **Game Mode Selection**: Toggle between Winter Event/Contracts/Haunted Academy Infinite/Cursed Womb
+- **Game Mode Selection**: You can freely swap between most modes found in Anime Adventures.
 
 ---
 
 ## Credits
 
-- Original Macro by: **[Taxi Macro](https://discord.gg/taximacro)**
+- Original Macro by: **[Mist](https://discord.gg/mistdomain)**
 - This version is a rewrite with quality-of-life improvements and community-requested features.
 
 ---
@@ -73,8 +67,8 @@ The macro includes configurable options for a personalized experience:
 
 ## Contributions
 
-- Haie (@itshaies) -For their card selection priority & webhook format)
-- Zredlohtop (@zredlohtop) - For their help with Cursed Womb
+- Mist (@mist_yuu) - Creator of the macro I used as a base
+- Haie (@itshaies) -For their card selection priority
 
 ---
 
@@ -86,4 +80,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Support
 
-For help or feedback, feel free to ask for help on the **[Taxi Macro](https://discord.gg/taximacro)** discord server.
+For help or feedback, feel free to ask for help in the **[Ryn's Hideout](https://discord.gg/6DWgB9XMTV)** discord server.
