@@ -1,10 +1,8 @@
-; updated card priority from @haie's event macro
 global PriorityCardSelector := Gui("+AlwaysOnTop")
 PriorityCardSelector.SetFont("s10 bold", "Segoe UI")
 PriorityCardSelector.BackColor := "0c000a"
 PriorityCardSelector.MarginX := 20
 PriorityCardSelector.MarginY := 20
-PriorityCardSelector.Title := "Card Priority"
 
 PriorityOrder := PriorityCardSelector.Add("GroupBox", "x30 y25 w180 h570 cWhite", "Modifier Priority Order")
 

@@ -22,7 +22,7 @@ readInSettings() {
     global mode
     global ChallengeBox, PriorityUpgrade
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking
-    global physicalTeam, magicTeam
+    global PhysicalTeam, MagicTeam, TeamSwap
 
     try {
         settingsFile := setupFilePath()
@@ -76,11 +76,13 @@ readInSettings() {
                 case "Upgrade": PriorityUpgrade.Value := parts[2] ; Set the checkbox value
                 case "Matchmake": MatchMaking.Value := parts[2] ; Set the checkbox value
                 case "Challenge": ChallengeBox.Value := parts[2] ; Set the checkbox value
+                case "Swap": TeamSwap.Value := parts[2] ; Set the checkbox value
                 case "PhyTeam": physicalTeam.Text := parts[2]
                 case "MagTeam": magicTeam.Text := parts[2]
             }
         }
         AddToLog("Configuration settings loaded successfully")
+        LoadWinterLocal()
     } 
 }
 
@@ -94,7 +96,7 @@ SaveSettings(*) {
     global mode
     global ChallengeBox, PriorityUpgrade
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking
-    global physicalTeam, magicTeam
+    global PhysicalTeam, MagicTeam, TeamSwap
 
     try {
         settingsFile := A_ScriptDir "\Settings\Configuration.txt"
@@ -148,12 +150,6 @@ SaveSettings(*) {
         content .= "`nChallengePriority5=" ChallengePriority5.Text
         content .= "`nChallengePriority6=" ChallengePriority6.Text
 
-        content .= "`n`n[CardPriority]"
-        for index, dropDown in dropDowns
-            {
-                content .= (Format("`nCard{}={}", index+1, dropDown.Text))
-            }
-
         content .= "`n`n[PlacementLogic]"
         content .= "`nLogic=" PlacementPatternDropdown.Value "`n"
 
@@ -169,6 +165,9 @@ SaveSettings(*) {
         content .= "`n[AutoChallenge]"
         content .= "`nChallenge=" ChallengeBox.Value "`n"
 
+        content .= "`n[TeamSwap]"
+        content .= "`nSwap=" TeamSwap.Value "`n"
+
         content .= "`n[PhysicalTeam]"
         content .= "`nPhyTeam=" physicalTeam.Value "`n"
         
@@ -177,6 +176,7 @@ SaveSettings(*) {
 
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")
+        SaveWinterLocal()
     }
 }
 

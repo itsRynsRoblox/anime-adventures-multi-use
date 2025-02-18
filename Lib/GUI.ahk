@@ -172,9 +172,9 @@ ShowSettingsGUI(*) {
 
     SettingsGUI.Add("GroupBox", "x160 y10 w115 h70 c" uiTheme[1], "Card Priority")
     ;SettingsGUI.Add("Text", "x170 y30 c" uiTheme[1], "Navigation Key")
-    global PriorityPicker := SettingsGUI.Add("Button", "x170 y50 w95 h20", "Edit")
+    PriorityPickerButton := SettingsGUI.Add("Button", "x170 y50 w95 h20", "Edit")
 
-    PriorityPicker.OnEvent("Click", (*) => OpenPriorityPicker())
+    PriorityPickerButton.OnEvent("Click", (*) => OpenPriorityPicker())
 
     ; Save buttons
     webhookSaveBtn := SettingsGUI.Add("Button", "x460 y135 w120 h25", "Save Webhook")
@@ -249,8 +249,9 @@ global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Ne
 global MatchMaking := aaMainUI.Add("Checkbox", "x1035 y451 cffffff Hidden Checked", "Matchmaking")
 global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Return To Lobby")
 global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Auto Ability")
-global ChallengeBox := aaMainUI.Add("CheckBox", "x1143 y476 cffffff", "Auto Challenge")
-global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1005 y476 cffffff", "Priority Upgrade")
+global ChallengeBox := aaMainUI.Add("CheckBox", "x1138 y476 cffffff", "Auto Challenge")
+global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1002 y476 cffffff", "Priority Upgrade")
+global TeamSwap := aaMainUI.Add("CheckBox", "x1261 y476 cffffff", "Team Swap")
 PlacementPatternText := aaMainUI.Add("Text", "x1032 y390 w115 h20", "Placement Type")
 global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral", "Up and Down", "Random", ])
 PlaceSpeedText := aaMainUI.Add("Text", "x1193 y390 w115 h20", "Placement Speed")
@@ -269,10 +270,10 @@ DiscordButton.OnEvent("Click", (*) => OpenDiscord())
 
 ;----------TEAM SWAPPING-----------;
 PhysicalTeamText := aaMainUI.Add("Text", "x576 y642 w115 h20 +Center", "Physical Team")
-global physicalTeam := aaMainUI.Add("DropDownList", "x611 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
+global PhysicalTeam := aaMainUI.Add("DropDownList", "x611 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
 
 MagicTeamText := aaMainUI.Add("Text", "x680 y642 w115 h20 +Center", "Magic Team")
-global magicTeam := aaMainUI.Add("DropDownList", "x711 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
+global MagicTeam := aaMainUI.Add("DropDownList", "x711 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
 
 ;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT

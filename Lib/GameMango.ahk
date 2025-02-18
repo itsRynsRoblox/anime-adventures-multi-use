@@ -1754,7 +1754,9 @@ HandleContractJoin() {
         Sleep(300)
     }
 
-    CheckBuffs()
+    if (TeamSwap.Value) {
+        CheckBuffs()
+    }
     Sleep 1500
 
     ; Get coordinates for the selected page
