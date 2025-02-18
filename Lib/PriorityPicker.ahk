@@ -56,6 +56,7 @@ OnDropDownChange(ctrl, index) {
         priorityOrder[index] := ctrl.Text
         AddToLog(Format("Priority {} set to {}", index, ctrl.Text))
         RemoveEmptyStrings(priorityOrder)
+        SaveWinterLocal
     } else {
         AddToLog(Format("Invalid index {} for dropdown", index))
     }

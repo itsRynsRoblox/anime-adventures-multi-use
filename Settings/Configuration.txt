@@ -1,12 +1,12 @@
-Mode=Contract
+Mode=
 
 
 Enabled1=1
-Enabled2=0
-Enabled3=0
-Enabled4=0
-Enabled5=0
-Enabled6=0
+Enabled2=1
+Enabled3=1
+Enabled4=1
+Enabled5=1
+Enabled6=1
 
 Placement1=1
 Placement2=1
@@ -34,7 +34,7 @@ ChallengePriority1=1
 ChallengePriority2=2
 ChallengePriority3=3
 ChallengePriority4=4
-ChallengePriority5=2
+ChallengePriority5=5
 ChallengePriority6=6
 
 [PlacementLogic]
@@ -45,16 +45,16 @@ Logic=1
 Speed=5
 
 [Matchmaking]
-Matchmake=0
+Matchmake=1
 
 [PriorityUpgrade]
 Upgrade=1
 
 [AutoChallenge]
-Challenge=1
+Challenge=0
 
 [TeamSwap]
-Swap=1
+Swap=0
 
 [PhysicalTeam]
 PhyTeam=6

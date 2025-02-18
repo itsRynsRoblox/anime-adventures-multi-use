@@ -36,7 +36,9 @@ SaveWinterConfigToFile(filePath) {
     }
 
     File.Close()
-    AddToLog("Winter configuration saved successfully to " filePath ".`n")
+    if (debugMessages) {
+        AddToLog("Winter configuration saved successfully to " filePath ".`n")
+    }
 }
 
 LoadWinterConfigFromFile(filePath) {
@@ -82,7 +84,9 @@ LoadWinterConfigFromFile(filePath) {
             }
         }
         file.Close()
-        AddToLog("Winter configuration loaded successfully.")
+        if (debugMessages) {
+            AddToLog("Winter configuration loaded successfully.")
+        }
     }
 }
 
