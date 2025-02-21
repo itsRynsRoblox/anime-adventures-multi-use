@@ -478,28 +478,12 @@ MonitorEndScreen() {
             ; Check if it's time for challenge mode
             if (!inChallengeMode && ChallengeBox.Value) {
                 timeElapsed := A_TickCount - challengeStartTime
-                timeRemaining := (1800000 - timeElapsed) ; Time remaining until the next reset (30 minutes)
-                
-                ; Get the current system time in minutes
-                currentMinute := A_Min
-                currentHour := A_Hour
-                
-                ; Check if the current time is near the top of the hour or the 30-minute mark
-                if ((currentMinute >= 28 && currentMinute <= 31) || currentMinute >= 57 || currentMinute == 0) {
-                    AddToLog("It's close to reset time, skipping challenge mode switch")
-                } else {
-                    ; If time remaining is more than 5 minutes (300,000 milliseconds), proceed with switching
-                    if (timeRemaining > 300000) {
-                        if (timeElapsed >= 1800000) {
-                            AddToLog("30 minutes passed - switching to Challenge mode")
-                            inChallengeMode := true
-                            challengeStartTime := A_TickCount
-                            ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
-                            return CheckLobby()
-                        }
-                    } else {
-                        AddToLog("Challenge reset is about to happen, skipping challenge mode switch")
-                    }
+                if (timeElapsed >= 1800000) {
+                    AddToLog("30 minutes passed - switching to Challenge mode")
+                    inChallengeMode := true
+                    challengeStartTime := A_TickCount
+                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                    return CheckLobby()
                 }
             }
 
@@ -1556,21 +1540,12 @@ StartSelectedMode() {
     FixClick(400,390)
 
     if (ChallengeBox.Value && firstStartup) {
-        ; Get the current system time in minutes
-        currentMinute := A_Min
-        currentHour := A_Hour
-        
-        ; Check if the current time is near the top of the hour or the 30-minute mark
-        if ((currentMinute >= 28 && currentMinute <= 31) || currentMinute >= 57 || currentMinute == 0) {
-            AddToLog("It's close to reset time, skipping challenge mode start")
-        } else {
-            AddToLog("Auto Challenge enabled - starting with challenge")
-            inChallengeMode := true
-            firstStartup := false
-            challengeStartTime := A_TickCount  ; Set initial challenge time
-            ChallengeMode()
-            return
-        }
+        AddToLog("Auto Challenge enabled - starting with challenge")
+        inChallengeMode := true
+        firstStartup := false
+        challengeStartTime := A_TickCount  ; Set initial challenge time
+        ChallengeMode()
+        return
     }
 
     ; If we're in challenge mode, do challenge
@@ -1891,31 +1866,15 @@ HandleContractEnd() {
             ; Check if it's time for challenge mode
             if (!inChallengeMode && ChallengeBox.Value) {
                 timeElapsed := A_TickCount - challengeStartTime
-                timeRemaining := (1800000 - timeElapsed) ; Time remaining until the next reset (30 minutes)
-                
-                ; Get the current system time in minutes
-                currentMinute := A_Min
-                currentHour := A_Hour
-                
-                ; Check if the current time is near the top of the hour or the 30-minute mark
-                if ((currentMinute >= 28 && currentMinute <= 31) || currentMinute >= 57 || currentMinute == 0) {
-                    AddToLog("It's close to reset time, skipping challenge mode switch")
-                } else {
-                    ; If time remaining is more than 5 minutes (300,000 milliseconds), proceed with switching
-                    if (timeRemaining > 300000) {
-                        if (timeElapsed >= 1800000) {
-                            AddToLog("30 minutes passed - switching to Challenge mode")
-                            inChallengeMode := true
-                            challengeStartTime := A_TickCount
-                            ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
-                            return CheckLobby()
-                        }
-                    } else {
-                        AddToLog("Challenge reset is about to happen, skipping challenge mode switch")
-                    }
+                if (timeElapsed >= 1800000) {  ; 30 minutes in milliseconds
+                    AddToLog("30 minutes passed - switching to Challenge mode")
+                    inChallengeMode := true
+                    challengeStartTime := A_TickCount
+                    Sleep(1500)
+                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                    return CheckLobby()
                 }
             }
-
             if (ReturnLobbyBox.Value) {
                 AddToLog("Contract complete - returning to lobby")
                 Sleep(1500)
