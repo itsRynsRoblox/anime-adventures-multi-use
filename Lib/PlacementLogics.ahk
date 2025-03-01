@@ -387,7 +387,6 @@ SpiralPlacement(gridPlacement := false) {
 				FixClick(284, 400) ; next
 				FixClick(60, 450) ; move mouse
                 if CheckForXp() {
-                    AddToLog("CheckForXp 1")
                     return MonitorStage()
                 }
                 Reconnect()
@@ -421,7 +420,6 @@ SpiralPlacement(gridPlacement := false) {
 
             dirIndex := Mod(dirIndex + 1, 4)
             if CheckForXp() {
-                AddToLog("CheckForXp 2")
                 return MonitorStage()
             }
             Reconnect()
@@ -435,6 +433,7 @@ SpiralPlacement(gridPlacement := false) {
     AddToLog("Upgrade Units 1")
 
     AddToLog("All slot placements and upgrades completed.")
+    MonitorStage()
 }
 
 PlaceInGrid(startX, startY, slotNum, &placementCount, &successfulCoordinates, &savedPlacements, &placements) {

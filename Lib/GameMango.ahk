@@ -9,7 +9,7 @@ LoadKeybindSettings()  ; Load saved keybinds
 Hotkey(F1Key, (*) => moveRobloxWindow())
 Hotkey(F2Key, (*) => StartMacro())
 Hotkey(F3Key, (*) => Reload())
-Hotkey(F4Key, (*) => PlacingUnits())
+Hotkey(F4Key, (*) => TogglePause())
 
 StartMacro(*) {
     if (!ValidateMode()) {
@@ -499,8 +499,13 @@ MonitorEndScreen() {
                         ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
                     }
                 } else {
-                    AddToLog("Story Infinity replay")
-                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+                    if (ReturnLobbyBox.Value) {
+                        AddToLog("Return to lobby")
+                        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                    } else {
+                        AddToLog("Story Infinity replay")
+                        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+                    }
                 }
                 return RestartStage()
             }
@@ -562,8 +567,10 @@ MonitorStage() {
         
         if (mode = "Story" && StoryActDropdown.Text = "Infinity") {
             timeElapsed := A_TickCount - lastClickTime
-            if (timeElapsed >= 300000) {  ; 5 minutes
+            if (timeElapsed >= 300000) {  ; 5 minutes (300000)
                 AddToLog("Performing anti-AFK click")
+                FixClick(560, 560)  ; Move click
+                FixClick(560, 560)  ; Move click
                 FixClick(560, 560)  ; Move click
                 lastClickTime := A_TickCount
             }
@@ -1962,7 +1969,7 @@ PlacementSpeed() {
         sleep 2500
     }
     else if PlaceSpeed.Text = "2.75 sec" {
-        sleep 2.75
+        sleep 2750
     }
     else if PlaceSpeed.Text = "3 sec" {
         sleep 3000
