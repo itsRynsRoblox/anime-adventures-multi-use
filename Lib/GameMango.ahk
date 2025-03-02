@@ -6,6 +6,7 @@ global contractPageCounter := 0
 global contractSwitchPattern := 0
 
 LoadKeybindSettings()  ; Load saved keybinds
+CheckForUpdates()
 Hotkey(F1Key, (*) => moveRobloxWindow())
 Hotkey(F2Key, (*) => StartMacro())
 Hotkey(F3Key, (*) => Reload())
@@ -1444,14 +1445,31 @@ ReachedUpgradeLimit() {
 }
 
 UnitPlaced() {
-    PlacementSpeed() ; Custom Placement Speed
-    ; Check for upgrade text
-    if (ok := FindText(&X, &Y, 160, 215, 330, 420, 0, 0, UpgradeText) or (ok:=FindText(&X, &Y, 160, 215, 330, 420, 0, 0, UpgradeText2))) {
+    if (WaitForUpgradeText(PlacementSpeed())) { ; Wait up to 4.5 seconds for the upgrade text to appear
         AddToLog("Unit Placed Successfully")
-        FixClick(325, 185) ; close upg menu
+        FixClick(325, 185) ; Close upgrade menu
         return true
     }
     return false
+}
+
+WaitForUpgradeText(timeout := 4500) {
+    startTime := A_TickCount
+    while (A_TickCount - startTime < timeout) {
+        if (FindText(&X, &Y, 160, 215, 330, 420, 0, 0, UpgradeText) or (FindText(&X, &Y, 160, 215, 330, 420, 0, 0, UpgradeText2))) {
+            timeSaved := (A_TickCount - startTime)  ; Time saved
+            if (debugMessages) {
+                AddToLog("Placement Speed: " . PlacementSpeed() . " ms")
+                AddToLog("Upgrade text found! Time saved: " . timeSaved . " ms")
+            }
+            return true
+        }
+        Sleep 100  ; Check every 100ms
+    }
+    if (debugMessages) {
+        AddToLog("Timed out! No upgrade text found. Timeout was: " . timeout . " ms")
+    }
+    return false  ; Timed out, upgrade text was not found
 }
 
 CheckAbility() {
@@ -1960,18 +1978,18 @@ IsColorInRange(color, targetColor, tolerance := 50) {
 
 PlacementSpeed() {
     if PlaceSpeed.Text = "2.25 sec" {
-        sleep 2250
+        return 2250
     }
     else if PlaceSpeed.Text = "2 sec" {
-        sleep 2000
+        return 2000
     }
     else if PlaceSpeed.Text = "2.5 sec" {
-        sleep 2500
+        return 2500
     }
     else if PlaceSpeed.Text = "2.75 sec" {
-        sleep 2750
+        return 2750
     }
     else if PlaceSpeed.Text = "3 sec" {
-        sleep 3000
+        return 3000
     }
 }

@@ -2,10 +2,15 @@
 #SingleInstance Force
 #Include Image.ahk
 #Include Functions.ahk
+#Include UpdateChecker.ahk
 
+;Update Checker
+global repoOwner := "itsRynsRoblox"
+global repoName := "anime-adventures-multi-use"
+global currentVersion := "1.6.3"
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn Edition "
-global version := "v1.6.2"
+global version := "v" . currentVersion
 global rblxID := "ahk_exe RobloxPlayerBeta.exe"
 ;Coordinate and Positioning Variables
 global targetWidth := 816
