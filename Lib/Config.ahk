@@ -127,7 +127,7 @@ SaveSettings(*) {
         content .= "`nPlacement5=" placement5.Text
         content .= "`nPlacement6=" placement6.Text
 
-        content .= "`nPriority1=" priority1.Text
+        content .= "`n`nPriority1=" priority1.Text
         content .= "`nPriority2=" priority2.Text
         content .= "`nPriority3=" priority3.Text
         content .= "`nPriority4=" priority4.Text

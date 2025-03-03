@@ -1,12 +1,12 @@
 Mode=
 
 
-Enabled1=1
-Enabled2=1
-Enabled3=1
-Enabled4=1
-Enabled5=1
-Enabled6=1
+Enabled1=0
+Enabled2=0
+Enabled3=0
+Enabled4=0
+Enabled5=0
+Enabled6=0
 
 Placement1=1
 Placement2=1
@@ -14,12 +14,13 @@ Placement3=1
 Placement4=1
 Placement5=1
 Placement6=1
+
 Priority1=1
-Priority2=2
-Priority3=3
-Priority4=4
-Priority5=5
-Priority6=6
+Priority2=1
+Priority3=1
+Priority4=1
+Priority5=1
+Priority6=1
 
 [ChallengePlacement]
 ChallengePlacement1=1
@@ -31,21 +32,21 @@ ChallengePlacement6=1
 
 [ChallengePriority]
 ChallengePriority1=1
-ChallengePriority2=2
-ChallengePriority3=3
-ChallengePriority4=4
-ChallengePriority5=5
-ChallengePriority6=6
+ChallengePriority2=1
+ChallengePriority3=1
+ChallengePriority4=1
+ChallengePriority5=1
+ChallengePriority6=1
 
 [PlacementLogic]
 Logic=1
 
 
 [PlaceSpeed]
-Speed=5
+Speed=3
 
 [Matchmaking]
-Matchmake=0
+Matchmake=1
 
 [PriorityUpgrade]
 Upgrade=1
@@ -57,7 +58,7 @@ Challenge=0
 Swap=0
 
 [PhysicalTeam]
-PhyTeam=6
+PhyTeam=1
 
 [MagicTeam]
-MagTeam=5
+MagTeam=1

@@ -8,8 +8,9 @@
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
 global currentVersion := "1.6.3"
+
 ; Basic Application Info
-global aaTitle := "Anime Adventures - Mist - Ryn Edition "
+global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
 global version := "v" . currentVersion
 global rblxID := "ahk_exe RobloxPlayerBeta.exe"
 ;Coordinate and Positioning Variables
@@ -104,7 +105,7 @@ aaMainUI.Add("Text", "x805 y501 w558 h25 +Center +BackgroundTrans", "Process") ;
 uiBorders.Push(aaMainUI.Add("Text", "x803 y499 w560 h1 +Background" uiTheme[3])) ;Process Top
 aaMainUI.SetFont("norm s11 c" uiTheme[1]) ;Font
 global process1 := aaMainUI.Add("Text", "x810 y536 w538 h18 +BackgroundTrans c" uiTheme[7], "➤ Original Creator: Mist_Yuu (discord.gg/mistdomain)") ;Processes
-global process2 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "➤ Version edited and maintained by Ryn") ;Processes 
+global process2 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "➤ Version edited and maintained by Ryn (@TheRealTension)") ;Processes 
 global process3 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
 global process4 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
 global process5 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
@@ -258,9 +259,9 @@ global ChallengeBox := aaMainUI.Add("CheckBox", "x1138 y476 cffffff", "Auto Chal
 global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1002 y476 cffffff", "Priority Upgrade")
 global TeamSwap := aaMainUI.Add("CheckBox", "x1261 y476 cffffff", "Team Swap")
 PlacementPatternText := aaMainUI.Add("Text", "x1032 y390 w115 h20", "Placement Type")
-global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral", "Up and Down", "Random", ])
+global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
 PlaceSpeedText := aaMainUI.Add("Text", "x1193 y390 w115 h20", "Placement Speed")
-global PlaceSpeed := aaMainUI.Add("DropDownList", "x1205 y410 w100 h180 Choose1 +Center", ["2.25 sec", "2 sec", "2.5 sec", "2.75 sec", "3 sec"])
+global PlaceSpeed := aaMainUI.Add("DropDownList", "x1205 y410 w100 h180 Choose1 +Center", ["Super Fast (1s)", "Fast (1.5s)", "Default (2s)", "Slow (2.5s)", "Very Slow (3s)", "Toaster (4s)"])
 PlacementSelectionText := aaMainUI.Add("Text", "x857 y390 w130 h20", "Placement Settings")
 PlacementSelection := aaMainUI.Add("DropDownList", "x865 y410 w100 h180 Choose1 +Center", ["Normal", "Challenge"])
 placementSaveText := aaMainUI.Add("Text", "x807 y451 w80 h20", "Save Config")
@@ -284,7 +285,7 @@ global MagicTeam := aaMainUI.Add("DropDownList", "x711 y662 w45 h180 Choose1 +Ce
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT
 global modeSelectionGroup := aaMainUI.Add("GroupBox", "x808 y38 w500 h45 Background" uiTheme[2], "Mode Select")
 aaMainUI.SetFont("s10 c" uiTheme[6])
-global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["Story", "Legend", "Raid", "Infinity Castle", "Contract", "Cursed Womb", "Portal", "Winter Event"])
+global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["Story", "Contract", "Legend", "Raid", "Portal", "Infinity Castle", "Cursed Womb", "Winter Event"])
 global StoryDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Planet Greenie", "Walled City", "Snowy Town", "Sand Village", "Navy Bay", "Fiend City", "Spirit World", "Ant Kingdom", "Magic Town", "Haunted Academy", "Magic Hills", "Space Center", "Alien Spaceship", "Fabled Kingdom", "Ruined City", "Puppet Island", "Virtual Dungeon", "Snowy Kingdom", "Dungeon Throne", "Mountain Temple", "Rain Village"])
 global StoryActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Act 1", "Act 2", "Act 3", "Act 4", "Act 5", "Act 6", "Infinity"])
 global LegendDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Magic Hills", "Space Center", "Fabled Kingdom", "Virtual Dungeon", "Dungeon Throne", "Rain Village"] )

@@ -52,7 +52,7 @@ PlacingUnits() {
         return MonitorStage()
     }
 
-    placementPoints := PlacementPatternDropdown.Text = "3x3 Grid" ? GenerateMoreGridPoints(3) : PlacementPatternDropdown.Text = "Circle" ? GenerateCirclePoints() : PlacementPatternDropdown.Text = "Grid" ? GenerateGridPoints() : PlacementPatternDropdown.Text = "Spiral" ? GenerateSpiralPoints() : PlacementPatternDropdown.Text = "Up and Down" ? GenerateUpandDownPoints() : GenerateRandomPoints()
+    placementPoints := PlacementPatternDropdown.Text = "3x3 Grid" ? GenerateMoreGridPoints(3) : PlacementPatternDropdown.Text = "Circle" ? GenerateCirclePoints() : PlacementPatternDropdown.Text = "Grid" ? GenerateGridPoints() : PlacementPatternDropdown.Text = "Spiral(WIP)" ? GenerateSpiralPoints() : PlacementPatternDropdown.Text = "Up and Down" ? GenerateUpandDownPoints() : GenerateRandomPoints()
     
     ; Go through each slot
     for slotNum in [1, 2, 3, 4, 5, 6] {
@@ -1313,7 +1313,7 @@ RestartStage() {
     StartedGame()
 
     ; Begin unit placement and management
-    if (PlacementPatternDropdown.Text = "Spiral") {
+    if (PlacementPatternDropdown.Text = "Spiral(WIP)") {
         SpiralPlacement()
     } else {
         PlacingUnits()
@@ -1977,19 +1977,22 @@ IsColorInRange(color, targetColor, tolerance := 50) {
 }
 
 PlacementSpeed() {
-    if PlaceSpeed.Text = "2.25 sec" {
-        return 2250
+    if PlaceSpeed.Text = "Super Fast (1s)" {
+        return 1000
     }
-    else if PlaceSpeed.Text = "2 sec" {
+    else if PlaceSpeed.Text = "Fast (1.5s)" {
+        return 1500
+    }
+    else if PlaceSpeed.Text = "Default (2s)" {
         return 2000
     }
-    else if PlaceSpeed.Text = "2.5 sec" {
+    else if PlaceSpeed.Text = "Slow (2.5s)" {
         return 2500
     }
-    else if PlaceSpeed.Text = "2.75 sec" {
-        return 2750
-    }
-    else if PlaceSpeed.Text = "3 sec" {
+    else if PlaceSpeed.Text = "Very Slow (3s)" {
         return 3000
+    }
+    else if PlaceSpeed.Text = "Toaster (4s)" {
+        return 4000
     }
 }

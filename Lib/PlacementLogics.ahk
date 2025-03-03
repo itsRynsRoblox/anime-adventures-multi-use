@@ -3,33 +3,33 @@
 ; circle coordinates
 GenerateCirclePoints() {
     points := []
-    
-; Define each circle's radius
-radius1 := 45    ; First circle 
-radius2 := 90    ; Second circle 
-radius3 := 135   ; Third circle 
-radius4 := 180   ; Fourth circle 
 
-; Angles for 8 evenly spaced points (in degrees)
-angles := [0, 45, 90, 135, 180, 225, 270, 315]
+    ; Define each circle's radius
+    radius1 := 45    ; First circle
+    radius2 := 90    ; Second circle
+    radius3 := 135   ; Third circle
+    radius4 := 180   ; Fourth circle
 
-; First circle points
-for angle in angles {
-    radians := angle * 3.14159 / 180
-    x := centerX + radius1 * Cos(radians)
-    y := centerY + radius1 * Sin(radians)
-    points.Push({ x: Round(x), y: Round(y) })
-}
+    ; Angles for 8 evenly spaced points (in degrees)
+    angles := [0, 45, 90, 135, 180, 225, 270, 315]
 
-; Second circle points with more angles
-angles2 := [0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5]
-for angle in angles2 {
-    radians := angle * 3.14159 / 180
-    x := centerX + radius2 * Cos(radians)
-    y := centerY + radius2 * Sin(radians)
-    points.Push({ x: Round(x), y: Round(y) })
-}
-    
+    ; First circle points
+    for angle in angles {
+        radians := angle * 3.14159 / 180
+        x := centerX + radius1 * Cos(radians)
+        y := centerY + radius1 * Sin(radians)
+        points.Push({ x: Round(x), y: Round(y) })
+    }
+
+    ; Second circle points with more angles
+    angles2 := [0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5]
+    for angle in angles2 {
+        radians := angle * 3.14159 / 180
+        x := centerX + radius2 * Cos(radians)
+        y := centerY + radius2 * Sin(radians)
+        points.Push({ x: Round(x), y: Round(y) })
+    }
+
     ; third circle points
     for angle in angles {
         radians := angle * 3.14159 / 180
@@ -37,7 +37,7 @@ for angle in angles2 {
         y := centerY + radius3 * Sin(radians)
         points.Push({ x: Round(x), y: Round(y) })
     }
-    
+
     ;  fourth circle points
     for angle in angles {
         radians := angle * 3.14159 / 180
@@ -52,27 +52,27 @@ GenerateGridPoints() {
     points := []
     gridSize := 40  ; Space between points
     squaresPerSide := 7  ; How many points per row/column (odd number recommended)
-    
+
     ; Center point coordinates
     centerX := 408
     centerY := 320
-    
+
     ; Calculate starting position for top-left point of the grid
     startX := centerX - ((squaresPerSide - 1) / 2 * gridSize)
     startY := centerY - ((squaresPerSide - 1) / 2 * gridSize)
-    
+
     ; Generate grid points row by row
-    Loop squaresPerSide {
+    loop squaresPerSide {
         currentRow := A_Index
         y := startY + ((currentRow - 1) * gridSize)
-        
+
         ; Generate each point in the current row
-        Loop squaresPerSide {
+        loop squaresPerSide {
             x := startX + ((A_Index - 1) * gridSize)
-            points.Push({x: x, y: y})
+            points.Push({ x: x, y: y })
         }
     }
-    
+
     return points
 }
 
@@ -92,14 +92,14 @@ GenerateMoreGridPoints(gridWidth := 5) {  ; Adjust grid width (must be an odd nu
     moves := 0
     stepsTaken := 0
 
-    points.Push({x: x, y: y})  ; Start at center
+    points.Push({ x: x, y: y })  ; Start at center
 
-    Loop (gridWidth * gridWidth - 1) {  ; Fill remaining slots
+    loop (gridWidth * gridWidth - 1) {  ; Fill remaining slots
         dx := directions[dirIndex][1] * gridSize
         dy := directions[dirIndex][2] * gridSize
         x += dx
         y += dy
-        points.Push({x: x, y: y})
+        points.Push({ x: x, y: y })
 
         moves++
         stepsTaken++
@@ -122,30 +122,30 @@ Generate3x3GridPoints() {
     points := []
     gridSize := 30  ; Space between points
     gridSizeHalf := gridSize // 2
-    
+
     ; Center point coordinates
     centerX := GetWindowCenter(rblxID).x - 30
     centerY := GetWindowCenter(rblxID).y - 30
-    
+
     ; Define movement directions: right, down, left, up
     directions := [[1, 0], [0, 1], [-1, 0], [0, -1]]
-    
+
     ; Spiral logic for a 3x3 grid
     x := centerX
     y := centerY
     step := 1  ; Number of steps in the current direction
     dirIndex := 0  ; Current direction index
     moves := 0  ; Move count to switch direction
-    
-    points.Push({x: x, y: y})  ; Start at center
-    
-    Loop 8 {  ; Fill remaining 8 spots (3x3 grid has 9 total)
+
+    points.Push({ x: x, y: y })  ; Start at center
+
+    loop 8 {  ; Fill remaining 8 spots (3x3 grid has 9 total)
         dx := directions[dirIndex + 1][1] * gridSize
         dy := directions[dirIndex + 1][2] * gridSize
         x += dx
         y += dy
-        points.Push({x: x, y: y})
-        
+        points.Push({ x: x, y: y })
+
         moves++
         if (moves = step) {  ; Change direction
             moves := 0
@@ -155,7 +155,7 @@ Generate3x3GridPoints() {
             }
         }
     }
-    
+
     return points
 }
 
@@ -165,74 +165,74 @@ GenerateMore3x3GridPoints() {
     static centerY := GetWindowCenter(rblxID).y - 30
     static gridOffsetX := 0
     static gridOffsetY := 0
-    
+
     gridSize := 30  ; Space between points
-    
+
     ; Generate a new 3x3 grid when needed
     if (points.Length = 0 || Mod(points.Length, 9) = 0) {
         newGrid := []
-        
+
         ; Update the center for the next grid
         centerX += 3 * gridSize * (gridOffsetX := Mod(gridOffsetX + 1, 2))
         centerY += 3 * gridSize * (gridOffsetX = 0 ? ++gridOffsetY : gridOffsetY)
 
         ; Generate new 3x3 grid
-        Loop 3 {
+        loop 3 {
             rowY := centerY + (A_Index - 2) * gridSize
-            Loop 3 {
+            loop 3 {
                 colX := centerX + (A_Index - 2) * gridSize
-                newGrid.Push({x: colX, y: rowY})
+                newGrid.Push({ x: colX, y: rowY })
             }
         }
-        
+
         ; Add new grid points to the main list
         points.Push(newGrid*)
     }
-    
+
     return points  ; Return all points accumulated
 }
 
 ; Spiral coordinates (restricted to a rectangle)
 GenerateSpiralPoints(rectX := 4, rectY := 123, rectWidth := 795, rectHeight := 433) {
     points := []
-    
+
     ; Calculate center of the rectangle
     centerX := GetWindowCenter(rblxID).x - 30
     centerY := GetWindowCenter(rblxID).y - 30
-    
+
     ; Angle increment per step (in degrees)
     angleStep := 30
     ; Distance increment per step (tighter spacing)
     radiusStep := 10
     ; Initial radius
     radius := 20
-    
+
     ; Maximum radius allowed (smallest distance from center to edge)
     maxRadiusX := (rectWidth // 2) - 1
     maxRadiusY := (rectHeight // 2) - 1
     maxRadius := Min(maxRadiusX, maxRadiusY)
 
     ; Generate spiral points until reaching max boundary
-    Loop {
+    loop {
         ; Stop if the radius exceeds the max boundary
         if (radius > maxRadius)
             break
-        
+
         angle := A_Index * angleStep
         radians := angle * 3.14159 / 180
         x := centerX + radius * Cos(radians)
         y := centerY + radius * Sin(radians)
-        
+
         ; Check if point is inside the rectangle
         if (x < rectX || x > rectX + rectWidth || y < rectY || y > rectY + rectHeight)
             break ; Stop if a point goes out of bounds
-        
+
         points.Push({ x: Round(x), y: Round(y) })
-        
+
         ; Increase radius for next point
         radius += radiusStep
     }
-    
+
     return points
 }
 
@@ -240,69 +240,69 @@ GenerateUpandDownPoints() {
     points := []
     gridSize := 40  ; Space between points
     squaresPerSide := 7  ; How many points per row/column (odd number recommended)
-    
+
     ; Center point coordinates
     centerX := 408
     centerY := 320
-    
+
     ; Calculate starting position for top-left point of the grid
     startX := centerX - ((squaresPerSide - 1) / 2 * gridSize)
     startY := centerY - ((squaresPerSide - 1) / 2 * gridSize)
-    
+
     ; Generate grid points column by column (left to right)
-    Loop squaresPerSide {
+    loop squaresPerSide {
         currentColumn := A_Index
         x := startX + ((currentColumn - 1) * gridSize)
-        
+
         ; Generate each point in the current column
-        Loop squaresPerSide {
+        loop squaresPerSide {
             y := startY + ((A_Index - 1) * gridSize)
-            points.Push({x: x, y: y})
+            points.Push({ x: x, y: y })
         }
     }
-    
+
     return points
 }
 
 GenerateRandomPoints() {
     points := []
     gridSize := 40  ; Minimum spacing between units
-    
+
     ; Center point coordinates
     centerX := 408
     centerY := 320
-    
+
     ; Define placement area boundaries (adjust these as needed)
     minX := centerX - 180  ; Left boundary
     maxX := centerX + 180  ; Right boundary
     minY := centerY - 140  ; Top boundary
     maxY := centerY + 140  ; Bottom boundary
-    
+
     ; Generate 40 random points
-    Loop 40 {
+    loop 40 {
         ; Generate random coordinates
         x := Random(minX, maxX)
         y := Random(minY, maxY)
-        
+
         ; Check if point is too close to existing points
         tooClose := false
         for existingPoint in points {
             ; Calculate distance to existing point
-            distance := Sqrt((x - existingPoint.x)**2 + (y - existingPoint.y)**2)
+            distance := Sqrt((x - existingPoint.x) ** 2 + (y - existingPoint.y) ** 2)
             if (distance < gridSize) {
                 tooClose := true
                 break
             }
         }
-        
+
         ; If point is not too close to others, add it
         if (!tooClose)
-            points.Push({x: x, y: y})
+            points.Push({ x: x, y: y })
     }
-    
+
     ; Always add center point last (so it's used last)
-    points.Push({x: centerX, y: centerY})
-    
+    points.Push({ x: centerX, y: centerY })
+
     return points
 }
 
@@ -362,8 +362,8 @@ SpiralPlacement(gridPlacement := false) {
                 if PlaceUnit(currentX, currentY, slotNum) {
                     placementCount++
                     successfulCoordinates.Push({ x: currentX, y: currentY, slot: "slot_" slotNum }) ; Track successful placements
-					
-					try {
+
+                    try {
                         if savedPlacements.Get("slot_" slotNum) {
                             savedPlacements.Set("slot_" slotNum, savedPlacements.Get("slot_" slotNum) + 1)
                         }
@@ -374,18 +374,18 @@ SpiralPlacement(gridPlacement := false) {
                     if placementCount >= placements {
                         break
                     }
-		
+
                     if (gridPlacement) {
-                        PlaceInGrid(currentX, currentY, slotNum, &placementCount, &successfulCoordinates, & savedPlacements, &placements)
+                        PlaceInGrid(currentX, currentY, slotNum, &placementCount, &successfulCoordinates, &
+                            savedPlacements, &placements)
                     }
 
                 }
-		
 
                 CheckForCardSelection()
-                
-				FixClick(284, 400) ; next
-				FixClick(60, 450) ; move mouse
+
+                FixClick(284, 400) ; next
+                FixClick(60, 450) ; move mouse
                 if CheckForXp() {
                     return MonitorStage()
                 }
@@ -439,25 +439,25 @@ SpiralPlacement(gridPlacement := false) {
 PlaceInGrid(startX, startY, slotNum, &placementCount, &successfulCoordinates, &savedPlacements, &placements) {
     ; Places untis in a 2x2 grid, starting from the top left where the initial unit is placed (as dictated by startX and startY)
     gridOffsets := [
-    [30, 0],  ; Row 1, Column 0
-    [0, 30],  ; Row 0, Column 1
-    [30, 30],   ; Row 1, Column 1
-	[-30, -30],
-	[-30, 30],
-	[-30, 0],
-	[0, -30],
-	[30, -30]
+        [30, 0],  ; Row 1, Column 0
+        [0, 30],  ; Row 0, Column 1
+        [30, 30],   ; Row 1, Column 1
+        [-30, -30],
+        [-30, 30],
+        [-30, 0],
+        [0, -30],
+        [30, -30]
     ]
     for index, offset in gridOffsets {
 
         ; Adds the value that's stored in the array at the current index to either x or y's starting location
         gridX := startX + offset[2] ; Move horizontally by 'step' from the initial start location
         gridY := startY + offset[1] ; Move vertically by 'step' from the initial start location
-		
+
         ; Handle card picker and related logic during grid placement
-		if (ok := FindText(&cardX, &cardY, 196, 204, 568, 278, 0, 0, pick_card)) {
-			cardSelector()
-		}
+        if (ok := FindText(&cardX, &cardY, 196, 204, 568, 278, 0, 0, pick_card)) {
+            cardSelector()
+        }
         FixClick(284, 400) ; next
         FixClick(60, 450) ; move mouse
         if CheckForXp() {

@@ -512,7 +512,7 @@ CheckForEmptyKeys() {
 }
 
 OpenGithub() {
-    Run("https://github.com/itsRynsRoblox?tab=repositories")
+    Run("https://github.com/itsRynsRoblox")
 }
 
 OpenDiscord() {
