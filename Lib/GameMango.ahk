@@ -1179,7 +1179,7 @@ MoveForMagicTown() {
 
 MoveForMagicHill() {
     color := PixelGetColor(630, 125)
-    if (!IsColorInRange(color, 0xFFD100)) {
+    if (ok := FindText(&X, &Y, 450, 280, 620, 480, 0.15, 0.15, MagicHillAngle2)) or (IsColorInRange(color, 0xFFD100)) {
         Fixclick(500, 20, "Right")
         Sleep (3000)
         Fixclick(500, 20, "Right")
@@ -1332,7 +1332,7 @@ CheckForDisconnect() {
 
 Reconnect() {   
     ; Check for Disconnected Screen using FindText
-    if (ok := FindText(&X, &Y, 450, 410, 539, 427, 0, 0, Disconnect)) {
+    if (ok := FindText(&X, &Y, 330, 218, 474, 247, 0, 0, Disconnect)) {
         AddToLog("Lost Connection! Attempting To Reconnect To Private Server...")
 
         psLink := FileExist("Settings\PrivateServer.txt") ? FileRead("Settings\PrivateServer.txt", "UTF-8") : ""
@@ -1342,30 +1342,26 @@ Reconnect() {
             AddToLog("Connecting to private server...")
             Run(psLink)
         } else {
-            Run("roblox://placeID=8304191830")  ; Public server if no PS file or empty
+            Run("roblox://placeID=8304191830")
         }
 
-        Sleep(150000)
-        
-        ; Restore window if it exists
-        if WinExist(rblxID) {
-            forceRobloxSize() 
-            Sleep(1000)
-        }
-        
-        ; Keep checking until we're back in
+        Sleep(5000)  
+
         loop {
             AddToLog("Reconnecting to Roblox...")
-            Sleep(5000)
+            Sleep(15000)
+
+            if WinExist(rblxID) {
+            forceRobloxSize()
+            moveRobloxWindow()
+            Sleep(1000)
+            }
             
-            ; Check if we're back in lobby
             if (ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
                 AddToLog("Reconnected Successfully!")
-                return StartSelectedMode() ; Return to raids
-            }
-            else {
-                ; If not in lobby, try reconnecting again
-                Reconnect()
+                return StartSelectedMode()
+            } else {
+                Reconnect() 
             }
         }
     }
