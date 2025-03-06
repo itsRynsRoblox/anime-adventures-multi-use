@@ -93,7 +93,14 @@ PlacingUnits() {
                         AddToLog("Placed Unit " slotNum " (" placedCounts[slotNum] "/" placements ")")
                         CheckAbility()
                         FixClick(560, 560) ; Move Click
-                        break ;(Removing break continues placing where it was but breaks placement count)
+                        if (UpgradeDuringPlacementBox.Value) {
+                            AttemptUpgrade()
+                        }
+                        break
+                    }
+
+                    if (UpgradeDuringPlacementBox.Value) {
+                        AttemptUpgrade()
                     }
                     
                     if CheckForXp()
@@ -109,6 +116,90 @@ PlacingUnits() {
     
     AddToLog("All units placed to requested amounts")
     UpgradeUnits()
+}
+
+AttemptUpgrade() {
+    global successfulCoordinates, PriorityUpgrade
+    global priority1, priority2, priority3, priority4, priority5, priority6
+    global challengepriority1, challengepriority2, challengepriority3, challengepriority4, challengepriority5, challengepriority6
+
+    if (successfulCoordinates.Length = 0) {
+        return ; No units placed yet
+    }
+
+    AddToLog("Attempting to upgrade placed units...")
+
+    if (PriorityUpgrade.Value) {
+        if (debugMessages) {
+            AddToLog("Using priority-based upgrading")
+        }
+        
+        ; Loop through priority levels (1-6) and upgrade all matching units
+        for priorityNum in [1, 2, 3, 4, 5, 6] {
+            upgradedThisRound := false
+
+            for index, coord in successfulCoordinates.Clone() { ; Clone to allow removal
+                ; Get the priority value for this unit's slot
+                priority := inChallengeMode && ChallengeBox.Value ? "challengepriority" coord.slot : "priority" coord.slot
+                priority := %priority%
+
+                if (priority.Text = priorityNum) {
+                    UpgradeUnit(coord.x, coord.y)
+
+                    if CheckForXp() {
+                        AddToLog("Stage ended during upgrades, proceeding to results")
+                        successfulCoordinates := []
+                        return MonitorStage()
+                    }
+
+                    if MaxUpgrade() {
+                        AddToLog("Max upgrade reached for Unit " coord.slot)
+                        successfulCoordinates.RemoveAt(index)
+                        FixClick(325, 185) ; Close upgrade menu
+                        continue
+                    }
+
+                    Sleep(200)
+                    CheckAbility()
+                    FixClick(560, 560) ; Move Click
+                    CheckForCardSelection()
+                    Reconnect()
+                    CheckEndAndRoute()
+
+                    upgradedThisRound := true
+                }
+            }
+
+            if upgradedThisRound {
+                Sleep(300) ; Add a slight delay between batches
+            }
+        }
+    } else {
+        ; Normal (non-priority) upgrading - upgrade all available units
+        for index, coord in successfulCoordinates.Clone() {
+            UpgradeUnit(coord.x, coord.y)
+
+            if CheckForXp() {
+                AddToLog("Stage ended during upgrades, proceeding to results")
+                successfulCoordinates := []
+                return MonitorStage()
+            }
+
+            if MaxUpgrade() {
+                AddToLog("Max upgrade reached for Unit " coord.slot)
+                successfulCoordinates.RemoveAt(index)
+                FixClick(325, 185) ; Close upgrade menu
+                continue
+            }
+
+            Sleep(200)
+            CheckAbility()
+            FixClick(560, 560) ; Move Click
+            CheckForCardSelection()
+            Reconnect()
+            CheckEndAndRoute()
+        }
+    }
 }
 
 

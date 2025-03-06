@@ -21,7 +21,7 @@ readInSettings() {
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
     global mode
     global ChallengeBox, PriorityUpgrade
-    global PlacementPatternDropdown, PlaceSpeed, MatchMaking
+    global PlacementPatternDropdown, PlaceSpeed, MatchMaking, UpgradeDuringPlacementBox
     global PhysicalTeam, MagicTeam, TeamSwap
 
     try {
@@ -79,6 +79,7 @@ readInSettings() {
                 case "Swap": TeamSwap.Value := parts[2] ; Set the checkbox value
                 case "PhyTeam": physicalTeam.Text := parts[2]
                 case "MagTeam": magicTeam.Text := parts[2]
+                case "AttemptUpgrade": UpgradeDuringPlacementBox.Value := parts[2] ; Set the checkbox value
             }
         }
         AddToLog("Configuration settings loaded successfully")
@@ -95,7 +96,7 @@ SaveSettings(*) {
     global ChallengePlacement1, ChallengePlacement2, ChallengePlacement3, ChallengePlacement4, ChallengePlacement5, ChallengePlacement6
     global mode
     global ChallengeBox, PriorityUpgrade
-    global PlacementPatternDropdown, PlaceSpeed, MatchMaking
+    global PlacementPatternDropdown, PlaceSpeed, MatchMaking, UpgradeDuringPlacementBox
     global PhysicalTeam, MagicTeam, TeamSwap
 
     try {
@@ -173,6 +174,9 @@ SaveSettings(*) {
         
         content .= "`n[MagicTeam]"
         content .= "`nMagTeam=" magicTeam.Value "`n"
+
+        content .= "`n`n[UpgradeDuringPlacement]"
+        content .= "`nAttemptUpgrade=" UpgradeDuringPlacementBox.Value "`n"
 
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")

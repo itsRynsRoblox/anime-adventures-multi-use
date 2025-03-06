@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.6.5"
+global currentVersion := "1.7"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -258,6 +258,7 @@ global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "
 global ChallengeBox := aaMainUI.Add("CheckBox", "x1138 y476 cffffff", "Auto Challenge")
 global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1002 y476 cffffff", "Priority Upgrade")
 global TeamSwap := aaMainUI.Add("CheckBox", "x1261 y476 cffffff", "Team Swap")
+global UpgradeDuringPlacementBox := aaMainUI.Add("Checkbox", "x1150 y451 cffffff Checked", "Upgrade During Placement")
 PlacementPatternText := aaMainUI.Add("Text", "x1032 y390 w115 h20", "Placement Type")
 global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
 PlaceSpeedText := aaMainUI.Add("Text", "x1193 y390 w115 h20", "Placement Speed")
