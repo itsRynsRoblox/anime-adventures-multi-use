@@ -1097,7 +1097,7 @@ HandleMapMovement(MapName) {
         case "Hellish City":
             MoveForHellish()
         case "Winter Event":
-            MoveForWinterEvent()
+            MoveForWinterEventNoClick()
         case "Contracts":
             MoveForContracts()
     }
@@ -1272,6 +1272,16 @@ MoveForWinterEvent() {
             SendInput ("{Left up}")
             KeyWait "Left" ; Wait for key to be fully processed
             Sleep 200
+        }
+    }
+}
+
+MoveForWinterEventNoClick() {
+    loop 200 {
+        Sleep 100
+
+        if FindAndClickBeam() {
+            break
         }
     }
 }
@@ -1990,5 +2000,63 @@ PlacementSpeed() {
     }
     else if PlaceSpeed.Text = "Toaster (4s)" {
         return 4000
+    }
+}
+
+FindAndClickBeam(targetColor := 0x006783, searchArea := [0, 0, GetWindowCenter(rblxID).Width, GetWindowCenter(rblxID).Height]) {
+    ; Extract the search area boundaries
+    x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
+	
+    ; Perform the pixel search
+    if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, targetColor, 0)) {
+        ; Color found, click on the detected coordinates
+		AddToLog("Beam found at X" foundX " Y" foundY)
+        AddToLog("Moving towards it...")
+	Sleep 50
+	SendInput("{space up}")
+	Sleep 50
+	SendInput("{w up}")
+	Sleep 50
+	SendInput("{a up}")
+	Sleep 50
+	SendInput("{s up}")
+	Sleep 50
+	SendInput("{d up}")
+	Sleep 50
+	MouseMove(400, 300)
+	
+	PosX:= foundX-400
+	PosY:= foundY-300
+	
+	Sleep 50
+	SendInput("{space down}")
+	Sleep 50
+	if(PosX > 0){
+		SendInput("{d down}")
+		Sleep PosX*6
+		SendInput("{d up}")
+	}
+	else {
+		SendInput("{a down}")
+		Sleep -PosX*6
+		SendInput("{a up}")
+	}	
+	Sleep 50
+	if(PosY > 0){
+		SendInput("{s down}")
+		Sleep PosY*6
+		SendInput("{s up}")
+	}
+	else {
+		SendInput("{w down}")
+		Sleep -PosY*6
+		SendInput("{w up}")
+	}
+	Sleep 50
+	SendInput("{space up}")
+	Sleep 50
+	
+		Sleep 100
+        return true
     }
 }
