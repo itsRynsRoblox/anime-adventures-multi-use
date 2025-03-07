@@ -109,7 +109,6 @@ PlacingUnits() {
                     if (UpgradeDuringPlacementBox.Value) {
                         AttemptUpgrade()
                     }
-                    
                     if CheckForXp()
                         return MonitorStage()
                     Reconnect()
@@ -191,6 +190,13 @@ AttemptUpgrade() {
                         return MonitorStage()
                     }
 
+                    if CheckForReturnToLobby() {
+                        AddToLog("Stage ended during upgrades, proceeding to results")
+                        successfulCoordinates := []
+                        maxedCoordinates := []
+                        return MonitorStage()
+                    }
+
                     if MaxUpgrade() {
                         AddToLog("Max upgrade reached for Unit " coord.slot)
                         successfulCoordinates.RemoveAt(index)
@@ -235,6 +241,13 @@ AttemptUpgrade() {
             if CheckForXp() {
                 AddToLog("Stage ended during upgrades, proceeding to results")
                 successfulCoordinates := []
+                return MonitorStage()
+            }
+
+            if CheckForReturnToLobby() {
+                AddToLog("Stage ended during upgrades, proceeding to results")
+                successfulCoordinates := []
+                maxedCoordinates := []
                 return MonitorStage()
             }
 
@@ -318,6 +331,13 @@ UpgradeUnits() {
                                     return
                                 }
 
+                                if CheckForReturnToLobby() {
+                                    AddToLog("Stage ended during upgrades, proceeding to results")
+                                    successfulCoordinates := []
+                                    maxedCoordinates := []
+                                    return MonitorStage()
+                                }
+
                                 if CheckForDisconnect() {
                                     Reconnect() ; Added Disconnect Check
                                     return
@@ -366,6 +386,13 @@ UpgradeUnits() {
                 if CheckForDisconnect() {
                     Reconnect() ; Added Disconnect Check
                     return
+                }
+
+                if CheckForReturnToLobby() {
+                    AddToLog("Stage ended during upgrades, proceeding to results")
+                    successfulCoordinates := []
+                    maxedCoordinates := []
+                    return MonitorStage()
                 }
 
                 if CheckForXp() {
@@ -591,7 +618,13 @@ PortalMode() {
     HandlePortalJoin()
     Sleep(2500)
     RestartStage()
-  }
+}
+
+CheckForReturnToLobby() {
+    if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
+        return true
+    }
+}
 
 MonitorEndScreen() {
     global mode, StoryDropdown, StoryActDropdown, ReturnLobbyBox, MatchMaking, challengeStartTime, inChallengeMode
