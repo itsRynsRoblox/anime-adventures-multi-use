@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.7.1"
+global currentVersion := "1.7.2"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -23,6 +23,7 @@ global WM_SIZE := 0x0005
 global centerX := 408
 global centerY := 320
 global successfulCoordinates := []
+global maxedCoordinates := []
 ;State Variables
 global enabledUnits := Map()  
 global placementValues := Map()  

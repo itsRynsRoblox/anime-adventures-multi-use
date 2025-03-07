@@ -157,6 +157,8 @@ OpenDiscordLink() {
         mode := "Portal"
     } else if (selected = "Cursed Womb") {
         mode := "Cursed Womb"
+    } else if (selected = "Winter Event") {
+        mode := "Winter Event"
     }
 }
 

@@ -32,8 +32,9 @@ TogglePause(*) {
 
 PlacingUnits() {
     CheckForCardSelection()
-    global successfulCoordinates
+    global successfulCoordinates, maxedCoordinates
     successfulCoordinates := []
+    maxedCoordinates := []
     placedCounts := Map()  
 
     anyEnabled := false
@@ -84,6 +85,12 @@ PlacingUnits() {
                             break
                         }
                     }
+                    for coord in maxedCoordinates { ; NEW CHECK
+                        if (coord.x = point.x && coord.y = point.y) {
+                            alreadyUsed := true
+                            break
+                        }
+                    }
                     if (alreadyUsed)
                         continue
                     if PlaceUnit(point.x, point.y, slotNum) {
@@ -119,7 +126,7 @@ PlacingUnits() {
 }
 
 AttemptUpgrade() {
-    global successfulCoordinates, PriorityUpgrade, debugMessages
+    global successfulCoordinates, maxedCoordinates, PriorityUpgrade, debugMessages
     global priority1, priority2, priority3, priority4, priority5, priority6
     global challengepriority1, challengepriority2, challengepriority3, challengepriority4, challengepriority5, challengepriority6
 
@@ -146,8 +153,6 @@ AttemptUpgrade() {
     }
 
     AddToLog("Attempting to upgrade placed units...")
-
-    unitsToRemove := []  ; Store units that reach max level
 
     if (PriorityUpgrade.Value) {
         if (debugMessages) {
@@ -182,12 +187,14 @@ AttemptUpgrade() {
                     if CheckForXp() {
                         AddToLog("Stage ended during upgrades, proceeding to results")
                         successfulCoordinates := []
+                        maxedCoordinates := []
                         return MonitorStage()
                     }
 
                     if MaxUpgrade() {
                         AddToLog("Max upgrade reached for Unit " coord.slot)
-                        unitsToRemove.Push(index) ; Mark for removal later
+                        successfulCoordinates.RemoveAt(index)
+                        maxedCoordinates.Push(coord)
                         FixClick(325, 185) ; Close upgrade menu
                         continue
                     }
@@ -233,7 +240,8 @@ AttemptUpgrade() {
 
             if MaxUpgrade() {
                 AddToLog("Max upgrade reached for Unit " coord.slot)
-                unitsToRemove.Push(index) ; Mark for removal later
+                successfulCoordinates.RemoveAt(index)
+                maxedCoordinates.Push(coord)
                 FixClick(325, 185) ; Close upgrade menu
                 continue
             }
@@ -246,12 +254,6 @@ AttemptUpgrade() {
             CheckEndAndRoute()
         }
     }
-
-    ; Remove maxed units after looping to avoid skipping elements
-    for i in unitsToRemove {
-        successfulCoordinates.RemoveAt(i)
-    }
-
     if (debugMessages) {
         AddToLog("Upgrade attempt completed")
     }
@@ -684,6 +686,18 @@ MonitorEndScreen() {
                 AddToLog("Returning to lobby")
                 ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
                 return CheckLobby()
+            }
+            else if (mode = "Winter Event") {
+                AddToLog("Handling Winter Event end")
+                if (ReturnLobbyBox.Value) {
+                    AddToLog("Return to lobby enabled")
+                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                    return CheckLobby()
+                } else {
+                    AddToLog("Replaying")
+                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+                }
+                    return RestartStage()
             }
             else {
                 AddToLog("Handling end case")
