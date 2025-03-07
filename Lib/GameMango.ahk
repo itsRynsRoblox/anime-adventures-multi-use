@@ -274,7 +274,7 @@ AttemptUpgrade() {
 
 
 UpgradeUnits() {
-    global successfulCoordinates, PriorityUpgrade, priority1, priority2, priority3, priority4, priority5, priority6
+    global successfulCoordinates, maxedCoordinates, PriorityUpgrade, priority1, priority2, priority3, priority4, priority5, priority6
     global challengepriority1, challengepriority2, challengepriority3, challengepriority4, challengepriority5, challengepriority6
 
     totalUnits := Map()    
@@ -327,8 +327,8 @@ UpgradeUnits() {
                                 if CheckForXp() {
                                     AddToLog("Stage ended during upgrades, proceeding to results")
                                     successfulCoordinates := []
-                                    MonitorStage()
-                                    return
+                                    maxedCoordinates := []
+                                    return MonitorStage()
                                 }
 
                                 if CheckForReturnToLobby() {
