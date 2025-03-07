@@ -119,7 +119,7 @@ PlacingUnits() {
 }
 
 AttemptUpgrade() {
-    global successfulCoordinates, PriorityUpgrade
+    global successfulCoordinates, PriorityUpgrade, debugMessages
     global priority1, priority2, priority3, priority4, priority5, priority6
     global challengepriority1, challengepriority2, challengepriority3, challengepriority4, challengepriority5, challengepriority6
 
@@ -127,23 +127,56 @@ AttemptUpgrade() {
         return ; No units placed yet
     }
 
+    anyEnabled := false
+    for slotNum in [1, 2, 3, 4, 5, 6] {
+        enabled := "upgradeEnabled" slotNum
+        enabled := %enabled%
+        enabled := enabled.Value
+        if (enabled) {
+            anyEnabled := true
+            break
+        }
+    }
+
+    if (!anyEnabled) {
+        if (debugMessages) {
+            AddToLog("No units enabled - skipping")
+        }
+        return
+    }
+
     AddToLog("Attempting to upgrade placed units...")
+
+    unitsToRemove := []  ; Store units that reach max level
 
     if (PriorityUpgrade.Value) {
         if (debugMessages) {
             AddToLog("Using priority-based upgrading")
         }
-        
+
         ; Loop through priority levels (1-6) and upgrade all matching units
         for priorityNum in [1, 2, 3, 4, 5, 6] {
             upgradedThisRound := false
 
-            for index, coord in successfulCoordinates.Clone() { ; Clone to allow removal
+            for index, coord in successfulCoordinates { 
+                ; Check if upgrading is enabled for this unit's slot
+                upgradeEnabled := "upgradeEnabled" coord.slot
+                upgradeEnabled := %upgradeEnabled%
+                if (!upgradeEnabled.Value) {
+                    if (debugMessages) {
+                        AddToLog("Skipping Unit " coord.slot " - Upgrading Disabled")
+                    }
+                    continue
+                }
+
                 ; Get the priority value for this unit's slot
                 priority := inChallengeMode && ChallengeBox.Value ? "challengepriority" coord.slot : "priority" coord.slot
                 priority := %priority%
 
                 if (priority.Text = priorityNum) {
+                    if (debugMessages) {
+                        AddToLog("Upgrading Unit " coord.slot " at (" coord.x ", " coord.y ")")
+                    }
                     UpgradeUnit(coord.x, coord.y)
 
                     if CheckForXp() {
@@ -154,7 +187,7 @@ AttemptUpgrade() {
 
                     if MaxUpgrade() {
                         AddToLog("Max upgrade reached for Unit " coord.slot)
-                        successfulCoordinates.RemoveAt(index)
+                        unitsToRemove.Push(index) ; Mark for removal later
                         FixClick(325, 185) ; Close upgrade menu
                         continue
                     }
@@ -176,7 +209,20 @@ AttemptUpgrade() {
         }
     } else {
         ; Normal (non-priority) upgrading - upgrade all available units
-        for index, coord in successfulCoordinates.Clone() {
+        for index, coord in successfulCoordinates {
+            ; Check if upgrading is enabled for this unit's slot
+            upgradeEnabled := "upgradeEnabled" coord.slot
+            upgradeEnabled := %upgradeEnabled%
+            if (!upgradeEnabled.Value) {
+                if (debugMessages) {
+                    AddToLog("Skipping Unit " coord.slot " - Upgrading Disabled")
+                }
+                continue
+            }
+
+            if (debugMessages) {
+                AddToLog("Upgrading Unit " coord.slot " at (" coord.x ", " coord.y ")")
+            }
             UpgradeUnit(coord.x, coord.y)
 
             if CheckForXp() {
@@ -187,7 +233,7 @@ AttemptUpgrade() {
 
             if MaxUpgrade() {
                 AddToLog("Max upgrade reached for Unit " coord.slot)
-                successfulCoordinates.RemoveAt(index)
+                unitsToRemove.Push(index) ; Mark for removal later
                 FixClick(325, 185) ; Close upgrade menu
                 continue
             }
@@ -199,6 +245,15 @@ AttemptUpgrade() {
             Reconnect()
             CheckEndAndRoute()
         }
+    }
+
+    ; Remove maxed units after looping to avoid skipping elements
+    for i in unitsToRemove {
+        successfulCoordinates.RemoveAt(i)
+    }
+
+    if (debugMessages) {
+        AddToLog("Upgrade attempt completed")
     }
 }
 
