@@ -306,6 +306,62 @@ GenerateRandomPoints() {
     return points
 }
 
+GenerateSpiralGridPoints() {
+    points := []
+    gridSize := 40  ; Space between points
+    squaresPerSide := 7  ; Number of points per row/column (should be odd)
+
+    ; Center point coordinates
+    centerX := GetWindowCenter(rblxID).x - 30
+    centerY := GetWindowCenter(rblxID).y - 30
+
+    ; Calculate starting position for top-left point of the grid
+    startX := centerX - ((squaresPerSide - 1) / 2 * gridSize)
+    startY := centerY - ((squaresPerSide - 1) / 2 * gridSize)
+
+    ; Define movement directions (right, down, left, up)
+    directions := [[1, 0], [0, 1], [-1, 0], [0, -1]]
+    dirIndex := 0  ; Start moving right
+    steps := 1  ; Step count before changing direction
+    stepIncrease := 0  ; Every two turns, increase step size
+    x := centerX
+    y := centerY
+
+    ; Track visited positions
+    visited := Map()
+    visited.Set(x "," y, true)
+
+    ; Generate points in a spiral
+    loop (squaresPerSide * squaresPerSide) {
+        points.Push({ x: x, y: y })
+
+        ; Move in the current direction
+        x += directions[dirIndex + 1][1] * gridSize
+        y += directions[dirIndex + 1][2] * gridSize
+
+        ; Track new position
+        visited.Set(x "," y, true)
+
+        ; Reduce steps in the current direction
+        steps--
+
+        ; Change direction if steps are exhausted
+        if (steps = 0) {
+            dirIndex := Mod(dirIndex + 1, 4)  ; Cycle through directions
+            stepIncrease := Mod(stepIncrease + 1, 2)
+
+            ; Every two direction changes, increase step size
+            if stepIncrease = 0 {
+                steps += 1
+            }
+
+            steps += 1  ; Set new step count
+        }
+    }
+
+    return points
+}
+
 ;---------LEGACY PLACEMENT CODE---------;
 rect1 := { x: 37, y: 45, width: 254, height: 69 }
 rect2 := { x: 591, y: 45, width: 243, height: 47 }

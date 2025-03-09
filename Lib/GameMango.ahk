@@ -12,6 +12,10 @@ Hotkey(F2Key, (*) => StartMacro())
 Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
+F5:: {
+
+}
+
 StartMacro(*) {
     if (!ValidateMode()) {
         return
@@ -53,7 +57,7 @@ PlacingUnits() {
         return MonitorStage()
     }
 
-    placementPoints := PlacementPatternDropdown.Text = "3x3 Grid" ? GenerateMoreGridPoints(3) : PlacementPatternDropdown.Text = "Circle" ? GenerateCirclePoints() : PlacementPatternDropdown.Text = "Grid" ? GenerateGridPoints() : PlacementPatternDropdown.Text = "Spiral(WIP)" ? GenerateSpiralPoints() : PlacementPatternDropdown.Text = "Up and Down" ? GenerateUpandDownPoints() : GenerateRandomPoints()
+    placementPoints := PlacementPatternDropdown.Text = "3x3 Grid" ? GenerateMoreGridPoints(3) : PlacementPatternDropdown.Text = "Circle" ? GenerateCirclePoints() : PlacementPatternDropdown.Text = "Grid" ? GenerateGridPoints() : PlacementPatternDropdown.Text = "Spiral(WIP)" ? GenerateSpiralGridPoints() : PlacementPatternDropdown.Text = "Up and Down" ? GenerateUpandDownPoints() : GenerateRandomPoints()
     
     ; Go through each slot
     for slotNum in [1, 2, 3, 4, 5, 6] {
@@ -1074,6 +1078,7 @@ GetStoryDownArrows(map) {
         case "Dungeon Throne": return 20
         case "Mountain Temple": return 21
         case "Rain Village": return 22
+        case "Shibuya District": return 23
     }
 }
 
@@ -1233,7 +1238,8 @@ DetectMap() {
             "Air Craft", AirCraft,
             "Hellish City", Hellish,
             "Contracts", ContractLoadingScreen,
-            "Winter Event", Winter
+            "Winter Event", Winter,
+            "Shibuya District", Shibuya
         )
 
         for mapName, pattern in mapPatterns {
@@ -1293,6 +1299,8 @@ HandleMapMovement(MapName) {
             MoveForWinterEventNoClick()
         case "Contracts":
             MoveForContracts()
+        case "Shibuya District":
+            MoveForShibuya()    
     }
 }
 
@@ -1498,6 +1506,12 @@ MoveForContracts() {
         }
     }
 }
+
+MoveForShibuya() {
+    SendInput ("{d down}")
+    Sleep(2000)
+    SendInput ("{d up}")
+  }
 
     
 RestartStage() {
@@ -1907,7 +1921,7 @@ HandlePortalJoin() {
         AddToLog("Creating " selectedPortal)
         FixClick(215, 285)  ; Click On Portal
         Sleep (1500)
-        FixClick(350, 370)  ; Click On Use
+        FixClick(350, 350)  ; Click On Use
         Sleep (1500)
         FixClick(250, 350)  ; Click On Open
         AddToLog("Waiting 15 seconds for others to join")
