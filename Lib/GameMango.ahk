@@ -13,7 +13,13 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
+    BasicSetup()
+    FindAndMoveToPath()
+}
 
+F6:: {
+    BasicSetup()
+    MoveForSandVillage()
 }
 
 StartMacro(*) {
@@ -1265,6 +1271,8 @@ HandleMapMovement(MapName) {
     AddToLog("Executing Movement for: " MapName)
     
     switch MapName {
+        case "Planet Greenie":
+            MoveForPlanetGreenie()
         case "Snowy Town":
             MoveForSnowyTown()
         case "Sand Village":
@@ -1304,15 +1312,32 @@ HandleMapMovement(MapName) {
     }
 }
 
+MoveForPlanetGreenie() {
+    SendInput ("{a down}")
+    SendInput ("{w down}")
+    Sleep (2200)
+    SendInput ("{a up}")
+    SendInput ("{w up}")
+}
+
 MoveForSnowyTown() {
-    Fixclick(700, 125, "Right")
+    FixClick(590, 15) ; click on paths
+    loop 50 {
+        Sleep 100
+
+        if FindAndMoveToPath() {
+            FixClick(590, 15) ; click on paths
+            break
+        }
+    }
+    /*Fixclick(700, 125, "Right")
     Sleep (6000)
     Fixclick(615, 115, "Right")
     Sleep (3000)
     Fixclick(725, 300, "Right")
     Sleep (3000)
     Fixclick(715, 395, "Right")
-    Sleep (3000)
+    Sleep (3000)*/
 }
 
 MoveForNavyBay() {
@@ -1380,7 +1405,7 @@ MoveForMagicTown() {
 
 MoveForMagicHill() {
     color := PixelGetColor(630, 125)
-    if (ok := FindText(&X, &Y, 450, 280, 620, 480, 0.15, 0.15, MagicHillAngle2)) or (IsColorInRange(color, 0xFFD100)) {
+    if (ok := FindText(&X, &Y, 610, 410, 740, 560, 0.15, 0.15, MagicHillAngle2)) or (IsColorInRange(color, 0xFFD100)) {
         Fixclick(500, 20, "Right")
         Sleep (3000)
         Fixclick(500, 20, "Right")
@@ -1508,11 +1533,22 @@ MoveForContracts() {
 }
 
 MoveForShibuya() {
-    SendInput ("{d down}")
-    Sleep(2000)
-    SendInput ("{d up}")
-  }
-
+    if (ok := FindText(&X, &Y, 220, 190, 320, 250, 0.15, 0.15, ShibuyaAngle)) {
+        SendInput ("{a down}")
+        Sleep (600)
+        SendInput ("{a up}")
+        Sleep (500)
+        SendInput ("{a down}")
+        SendInput ("{w down}")
+        Sleep (1500)
+        SendInput ("{a up}")
+        SendInput ("{w up}")
+    } else {
+        SendInput ("{d down}")
+        Sleep(2000)
+        SendInput ("{d up}")
+    }
+}
     
 RestartStage() {
     currentMap := DetectMap()
@@ -1873,7 +1909,7 @@ HandlePortalEnd() {
             AddToLog("Found Lobby Text - creating/joining new portal")
             Sleep(2000)
 
-        if (PortalJoinDropdown.Text = "Creating") {
+        if (PortalJoinDropdown.Text = "Solo") {
             FixClick(485, 120) ;Select New Portal
             Sleep(1500)
             FixClick(510, 190) ; Click search
@@ -1882,7 +1918,27 @@ HandlePortalEnd() {
             Sleep(1500)
             FixClick(215, 285)  ; Click On Portal
             Sleep (1500)
-            FixClick(350, 410)  ; Click On Use
+            FixClick(350, 410)
+            Sleep(500)
+            FixClick(350, 420)
+            Sleep(500)
+            FixClick(350, 430)
+            Sleep(5000)
+        }
+        else if (PortalJoinDropdown.Text = "Creating") {
+            FixClick(485, 120) ;Select New Portal
+            Sleep(1500)
+            FixClick(510, 190) ; Click search
+            Sleep(1500)
+            SendInput(selectedPortal)
+            Sleep(1500)
+            FixClick(215, 285)  ; Click On Portal
+            Sleep (1500)
+            FixClick(350, 410)
+            Sleep(500)
+            FixClick(350, 420)
+            Sleep(500)
+            FixClick(350, 430)
             Sleep(5000)
         } else {
             AddToLog("Waiting for next portal")
@@ -1900,7 +1956,33 @@ HandlePortalJoin() {
     selectedPortal := PortalDropdown.Text
     joinType := PortalJoinDropdown.Text
 
-    if (joinType = "Creating") {
+    if (joinType = "Solo") {
+    ; Click items
+        FixClick(33, 300)
+        Sleep(1500)
+        
+        ; Click portals tab
+        FixClick(435, 230)
+        Sleep(1500)
+                
+        ; Click search
+        FixClick(510, 190)
+        Sleep(1500)
+                
+        ; Type portal name
+        SendInput(selectedPortal)
+        Sleep(1500)
+        
+        AddToLog("Soloing " selectedPortal)
+        FixClick(215, 285)  ; Click On Portal
+        Sleep (1500)
+        FixClick(350, 390) ; Use Portal
+        Sleep (1500)
+        FixClick(250, 350) ; Click Open
+        Sleep(1500)
+        FixClick(400, 460)  ; Start portal
+    }
+    else if (joinType = "Creating") {
 
         ; Click items
         FixClick(33, 300)
@@ -1921,9 +2003,9 @@ HandlePortalJoin() {
         AddToLog("Creating " selectedPortal)
         FixClick(215, 285)  ; Click On Portal
         Sleep (1500)
-        FixClick(350, 350)  ; Click On Use
+        FixClick(350, 390) ; Use Portal
         Sleep (1500)
-        FixClick(250, 350)  ; Click On Open
+        FixClick(250, 350) ; Click Open
         AddToLog("Waiting 15 seconds for others to join")
         Sleep(15000)
         FixClick(400, 460)  ; Start portal
@@ -2266,4 +2348,76 @@ FindAndClickBeam(targetColor := 0x006783, searchArea := [0, 0, GetWindowCenter(r
 		Sleep 100
         return true
     }
+}
+
+FindAndMoveToPath(targetColors := [0x32FF3D, 0xFFFF00], searchArea := [0, 0, GetWindowCenter(rblxID).Width, GetWindowCenter(rblxID).Height]) {
+    ; Extract search area boundaries
+    x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
+
+    ; Loop through each target color
+    for _, color in targetColors {
+        if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, color, 0)) {
+            ; Color found, log details and move
+            AddToLog("Path found at X" foundX " Y" foundY " (Color: " color ")")
+            AddToLog("Moving towards it...")
+
+            ; Stop movement before adjusting
+            StopAllMovement()
+            
+            ; Recenter mouse
+            MouseMove(400, 300)
+            
+            ; Calculate movement direction
+            PosX := foundX - 400
+            PosY := foundY - 300
+
+            ; Move towards detected position
+            MoveToPosition(PosX, PosY)
+
+            return true
+        }
+    }
+    return false  ; No color found
+}
+
+StopAllMovement() {
+    Sleep 50
+    SendInput("{space up}")
+    Sleep 50
+    SendInput("{w up}")
+    Sleep 50
+    SendInput("{a up}")
+    Sleep 50
+    SendInput("{s up}")
+    Sleep 50
+    SendInput("{d up}")
+    Sleep 50
+}
+
+MoveToPosition(PosX, PosY) {
+    Sleep 50
+    SendInput("{space down}")
+    Sleep 50
+    if (PosX > 0) {
+        SendInput("{d down}")
+        Sleep PosX * 6
+        SendInput("{d up}")
+    } else {
+        SendInput("{a down}")
+        Sleep -PosX * 6
+        SendInput("{a up}")
+    }    
+    Sleep 50
+    if (PosY > 0) {
+        SendInput("{s down}")
+        Sleep PosY * 6
+        SendInput("{s up}")
+    } else {
+        SendInput("{w down}")
+        Sleep -PosY * 6
+        SendInput("{w up}")
+    }
+    Sleep 50
+    SendInput("{space up}")
+    Sleep 50
 }
