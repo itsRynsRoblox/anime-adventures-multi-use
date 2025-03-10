@@ -4,6 +4,8 @@ global macroStartTime := A_TickCount
 global stageStartTime := A_TickCount
 global contractPageCounter := 0
 global contractSwitchPattern := 0
+global BossRoomCompleted := false
+global SaveChestsForBoss := true
 
 LoadKeybindSettings()  ; Load saved keybinds
 CheckForUpdates()
@@ -13,13 +15,11 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-    BasicSetup()
-    FindAndMoveToPath()
+
 }
 
 F6:: {
-    BasicSetup()
-    MoveForSandVillage()
+    CheckForPortal()
 }
 
 StartMacro(*) {
@@ -630,6 +630,18 @@ PortalMode() {
     RestartStage()
 }
 
+DungeonMode() {
+    AddToLog("Entering Dungeon Mode")
+    FixClick(85, 400)  ; Click Dungeon mode button
+    Sleep(1000)
+    if (ok := FindText(&X, &Y, 310, 395, 495, 440, 0.20, 0.20, EnterDungeon)) {
+        FixClick(395,380)
+    }
+    Sleep(1000)
+    ; Select dungeon route and enter
+    SelectDungeonRoute()
+}
+
 CheckForReturnToLobby() {
     if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
         return true
@@ -685,18 +697,18 @@ MonitorEndScreen() {
                 if (StoryActDropdown.Text != "Infinity") {
                     if (NextLevelBox.Value && lastResult = "win") {
                         AddToLog("Next level")
-                        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +260, -35, LobbyText2)
+                        ClickNextLevel()
                     } else {
                         AddToLog("Replay level")
-                        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+                        ClickReplay()
                     }
                 } else {
                     if (ReturnLobbyBox.Value) {
                         AddToLog("Return to lobby")
-                        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                        ClickReturnToLobby()
                     } else {
                         AddToLog("Story Infinity replay")
-                        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+                        ClickReplay()
                     }
                 }
                 return RestartStage()
@@ -705,11 +717,11 @@ MonitorEndScreen() {
                 AddToLog("Handling Raid end")
                 if (ReturnLobbyBox.Value) {
                     AddToLog("Return to lobby")
-                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                    ClickReturnToLobby()
                     return CheckLobby()
                 } else {
                     AddToLog("Replay raid")
-                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+                    ClickReplay()
                     return RestartStage()
                 }
             }
@@ -717,45 +729,44 @@ MonitorEndScreen() {
                 AddToLog("Handling Infinity Castle end")
                 if (lastResult = "win") {
                     AddToLog("Next floor")
-                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+                    ClickReplay() ; Uses the replay coords for next level
                 } else {
                     AddToLog("Restart floor")
-                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+                    ClickReplay()
                 }
                 return RestartStage()
             }
             else if (mode = "Cursed Womb") {
                 AddToLog("Handling Cursed Womb End")
                 AddToLog("Returning to lobby")
-                ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                ClickReturnToLobby()
                 return CheckLobby()
             }
             else if (mode = "Winter Event") {
                 AddToLog("Handling Winter Event end")
                 if (ReturnLobbyBox.Value) {
                     AddToLog("Return to lobby enabled")
-                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                    ClickReturnToLobby()
                     return CheckLobby()
                 } else {
                     AddToLog("Replaying")
-                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+                    ClickReplay()
                 }
-                    return RestartStage()
+                return RestartStage()
             }
             else {
                 AddToLog("Handling end case")
                 if (ReturnLobbyBox.Value) {
                     AddToLog("Return to lobby enabled")
-                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                    ClickReturnToLobby()
                     return CheckLobby()
                 } else {
                     AddToLog("Replaying")
-                    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+                    ClickReplay()
                     return RestartStage()
                 }
             }
         }
-        
         Reconnect()
     }
 }
@@ -805,6 +816,8 @@ MonitorStage() {
                     return HandlePortalEnd()            
                 } else if (mode = "Contract") {
                     return HandleContractEnd() 
+                } else if (mode = "Dungeon") {
+                    return MonitorDungeonEnd()  ; New function for Dungeon endings
                 } else {
                     return MonitorEndScreen() 
                 }
@@ -817,6 +830,8 @@ MonitorStage() {
                     return HandlePortalEnd()            
                 } else if (mode = "Contract") {
                     return HandleContractEnd() 
+                } else if (mode = "Dungeon") {
+                    return MonitorDungeonEnd()  ; New function for Dungeon endings
                 } else {
                     return MonitorEndScreen() 
                 }
@@ -1860,6 +1875,9 @@ StartSelectedMode() {
     else if (ModeDropdown.Text = "Portal") {
         PortalMode()
     }
+    else if (ModeDropdown.Text = "Dungeon") {
+        DungeonMode()
+    }
 }
 
 FormatStageTime(ms) {
@@ -1918,11 +1936,7 @@ HandlePortalEnd() {
             Sleep(1500)
             FixClick(215, 285)  ; Click On Portal
             Sleep (1500)
-            FixClick(350, 410)
-            Sleep(500)
-            FixClick(350, 420)
-            Sleep(500)
-            FixClick(350, 430)
+            ClickSelectPortal()
             Sleep(5000)
         }
         else if (PortalJoinDropdown.Text = "Creating") {
@@ -1934,11 +1948,7 @@ HandlePortalEnd() {
             Sleep(1500)
             FixClick(215, 285)  ; Click On Portal
             Sleep (1500)
-            FixClick(350, 410)
-            Sleep(500)
-            FixClick(350, 420)
-            Sleep(500)
-            FixClick(350, 430)
+            ClickSelectPortal()
             Sleep(5000)
         } else {
             AddToLog("Waiting for next portal")
@@ -2235,6 +2245,8 @@ CheckEndAndRoute() {
         AddToLog("Found end screen")
         if (mode = "Contract") {
             return HandleContractEnd()
+        } else if (mode = "Dungeon") {
+            return MonitorDungeonEnd()
         } else {
             return MonitorEndScreen()
         }
@@ -2420,4 +2432,286 @@ MoveToPosition(PosX, PosY) {
     Sleep 50
     SendInput("{space up}")
     Sleep 50
+}
+
+ClickReplay() {
+    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+}
+
+ClickNextLevel() {
+    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +260, -35, LobbyText2)
+}
+
+ClickReturnToLobby() {
+    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+}
+
+ClickSelectPortal() {
+    ClickUntilGone(0, 0, 257, 419, 445, 520, SelectPortal, 0, -35)
+}
+
+; Custom monitor for dungeon ending
+MonitorDungeonEnd() {
+    global mode, Wins, loss
+
+    Loop {
+        Sleep(3000)  
+        
+        FixClick(560, 560)  ; Move click
+
+        ; Check for unit exit UI element
+        if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
+            ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
+        }
+
+        ; Check for next text UI element
+        if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
+            ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
+        }
+
+        ; Check for returning to lobby
+        if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or 
+            (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
+                AddToLog("Dungeon run completed, clicking replay")
+            
+            ; Click replay button
+            ClickReplay()
+            
+            ; After clicking replay, check for shop/shrine/chest
+            CheckDungeonSpecials()
+
+            if (CheckForFinishDungeon()) {
+                AddToLog("Handled dungeon completion")
+            return
+            }
+            
+            ; Start a new dungeon run
+            AddToLog("Starting next dungeon")
+            return SelectDungeonRoute()
+        }
+        
+        Reconnect()
+    }
+}
+
+; Function to check for special dungeon elements after replay
+CheckDungeonSpecials() {
+    AddToLog("Checking for dungeon shop, shrine, open chest")
+    
+    ; Give time for special elements to appear
+    Sleep(2000)
+    
+    ; Check the area for shop, shrine, or chest
+    Loop 5 {
+        ; Check for shop
+        if (ok := FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shop)) {
+            AddToLog("Found Shop")
+            Sleep(1000)
+            HandleShop()
+            Sleep(1000)
+            return true
+        }
+        ; Check for shrine
+        if (ok := FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shrine)) {
+            AddToLog("Found Shrine, Denying")
+            ClickUntilGone(0, 0, 490, 420, 605, 455, DenyShrine, 0, -30)
+            Sleep(1000)
+            return true
+        }
+        ; Check for Chest Opening
+        if (ok := FindText(&X, &Y, 140, 200, 375, 250, 0, 0, ChestRoom)) {
+            AddToLog("Found Chest Opening")
+            HandleChestScreen()
+            return true
+        }
+        
+        Sleep(1000)  ; Wait and check again
+    }
+    
+    AddToLog("No shop, shrine, open chest found")
+    return false
+}
+
+SelectDungeonRoute() {
+    if (ok := FindText(&X, &Y, 140, 180, 480, 350, 0, 0, BossRoom)) {
+        AddToLog("Boss room detected!")
+        global BossRoomCompleted := true
+        FixClick(X, Y-30)
+        Sleep(1000)
+    } 
+    if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Chest)) {
+        AddToLog("Found Chest Room, clicking it")
+        FixClick(X, Y-30)
+        Sleep(1000)
+    } 
+    else if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Hoard)) {
+        AddToLog("Found Hoard Room, clicking it")
+        FixClick(X, Y-30)
+        Sleep(1000)
+    } 
+    else {
+        ; If no chest/hoard found, click default positions
+        AddToLog("No chest/hoard found, clicking default positions")
+        FixClick(400, 355)
+        Sleep(500)
+        FixClick(335, 355)
+        Sleep(500)
+    }
+    
+    ; Look for Enter button and click until gone
+    if (ok := FindText(&X, &Y, 120, 425, 680, 500, 0.20, 0.20, Enter)) {
+        AddToLog("Found Enter button, joining dungeon")
+        ClickUntilGone(0, 0, 120, 425, 680, 500, Enter, 0, -30)
+        Sleep(2000)
+        
+        ; Start dungeon run
+        AddToLog("Starting dungeon run")
+        RestartStage()
+    }
+}
+
+HandleShop() {
+    AddToLog("Handling shop - buying available items")
+    
+    ; Give the shop time to fully load
+    Sleep(1000)
+    
+    ; Buy item in slot 3 (bottom)
+    FixClick(560, 335)
+    Sleep(1000)
+    
+    ; Buy item in slot 2 (middle)
+    FixClick(560, 280)
+    Sleep(1000)
+    
+    ; Buy item in slot 1 (top)
+    FixClick(560, 225)
+    Sleep(1000)
+    
+    ; Click continue to close the shop
+    AddToLog("Closing shop")
+    FixClick(485, 410)
+    Sleep(1000)
+    return true
+}
+
+HandleChestScreen() {
+    global BossRoomCompleted, SaveChestsForBoss
+    
+    ; Determine if we should open chests now
+    shouldOpenChests := BossRoomCompleted || !SaveChestsForBoss
+    
+    if (shouldOpenChests) {
+        AddToLog("Opening all available chests")
+        
+        ; Process first chest position - keep clicking until exhausted
+        firstChestExhausted := false
+        
+        while (!firstChestExhausted ) {
+            ; Click first chest OPEN button
+            FixClick(565, 260)
+            Sleep(2000)
+            
+            ; Check if we're still on the chest screen
+            if (!IsChestScreenVisible()) {
+                ClaimChestReward()
+            } else {
+                firstChestExhausted := true
+            }
+        }
+        
+        ; Process second chest position - keep clicking until exhausted
+        secondChestExhausted := false
+        
+        while (!secondChestExhausted) {
+            ; Click second chest OPEN button
+            FixClick(565, 320)
+            Sleep(1000)
+            
+            ; Check if we're still on the chest screen
+            if (!IsChestScreenVisible()) {
+                ClaimChestReward()
+            } else {
+                secondChestExhausted := true
+            }
+        }
+
+        AddToLog("All chests opened")
+
+        ; Reset the boss room flag if it was set
+        if (BossRoomCompleted) {
+            BossRoomCompleted := false
+            FixClick(485, 410)
+        }
+        } else {
+            ; Skip opening chests, just click continue
+            AddToLog("Saving chests for boss room - clicking continue")
+            FixClick(485, 410)
+        }
+         Sleep(1000)
+         Reconnect()
+    return true
+}
+
+ClaimChestReward() {
+    maxClicks := 30  ; Safety limit
+    clicks := 0
+    
+    while (clicks < maxClicks) {
+        ; Click to claim reward
+        FixClick(560, 560)
+        Sleep(500)
+        
+        ; Check if chest screen has returned
+        if (IsChestScreenVisible()) {
+            return true
+        }
+        
+        clicks++
+    }
+    
+    AddToLog("Max clicks reached while claiming rewards")
+    return false
+}
+
+IsChestScreenVisible() {
+    return FindText(&X, &Y, 140, 200, 375, 250, 0, 0, ChestRoom)
+}
+
+CheckForPortal() {
+    stageEndTime := A_TickCount
+    stageLength := FormatStageTime(stageEndTime - stageStartTime)
+
+    if (ok := FindText(&portalX, &portalY, 257, 419, 445, 520, 0, 0, SelectPortal)) {
+        AddToLog("Portal detected, restarting portal...")
+        ;ClickSelectPortal()
+    } else {
+        AddToLog("No portal detected, shutting down...")
+        SendFinalWebhookBeforeExit()
+        Sleep(2000)
+        return Reload()
+    }
+}
+
+CheckForFinishDungeon() {
+    ; Check for the finish dungeon popup
+    if (ok := FindText(&X, &Y, 240, 260, 405, 310, 0, 0, FinishDungeon) or (ok := FindText(&X, &Y, 310, 395, 495, 440, 0.20, 0.20, EnterDungeon))) {
+        
+        ; Click the Finish button
+        FixClick(330, 340)
+        Sleep(1500)
+        
+        ; Click the X in the top right
+        FixClick(670, 155)
+        Sleep(1000)
+        
+        ; Return to lobby
+        AddToLog("Returning to lobby after completing dungeon")
+        ClickReturnToLobby()
+        
+        ; Check for lobby and restart
+        return CheckLobby()
+    }
+    
+    return false
 }

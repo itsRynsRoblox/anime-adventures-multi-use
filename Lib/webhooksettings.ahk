@@ -184,6 +184,46 @@ SendWebhookWithTime(isWin, stageLength) {
     )
 }
 
+SendFinalWebhookBeforeExit() {
+    global currentStreak, Wins, loss, WebhookURL, webhook, macroStartTime
+
+    ; Check if webhook file exists first
+    if (!FileExist(WebhookURLFile)) {
+        AddToLog("No webhook configured - skipping final webhook")
+        return
+    }
+
+    ; Read webhook URL from file
+    WebhookURL := FileRead(WebhookURLFile, "UTF-8")
+    if !(WebhookURL ~= 'i)https?:\/\/discord\.com\/api\/webhooks\/(\d{18,19})\/[\w-]{68}') {
+        AddToLog("Invalid webhook URL - skipping final webhook")
+        return
+    }
+
+    ; Initialize webhook
+    webhook := WebHookBuilder(WebhookURL)
+
+    ; Calculate total macro runtime
+    macroLength := FormatStageTime(A_TickCount - macroStartTime)
+
+    ; Build session summary
+    sessionData := "📌 **Script is shutting down!**`n"
+    . "⌛ Total Runtime: " macroLength "`n"
+    . "🔄 Final Streak: " (currentStreak > 0 ? currentStreak " Win Streak" : (currentStreak < 0 ? Abs(currentStreak) " Loss Streak" : "No active streak")) "`n"
+    . ":white_check_mark: Successful Runs: " Wins "`n"
+    . "❌ Failed Runs: " loss "`n"
+    . ":bar_chart: Total Runs: " (loss + Wins) "`n"
+    . ":scales: Win Rate: " (Wins + loss > 0 ? Format("{:.1f}%", (Wins / (Wins + loss)) * 100) : "N/A") "`n"
+
+    ; Send final webhook
+    WebhookScreenshot(
+        "Final Session Summary",
+        sessionData,
+        0xFFA500,  ; Orange color to indicate script shutdown
+        "exit"
+    )
+}
+
 SendBanner() {
     global DiscordUserID, StartTime
 

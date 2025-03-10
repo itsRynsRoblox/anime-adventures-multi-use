@@ -155,6 +155,9 @@ OpenDiscordLink() {
         PortalDropdown.Visible := true
         PortalJoinDropdown.Visible := true
         mode := "Portal"
+    } else if (selected = "Dungeon") {
+        AddToLog("⚠️ Dungeon is still under development! Stay tuned for updates.")
+        mode := "Dungeon"
     } else if (selected = "Cursed Womb") {
         mode := "Cursed Womb"
     } else if (selected = "Winter Event") {
