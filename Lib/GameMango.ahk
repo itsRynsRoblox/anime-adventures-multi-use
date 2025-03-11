@@ -1931,6 +1931,7 @@ GetNavKeys() {
 }
 
 HandlePortalEnd() {
+    global inChallengeMode, challengeStartTime
     selectedPortal := PortalDropdown.Text
 
     Loop {
@@ -1947,6 +1948,28 @@ HandlePortalEnd() {
         }
 
         if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
+
+            if (inChallengeMode) {
+                AddToLog("Challenge completed - returning to selected mode")
+                inChallengeMode := false
+                challengeStartTime := A_TickCount
+                Sleep(1500)
+                ClickReturnToLobby()
+                return CheckLobby()
+            }
+
+            ; Check if it's time for challenge mode
+            if (!inChallengeMode && ChallengeBox.Value) {
+                timeElapsed := A_TickCount - challengeStartTime
+                if (timeElapsed >= 1800000) {  ; 30 minutes in milliseconds
+                    AddToLog("30 minutes passed - switching to Challenge mode")
+                    inChallengeMode := true
+                    challengeStartTime := A_TickCount
+                    Sleep(1500)
+                    ClickReturnToLobby()
+                    return CheckLobby()
+                }
+            }
             AddToLog("Found Lobby Text - creating/joining new portal")
             Sleep(2000)
 
