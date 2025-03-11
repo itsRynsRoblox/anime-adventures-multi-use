@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.8"
+global currentVersion := "1.8.1"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -253,6 +253,7 @@ placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
 aaMainUI.SetFont("s9")
 global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Next Level")
+SaveChestsBox := aaMainUI.Add("CheckBox", "x900 y451 cffffff Checked", "Save Chests For Rukia")
 global MatchMaking := aaMainUI.Add("Checkbox", "x1035 y451 cffffff Hidden Checked", "Matchmaking")
 global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Return To Lobby")
 global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Auto Ability")
@@ -317,11 +318,13 @@ ReturnLobbyBox.Visible := false
 NextLevelBox.Visible := false
 Hotkeytext.Visible := false
 Hotkeytext2.Visible := false
+SaveChestsBox.Visible := false
 ModeDropdown.OnEvent("Change", OnModeChange)
 StoryDropdown.OnEvent("Change", OnStoryChange)
 LegendDropDown.OnEvent("Change", OnLegendChange)
 RaidDropdown.OnEvent("Change", OnRaidChange)
 ConfirmButton.OnEvent("Click", OnConfirmClick)
+SaveChestsBox.OnEvent("Click", ToggleSaveChestsForBoss)
 ;------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI
 ;------UNIT CONFIGURATION------UNIT CONFIGURATION------UNIT CONFIGURATION/------UNIT CONFIGURATION/------UNIT CONFIGURATION/------UNIT CONFIGURATION/
 

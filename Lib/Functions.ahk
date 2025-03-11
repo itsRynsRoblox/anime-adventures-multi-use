@@ -127,6 +127,7 @@ OpenDiscordLink() {
     InfinityCastleDropdown.Visible := false
     MatchMaking.Visible := false
     ReturnLobbyBox.Visible := false
+    SaveChestsBox.Visible := false
     PortalDropdown.Visible := false 
     PortalJoinDropdown.Visible := false  
     ContractPageDropdown.Visible := false  
@@ -157,6 +158,7 @@ OpenDiscordLink() {
         mode := "Portal"
     } else if (selected = "Dungeon") {
         AddToLog("⚠️ Dungeon is still under development! Stay tuned for updates.")
+        SaveChestsBox.Visible := true
         mode := "Dungeon"
     } else if (selected = "Cursed Womb") {
         mode := "Cursed Womb"
@@ -290,6 +292,12 @@ OnConfirmClick(*) {
     Hotkeytext.Visible := true
     Hotkeytext2.Visible := true
     global confirmClicked := true
+}
+
+ToggleSaveChestsForBoss(*) {
+    global SaveChestsForBoss
+    SaveChestsForBoss := !SaveChestsForBoss
+    AddToLog("Save chests for boss room: " (SaveChestsForBoss ? "Enabled" : "Disabled"))
 }
 
 
