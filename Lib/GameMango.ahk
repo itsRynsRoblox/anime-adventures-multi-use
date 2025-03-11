@@ -19,7 +19,7 @@ F5:: {
 }
 
 F6:: {
-
+    
 }
 
 StartMacro(*) {
@@ -826,6 +826,29 @@ MonitorStage() {
                 AddToLog("Defeat detected - Stage Length: " stageLength)
                 loss += 1
                 SendWebhookWithTime(false, stageLength) 
+                if (mode = "Portal") {
+                    return HandlePortalEnd()            
+                } else if (mode = "Contract") {
+                    return HandleContractEnd() 
+                } else if (mode = "Dungeon") {
+                    return MonitorDungeonEnd()  ; New function for Dungeon endings
+                } else {
+                    return MonitorEndScreen() 
+                }
+            }
+        }
+        if !CheckForXp() {
+            if CheckForReturnToLobby() { ; Rare instance of clicking through the interface due to upgrading units
+                AddToLog("Found return To lobby but no results screen")
+                
+                ; Calculate stage end time here, before checking win/loss
+                stageEndTime := A_TickCount
+                stageLength := FormatStageTime(stageEndTime - stageStartTime)
+    
+                if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
+                    ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
+                }
+                AddToLog("Game Over Detected - Stage Length: " stageLength)
                 if (mode = "Portal") {
                     return HandlePortalEnd()            
                 } else if (mode = "Contract") {
@@ -2266,6 +2289,18 @@ ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX
     }
 }
 
+RightClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
+    while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || 
+           textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
+        if (offsetX != 0 || offsetY != 0) {
+            FixClick(X + offsetX, Y + offsetY, "Right")  
+        } else {
+            FixClick(x, y, "Right") 
+        }
+        Sleep(1000)
+    }
+}
+
 IsColorInRange(color, targetColor, tolerance := 50) {
     ; Extract RGB components
     r1 := (color >> 16) & 0xFF
@@ -2450,6 +2485,10 @@ ClickSelectPortal() {
     ClickUntilGone(0, 0, 257, 419, 445, 520, SelectPortal, 0, -35)
 }
 
+ClickDungeonContinue() {
+    ClickUntilGone(0, 0, 422, 421, 572, 455, DungeonContinue, 0, -35)
+}
+
 ; Custom monitor for dungeon ending
 MonitorDungeonEnd() {
     global mode, Wins, loss
@@ -2548,12 +2587,17 @@ SelectDungeonRoute() {
         global BossRoomCompleted := true
         FixClick(X, Y-30)
         Sleep(1000)
-    } 
-    if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Chest)) {
+    }
+    if (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChest) or (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChestNoHover))) {
+        AddToLog("Found Double Chest Room, clicking it")
+        FixClick(X, Y-30)
+        Sleep(1000)
+    }
+    else if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Chest)) {
         AddToLog("Found Chest Room, clicking it")
         FixClick(X, Y-30)
         Sleep(1000)
-    } 
+    }
     else if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Hoard)) {
         AddToLog("Found Hoard Room, clicking it")
         FixClick(X, Y-30)
@@ -2601,6 +2645,7 @@ HandleShop() {
     ; Click continue to close the shop
     AddToLog("Closing shop")
     FixClick(485, 410)
+    ClickDungeonContinue()
     Sleep(1000)
     return true
 }
@@ -2656,7 +2701,7 @@ HandleChestScreen() {
         } else {
             ; Skip opening chests, just click continue
             AddToLog("Saving chests for boss room - clicking continue")
-            FixClick(485, 410)
+            ClickDungeonContinue()
         }
          Sleep(1000)
          Reconnect()
