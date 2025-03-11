@@ -19,7 +19,7 @@ F5:: {
 }
 
 F6:: {
-    
+    MoveForMagicTown()
 }
 
 StartMacro(*) {
@@ -176,6 +176,7 @@ AttemptUpgrade() {
                 ; Check if upgrading is enabled for this unit's slot
                 upgradeEnabled := "upgradeEnabled" coord.slot
                 upgradeEnabled := %upgradeEnabled%
+
                 if (!upgradeEnabled.Value) {
                     if (debugMessages) {
                         AddToLog("Skipping Unit " coord.slot " - Upgrading Disabled")
@@ -187,11 +188,24 @@ AttemptUpgrade() {
                 priority := inChallengeMode && ChallengeBox.Value ? "challengepriority" coord.slot : "priority" coord.slot
                 priority := %priority%
 
+                upgradeLimitEnabled := "upgradeLimitEnabled" coord.slot
+                upgradeLimitEnabled := %upgradeLimitEnabled%
+
+                upgradeLimit := "UpgradeLimit" coord.slot
+                upgradeLimit := %upgradeLimit%
+                upgradeLimit := String(upgradeLimit.Text)
+
+                
                 if (priority.Text = priorityNum) {
                     if (debugMessages) {
                         AddToLog("Upgrading Unit " coord.slot " at (" coord.x ", " coord.y ")")
                     }
-                    UpgradeUnit(coord.x, coord.y)
+
+                    if (!upgradeLimitEnabled.Value) {
+                        UpgradeUnit(coord.x, coord.y)
+                    } else {
+                        UpgradeUnitLimit(coord.x, coord.y, coord, index, upgradeLimit)
+                    }
 
                     if CheckForXp() {
                         AddToLog("Stage ended during upgrades, proceeding to results")
@@ -236,6 +250,14 @@ AttemptUpgrade() {
             ; Check if upgrading is enabled for this unit's slot
             upgradeEnabled := "upgradeEnabled" coord.slot
             upgradeEnabled := %upgradeEnabled%
+
+            upgradeLimitEnabled := "upgradeLimitEnabled" coord.slot
+            upgradeLimitEnabled := %upgradeLimitEnabled%
+
+            upgradeLimit := "UpgradeLimit" coord.slot
+            upgradeLimit := %upgradeLimit%
+            upgradeLimit := String(upgradeLimit.Text)
+
             if (!upgradeEnabled.Value) {
                 if (debugMessages) {
                     AddToLog("Skipping Unit " coord.slot " - Upgrading Disabled")
@@ -246,7 +268,12 @@ AttemptUpgrade() {
             if (debugMessages) {
                 AddToLog("Upgrading Unit " coord.slot " at (" coord.x ", " coord.y ")")
             }
-            UpgradeUnit(coord.x, coord.y)
+
+            if (!upgradeLimitEnabled.Value) {
+                UpgradeUnit(coord.x, coord.y)
+            } else {
+                UpgradeUnitLimit(coord.x, coord.y, coord, index, upgradeLimit)
+            }
 
             if CheckForXp() {
                 AddToLog("Stage ended during upgrades, proceeding to results")
@@ -280,6 +307,14 @@ AttemptUpgrade() {
     if (debugMessages) {
         AddToLog("Upgrade attempt completed")
     }
+}
+
+SetUnitAsMaxed(coord, index) {
+    global successfulCoordinates, maxedCoordinates
+    AddToLog("Max upgrade reached for Unit " coord.slot)
+    successfulCoordinates.RemoveAt(index)
+    maxedCoordinates.Push(coord)
+    FixClick(325, 185) ; Close upgrade menu
 }
 
 
@@ -332,7 +367,21 @@ UpgradeUnits() {
                         for index, coord in successfulCoordinates {
                             if (coord.slot = slot) {
                                 slotDone := false
-                                UpgradeUnit(coord.x, coord.y)
+
+                                upgradeLimitEnabled := "upgradeLimitEnabled" coord.slot
+                                upgradeLimitEnabled := %upgradeLimitEnabled%
+            
+                                
+                                upgradeLimit := "UpgradeLimit" coord.slot
+                                upgradeLimit := %upgradeLimit%
+                                upgradeLimit := String(upgradeLimit.Text)
+            
+                                
+                                if (!upgradeLimitEnabled.Value) {
+                                    UpgradeUnit(coord.x, coord.y)
+                                } else {
+                                    UpgradeUnitLimit(coord.x, coord.y, coord, index, upgradeLimit)
+                                }
 
                                 if CheckForXp() {
                                     AddToLog("Stage ended during upgrades, proceeding to results")
@@ -391,7 +440,12 @@ UpgradeUnits() {
             }
 
             for index, coord in successfulCoordinates {
-                UpgradeUnit(coord.x, coord.y)
+
+                if (!upgradeLimitEnabled.Value) {
+                    UpgradeUnit(coord.x, coord.y)
+                } else {
+                    UpgradeUnitLimit(coord.x, coord.y, coord, index, upgradeLimit)
+                }
 
                 if CheckForDisconnect() {
                     Reconnect() ; Added Disconnect Check
@@ -1437,7 +1491,7 @@ MoveForMagicTown() {
     Fixclick(585, 535, "Right")
     Sleep (3000)
     SendInput ("{d down}")
-    Sleep (3800)
+    Sleep (3800) ;was 3800
     SendInput ("{d up}")
 }
 
@@ -1721,12 +1775,36 @@ MaxUpgrade() {
     return false
 }
 
-ReachedUpgradeLimit() {
-    upgradesToCheck := [1,2,3,4,5,6,7,8,9]
-    for i, upgradeNum in upgradesToCheck {
-        if (ok := FindText(&X, &Y, 166, 272, 289, 297, 0, 0, "Upgrade" . upgradeNum)) {
+MaxUpgraded(limit) {
+    levelTexts := Map(
+        1, Upgrade1,
+        2, Upgrade2,
+        3, Upgrade3,
+        4, Upgrade4,
+        5, Upgrade5,
+        6, Upgrade6
+    )
+
+    if levelTexts.Has(limit) {
+        level := levelTexts[limit]
+        if (!level) {
+            AddToLog("Error: Level " limit " is undefined or empty")
+            return false
+        }
+        if (ok := FindText(&X, &Y, 150, 200, 350, 450, 0, 0, level)) {
             return true
         }
+        return false
+    }
+}
+
+
+ReachedUpgradeLimit() {
+
+    ; Search for the dynamic upgrade text
+    if (ok := FindText(&X, &Y, 168, 227, 314, 254, 0, 0, Upgrade3)) {
+        AddToLog("Upgrade: 0")
+        return true
     }
     return false
 }
@@ -1797,9 +1875,25 @@ CheckForXp() {
 
 UpgradeUnit(x, y) {
     FixClick(x, y - 3)
-    FixClick(264, 363) ; upgrade button 
-    FixClick(264, 363) ; upgrade button
-    FixClick(264, 363) ; upgrade button
+    Sleep (1000)
+    SendInput("R")
+    SendInput("R")
+    SendInput("R")
+}
+
+UpgradeUnitLimit(x, y, coord, index, upgradeLimit) {
+    FixClick(x, y - 3)
+    Sleep (1000)
+    if CheckUpgradeLimit(upgradeLimit + 1) {
+        SetUnitAsMaxed(coord, index)
+    } else {
+        SendInput("R")
+    }
+}
+
+ClickUnit(x, y) {
+    FixClick(x, y - 3)
+    Sleep (1000)
 }
 
 CheckLobby() {
@@ -1982,7 +2076,7 @@ HandlePortalEnd() {
             Sleep(1500)
             FixClick(215, 285)  ; Click On Portal
             Sleep (1500)
-            ClickSelectPortal()
+            CheckForPortal()
             Sleep(5000)
         }
         else if (PortalJoinDropdown.Text = "Creating") {
@@ -1994,7 +2088,7 @@ HandlePortalEnd() {
             Sleep(1500)
             FixClick(215, 285)  ; Click On Portal
             Sleep (1500)
-            ClickSelectPortal()
+            CheckForPortal()
             Sleep(5000)
         } else {
             AddToLog("Waiting for next portal")
@@ -2762,11 +2856,21 @@ CheckForPortal() {
 
     if (ok := FindText(&portalX, &portalY, 257, 419, 445, 520, 0, 0, SelectPortal)) {
         AddToLog("Portal detected, restarting portal...")
-        ;ClickSelectPortal()
+        ClickSelectPortal()
     } else {
-        AddToLog("No portal detected, shutting down...")
-        SendFinalWebhookBeforeExit()
-        Sleep(2000)
+        if (PortalDropdown.Text = "Shibuya Portal") {
+            ClickReturnToLobby()
+            Sleep(500)
+            AddToLog("Swapping to Shibuya District Infinite...")
+            ModeDropdown.Text := "Story"
+            StoryDropdown.Text := "Shibuya District"
+            StoryActDropdown.Text := "Infinity"
+            return CheckLobby()
+        } else {
+            AddToLog("No portal detected, shutting down...")
+            SendFinalWebhookBeforeExit()
+            Sleep(2000)
+        }
         return Reload()
     }
 }
@@ -2789,6 +2893,33 @@ CheckForFinishDungeon() {
         
         ; Check for lobby and restart
         return CheckLobby()
+    }
+    
+    return false
+}
+
+CheckForUpgrade(upgradeLimit) {
+    if (!MaxUpgrade()) {
+        return UpgradeDetect(170, 231, 118, 22, 400, 335, upgradeLimit) ? true : false
+    }
+    return false
+}
+
+CheckUpgradeLimit(upgradeCap) {
+    Sleep 500
+
+    ; Map the upgrade cap to the corresponding MaxText variable
+    upgradeTexts := [
+        Upgrade0, Upgrade1, Upgrade2, Upgrade3, Upgrade4,
+        Upgrade5, Upgrade6, Upgrade7, Upgrade8, Upgrade9
+    ]
+
+    ; Select the correct upgrade text based on the cap
+    targetText := upgradeTexts[upgradeCap]
+
+    ; Check for max text in the designated area
+    if (ok := FindText(&X, &Y, 170, 228, 312, 252, 0, 0, targetText) or (ok := FindText(&X, &Y, 170, 228, 312, 252, 0, 0, targetText))) {
+        return true
     }
     
     return false

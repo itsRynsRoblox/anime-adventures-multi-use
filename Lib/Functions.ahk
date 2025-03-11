@@ -132,6 +132,11 @@ OpenDiscordLink() {
     PortalJoinDropdown.Visible := false  
     ContractPageDropdown.Visible := false  
     ContractJoinDropdown.Visible := false 
+
+    MagicTeamText.Visible := false
+    MagicTeam.Visible := false
+    PhysicalTeamText.Visible := false
+    PhysicalTeam.Visible := false
     
     if (selected = "Story") {
         StoryDropdown.Visible := true
@@ -152,6 +157,10 @@ OpenDiscordLink() {
         ContractPageDropdown.Visible := true
         ContractJoinDropdown.Visible := true
         mode := "Contract"
+        MagicTeamText.Visible := true
+        MagicTeam.Visible := true
+        PhysicalTeamText.Visible := true
+        PhysicalTeam.Visible := true
     } else if (selected = "Portal") {
         PortalDropdown.Visible := true
         PortalJoinDropdown.Visible := true
@@ -609,4 +618,50 @@ SwapTeam(magic := false) {
     }
     FixClick(33, 400) ; Reopen Contracts
     Sleep 1000
+}
+
+UpgradeDetect(x, y, w, h, inputX, inputY, upgradeLimit) {
+    detectionCount := 0
+    AddToLog("Checking for upgrade level...")
+
+    try {
+        result := OCR.FromRect(x, y, w, h, "FirstFromAvailableLanguages", { grayscale: true, scale: 4.0 })
+
+        if result {
+            rawText := result.Text
+            if (debugMessages) {
+                AddToLog("Raw OCR Upgrade Text: " rawText)
+            }
+
+            ; Clean text to isolate "Upgrade" + number
+            cleanedText := RegExReplace(rawText, ".*Upgrade\D*(\d+).*", "$1") ; Capture only the number after "Upgrade"
+            cleanedText := StrReplace(cleanedText, "O", "0") ; Fix OCR mistaking 0 as O
+
+            ; Explicitly replace "O" with "0" to ensure OCR doesn't misinterpret them
+            if (cleanedText = "O") {
+                cleanedText := "0"
+                AddToLog(cleanedText)
+            }
+
+            if (debugMessages) {
+                AddToLog("Cleaned Upgrade Number: " cleanedText)
+            }
+
+            ; Check if the cleaned text is a valid number
+            if (cleanedText != "" && RegExMatch(cleanedText, "^\d+$")) {
+                detectionCount++
+                    
+                if (detectionCount >= 1) {
+                    if (cleanedText >= upgradeLimit) {
+                        AddToLog("Found Upgrade Level: " cleanedText)
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            }
+        }
+    }
+    AddToLog("Could not detect valid upgrade level")
+    return false
 }

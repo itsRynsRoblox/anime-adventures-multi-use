@@ -22,12 +22,26 @@ Priority4=4
 Priority5=5
 Priority6=6
 
+UpgradeLimit1=0
+UpgradeLimit2=0
+UpgradeLimit3=0
+UpgradeLimit4=0
+UpgradeLimit5=0
+UpgradeLimit6=0
+
 UpgradeEnabled1=1
 UpgradeEnabled2=1
 UpgradeEnabled3=1
 UpgradeEnabled4=1
 UpgradeEnabled5=1
 UpgradeEnabled6=1
+
+UpgradeLimitEnabled1=0
+UpgradeLimitEnabled2=0
+UpgradeLimitEnabled3=0
+UpgradeLimitEnabled4=0
+UpgradeLimitEnabled5=0
+UpgradeLimitEnabled6=0
 
 [ChallengePlacement]
 ChallengePlacement1=1

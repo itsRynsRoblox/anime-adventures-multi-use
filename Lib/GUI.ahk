@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.8.3"
+global currentVersion := "1.8.4"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -319,6 +319,12 @@ NextLevelBox.Visible := false
 Hotkeytext.Visible := false
 Hotkeytext2.Visible := false
 SaveChestsBox.Visible := false
+
+MagicTeamText.Visible := false
+MagicTeam.Visible := false
+PhysicalTeamText.Visible := false
+PhysicalTeam.Visible := false
+
 ModeDropdown.OnEvent("Change", OnModeChange)
 StoryDropdown.OnEvent("Change", OnStoryChange)
 LegendDropDown.OnEvent("Change", OnLegendChange)
@@ -340,11 +346,16 @@ AddUnitCard(aaMainUI, index, x, y) {
     aaMainUI.SetFont("s11 Bold c" uiTheme[1])
     unit.Title := aaMainUI.Add("Text", Format("x{} y{} w60 h25 +BackgroundTrans", x+30, y+18), "Unit " index)
 
-    unit.Title := aaMainUI.Add("Text", Format("x{} y{} w250 h25 +BackgroundTrans", x+285, y+18), "Upgrade During Placement")
-
     aaMainUI.SetFont("s9 c" uiTheme[1])
     unit.PlacementText := aaMainUI.Add("Text", Format("x{} y{} w70 h20 +BackgroundTrans", x+100, y+2), "Placement")
     unit.PriorityText := aaMainUI.Add("Text", Format("x{} y{} w60 h20 BackgroundTrans", x+183, y+2), "Priority")
+
+    unit.BorderRight := aaMainUI.Add("Text", Format("x{} y{} w2 h45 +Background{}", x+390, y, uiTheme[3]))
+    unit.UpgradeCapText := aaMainUI.Add("Text", Format("x{} y{} w250 h20 BackgroundTrans", x+183+83, y+2), "Place && Upgrade")
+    unit.Title := aaMainUI.Add("Text", Format("x{} y{} w250 h25 +BackgroundTrans", x+295, y+20), "Enabled")
+
+    unit.UpgradeCapText := aaMainUI.Add("Text", Format("x{} y{} w250 h20 BackgroundTrans", x+425, y+2), "Upgrade Limit")
+    unit.Title := aaMainUI.Add("Text", Format("x{} y{} w250 h25 +BackgroundTrans", x+420, y+20), "Enabled")
     
     UnitData.Push(unit)
     return unit
@@ -371,6 +382,13 @@ upgradeEnabled4 := aaMainUI.Add("CheckBox", "x1070 y255 w15 h15", "")
 upgradeEnabled5 := aaMainUI.Add("CheckBox", "x1070 y305 w15 h15", "")
 upgradeEnabled6 := aaMainUI.Add("CheckBox", "x1070 y355 w15 h15", "")
 
+upgradeLimitEnabled1 := aaMainUI.Add("CheckBox", "x1210 y105 w15 h15", "")
+upgradeLimitEnabled2 := aaMainUI.Add("CheckBox", "x1210 y155 w15 h15", "")
+upgradeLimitEnabled3 := aaMainUI.Add("CheckBox", "x1210 y205 w15 h15", "")
+upgradeLimitEnabled4 := aaMainUI.Add("CheckBox", "x1210 y255 w15 h15", "")
+upgradeLimitEnabled5 := aaMainUI.Add("CheckBox", "x1210 y305 w15 h15", "")
+upgradeLimitEnabled6 := aaMainUI.Add("CheckBox", "x1210 y355 w15 h15", "")
+
 aaMainUI.SetFont("s8 c" uiTheme[6])
 
 ; Mode selection dropdown
@@ -390,6 +408,14 @@ Priority3 := aaMainUI.Add("DropDownList", "x990 y205 w60 h180 Choose1 +Center", 
 Priority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
 Priority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
 Priority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
+
+; Upgrade Limit
+UpgradeLimit1 := aaMainUI.Add("DropDownList", "x1290 y105 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
+UpgradeLimit2 := aaMainUI.Add("DropDownList", "x1290 y155 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
+UpgradeLimit3 := aaMainUI.Add("DropDownList", "x1290 y205 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
+UpgradeLimit4 := aaMainUI.Add("DropDownList", "x1290 y255 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
+UpgradeLimit5 := aaMainUI.Add("DropDownList", "x1290 y305 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
+UpgradeLimit6 := aaMainUI.Add("DropDownList", "x1290 y355 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
 
 ChallengePlacement1 := aaMainUI.Add("DropDownList", "x908 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
 ChallengePlacement2 := aaMainUI.Add("DropDownList", "x908 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])

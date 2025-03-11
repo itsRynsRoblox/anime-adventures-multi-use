@@ -16,6 +16,8 @@ setupFilePath() {
 readInSettings() {
     global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
     global upgradeEnabled1, upgradeEnabled2, upgradeEnabled3, upgradeEnabled4, upgradeEnabled5, upgradeEnabled6
+    global upgradeLimitEnabled1, upgradeLimitEnabled2, upgradeLimitEnabled3, upgradeLimitEnabled4, upgradeLimitEnabled5, upgradeLimitEnabled6
+    global UpgradeLimit1, UpgradeLimit2, UpgradeLimit3, UpgradeLimit4, UpgradeLimit5, UpgradeLimit6
     global placement1, placement2, placement3, placement4, placement5, placement6
     global priority1, priority2, priority3, priority4, priority5, priority6
     global ChallengePlacement1, ChallengePlacement2, ChallengePlacement3, ChallengePlacement4, ChallengePlacement5, ChallengePlacement6
@@ -60,12 +62,26 @@ readInSettings() {
                 case "Priority4": priority4.Text := parts[2]
                 case "Priority5": priority5.Text := parts[2]
                 case "Priority6": priority6.Text := parts[2]
+
+                case "UpgradeLimit1": UpgradeLimit1.Text := parts[2]
+                case "UpgradeLimit2": UpgradeLimit2.Text := parts[2]
+                case "UpgradeLimit3": UpgradeLimit3.Text := parts[2]
+                case "UpgradeLimit4": UpgradeLimit4.Text := parts[2]
+                case "UpgradeLimit5": UpgradeLimit5.Text := parts[2]
+                case "UpgradeLimit6": UpgradeLimit6.Text := parts[2]
+
                 case "UpgradeEnabled1": upgradeEnabled1.Value := parts[2]
                 case "UpgradeEnabled2": upgradeEnabled2.Value := parts[2]
                 case "UpgradeEnabled3": upgradeEnabled3.Value := parts[2]
                 case "UpgradeEnabled4": upgradeEnabled4.Value := parts[2]
                 case "UpgradeEnabled5": upgradeEnabled5.Value := parts[2]
                 case "UpgradeEnabled6": upgradeEnabled6.Value := parts[2]
+                case "UpgradeLimitEnabled1": upgradeLimitEnabled1.Value := parts[2]
+                case "UpgradeLimitEnabled2": upgradeLimitEnabled2.Value := parts[2]
+                case "UpgradeLimitEnabled3": upgradeLimitEnabled3.Value := parts[2]
+                case "UpgradeLimitEnabled4": upgradeLimitEnabled4.Value := parts[2]
+                case "UpgradeLimitEnabled5": upgradeLimitEnabled5.Value := parts[2]
+                case "UpgradeLimitEnabled6": upgradeLimitEnabled6.Value := parts[2]
                 case "ChallengePlacement1": ChallengePlacement1.Text := parts[2]
                 case "ChallengePlacement2": ChallengePlacement2.Text := parts[2]
                 case "ChallengePlacement3": ChallengePlacement3.Text := parts[2]
@@ -98,6 +114,8 @@ readInSettings() {
 SaveSettings(*) {
     global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
     global upgradeEnabled1, upgradeEnabled2, upgradeEnabled3, upgradeEnabled4, upgradeEnabled5, upgradeEnabled6
+    global upgradeLimitEnabled1, upgradeLimitEnabled2, upgradeLimitEnabled3, upgradeLimitEnabled4, upgradeLimitEnabled5, upgradeLimitEnabled6
+    global UpgradeLimit1, UpgradeLimit2, UpgradeLimit3, UpgradeLimit4, UpgradeLimit5, UpgradeLimit6
     global placement1, placement2, placement3, placement4, placement5, placement6
     global priority1, priority2, priority3, priority4, priority5, priority6
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
@@ -143,12 +161,27 @@ SaveSettings(*) {
         content .= "`nPriority5=" priority5.Text
         content .= "`nPriority6=" priority6.Text
 
+        content .= "`n`nUpgradeLimit1=" UpgradeLimit1.Text
+        content .= "`nUpgradeLimit2=" UpgradeLimit2.Text
+        content .= "`nUpgradeLimit3=" UpgradeLimit3.Text
+        content .= "`nUpgradeLimit4=" UpgradeLimit4.Text
+        content .= "`nUpgradeLimit5=" UpgradeLimit5.Text
+        content .= "`nUpgradeLimit6=" UpgradeLimit6.Text
+
         content .= "`n`nUpgradeEnabled1=" upgradeEnabled1.Value
         content .= "`nUpgradeEnabled2=" upgradeEnabled2.Value
         content .= "`nUpgradeEnabled3=" upgradeEnabled3.Value
         content .= "`nUpgradeEnabled4=" upgradeEnabled4.Value
         content .= "`nUpgradeEnabled5=" upgradeEnabled5.Value
         content .= "`nUpgradeEnabled6=" upgradeEnabled6.Value
+
+        content .= "`n`nUpgradeLimitEnabled1=" upgradeLimitEnabled1.Value
+        content .= "`nUpgradeLimitEnabled2=" upgradeLimitEnabled2.Value
+        content .= "`nUpgradeLimitEnabled3=" upgradeLimitEnabled3.Value
+        content .= "`nUpgradeLimitEnabled4=" upgradeLimitEnabled4.Value
+        content .= "`nUpgradeLimitEnabled5=" upgradeLimitEnabled5.Value
+        content .= "`nUpgradeLimitEnabled6=" upgradeLimitEnabled6.Value
+
 
         content .= "`n`n[ChallengePlacement]"
         content .= "`nChallengePlacement1=" ChallengePlacement1.Text
