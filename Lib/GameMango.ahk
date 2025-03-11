@@ -19,7 +19,7 @@ F5:: {
 }
 
 F6:: {
-    CheckForPortal()
+
 }
 
 StartMacro(*) {
@@ -1692,7 +1692,7 @@ PlaceUnit(x, y, slot := 1) {
 MaxUpgrade() {
     Sleep 500
     ; Check for max text
-    if (ok := FindText(&X, &Y, 160, 215, 330, 420 , 0, 0, MaxText) or (ok:=FindText(&X, &Y, 160, 215, 330, 420, 0, 0, MaxText2))) {
+    if (ok := FindText(&X, &Y, 225, 388, 278, 412 , 0, 0, MaxText) or (ok:=FindText(&X, &Y, 255, 234, 299, 250, 0, 0, MaxText2))) {
         return true
     }
     return false
@@ -2501,35 +2501,45 @@ CheckDungeonSpecials() {
     ; Give time for special elements to appear
     Sleep(2000)
     
+    foundShop := false
+    foundShrine := false
+    foundChest := false
+
     ; Check the area for shop, shrine, or chest
     Loop 5 {
         ; Check for shop
-        if (ok := FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shop)) {
+        if (!foundShop && FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shop)) {
             AddToLog("Found Shop")
             Sleep(1000)
             HandleShop()
             Sleep(1000)
-            return true
+            foundShop := true
         }
         ; Check for shrine
-        if (ok := FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shrine)) {
+        if (!foundShrine && FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shrine)) {
             AddToLog("Found Shrine, Denying")
             ClickUntilGone(0, 0, 490, 420, 605, 455, DenyShrine, 0, -30)
             Sleep(1000)
-            return true
+            foundShrine := true
         }
         ; Check for Chest Opening
-        if (ok := FindText(&X, &Y, 140, 200, 375, 250, 0, 0, ChestRoom)) {
+        if (!foundChest && FindText(&X, &Y, 140, 200, 375, 250, 0, 0, ChestRoom)) {
             AddToLog("Found Chest Opening")
             HandleChestScreen()
-            return true
+            foundChest := true
         }
         
+        ; If all elements are found, exit early
+        if (foundShop && foundShrine && foundChest)
+            break
+
         Sleep(1000)  ; Wait and check again
     }
     
-    AddToLog("No shop, shrine, open chest found")
-    return false
+    if (!foundShop && !foundShrine && !foundChest)
+        AddToLog("No shop, shrine, or chest found")
+
+    return (foundShop || foundShrine || foundChest)
 }
 
 SelectDungeonRoute() {
