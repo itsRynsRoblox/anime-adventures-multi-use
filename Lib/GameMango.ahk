@@ -2627,7 +2627,7 @@ ClickSelectPortal() {
 }
 
 ClickUsePortal() {
-    RightClickUntilGone(0, 0, 211, 341, 401, 504, UsePortal, 0, -35)
+    ClickUntilGone(0, 0, 211, 341, 401, 504, UsePortal, 0, -35)
 }
 
 ClickDungeonContinue() {
