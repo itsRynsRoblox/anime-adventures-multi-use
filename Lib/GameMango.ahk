@@ -1539,13 +1539,13 @@ MoveForMagicHill() {
 
 MoveForHauntedAcademy() {
     color := PixelGetColor(647, 187)
-    if (!IsColorInRange(color, 0xFDF0B3)) {
+    if (ok := FindText(&X, &Y, 620, 200, 750, 375, 0.15, 0.15, AcademyAngle2)) or (IsColorInRange(color, 0xFDF0B3)) {
         SendInput ("{s down}")
-        sleep (3500)
+        sleep (3000)
         SendInput ("{s up}")
     } else {
         SendInput ("{d down}")
-        sleep (3500)
+        Sleep (3000)
         SendInput ("{d up}")
     }
 }
@@ -1573,9 +1573,9 @@ MoveForNightmareTrain() {
 }
 
 MoveForAirCraft() {
-    SendInput ("{s down}")
+    SendInput ("{w down}")
     sleep (800)
-    SendInput ("{s up}")
+    SendInput ("{w up}")
 }
 
 MoveForHellish() {
