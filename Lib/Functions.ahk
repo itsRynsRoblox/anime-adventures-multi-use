@@ -137,6 +137,10 @@ OpenDiscordLink() {
     SaveChestsBox.Visible := false
     QuitIfFailBox.Visible := false
 
+    ;Shibuya Infinite
+    ShibuyaSwap.Visible := false
+    ShibuyaSwapText.Visible := false
+
     ;Contracts
     TeamSwap.Visible := false
     MagicTeamText.Visible := false
@@ -191,6 +195,21 @@ OnStoryChange(*) {
         StoryActDropdown.Visible := true
     } else {
         StoryActDropdown.Visible := false
+    }
+}
+
+OnStoryActChange(*) {
+    if (StoryActDropdown.Text = "Infinity") {
+        if (StoryDropdown.Text = "Shibuya District") {
+            ShibuyaSwapText.Visible := true
+            ShibuyaSwap.Visible := true
+        } else {
+            ShibuyaSwapText.Visible := false
+            ShibuyaSwap.Visible := false
+        }
+    } else {
+        ShibuyaSwapText.Visible := false
+        ShibuyaSwap.Visible := false
     }
 }
 

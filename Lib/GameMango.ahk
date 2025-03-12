@@ -19,7 +19,7 @@ F5:: {
 }
 
 F6:: {
-    MonitorDungeonEnd()
+
 }
 
 StartMacro(*) {
@@ -774,12 +774,21 @@ MonitorEndScreen() {
                         ClickReplay()
                     }
                 } else {
-                    if (ReturnLobbyBox.Value) {
-                        AddToLog("Return to lobby")
+                    if (StoryDropdown.Text = "Shibuya District") {
+                        ModeDropdown.Text := "Portal"
+                        PortalDropdown.Text := "Shibuya Portal"
+                        PortalJoinDropdown.Text := "Solo"
+                        AddToLog("Returning to lobby, attempting to do Shibuya Portal...")
                         ClickReturnToLobby()
+                        return CheckLobby()
                     } else {
-                        AddToLog("Story Infinity replay")
-                        ClickReplay()
+                        if (ReturnLobbyBox.Value) {
+                            AddToLog("Return to lobby")
+                            ClickReturnToLobby()
+                        } else {
+                            AddToLog("Story Infinity replay")
+                            ClickReplay()
+                        }
                     }
                 }
                 return RestartStage()
@@ -2147,8 +2156,8 @@ HandlePortalJoin() {
         AddToLog("Soloing " selectedPortal)
         FixClick(215, 285)  ; Click On Portal
         Sleep (1500)
-        FixClick(350, 390) ; Use Portal
-        Sleep (1500)
+        CheckForPortal(true)
+        Sleep(1500)
         FixClick(250, 350) ; Click Open
         Sleep(1500)
         FixClick(400, 460)  ; Start portal
@@ -2174,8 +2183,8 @@ HandlePortalJoin() {
         AddToLog("Creating " selectedPortal)
         FixClick(215, 285)  ; Click On Portal
         Sleep (1500)
-        FixClick(350, 390) ; Use Portal
-        Sleep (1500)
+        CheckForPortal(true)
+        Sleep(1500)
         FixClick(250, 350) ; Click Open
         Sleep(1500)
         AddToLog("Waiting 15 seconds for others to join")

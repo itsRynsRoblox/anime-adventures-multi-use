@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.9.1"
+global currentVersion := "1.9.2"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -281,6 +281,9 @@ DiscordButton := aaMainUI.Add("Picture", "x112 y645 w60 h34 +BackgroundTrans cff
 GithubButton.OnEvent("Click", (*) => OpenGithub())
 DiscordButton.OnEvent("Click", (*) => OpenDiscord())
 
+ShibuyaSwapText := aaMainUI.Add("Text", "x635 y642 w115 h20 +Center", "Shibuya Infinite")
+global ShibuyaSwap := aaMainUI.Add("CheckBox", "x611 y662 cffffff", "Rotate Infinite / Portals")
+
 ;----------TEAM SWAPPING-----------;
 PhysicalTeamText := aaMainUI.Add("Text", "x576 y642 w115 h20 +Center", "Physical Team")
 global PhysicalTeam := aaMainUI.Add("DropDownList", "x611 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
@@ -327,6 +330,9 @@ Hotkeytext2.Visible := false
 SaveChestsBox.Visible := false
 QuitIfFailBox.Visible := false
 
+ShibuyaSwap.Visible := false
+ShibuyaSwapText.Visible := false
+
 ;Contracts
 TeamSwap.Visible := false
 MagicTeamText.Visible := false
@@ -336,6 +342,7 @@ PhysicalTeam.Visible := false
 
 ModeDropdown.OnEvent("Change", OnModeChange)
 StoryDropdown.OnEvent("Change", OnStoryChange)
+StoryActDropdown.OnEvent("Change", OnStoryActChange)
 LegendDropDown.OnEvent("Change", OnLegendChange)
 RaidDropdown.OnEvent("Change", OnRaidChange)
 ConfirmButton.OnEvent("Click", OnConfirmClick)

@@ -1,5 +1,5 @@
-Mode=Legend
-
+Mode=Story
+Map=Shibuya District
 
 Enabled1=1
 Enabled2=1
@@ -67,7 +67,7 @@ Logic=1
 Speed=3
 
 [Matchmaking]
-Matchmake=1
+Matchmake=0
 
 [PriorityUpgrade]
 Upgrade=1
@@ -95,3 +95,7 @@ StopAfterDefeat=1
 
 [RejoinFailsafe]
 FailsafeEnabled=1
+
+
+[ReturnToLobby]
+ToLobby=0

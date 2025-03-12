@@ -28,6 +28,7 @@ readInSettings() {
     global PhysicalTeam, MagicTeam, TeamSwap
     global QuitIfFailBox
     global RejoinRoblox
+    global ReturnLobbyBox
 
     try {
         settingsFile := setupFilePath()
@@ -108,6 +109,7 @@ readInSettings() {
 
                 case "StopAfterDefeat": QuitIfFailBox.Value := parts[2] ; Set the checkbox value
                 case "FailsafeEnabled": RejoinRoblox.Value := parts[2] ; Set the checkbox value
+                case "ToLobby": ReturnLobbyBox.Value := parts[2] ; Set the checkbox value
             }
         }
         AddToLog("Configuration settings loaded successfully")
@@ -131,6 +133,7 @@ SaveSettings(*) {
     global PhysicalTeam, MagicTeam, TeamSwap
     global QuitIfFailBox
     global RejoinRoblox
+    global ReturnLobbyBox
 
     try {
         settingsFile := A_ScriptDir "\Settings\Configuration.txt"
@@ -238,6 +241,9 @@ SaveSettings(*) {
 
         content .= "`n`n[RejoinFailsafe]"
         content .= "`nFailsafeEnabled=" RejoinRoblox.Value "`n"
+
+        content .= "`n`n[ReturnToLobby]"
+        content .= "`nToLobby=" ReturnLobbyBox.Value "`n"
 
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")
