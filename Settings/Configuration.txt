@@ -1,4 +1,4 @@
-Mode=
+Mode=Legend
 
 
 Enabled1=1
@@ -29,12 +29,12 @@ UpgradeLimit4=0
 UpgradeLimit5=0
 UpgradeLimit6=0
 
-UpgradeEnabled1=0
-UpgradeEnabled2=0
-UpgradeEnabled3=0
-UpgradeEnabled4=0
-UpgradeEnabled5=0
-UpgradeEnabled6=0
+UpgradeEnabled1=1
+UpgradeEnabled2=1
+UpgradeEnabled3=1
+UpgradeEnabled4=1
+UpgradeEnabled5=1
+UpgradeEnabled6=1
 
 UpgradeLimitEnabled1=0
 UpgradeLimitEnabled2=0

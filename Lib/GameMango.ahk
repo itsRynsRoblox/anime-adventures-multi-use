@@ -19,7 +19,7 @@ F5:: {
 }
 
 F6:: {
-
+    MonitorDungeonEnd()
 }
 
 StartMacro(*) {
@@ -2433,7 +2433,9 @@ ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX
 ClickUntilGoneWithFailSafe(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
     while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
         
-        if ((A_TickCount - startTime) > 300000) { ; 5-minute limit
+        waitTime := A_TickCount ; Start timer
+
+        if ((A_TickCount - waitTime) > 300000) { ; 5-minute limit
             AddToLog("5 minute failsafe triggered, trying to open roblox...")
             return RejoinPrivateServer()
         }
@@ -2664,6 +2666,10 @@ ClickDungeonContinue() {
     ClickUntilGone(0, 0, 212, 280, 406, 476, DungeonContinue, 0, -35)
 }
 
+ClickChestContinue() {
+    ClickUntilGone(0, 0, 404, 420, 568, 455, ChestContinue, 0, -35)
+}
+
 ; Custom monitor for dungeon ending
 MonitorDungeonEnd() {
     global mode, Wins, loss
@@ -2889,7 +2895,7 @@ HandleChestScreen() {
         } else {
             ; Skip opening chests, just click continue
             AddToLog("Saving chests for boss room - clicking continue")
-            ClickDungeonContinue()
+            ClickChestContinue()
         }
          Sleep(1000)
          Reconnect()
