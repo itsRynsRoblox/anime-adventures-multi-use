@@ -448,6 +448,14 @@ UpgradeUnits() {
 
             for index, coord in successfulCoordinates {
 
+                upgradeLimitEnabled := "upgradeLimitEnabled" coord.slot
+                upgradeLimitEnabled := %upgradeLimitEnabled%
+
+                
+                upgradeLimit := "UpgradeLimit" coord.slot
+                upgradeLimit := %upgradeLimit%
+                upgradeLimit := String(upgradeLimit.Text)
+
                 if (!upgradeLimitEnabled.Value) {
                     UpgradeUnit(coord.x, coord.y)
                 } else {
@@ -726,6 +734,8 @@ MonitorEndScreen() {
             ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
         }
 
+        
+
         ; Now handle each mode
         if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
             AddToLog("Found Lobby Text - Current Mode: " (inChallengeMode ? "Challenge" : mode))
@@ -843,7 +853,7 @@ MonitorStage() {
         
         if (mode = "Story" && StoryActDropdown.Text = "Infinity") {
             timeElapsed := A_TickCount - lastClickTime
-            if (timeElapsed >= 300000) {  ; 5 minutes (300000)
+            if (timeElapsed >= 60000) {  ; Every Minute
                 AddToLog("Performing anti-AFK click")
                 FixClick(560, 560)  ; Move click
                 FixClick(560, 560)  ; Move click
@@ -2092,6 +2102,7 @@ HandlePortalEnd() {
             Sleep (1500)
             CheckForPortal()
             Sleep(5000)
+            return RestartStage()
         }
         else if (PortalJoinDropdown.Text = "Creating") {
             FixClick(485, 120) ;Select New Portal
@@ -2140,9 +2151,7 @@ HandlePortalJoin() {
         AddToLog("Soloing " selectedPortal)
         FixClick(215, 285)  ; Click On Portal
         Sleep (1500)
-        FixClick(350, 390) ; Use Portal
-        Sleep (1500)
-        FixClick(250, 350) ; Click Open
+        CheckForPortal(true)
         Sleep(1500)
         FixClick(400, 460)  ; Start portal
     }
@@ -2167,9 +2176,8 @@ HandlePortalJoin() {
         AddToLog("Creating " selectedPortal)
         FixClick(215, 285)  ; Click On Portal
         Sleep (1500)
-        FixClick(350, 390) ; Use Portal
-        Sleep (1500)
-        FixClick(250, 350) ; Click Open
+        CheckForPortal(true)
+        Sleep(1500)
         AddToLog("Waiting 15 seconds for others to join")
         Sleep(15000)
         FixClick(400, 460)  ; Start portal
@@ -2401,6 +2409,8 @@ CheckEndAndRoute() {
             return HandleContractEnd()
         } else if (mode = "Dungeon") {
             return MonitorDungeonEnd()
+        } else if (mode = "Portal") {
+            return HandlePortalEnd()
         } else {
             return MonitorEndScreen()
         }
@@ -2616,8 +2626,12 @@ ClickSelectPortal() {
     ClickUntilGone(0, 0, 257, 419, 445, 520, SelectPortal, 0, -35)
 }
 
+ClickUsePortal() {
+    RightClickUntilGone(0, 0, 211, 341, 401, 504, UsePortal, 0, -35)
+}
+
 ClickDungeonContinue() {
-    ClickUntilGone(0, 0, 422, 421, 572, 455, DungeonContinue, 0, -35)
+    ClickUntilGone(0, 0, 212, 280, 406, 476, DungeonContinue, 0, -35)
 }
 
 ; Custom monitor for dungeon ending
@@ -2713,7 +2727,7 @@ CheckDungeonSpecials() {
 }
 
 SelectDungeonRoute() {
-    if (ok := FindText(&X, &Y, 140, 180, 480, 350, 0, 0, BossRoom)) {
+    if (ok := FindText(&X, &Y, 140, 180, 480, 350, 0.20, 0.20, BossRoom) or (ok := FindText(&X, &Y, 140, 180, 480, 350, 0.20, 0.20, BossRoom2))) {
         AddToLog("Boss room detected!")
         global BossRoomCompleted := true
         FixClick(X, Y-30)
@@ -2864,28 +2878,47 @@ IsChestScreenVisible() {
     return FindText(&X, &Y, 140, 200, 375, 250, 0, 0, ChestRoom)
 }
 
-CheckForPortal() {
+CheckForPortal(lobby := false) {
     stageEndTime := A_TickCount
     stageLength := FormatStageTime(stageEndTime - stageStartTime)
-
-    if (ok := FindText(&portalX, &portalY, 257, 419, 445, 520, 0, 0, SelectPortal)) {
-        AddToLog("Portal detected, restarting portal...")
-        ClickSelectPortal()
-    } else {
-        if (PortalDropdown.Text = "Shibuya Portal") {
-            ClickReturnToLobby()
-            Sleep(500)
-            AddToLog("Swapping to Shibuya District Infinite...")
-            ModeDropdown.Text := "Story"
-            StoryDropdown.Text := "Shibuya District"
-            StoryActDropdown.Text := "Infinity"
-            return CheckLobby()
+    if (!lobby) {
+        if (ok := FindText(&portalX, &portalY, 257, 419, 445, 520, 0, 0, SelectPortal)) {
+            AddToLog("Portal detected, restarting portal...")
+            ClickSelectPortal()
         } else {
-            AddToLog("No portal detected, shutting down...")
-            SendFinalWebhookBeforeExit()
-            Sleep(2000)
+            if (PortalDropdown.Text = "Shibuya Portal") {
+                ClickReturnToLobby()
+                Sleep(500)
+                AddToLog("Swapping to Shibuya District Infinite...")
+                ModeDropdown.Text := "Story"
+                StoryDropdown.Text := "Shibuya District"
+                StoryActDropdown.Text := "Infinity"
+                return CheckLobby()
+            } else {
+                AddToLog("No portal detected, shutting down...")
+                SendFinalWebhookBeforeExit()
+                Sleep(2000)
+            }
+            return Reload()
         }
-        return Reload()
+    } else {
+        if (ok := FindText(&portalX, &portalY, 211, 341, 401, 504, 0, 0, UsePortal)) {
+            AddToLog("Portal detected, starting portal...")
+            ClickSelectPortal()
+        } else {
+            if (PortalDropdown.Text = "Shibuya Portal") {
+                AddToLog("No portal detected, changing to Shibuya District Infinite...")
+                ModeDropdown.Text := "Story"
+                StoryDropdown.Text := "Shibuya District"
+                StoryActDropdown.Text := "Infinity"
+                return CheckLobby()
+            } else {
+                AddToLog("No portal detected, shutting down...")
+                SendFinalWebhookBeforeExit()
+                Sleep(2000)
+            }
+            return Reload()
+        }
     }
 }
 

@@ -93,8 +93,6 @@ uiBorders.Push(aaMainUI.Add("Text", "x802 y30 w1 h667 +Background" uiTheme[3])) 
 uiBorders.Push(aaMainUI.Add("Text", "x0 y697 w1364 h1 +Background" uiTheme[3], "")) ;Roblox second bottom
 
 global robloxHolder := aaMainUI.Add("Text", "x3 y33 w797 h597 +Background" uiTheme[5], "") ;Roblox window box
-Global Discord := aaMainUI.Add("Picture", "x1255 y-4 w42 h42 +BackgroundTrans", Discord) ;Discord logo
-Discord.OnEvent("Click", (*) => OpenDiscordLink()) ;Open discord
 global exitButton := aaMainUI.Add("Picture", "x1330 y1 w32 h32 +BackgroundTrans", Exitbutton) ;Exit image
 exitButton.OnEvent("Click", (*) => Destroy()) ;Exit button
 global minimizeButton := aaMainUI.Add("Picture", "x1300 y3 w27 h27 +Background" uiTheme[2], Minimize) ;Minimize gui
@@ -244,9 +242,9 @@ OpenGuide(*) {
 }
 
 aaMainUI.SetFont("s12 Bold c" uiTheme[1])
-global settingsBtn := aaMainUI.Add("Button", "x1160 y0 w90 h30", "Settings")
+global settingsBtn := aaMainUI.Add("Button", "x1200 y0 w90 h30", "Settings")
 settingsBtn.OnEvent("Click", ShowSettingsGUI)
-global guideBtn := aaMainUI.Add("Button", "x1060 y0 w90 h30", "Guide")
+global guideBtn := aaMainUI.Add("Button", "x1100 y0 w90 h30", "Guide")
 guideBtn.OnEvent("Click", OpenGuide)
 
 placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
@@ -410,12 +408,12 @@ Priority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose1 +Center", 
 Priority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose1 +Center", ["1","2","3","4","5","6"])
 
 ; Upgrade Limit
-UpgradeLimit1 := aaMainUI.Add("DropDownList", "x1290 y105 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
-UpgradeLimit2 := aaMainUI.Add("DropDownList", "x1290 y155 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
-UpgradeLimit3 := aaMainUI.Add("DropDownList", "x1290 y205 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
-UpgradeLimit4 := aaMainUI.Add("DropDownList", "x1290 y255 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
-UpgradeLimit5 := aaMainUI.Add("DropDownList", "x1290 y305 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
-UpgradeLimit6 := aaMainUI.Add("DropDownList", "x1290 y355 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","9","10","11","12"])
+UpgradeLimit1 := aaMainUI.Add("DropDownList", "x1290 y105 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","8","9","10"])
+UpgradeLimit2 := aaMainUI.Add("DropDownList", "x1290 y155 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","8","9","10"])
+UpgradeLimit3 := aaMainUI.Add("DropDownList", "x1290 y205 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","8","9","10"])
+UpgradeLimit4 := aaMainUI.Add("DropDownList", "x1290 y255 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","8","9","10"])
+UpgradeLimit5 := aaMainUI.Add("DropDownList", "x1290 y305 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","8","9","10"])
+UpgradeLimit6 := aaMainUI.Add("DropDownList", "x1290 y355 w60 h180 Choose1 +Center", ["0","1","2","3","4","5","6","7","8","9","10"])
 
 ChallengePlacement1 := aaMainUI.Add("DropDownList", "x908 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
 ChallengePlacement2 := aaMainUI.Add("DropDownList", "x908 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])

@@ -534,11 +534,11 @@ CheckForEmptyKeys() {
 }
 
 OpenGithub() {
-    Run("https://github.com/itsRynsRoblox")
+    ; Removed to prevent access to non testers / mists donators
 }
 
 OpenDiscord() {
-    Run("https://discord.gg/6DWgB9XMTV")
+    Run("https://discord.gg/mistdomain")
 }
 
 CheckBuffs() {

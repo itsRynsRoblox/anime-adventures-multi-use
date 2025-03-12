@@ -33,8 +33,8 @@ UpgradeEnabled1=1
 UpgradeEnabled2=1
 UpgradeEnabled3=1
 UpgradeEnabled4=1
-UpgradeEnabled5=1
-UpgradeEnabled6=1
+UpgradeEnabled5=0
+UpgradeEnabled6=0
 
 UpgradeLimitEnabled1=0
 UpgradeLimitEnabled2=0
