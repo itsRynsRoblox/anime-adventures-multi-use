@@ -1145,12 +1145,14 @@ StartRaid(map, RaidActDropdown) {
 
 PlayHere() {
     FixClick(400, 435)  ; Play Here or Find Match 
-    Sleep (300)
+    Sleep (500)
     FixClick(330, 325) ;Click Play here
-    Sleep (300)
-    FixClick(400, 465) ;
-    Sleep (300)
+    Sleep (500)
+    ClickStartStory()
+    Sleep (500)
 }
+
+
 
 FindMatch() {
     startTime := A_TickCount
@@ -2661,6 +2663,10 @@ ClickReturnToLobby() {
     } else {
         ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
     }
+}
+
+ClickStartStory() {
+    ClickUntilGone(0, 0, 320, 468, 486, 521, StartStoryButton, 0, -35)
 }
 
 ClickSelectPortal() {
