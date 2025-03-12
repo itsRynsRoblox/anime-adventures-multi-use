@@ -133,6 +133,12 @@ OpenDiscordLink() {
     ContractPageDropdown.Visible := false  
     ContractJoinDropdown.Visible := false 
 
+    ;Dungeon
+    SaveChestsBox.Visible := false
+    QuitIfFailBox.Visible := false
+
+    ;Contracts
+    TeamSwap.Visible := false
     MagicTeamText.Visible := false
     MagicTeam.Visible := false
     PhysicalTeamText.Visible := false
@@ -157,6 +163,7 @@ OpenDiscordLink() {
         ContractPageDropdown.Visible := true
         ContractJoinDropdown.Visible := true
         mode := "Contract"
+        TeamSwap.Visible := true
         MagicTeamText.Visible := true
         MagicTeam.Visible := true
         PhysicalTeamText.Visible := true
@@ -168,11 +175,14 @@ OpenDiscordLink() {
     } else if (selected = "Dungeon") {
         AddToLog("⚠️ Dungeon is still under development! Stay tuned for updates.")
         SaveChestsBox.Visible := true
+        QuitIfFailBox.Visible := true
         mode := "Dungeon"
     } else if (selected = "Cursed Womb") {
         mode := "Cursed Womb"
     } else if (selected = "Winter Event") {
         mode := "Winter Event"
+        MatchMaking.Visible := true
+        ReturnLobbyBox.Visible := true
     }
 }
 
@@ -272,8 +282,6 @@ OnConfirmClick(*) {
     ; Winter Event
     else if (ModeDropdown.Text = "Winter Event") {
         AddToLog("Selected Winter Event")
-        MatchMaking.Visible := true
-        ReturnLobbyBox.Visible := true
     }
     else {
         AddToLog("Selected " ModeDropdown.Text " mode")

@@ -1730,39 +1730,35 @@ Reconnect() {
 }
 
 RejoinPrivateServer() {   
-    ; Check for Disconnected Screen using FindText
     AddToLog("Attempting To Reconnect To Private Server...")
 
     psLink := FileExist("Settings\PrivateServer.txt") ? FileRead("Settings\PrivateServer.txt", "UTF-8") : ""
 
-    ; Reconnect to Ps
-    if FileExist("Settings\PrivateServer.txt") && (psLink := FileRead("Settings\PrivateServer.txt", "UTF-8")) {
+    if psLink {
         AddToLog("Connecting to private server...")
-           Run(psLink)
+        Run(psLink)
     } else {
         Run("roblox://placeID=8304191830")  ; Public server if no PS file or empty
     }
 
-    Sleep(300000)
-    ; Restore window if it exists
-    if WinExist(rblxID) {
-        forceRobloxSize() 
-        Sleep(1000)
-    }
-        
-    ; Keep checking until we're back in
-        loop {
-            AddToLog("Reconnecting to Roblox...")
-            Sleep(5000)
-            
-            ; Check if we're back in lobby
-            if (ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
-                AddToLog("Reconnected Successfully!")
-                return StartSelectedMode() ; Return to raids
-            } else {
-            ; If not in lobby, try reconnecting again
-            Reconnect()
+    Sleep(5000)
+
+    ; Loop until successfully reconnected
+    loop {
+        AddToLog("Reconnecting to Roblox...")
+        Sleep(5000)
+
+        if WinExist(rblxID) {
+            forceRobloxSize() 
+            Sleep(1000)
         }
+
+        if (ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
+            AddToLog("Reconnected Successfully!")
+            return StartSelectedMode()
+        }
+
+        Reconnect()
     }
 }
 
@@ -2100,10 +2096,7 @@ HandlePortalEnd() {
             Sleep(1500)
             FixClick(215, 285)  ; Click On Portal
             Sleep (1500)
-            FixClick(350, 390) ; Use Portal
-            Sleep (1500)
-            FixClick(250, 350) ; Click Open
-            ;CheckForPortal()
+            CheckForPortal(false)
             Sleep(5000)
             return RestartStage()
         }
@@ -2116,10 +2109,7 @@ HandlePortalEnd() {
             Sleep(1500)
             FixClick(215, 285)  ; Click On Portal
             Sleep (1500)
-            FixClick(350, 390) ; Use Portal
-            Sleep (1500)
-            FixClick(250, 350) ; Click Open
-            ;CheckForPortal()
+            CheckForPortal(false)
             Sleep(5000)
         } else {
             AddToLog("Waiting for next portal")
@@ -2157,7 +2147,9 @@ HandlePortalJoin() {
         AddToLog("Soloing " selectedPortal)
         FixClick(215, 285)  ; Click On Portal
         Sleep (1500)
-        CheckForPortal(true)
+        FixClick(350, 390) ; Use Portal
+        Sleep (1500)
+        FixClick(250, 350) ; Click Open
         Sleep(1500)
         FixClick(400, 460)  ; Start portal
     }
@@ -2182,7 +2174,9 @@ HandlePortalJoin() {
         AddToLog("Creating " selectedPortal)
         FixClick(215, 285)  ; Click On Portal
         Sleep (1500)
-        CheckForPortal(true)
+        FixClick(350, 390) ; Use Portal
+        Sleep (1500)
+        FixClick(250, 350) ; Click Open
         Sleep(1500)
         AddToLog("Waiting 15 seconds for others to join")
         Sleep(15000)
@@ -2425,8 +2419,30 @@ CheckEndAndRoute() {
 }
 
 ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
-    while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || 
-           textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
+    while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
+        
+        if ((A_TickCount - startTime) > 5000) { ; 5-minute limit
+            AddToLog("5 seconds have passed while still clicking, trying fail safe...")
+            return  ; Exit the function
+        }
+        
+        if (offsetX != 0 || offsetY != 0) {
+            FixClick(X + offsetX, Y + offsetY)  
+        } else {
+            FixClick(x, y) 
+        }
+        Sleep(1000)
+    }
+}
+
+ClickUntilGoneWithFailSafe(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
+    while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
+        
+        if ((A_TickCount - startTime) > 300000) { ; 5-minute limit
+            AddToLog("5 minute failsafe triggered, trying to open roblox...")
+            return RejoinPrivateServer()
+        }
+        
         if (offsetX != 0 || offsetY != 0) {
             FixClick(X + offsetX, Y + offsetY)  
         } else {
@@ -2439,6 +2455,7 @@ ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX
 RightClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
     while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || 
            textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
+
         if (offsetX != 0 || offsetY != 0) {
             FixClick(X + offsetX, Y + offsetY, "Right")  
         } else {
@@ -2617,15 +2634,27 @@ MoveToPosition(PosX, PosY) {
 }
 
 ClickReplay() {
-    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+    if (RejoinRoblox.Value) {
+        ClickUntilGoneWithFailSafe(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+    } else {
+        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
+    }
 }
 
 ClickNextLevel() {
-    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +260, -35, LobbyText2)
+    if (RejoinRoblox.Value) {
+        ClickUntilGoneWithFailSafe(0, 0, 80, 85, 739, 224, LobbyText, +260, -35, LobbyText2)
+    } else {
+        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +260, -35, LobbyText2)
+    }
 }
 
 ClickReturnToLobby() {
-    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+    if (RejoinRoblox.Value) {
+        ClickUntilGoneWithFailSafe(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+    } else {
+        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+    }
 }
 
 ClickSelectPortal() {
@@ -2644,6 +2673,8 @@ ClickDungeonContinue() {
 MonitorDungeonEnd() {
     global mode, Wins, loss
 
+    failed := false
+    
     Loop {
         Sleep(3000)  
         
@@ -2653,6 +2684,10 @@ MonitorDungeonEnd() {
         if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
             ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
         }
+        
+        if (ok := FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText) or (ok:=FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText2))) {
+            failed := true
+        }
 
         ; Check for next text UI element
         if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
@@ -2660,27 +2695,34 @@ MonitorDungeonEnd() {
         }
 
         ; Check for returning to lobby
-        if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or 
-            (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
+        if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
+            if (QuitIfFailBox.Value && failed) {
+                AddToLog("Dungeon run failed, stopping to save lives...")
+                ClickReturnToLobby()
+                SendFinalWebhookBeforeExit()
+                CheckLobby()
+                Sleep(2000)
+                return Reload()
+            } else  {
                 AddToLog("Dungeon run completed, clicking replay")
             
-            ; Click replay button
-            ClickReplay()
-            
-            ; After clicking replay, check for shop/shrine/chest
-            CheckDungeonSpecials()
-
-            if (CheckForFinishDungeon()) {
-                AddToLog("Handled dungeon completion")
-            return
+                ; Click replay button
+                ClickReplay()
+                
+                ; After clicking replay, check for shop/shrine/chest
+                CheckDungeonSpecials()
+    
+                if (CheckForFinishDungeon()) {
+                    AddToLog("Handled dungeon completion")
+                    return
+                }
+                
+                ; Start a new dungeon run
+                AddToLog("Starting next dungeon")
+                return SelectDungeonRoute()
             }
-            
-            ; Start a new dungeon run
-            AddToLog("Starting next dungeon")
-            return SelectDungeonRoute()
+            Reconnect()
         }
-        
-        Reconnect()
     }
 }
 
@@ -2904,8 +2946,8 @@ CheckForPortal(lobby := false) {
                 AddToLog("No portal detected, shutting down...")
                 SendFinalWebhookBeforeExit()
                 Sleep(2000)
+                return Reload()
             }
-            return Reload()
         }
     } else {
         if (ok := FindText(&portalX, &portalY, 211, 341, 401, 504, 0, 0, UsePortal)) {
@@ -2922,8 +2964,8 @@ CheckForPortal(lobby := false) {
                 AddToLog("No portal detected, shutting down...")
                 SendFinalWebhookBeforeExit()
                 Sleep(2000)
+                return Reload()
             }
-            return Reload()
         }
     }
 }

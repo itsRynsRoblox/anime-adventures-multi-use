@@ -29,10 +29,10 @@ UpgradeLimit4=0
 UpgradeLimit5=0
 UpgradeLimit6=0
 
-UpgradeEnabled1=1
-UpgradeEnabled2=1
-UpgradeEnabled3=1
-UpgradeEnabled4=1
+UpgradeEnabled1=0
+UpgradeEnabled2=0
+UpgradeEnabled3=0
+UpgradeEnabled4=0
 UpgradeEnabled5=0
 UpgradeEnabled6=0
 
@@ -67,7 +67,7 @@ Logic=1
 Speed=3
 
 [Matchmaking]
-Matchmake=0
+Matchmake=1
 
 [PriorityUpgrade]
 Upgrade=1
@@ -87,3 +87,11 @@ MagTeam=1
 
 [UpgradeDuringPlacement]
 AttemptUpgrade=1
+
+
+[QuitUponDefeat]
+StopAfterDefeat=1
+
+
+[RejoinFailsafe]
+FailsafeEnabled=1

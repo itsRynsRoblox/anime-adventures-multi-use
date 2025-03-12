@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.8.8"
+global currentVersion := "1.8.9"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -247,17 +247,23 @@ settingsBtn.OnEvent("Click", ShowSettingsGUI)
 global guideBtn := aaMainUI.Add("Button", "x1100 y0 w90 h30", "Guide")
 guideBtn.OnEvent("Click", OpenGuide)
 
+global RejoinRoblox := aaMainUI.Add("Checkbox", "x850 y6 c" uiTheme[1], "Pending Teleport Failsafe")
+
 placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
 aaMainUI.SetFont("s9")
 global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Next Level")
-SaveChestsBox := aaMainUI.Add("CheckBox", "x900 y451 cffffff Checked", "Save Chests For Rukia")
+; Dungeon Options
+SaveChestsBox := aaMainUI.Add("CheckBox", "x900 y451 cffffff Checked", "Save Chests")
+QuitIfFailBox := aaMainUI.Add("CheckBox", "x1005 y451 cffffff Checked", "Stop Upon Defeat")
+;Contract Options
+global TeamSwap := aaMainUI.Add("CheckBox", "x1035 y451 cffffff", "Team Swap")
+;Normal Options
 global MatchMaking := aaMainUI.Add("Checkbox", "x1035 y451 cffffff Hidden Checked", "Matchmaking")
 global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Return To Lobby")
 global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Auto Ability")
-global ChallengeBox := aaMainUI.Add("CheckBox", "x1138 y476 cffffff", "Auto Challenge")
-global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1002 y476 cffffff", "Priority Upgrade")
-global TeamSwap := aaMainUI.Add("CheckBox", "x1261 y476 cffffff", "Team Swap")
+global ChallengeBox := aaMainUI.Add("CheckBox", "x1150 y476 cffffff", "Auto Challenge")
+global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1005 y476 cffffff", "Priority Upgrade")
 global UpgradeDuringPlacementBox := aaMainUI.Add("Checkbox", "x1150 y451 cffffff Checked", "Upgrade During Placement")
 PlacementPatternText := aaMainUI.Add("Text", "x1032 y390 w115 h20", "Placement Type")
 global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
@@ -316,8 +322,13 @@ ReturnLobbyBox.Visible := false
 NextLevelBox.Visible := false
 Hotkeytext.Visible := false
 Hotkeytext2.Visible := false
-SaveChestsBox.Visible := false
 
+;Dungeons
+SaveChestsBox.Visible := false
+QuitIfFailBox.Visible := false
+
+;Contracts
+TeamSwap.Visible := false
 MagicTeamText.Visible := false
 MagicTeam.Visible := false
 PhysicalTeamText.Visible := false

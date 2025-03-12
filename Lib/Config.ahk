@@ -26,6 +26,8 @@ readInSettings() {
     global ChallengeBox, PriorityUpgrade
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking, UpgradeDuringPlacementBox
     global PhysicalTeam, MagicTeam, TeamSwap
+    global QuitIfFailBox
+    global RejoinRoblox
 
     try {
         settingsFile := setupFilePath()
@@ -103,6 +105,9 @@ readInSettings() {
                 case "PhyTeam": physicalTeam.Text := parts[2]
                 case "MagTeam": magicTeam.Text := parts[2]
                 case "AttemptUpgrade": UpgradeDuringPlacementBox.Value := parts[2] ; Set the checkbox value
+
+                case "StopAfterDefeat": QuitIfFailBox.Value := parts[2] ; Set the checkbox value
+                case "FailsafeEnabled": RejoinRoblox.Value := parts[2] ; Set the checkbox value
             }
         }
         AddToLog("Configuration settings loaded successfully")
@@ -124,6 +129,8 @@ SaveSettings(*) {
     global ChallengeBox, PriorityUpgrade
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking, UpgradeDuringPlacementBox
     global PhysicalTeam, MagicTeam, TeamSwap
+    global QuitIfFailBox
+    global RejoinRoblox
 
     try {
         settingsFile := A_ScriptDir "\Settings\Configuration.txt"
@@ -226,86 +233,15 @@ SaveSettings(*) {
         content .= "`n`n[UpgradeDuringPlacement]"
         content .= "`nAttemptUpgrade=" UpgradeDuringPlacementBox.Value "`n"
 
+        content .= "`n`n[QuitUponDefeat]"
+        content .= "`nStopAfterDefeat=" QuitIfFailBox.Value "`n"
+
+        content .= "`n`n[RejoinFailsafe]"
+        content .= "`nFailsafeEnabled=" RejoinRoblox.Value "`n"
+
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")
         SaveWinterLocal()
-    }
-}
-
-LoadSettings() {
-    global UnitData, mode
-    try {
-        settingsFile := A_ScriptDir "\Settings\Configuration.txt"
-        if !FileExist(settingsFile) {
-            return
-        }
-
-        content := FileRead(settingsFile)
-        sections := StrSplit(content, "`n`n")
-        
-        for section in sections {
-            if (InStr(section, "CardPriority")) {
-                lines := StrSplit(section, "`n")
-                
-                for line in lines {
-                    if line = "" {
-                        continue
-                    }
-                    
-                    if RegExMatch(line, "Card(\d+)=(\w+)", &match) {
-                        slot := match.1
-                        value := match.2
-                        
-                        priorityOrder[slot - 1] := value
-                        
-                        dropDown := dropDowns[slot - 1]
-                        
-                        if (dropDown) {
-                            dropDown.Text := value
-                        }
-                    }
-                }
-            }
-            ; Define a mapping of section names to dropdown controls
-            sectionDropdownMap := {
-                PlacementLogic: PlacementPatternDropdown,
-                MagicTeam: magicTeam,
-                PhysicalTeam: physicalTeam,
-                PlaceSpeed: PlaceSpeed,
-                Matchmaking: MatchMaking,
-                PriorityUpgrade: PriorityUpgrade,
-                AutoChallenge: ChallengeBox
-            }
-
-            ; Loop through the section names and dropdown controls
-            for section, dropdownControl in sectionDropdownMap {
-                if InStr(section, section) {
-                    if RegExMatch(line, section . "=(\w+)", &match) {
-                        dropdownControl.Value := match.1 ; Set the dropdown value
-                    }
-                }
-            }
-            else if (InStr(section, "Index=")) {
-                lines := StrSplit(section, "`n")
-                
-                for line in lines {
-                    if line = "" {
-                        continue
-                    }
-                    
-                    parts := StrSplit(line, "=")
-                    if (parts[1] = "Index") {
-                        index := parts[2]
-                    } else if (index && UnitData.Has(Integer(index))) {
-                        switch parts[1] {
-                            case "Enabled": UnitData[index].Enabled.Value := parts[2]
-                            case "Placement": UnitData[index].PlacementBox.Value := parts[2]
-                        }
-                    }
-                }
-            }
-        }
-        AddToLog("Auto settings loaded successfully")
     }
 }
 
