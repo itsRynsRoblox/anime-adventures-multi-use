@@ -2421,11 +2421,6 @@ CheckEndAndRoute() {
 ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
     while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
         
-        if ((A_TickCount - startTime) > 5000) { ; 5-minute limit
-            AddToLog("5 seconds have passed while still clicking, trying fail safe...")
-            return  ; Exit the function
-        }
-        
         if (offsetX != 0 || offsetY != 0) {
             FixClick(X + offsetX, Y + offsetY)  
         } else {
