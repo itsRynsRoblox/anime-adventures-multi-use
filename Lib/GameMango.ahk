@@ -2100,7 +2100,10 @@ HandlePortalEnd() {
             Sleep(1500)
             FixClick(215, 285)  ; Click On Portal
             Sleep (1500)
-            CheckForPortal()
+            FixClick(350, 390) ; Use Portal
+            Sleep (1500)
+            FixClick(250, 350) ; Click Open
+            ;CheckForPortal()
             Sleep(5000)
             return RestartStage()
         }
@@ -2113,7 +2116,10 @@ HandlePortalEnd() {
             Sleep(1500)
             FixClick(215, 285)  ; Click On Portal
             Sleep (1500)
-            CheckForPortal()
+            FixClick(350, 390) ; Use Portal
+            Sleep (1500)
+            FixClick(250, 350) ; Click Open
+            ;CheckForPortal()
             Sleep(5000)
         } else {
             AddToLog("Waiting for next portal")
@@ -2904,7 +2910,7 @@ CheckForPortal(lobby := false) {
     } else {
         if (ok := FindText(&portalX, &portalY, 211, 341, 401, 504, 0, 0, UsePortal)) {
             AddToLog("Portal detected, starting portal...")
-            ClickSelectPortal()
+            ClickUsePortal()
         } else {
             if (PortalDropdown.Text = "Shibuya Portal") {
                 AddToLog("No portal detected, changing to Shibuya District Infinite...")
