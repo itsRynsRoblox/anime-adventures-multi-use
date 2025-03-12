@@ -19,7 +19,7 @@ F5:: {
 }
 
 F6:: {
-    MoveForMagicTown()
+
 }
 
 StartMacro(*) {
@@ -119,8 +119,15 @@ PlacingUnits() {
                     if (UpgradeDuringPlacementBox.Value) {
                         AttemptUpgrade()
                     }
+
                     if CheckForXp()
                         return MonitorStage()
+
+                    if CheckForLobbyText() {
+                        AddToLog("I'm not sure how you ended up here....")
+                        return StartSelectedMode()
+                    }
+
                     Reconnect()
                     CheckEndAndRoute()
                 }
@@ -1906,6 +1913,13 @@ CheckLobby() {
     }
     AddToLog("Returned to lobby, restarting selected mode")
     return StartSelectedMode()
+}
+
+CheckForLobbyText() {
+    if (ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
+        return true
+    }
+    return false
 }
 
 CheckLoaded() {
