@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.9.3"
+global currentVersion := "1.9.4"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "

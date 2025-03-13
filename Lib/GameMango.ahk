@@ -1147,7 +1147,7 @@ PlayHere() {
     FixClick(400, 435)  ; Play Here or Find Match 
     Sleep (500)
     FixClick(330, 325) ;Click Play here
-    Sleep (500)
+    Sleep (1200)
     ClickStartStory()
     Sleep (500)
 }
