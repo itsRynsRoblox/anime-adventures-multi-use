@@ -63,6 +63,19 @@ PlacingUnits() {
         return MonitorStage()
     }
 
+    if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
+        AddToLog("Stage ended during placements, proceeding to results")
+        return MonitorStage()
+    }
+
+    if CheckForLobbyText() {
+        return CheckLobby()
+    }
+
+    if CheckForDisconnect() {
+        return Reconnect()
+    }
+
     placementPoints := PlacementPatternDropdown.Text = "3x3 Grid" ? GenerateMoreGridPoints(3) : PlacementPatternDropdown.Text = "Circle" ? GenerateCirclePoints() : PlacementPatternDropdown.Text = "Grid" ? GenerateGridPoints() : PlacementPatternDropdown.Text = "Spiral(WIP)" ? GenerateSpiralGridPoints() : PlacementPatternDropdown.Text = "Up and Down" ? GenerateUpandDownPoints() : GenerateRandomPoints()
     
     ; Go through each slot
@@ -110,15 +123,10 @@ PlacingUnits() {
                         AddToLog("Placed Unit " slotNum " (" placedCounts[slotNum] "/" placements ")")
                         CheckAbility()
                         FixClick(560, 560) ; Move Click
-                        if (UpgradeDuringPlacementBox.Value) {
-                            AttemptUpgrade()
-                        }
+                        AttemptUpgrade()
                         break
                     }
-
-                    if (UpgradeDuringPlacementBox.Value) {
                         AttemptUpgrade()
-                    }
 
                     if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
                         AddToLog("Stage ended during placements, proceeding to results")
@@ -132,6 +140,7 @@ PlacingUnits() {
                     if CheckForDisconnect() {
                         return Reconnect()
                     }
+
                     CheckEndAndRoute()
                 }
                 Sleep(500)
@@ -146,11 +155,11 @@ PlacingUnits() {
 
 AttemptUpgrade() {
     global successfulCoordinates, maxedCoordinates, PriorityUpgrade, debugMessages
-    global priority1, priority2, priority3, priority4, priority5, priority6
-    global challengepriority1, challengepriority2, challengepriority3, challengepriority4, challengepriority5, challengepriority6
 
     if (successfulCoordinates.Length = 0) {
         return ; No units placed yet
+    } else {
+        AddToLog("Attempting to upgrade placed units...")
     }
 
     anyEnabled := false
@@ -170,8 +179,6 @@ AttemptUpgrade() {
         }
         return
     }
-
-    AddToLog("Attempting to upgrade placed units...")
 
     if (PriorityUpgrade.Value) {
         if (debugMessages) {
@@ -332,19 +339,15 @@ SetUnitAsMaxed(coord, index) {
 
 
 UpgradeUnits() {
-    global successfulCoordinates, maxedCoordinates, PriorityUpgrade, priority1, priority2, priority3, priority4, priority5, priority6
-    global challengepriority1, challengepriority2, challengepriority3, challengepriority4, challengepriority5, challengepriority6
+    global successfulCoordinates, maxedCoordinates, PriorityUpgrade
 
-    totalUnits := Map()    
-    upgradedCount := Map()  
-    
+    local totalUnits := Map()  ; Initialize as a local variable
+    local upgradedCount := Map()  ; Initialize as a local variable
+
     ; Initialize counters
     for coord in successfulCoordinates {
-        if (!totalUnits.Has(coord.slot)) {
-            totalUnits[coord.slot] := 0
-            upgradedCount[coord.slot] := 0
-        }
-        totalUnits[coord.slot]++
+        totalUnits[coord.slot] := (totalUnits.Has(coord.slot) ? totalUnits[coord.slot] + 1 : 1)
+        upgradedCount[coord.slot] := upgradedCount.Has(coord.slot) ? upgradedCount[coord.slot] : 0
     }
 
     AddToLog("Initiating Unit Upgrades...")
@@ -353,149 +356,130 @@ UpgradeUnits() {
         AddToLog("Using priority upgrade system")
         ; Go through each priority level (1-6)
         for priorityNum in [1, 2, 3, 4, 5, 6] {
-            ; Find which slot has this priority number
             for slot in [1, 2, 3, 4, 5, 6] {
                 priority := inChallengeMode && ChallengeBox.Value ? "challengepriority" slot : "priority" slot
                 priority := %priority%
-                if (priority.Text = priorityNum) {
-                    ; Skip if no units in this slot
-                    hasUnitsInSlot := false
-                    for coord in successfulCoordinates {
-                        if (coord.slot = slot) {
-                            hasUnitsInSlot := true
-                            break
-                        }
-                    }
-                    
-                    if (!hasUnitsInSlot) {
-                        continue
-                    }
 
+                if (priority.Text = priorityNum && HasUnitsInSlot(slot, successfulCoordinates)) {
                     AddToLog("Starting upgrades for priority " priorityNum " (slot " slot ")")
-                    
-                    ; Keep upgrading current slot until all its units are maxed
-                    while true {
-                        slotDone := true
-                        
-                        for index, coord in successfulCoordinates {
-                            if (coord.slot = slot) {
-                                slotDone := false
-
-                                upgradeLimitEnabled := "upgradeLimitEnabled" coord.slot
-                                upgradeLimitEnabled := %upgradeLimitEnabled%
-            
-                                
-                                upgradeLimit := "UpgradeLimit" coord.slot
-                                upgradeLimit := %upgradeLimit%
-                                upgradeLimit := String(upgradeLimit.Text)
-            
-                                
-                                if (!upgradeLimitEnabled.Value) {
-                                    UpgradeUnit(coord.x, coord.y)
-                                } else {
-                                    UpgradeUnitLimit(coord.x, coord.y, coord, index, upgradeLimit)
-                                }
-
-                                if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
-                                    AddToLog("Stage ended during upgrades, proceeding to results")
-                                    successfulCoordinates := []
-                                    maxedCoordinates := []
-                                    return MonitorStage()
-                                }
-
-                                if CheckForLobbyText() {
-                                    return CheckLobby()
-                                }
-
-                                if CheckForDisconnect() {
-                                    return Reconnect()
-                                }
-
-                                if MaxUpgrade() {
-                                    CheckForCardSelection()
-                                    upgradedCount[coord.slot]++
-                                    AddToLog("Max upgrade reached for Unit " coord.slot " (" upgradedCount[coord.slot] "/" totalUnits[coord.slot] ")")
-                                    successfulCoordinates.RemoveAt(index)
-                                    FixClick(325, 185) ;Close upg menu
-                                    break
-                                }
-
-                                Sleep(200)
-                                CheckAbility()
-                                FixClick(560, 560) ; Move Click
-                                CheckForCardSelection()
-                                Reconnect()
-                                CheckEndAndRoute()
-                            }
-                        }
-                        
-                        if (slotDone || successfulCoordinates.Length = 0) {
-                            AddToLog("Finished upgrades for priority " priorityNum)
-                            break
-                        }
-                    }
+                    UpgradeSlot(slot, priorityNum, totalUnits, upgradedCount)
                 }
             }
         }
-        
         AddToLog("Priority upgrading completed")
-        return MonitorStage()
     } else {
         ; Normal upgrade (no priority)
-        while true {
-            if (successfulCoordinates.Length == 0) {
-                AddToLog("All units maxed, proceeding to monitor stage")
-                return MonitorStage()
-            }
+        while (successfulCoordinates.Length > 0) {
+            UpgradeAllUnits(totalUnits, upgradedCount)
+        }
+        AddToLog("All units maxed, proceeding to monitor stage")
+    }
 
-            for index, coord in successfulCoordinates {
+    return MonitorStage()
+}
 
-                upgradeLimitEnabled := "upgradeLimitEnabled" coord.slot
-                upgradeLimitEnabled := %upgradeLimitEnabled%
+HasUnitsInSlot(slot, coordinates) {
+    for coord in coordinates {
+        if (coord.slot = slot) {
+            return true
+        }
+    }
+    return false
+}
 
-                
-                upgradeLimit := "UpgradeLimit" coord.slot
-                upgradeLimit := %upgradeLimit%
-                upgradeLimit := String(upgradeLimit.Text)
+UpgradeSlot(slot, priorityNum, totalUnits, upgradedCount) {
+    while (true) {
+        slotDone := true
 
-                if (!upgradeLimitEnabled.Value) {
-                    UpgradeUnit(coord.x, coord.y)
-                } else {
-                    UpgradeUnitLimit(coord.x, coord.y, coord, index, upgradeLimit)
+        for index, coord in successfulCoordinates {
+            if (coord.slot = slot) {
+                slotDone := false
+                UpgradeUnitWithLimit(coord, index)
+
+                if (CheckForTerminationConditions()) {
+                    return
                 }
 
-                if CheckForDisconnect() {
-                    return Reconnect()
-                }
-
-                if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
-                    AddToLog("Stage ended during upgrades, proceeding to results")
-                    successfulCoordinates := []
-                    maxedCoordinates := []
-                    return MonitorStage()
-                }
-
-                if CheckForLobbyText() {
-                    return CheckLobby()
-                }
-
-                if MaxUpgrade() {
-                    upgradedCount[coord.slot]++
-                    AddToLog("Max upgrade reached for Unit " coord.slot " (" upgradedCount[coord.slot] "/" totalUnits[coord.slot] ")")
-                    successfulCoordinates.RemoveAt(index)
-                    FixClick(325, 185) ;Close upg menu
-                    continue
+                if (MaxUpgrade()) {
+                    HandleMaxUpgrade(coord, index, totalUnits, upgradedCount)
+                    break
                 }
 
                 Sleep(200)
-                CheckAbility()
-                FixClick(560, 560) ; Move Click
-                CheckForCardSelection()
-                Reconnect()
-                CheckEndAndRoute()
+                PostUpgradeChecks()
             }
         }
+
+        if (slotDone || successfulCoordinates.Length = 0) {
+            AddToLog("Finished upgrades for priority " priorityNum)
+            break
+        }
     }
+}
+
+UpgradeAllUnits(totalUnits, upgradedCount) {
+    for index, coord in successfulCoordinates {
+        UpgradeUnitWithLimit(coord, index)
+
+        if (CheckForDisconnect()) {
+            return Reconnect()
+        }
+
+        if (CheckForTerminationConditions()) {
+            return
+        }
+
+        if (MaxUpgrade()) {
+            HandleMaxUpgrade(coord, index, totalUnits, upgradedCount)
+            continue
+        }
+
+        Sleep(200)
+        PostUpgradeChecks()
+    }
+}
+
+UpgradeUnitWithLimit(coord, index) {
+    upgradeLimitEnabled := "upgradeLimitEnabled" coord.slot
+    upgradeLimitEnabled := %upgradeLimitEnabled%
+
+    upgradeLimit := "UpgradeLimit" coord.slot
+    upgradeLimit := %upgradeLimit%
+    upgradeLimit := String(upgradeLimit.Text)
+
+    if (!upgradeLimitEnabled.Value) {
+        UpgradeUnit(coord.x, coord.y)
+    } else {
+        UpgradeUnitLimit(coord.x, coord.y, coord, index, upgradeLimit)
+    }
+}
+
+CheckForTerminationConditions() {
+    if (CheckForXp() || CheckForReturnToLobby() || CheckForNextText()) {
+        AddToLog("Stage ended during upgrades, proceeding to results")
+        successfulCoordinates := []
+        maxedCoordinates := []
+        return true
+    }
+    if (CheckForLobbyText()) {
+        return CheckLobby()
+    }
+    return false
+}
+
+HandleMaxUpgrade(coord, index, totalUnits, upgradedCount) {
+    upgradedCount[coord.slot]++
+    AddToLog("Max upgrade reached for Unit " coord.slot " (" upgradedCount[coord.slot] "/" totalUnits[coord.slot] ")")
+    successfulCoordinates.RemoveAt(index)
+    FixClick(325, 185) ; Close upgrade menu
+}
+
+PostUpgradeChecks() {
+    CheckAbility()
+    FixClick(560, 560) ; Move Click
+    CheckForCardSelection()
+    Reconnect()
+    CheckEndAndRoute()
 }
 
 ChallengeMode() {    
@@ -791,6 +775,14 @@ MonitorEndScreen() {
                             AddToLog("Returning to lobby, attempting to do Shibuya Portal...")
                             ClickReturnToLobby()
                             return CheckLobby()
+                        } else {
+                            if (ReturnLobbyBox.Value) {
+                                AddToLog("Return to lobby")
+                                ClickReturnToLobby()
+                            } else {
+                                AddToLog("Story Infinity replay")
+                                ClickReplay()
+                            }
                         }
                     } else {
                         if (ReturnLobbyBox.Value) {
@@ -1125,7 +1117,7 @@ GetMapData(type, name) {
             "Magic Town", {x: 700, y: 375, scrolls: 2},
 
             "Haunted Academy", {x: 700, y: 310, scrolls: 3},
-            "Magic Town", {x: 700, y: 360, scrolls: 3},
+            "Magic Hills", {x: 700, y: 360, scrolls: 3},
             "Space Center", {x: 700, y: 410, scrolls: 3},
 
             "Alien Spaceship", {x: 700, y: 325, scrolls: 4},
@@ -1446,7 +1438,7 @@ DetectMap() {
             "Ant Kingdom", Ant,
             "Sand Village", Sand,
             "Magic Town", MagicTown, 
-            "Magic Hill", MagicHills,
+            "Magic Hills", MagicHills,
             "Navy Bay", Navy,
             "Snowy Town", SnowyTown,
             "Fiend City", Fiend,
@@ -1496,10 +1488,12 @@ HandleMapMovement(MapName) {
             MoveForAntKingdom()
         case "Magic Town":
             MoveForMagicTown()
-        case "Magic Hill":
+        case "Magic Hills":
             MoveForMagicHill()
         case "Navy Bay":
             MoveForNavyBay()
+        case "Alien Spaceship":
+            MoveForAlienSpaceship()    
         case "Fiend City":
             MoveForFiendCity()
         case "Spirit World":
@@ -1533,6 +1527,16 @@ MoveForPlanetGreenie() {
     Sleep (2200)
     SendInput ("{a up}")
     SendInput ("{w up}")
+}
+
+MoveForAlienSpaceship() {
+    if (ok := FindText(&X, &Y, 0, 244, 48, 278, 0.15, 0.15, AlienSpaceshipAngle)) {
+        FixClick(73, 176, "Right")
+        Sleep (2500)
+    } else {
+        FixClick(658, 61, "Right")
+        Sleep (2500)
+    }
 }
 
 MoveForSnowyTown() {
@@ -1618,9 +1622,9 @@ MoveForMagicTown() {
     SendInput ("{d up}")
 }
 
+
 MoveForMagicHill() {
-    color := PixelGetColor(630, 125)
-    if (ok := FindText(&X, &Y, 610, 410, 740, 560, 0.15, 0.15, MagicHillAngle2)) or (IsColorInRange(color, 0xFFD100)) {
+    if (ok := FindText(&X, &Y, 518, 334, 566, 404, 0.15, 0.15, MagicHillsBench) or (ok := FindText(&X, &Y, 522, 339, 557, 402, 0.15, 0.15, MagicHillLegendStageBench))) {
         AddToLog("Angle 2")
         Fixclick(500, 20, "Right")
         Sleep (3000)
@@ -1644,13 +1648,13 @@ MoveForMagicHill() {
         Sleep (2500)
         Fixclick(25, 485, "Right")
         Sleep (3000)
-        Fixclick(110, 455, "Right")
+        SendInput ("{a down}")
+        sleep (3000)
+        SendInput ("{a up}")
         Sleep (3000)
-        Fixclick(40, 340, "Right")
-        Sleep (3000)
-        Fixclick(250, 80, "Right")
-        Sleep (3000)
-        Fixclick(230, 110, "Right")
+        SendInput ("{s down}")
+        sleep (1200)
+        SendInput ("{s up}")
         Sleep (3000)
     }
 }
@@ -1669,8 +1673,18 @@ MoveForHauntedAcademy() {
 }
 
 MoveForSpaceCenter() {
-    Fixclick(160, 280, "Right")
-    Sleep (7000)
+    if (ok := FindText(&X, &Y, 248, 402, 283, 438, 0.15, 0.15, SpaceCenterAngle)) {
+        Fixclick(160, 280, "Right")
+        Sleep (7000)
+    } else {
+        FixClick(590, 15) ; click on paths
+        loop {
+            if FindAndClickSpaceCenterPath() {
+                FixClick(590, 15) ; click on paths
+                break
+            }
+        }
+    }
 }
 
 MoveForMountainTemple() {
@@ -1943,6 +1957,12 @@ WaitForUpgradeText(timeout := 4500) {
     startTime := A_TickCount
     while (A_TickCount - startTime < timeout) {
         if (FindText(&X, &Y, 160, 215, 330, 420, 0, 0, UpgradeText) or (FindText(&X, &Y, 160, 215, 330, 420, 0, 0, UpgradeText2))) {
+            /*if FindText(&X, &Y, 15, 220, 121, 250, 0, 0, ElyssiaSummon) {
+                if (debugMessages) {
+                    AddToLog("Clicked on Elyssia Summon")
+                    return false
+                }
+            }*/
             timeSaved := (A_TickCount - startTime)  ; Time saved
             if (debugMessages) {
                 AddToLog("Placement Speed: " . PlacementSpeed() . " ms")
@@ -2000,7 +2020,7 @@ CheckForXp(closeLeaderboard := false) {
 
 UpgradeUnit(x, y) {
     FixClick(x, y - 3)
-    Sleep (1000)
+    Sleep (500)
     SendInput("R")
     SendInput("R")
     SendInput("R")

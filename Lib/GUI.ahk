@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.9.5"
+global currentVersion := "1.9.6"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -251,8 +251,7 @@ placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
 aaMainUI.SetFont("s9")
 
-global RejoinRoblox := aaMainUI.Add("Checkbox", "x900 y8 c" uiTheme[1], "Pending Teleport Failsafe")
-global StoryUINav := aaMainUI.Add("Checkbox", "x650 y8 c" uiTheme[1], "Use UI Navigation for Story")
+global StoryUINav := aaMainUI.Add("Checkbox", "x875 y8 c" uiTheme[1], "Use UI Navigation for Story")
 
 global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Next Level")
 ; Dungeon Options
@@ -266,7 +265,7 @@ global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "
 global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Auto Ability")
 global ChallengeBox := aaMainUI.Add("CheckBox", "x1150 y476 cffffff", "Auto Challenge")
 global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1005 y476 cffffff", "Priority Upgrade")
-global UpgradeDuringPlacementBox := aaMainUI.Add("Checkbox", "x1150 y451 cffffff Checked", "Upgrade During Placement")
+global RejoinRoblox := aaMainUI.Add("Checkbox", "x1150 y451 c" uiTheme[1], "Pending Teleport Failsafe")
 PlacementPatternText := aaMainUI.Add("Text", "x1032 y390 w115 h20", "Placement Type")
 global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
 PlaceSpeedText := aaMainUI.Add("Text", "x1193 y390 w115 h20", "Placement Speed")

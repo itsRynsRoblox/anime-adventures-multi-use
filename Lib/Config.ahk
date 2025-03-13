@@ -24,7 +24,7 @@ readInSettings() {
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
     global mode
     global ChallengeBox, PriorityUpgrade
-    global PlacementPatternDropdown, PlaceSpeed, MatchMaking, UpgradeDuringPlacementBox
+    global PlacementPatternDropdown, PlaceSpeed, MatchMaking
     global PhysicalTeam, MagicTeam, TeamSwap
     global QuitIfFailBox
     global RejoinRoblox
@@ -105,7 +105,6 @@ readInSettings() {
                 case "Swap": TeamSwap.Value := parts[2] ; Set the checkbox value
                 case "PhyTeam": physicalTeam.Text := parts[2]
                 case "MagTeam": magicTeam.Text := parts[2]
-                case "AttemptUpgrade": UpgradeDuringPlacementBox.Value := parts[2] ; Set the checkbox value
 
                 case "StopAfterDefeat": QuitIfFailBox.Value := parts[2] ; Set the checkbox value
                 case "FailsafeEnabled": RejoinRoblox.Value := parts[2] ; Set the checkbox value
@@ -130,7 +129,7 @@ SaveSettings(*) {
     global ChallengePlacement1, ChallengePlacement2, ChallengePlacement3, ChallengePlacement4, ChallengePlacement5, ChallengePlacement6
     global mode
     global ChallengeBox, PriorityUpgrade
-    global PlacementPatternDropdown, PlaceSpeed, MatchMaking, UpgradeDuringPlacementBox
+    global PlacementPatternDropdown, PlaceSpeed, MatchMaking
     global PhysicalTeam, MagicTeam, TeamSwap
     global RejoinRoblox, ReturnLobbyBox, QuitIfFailBox, StoryUINav
 
@@ -231,9 +230,6 @@ SaveSettings(*) {
         
         content .= "`n[MagicTeam]"
         content .= "`nMagTeam=" magicTeam.Value "`n"
-
-        content .= "`n`n[UpgradeDuringPlacement]"
-        content .= "`nAttemptUpgrade=" UpgradeDuringPlacementBox.Value "`n"
 
         content .= "`n`n[QuitUponDefeat]"
         content .= "`nStopAfterDefeat=" QuitIfFailBox.Value "`n"

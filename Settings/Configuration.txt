@@ -85,10 +85,6 @@ PhyTeam=1
 MagTeam=1
 
 
-[UpgradeDuringPlacement]
-AttemptUpgrade=1
-
-
 [QuitUponDefeat]
 StopAfterDefeat=1
 

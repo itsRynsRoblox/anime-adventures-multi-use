@@ -437,6 +437,20 @@ FindAndClickColor(targetColor := (ModeDropdown.Text = "Winter Event" ? 0x006783 
     }
 }
 
+FindAndClickSpaceCenterPath(targetColor := 0xD8FF00, searchArea := [0, 0, GetWindowCenter(rblxID).Width, GetWindowCenter(rblxID).Height]) { ;targetColor := Winter Event Color : 0x006783 / Contracts Color : 0xFAFF4D
+    ; Extract the search area boundaries
+    x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
+
+    ; Perform the pixel search
+    if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, targetColor, 0)) {
+        ; Color found, click on the detected coordinates
+        FixClick(foundX, foundY, "Right")
+        AddToLog("Color found and clicked at: X" foundX " Y" foundY)
+        return true
+
+    }
+}
+
 FindAndClickHauntedPath(targetColor := (mode = "Story" ? 0x191622 : 0x1D1414), searchArea := (mode = "Story" ? [708, 332, 833, 365] : [558, 335, 694, 369])) {
     
     ; Extract the search area boundaries
