@@ -68,6 +68,11 @@ PlacingUnits() {
         return MonitorStage()
     }
 
+    if (CheckForRobloxApp()) {
+        AddToLog("Found Roblox App, rejoining private server...")
+        return RejoinPrivateServer()
+    }
+
     if CheckForLobbyText() {
         return CheckLobby()
     }
@@ -131,6 +136,11 @@ PlacingUnits() {
                     if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
                         AddToLog("Stage ended during placements, proceeding to results")
                         return MonitorStage()
+                    }
+
+                    if (CheckForRobloxApp()) {
+                        AddToLog("Found Roblox App, rejoining private server...")
+                        return RejoinPrivateServer()
                     }
 
                     if CheckForLobbyText() {
@@ -231,6 +241,11 @@ AttemptUpgrade() {
                         return MonitorStage()
                     }
 
+                    if (CheckForRobloxApp()) {
+                        AddToLog("Found Roblox App, rejoining private server...")
+                        return RejoinPrivateServer()
+                    }
+
                     if CheckForLobbyText() {
                         return CheckLobby()
                     }
@@ -298,6 +313,11 @@ AttemptUpgrade() {
                 successfulCoordinates := []
                 maxedCoordinates := []
                 return MonitorStage()
+            }
+
+            if (CheckForRobloxApp()) {
+                AddToLog("Found Roblox App, rejoining private server...")
+                return RejoinPrivateServer()
             }
 
             if CheckForLobbyText() {
@@ -425,6 +445,11 @@ UpgradeAllUnits(totalUnits, upgradedCount) {
             return Reconnect()
         }
 
+        if (CheckForRobloxApp()) {
+            AddToLog("Found Roblox App, rejoining private server...")
+            return RejoinPrivateServer()
+        }
+
         if (CheckForTerminationConditions()) {
             return
         }
@@ -460,6 +485,10 @@ CheckForTerminationConditions() {
         successfulCoordinates := []
         maxedCoordinates := []
         return true
+    }
+    if (CheckForRobloxApp()) {
+        AddToLog("Found Roblox App, rejoining private server...")
+        return RejoinPrivateServer()
     }
     if (CheckForLobbyText()) {
         return CheckLobby()
@@ -1324,6 +1353,8 @@ GetLegendActDownArrows(LegendActDropdown) {
         case "Act 1": return 1
         case "Act 2": return 2
         case "Act 3": return 3
+        case "Random": 
+            return Random(1, 3) ; Generates a random number between 1 and 3
     }
 }
 
@@ -2845,6 +2876,28 @@ MonitorDungeonEnd() {
 
         ; Check for returning to lobby
         if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
+
+            ; Challenge mode logic first
+            if (inChallengeMode) {
+                AddToLog("Challenge completed - returning to " mode " mode")
+               inChallengeMode := false
+               challengeStartTime := A_TickCount
+               ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+               return CheckLobby()
+           }
+
+           ; Check if it's time for challenge mode
+           if (!inChallengeMode && ChallengeBox.Value) {
+               timeElapsed := A_TickCount - challengeStartTime
+               if (timeElapsed >= 1800000) {
+                   AddToLog("30 minutes passed - switching to Challenge mode")
+                   inChallengeMode := true
+                   challengeStartTime := A_TickCount
+                   ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
+                   return CheckLobby()
+               }
+           }
+
             if (QuitIfFailBox.Value && failed) {
                 AddToLog("Dungeon run failed, stopping to save lives...")
                 ClickReturnToLobby()
@@ -3170,4 +3223,8 @@ CheckUpgradeLimit(upgradeCap) {
     }
     
     return false
+}
+
+CheckForRobloxApp() {
+    return FindText(&X, &Y, 14, 55, 57, 115, 0, 0, RobloxApp) ? true : false
 }
