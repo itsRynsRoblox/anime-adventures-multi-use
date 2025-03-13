@@ -120,14 +120,18 @@ PlacingUnits() {
                         AttemptUpgrade()
                     }
 
-                    if CheckForXp()
+                    if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
+                        AddToLog("Stage ended during placements, proceeding to results")
                         return MonitorStage()
+                    }
 
                     if CheckForLobbyText() {
                         return CheckLobby()
                     }
 
-                    Reconnect()
+                    if CheckForDisconnect() {
+                        return Reconnect()
+                    }
                     CheckEndAndRoute()
                 }
                 Sleep(500)
@@ -213,14 +217,7 @@ AttemptUpgrade() {
                         UpgradeUnitLimit(coord.x, coord.y, coord, index, upgradeLimit)
                     }
 
-                    if CheckForXp() {
-                        AddToLog("Stage ended during upgrades, proceeding to results")
-                        successfulCoordinates := []
-                        maxedCoordinates := []
-                        return MonitorStage()
-                    }
-
-                    if CheckForReturnToLobby() {
+                    if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
                         AddToLog("Stage ended during upgrades, proceeding to results")
                         successfulCoordinates := []
                         maxedCoordinates := []
@@ -229,6 +226,10 @@ AttemptUpgrade() {
 
                     if CheckForLobbyText() {
                         return CheckLobby()
+                    }
+
+                    if CheckForDisconnect() {
+                        return Reconnect()
                     }
 
                     if MaxUpgrade() {
@@ -285,13 +286,7 @@ AttemptUpgrade() {
                 UpgradeUnitLimit(coord.x, coord.y, coord, index, upgradeLimit)
             }
 
-            if CheckForXp() {
-                AddToLog("Stage ended during upgrades, proceeding to results")
-                successfulCoordinates := []
-                return MonitorStage()
-            }
-
-            if CheckForReturnToLobby() {
+            if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
                 AddToLog("Stage ended during upgrades, proceeding to results")
                 successfulCoordinates := []
                 maxedCoordinates := []
@@ -300,6 +295,10 @@ AttemptUpgrade() {
 
             if CheckForLobbyText() {
                 return CheckLobby()
+            }
+
+            if CheckForDisconnect() {
+                return Reconnect()
             }
 
             if MaxUpgrade() {
@@ -397,14 +396,7 @@ UpgradeUnits() {
                                     UpgradeUnitLimit(coord.x, coord.y, coord, index, upgradeLimit)
                                 }
 
-                                if CheckForXp() {
-                                    AddToLog("Stage ended during upgrades, proceeding to results")
-                                    successfulCoordinates := []
-                                    maxedCoordinates := []
-                                    return MonitorStage()
-                                }
-
-                                if CheckForReturnToLobby() {
+                                if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
                                     AddToLog("Stage ended during upgrades, proceeding to results")
                                     successfulCoordinates := []
                                     maxedCoordinates := []
@@ -416,8 +408,7 @@ UpgradeUnits() {
                                 }
 
                                 if CheckForDisconnect() {
-                                    Reconnect() ; Added Disconnect Check
-                                    return
+                                    return Reconnect()
                                 }
 
                                 if MaxUpgrade() {
@@ -474,22 +465,14 @@ UpgradeUnits() {
                 }
 
                 if CheckForDisconnect() {
-                    Reconnect() ; Added Disconnect Check
-                    return
+                    return Reconnect()
                 }
 
-                if CheckForReturnToLobby() {
+                if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
                     AddToLog("Stage ended during upgrades, proceeding to results")
                     successfulCoordinates := []
                     maxedCoordinates := []
                     return MonitorStage()
-                }
-
-                if CheckForXp() {
-                    AddToLog("Stage ended during upgrades, proceeding to results")
-                    successfulCoordinates := []
-                    MonitorStage()
-                    return
                 }
 
                 if CheckForLobbyText() {
@@ -735,6 +718,14 @@ CheckForReturnToLobby() {
     if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
         return true
     }
+    return false
+}
+
+CheckForNextText() {
+    if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
+        return true
+    }
+    return false
 }
 
 MonitorEndScreen() {
