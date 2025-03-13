@@ -247,11 +247,13 @@ settingsBtn.OnEvent("Click", ShowSettingsGUI)
 global guideBtn := aaMainUI.Add("Button", "x1100 y0 w90 h30", "Guide")
 guideBtn.OnEvent("Click", OpenGuide)
 
-global RejoinRoblox := aaMainUI.Add("Checkbox", "x850 y6 c" uiTheme[1], "Pending Teleport Failsafe")
-
 placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
 aaMainUI.SetFont("s9")
+
+global RejoinRoblox := aaMainUI.Add("Checkbox", "x900 y8 c" uiTheme[1], "Pending Teleport Failsafe")
+global StoryUINav := aaMainUI.Add("Checkbox", "x650 y8 c" uiTheme[1], "Use UI Navigation for Story")
+
 global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Next Level")
 ; Dungeon Options
 SaveChestsBox := aaMainUI.Add("CheckBox", "x900 y451 cffffff Checked", "Save Chests")

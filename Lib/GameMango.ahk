@@ -120,14 +120,11 @@ PlacingUnits() {
                         AttemptUpgrade()
                     }
 
-
-
                     if CheckForXp()
                         return MonitorStage()
 
                     if CheckForLobbyText() {
-                        AddToLog("I'm not sure how you ended up here....")
-                        return StartSelectedMode()
+                        return CheckLobby()
                     }
 
                     Reconnect()
@@ -230,6 +227,10 @@ AttemptUpgrade() {
                         return MonitorStage()
                     }
 
+                    if CheckForLobbyText() {
+                        return CheckLobby()
+                    }
+
                     if MaxUpgrade() {
                         AddToLog("Max upgrade reached for Unit " coord.slot)
                         successfulCoordinates.RemoveAt(index)
@@ -295,6 +296,10 @@ AttemptUpgrade() {
                 successfulCoordinates := []
                 maxedCoordinates := []
                 return MonitorStage()
+            }
+
+            if CheckForLobbyText() {
+                return CheckLobby()
             }
 
             if MaxUpgrade() {
@@ -406,6 +411,10 @@ UpgradeUnits() {
                                     return MonitorStage()
                                 }
 
+                                if CheckForLobbyText() {
+                                    return CheckLobby()
+                                }
+
                                 if CheckForDisconnect() {
                                     Reconnect() ; Added Disconnect Check
                                     return
@@ -483,6 +492,10 @@ UpgradeUnits() {
                     return
                 }
 
+                if CheckForLobbyText() {
+                    return CheckLobby()
+                }
+
                 if MaxUpgrade() {
                     upgradedCount[coord.slot]++
                     AddToLog("Max upgrade reached for Unit " coord.slot " (" upgradedCount[coord.slot] "/" totalUnits[coord.slot] ")")
@@ -531,7 +544,12 @@ StoryMode() {
         StoryMovement()
     }
     AddToLog("Starting " currentStoryMap " - " currentStoryAct)
-    StartStory(currentStoryMap, currentStoryAct)
+    
+    if (StoryUINav.Value) {
+        StartStory(currentStoryMap, currentStoryAct)
+    } else {
+        StartStoryNoUINavigation(currentStoryMap, currentStoryAct)
+    }
 
     ; Handle play mode selection
     if (StoryActDropdown.Text != "Infinity") {
@@ -874,11 +892,7 @@ global mode, StoryActDropdown
             ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
         }
 
-        if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
-            ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
-        }
-
-        if CheckForXp() {
+        if CheckForXp(true) {
             HandleStageEnd()
         } else if CheckForReturnToLobby() {
             AddToLog("Return to lobby found, but not the results screen...")
@@ -909,10 +923,6 @@ HandleStageEnd() {
 
     if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
         ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
-    }
-
-    if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
-        ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
     }
 
     if (ok := FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText) or (ok:=FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText2))) {
@@ -1060,6 +1070,100 @@ StartStory(map, StoryActDropdown) {
     for key in navKeys {
         SendInput("{" key "}")
     }
+}
+
+StartStoryNoUINavigation(map, act) {
+    AddToLog("Selecting map: " map " and act: " act)
+    
+    ; Closes Player leaderboard
+    FixClick(640, 70)
+    Sleep(500)
+
+    ; Get Story map 
+    StoryMap := GetMapData("StoryMap", map)
+    
+    ; Scroll if needed
+    if (StoryMap.scrolls > 0) {
+        AddToLog("Scrolling down " StoryMap.scrolls " for " map)
+        MouseMove(700, 210)
+        loop StoryMap.scrolls {
+            SendInput("{WheelDown}")
+            Sleep(250)
+        }
+    }
+    Sleep(1000)
+    
+    ; Click on the map
+    FixClick(StoryMap.x, StoryMap.y)
+    Sleep(1000)
+    
+    ; Get act details
+    StoryAct := GetMapData("StoryAct", act)
+    
+    ; Scroll if needed for act
+    if (StoryAct.scrolls > 0) {
+        AddToLog("Scrolling down " StoryAct.scrolls " times for " act)
+        MouseMove(300, 240)
+        loop StoryAct.scrolls {
+            SendInput("{WheelDown}")
+            Sleep(250)
+        }
+    }
+    Sleep(1000)
+    
+    ; Click on the act
+    FixClick(StoryAct.x, StoryAct.y)
+    Sleep(1000)
+    
+    return true
+}
+
+GetMapData(type, name) {
+    data := Map(
+        "StoryMap", Map(
+            "Planet Greenie", {x: 700, y: 250, scrolls: 0},
+            "Walled City", {x: 700, y: 300, scrolls: 0},
+            "Snowy Town", {x: 700, y: 350, scrolls: 0},
+            "Sand Village", {x: 700, y: 400, scrolls: 0},
+
+            "Navy Bay", {x: 700, y: 325, scrolls: 1},
+            "Fiend City", {x: 700, y: 375, scrolls: 1},
+            "Spirit World", {x: 700, y: 425, scrolls: 1},
+
+            "Ant Kingdom", {x: 700, y: 340, scrolls: 2},
+            "Magic Town", {x: 700, y: 375, scrolls: 2},
+
+            "Haunted Academy", {x: 700, y: 310, scrolls: 3},
+            "Magic Town", {x: 700, y: 360, scrolls: 3},
+            "Space Center", {x: 700, y: 410, scrolls: 3},
+
+            "Alien Spaceship", {x: 700, y: 325, scrolls: 4},
+            "Fabled Kingdom", {x: 700, y: 375, scrolls: 4},
+            "Space Center", {x: 700, y: 435, scrolls: 4},
+
+            "Puppet Island", {x: 700, y: 350, scrolls: 5},
+            "Virtual Dungeon", {x: 700, y: 400, scrolls: 5},
+
+            "Snowy Kingdom", {x: 700, y: 315, scrolls: 6},
+            "Dungeon Throne", {x: 700, y: 365, scrolls: 6},
+            "Mountain Temple", {x: 700, y: 415, scrolls: 6},
+
+            "Rain Village", {x: 700, y: 335, scrolls: 7},
+            "Shibuya District", {x: 700, y: 385, scrolls: 7}
+        ),
+        "StoryAct", Map(
+            "Infinity", {x: 285, y: 235, scrolls: 0},
+            "Act 1", {x: 285, y: 270, scrolls: 0},
+            "Act 2", {x: 285, y: 305, scrolls: 0},
+            "Act 3", {x: 285, y: 340, scrolls: 0},
+            "Act 4", {x: 285, y: 385, scrolls: 0},
+
+            "Act 5", {x: 300, y: 350, scrolls: 1},
+            "Act 6", {x: 300, y: 385, scrolls: 1}
+        )
+    )
+
+    return data.Has(type) && data[type].Has(name) ? data[type][name] : {}
 }
 
 StartLegend(map, LegendActDropdown) {
@@ -1526,6 +1630,7 @@ MoveForMagicTown() {
 MoveForMagicHill() {
     color := PixelGetColor(630, 125)
     if (ok := FindText(&X, &Y, 610, 410, 740, 560, 0.15, 0.15, MagicHillAngle2)) or (IsColorInRange(color, 0xFFD100)) {
+        AddToLog("Angle 2")
         Fixclick(500, 20, "Right")
         Sleep (3000)
         Fixclick(500, 20, "Right")
@@ -1541,6 +1646,7 @@ MoveForMagicHill() {
         Fixclick(545, 30, "Right")
         Sleep (3000)
     } else {
+        AddToLog("Angle 1")
         Fixclick(45, 185, "Right")
         Sleep (3000)
         Fixclick(140, 250, "Right")
@@ -1887,7 +1993,11 @@ CheckForCardSelection() {
     }
 }
 
-CheckForXp() {
+CheckForXp(closeLeaderboard := false) {
+    if (closeLeaderboard) {
+        FixClick(564, 72)
+        Sleep(500)
+    }
     ; Check for lobby text
     if (ok := FindText(&X, &Y, 340, 369, 437, 402, 0, 0, XpText) or (ok:=FindText(&X, &Y, 539, 155, 760, 189, 0, 0, XpText2))) {
         FixClick(325, 185)
@@ -1944,7 +2054,7 @@ CheckLoaded() {
         Sleep(1000)
         
         ; Check for vote screen
-        if (ok := FindText(&X, &Y, 326, 60, 547, 173, 0, 0, VoteStart)) {
+        if (ok := FindText(&X, &Y, 326, 60, 547, 173, 0, 0, VoteStart) or PixelGetColor(320, 60) = 0x00EE00) {
             AddToLog("Successfully Loaded In")
             Sleep(1000)
             break
@@ -2678,12 +2788,23 @@ ClickUsePortal() {
     ClickUntilGone(0, 0, 211, 341, 401, 504, UsePortal, 0, -35)
 }
 
-ClickDungeonContinue() {
+ClickDungeonContinueOld() {
     ClickUntilGone(0, 0, 212, 280, 406, 476, DungeonContinue, 0, -35)
+}
+
+ClickDungeonContinue() {
+    ClickUntilGone(0, 0, 380, 385, 615, 490, DungeonContinue, -3, -35, DungeonContinue2)
 }
 
 ClickChestContinue() {
     ClickUntilGone(0, 0, 404, 420, 568, 455, ChestContinue, 0, -35)
+}
+
+CheckIfFinalRoom() {
+    if (ok := FindText(&X, &Y, 434, 215, 479, 230, 0, 0, FinalRoom)) {
+        return true
+    }
+    return false
 }
 
 ; Custom monitor for dungeon ending
@@ -2798,7 +2919,7 @@ SelectDungeonRoute() {
         FixClick(X, Y-30)
         Sleep(1000)
     }
-    if (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChest) or (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChestNoHover))) {
+    else if (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChest) or (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChestNoHover))) {
         AddToLog("Found Double Chest Room, clicking it")
         FixClick(X, Y-30)
         Sleep(1000)
@@ -2903,20 +3024,18 @@ HandleChestScreen() {
 
         AddToLog("All chests opened")
 
-        ; Reset the boss room flag if it was set
         if (BossRoomCompleted) {
             BossRoomCompleted := false
-            FixClick(485, 410)
+            ClickDungeonContinue()
         }
         } else {
-            ; Skip opening chests, just click continue
             AddToLog("Saving chests for boss room - clicking continue")
-            ClickChestContinue()
+            ClickDungeonContinue()
         }
-         Sleep(1000)
-         Reconnect()
-    return true
-}
+        Sleep(1000)
+        Reconnect()
+        return true
+    }
 
 ClaimChestReward() {
     maxClicks := 30  ; Safety limit

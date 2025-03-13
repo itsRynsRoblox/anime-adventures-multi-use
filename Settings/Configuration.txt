@@ -99,3 +99,7 @@ FailsafeEnabled=1
 
 [ReturnToLobby]
 ToLobby=0
+
+
+[UINavigation]
+UseNavigation=0
