@@ -120,6 +120,8 @@ PlacingUnits() {
                         AttemptUpgrade()
                     }
 
+
+
                     if CheckForXp()
                         return MonitorStage()
 
@@ -734,8 +736,6 @@ MonitorEndScreen() {
             ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
         }
 
-        
-
         ; Now handle each mode
         if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
             AddToLog("Found Lobby Text - Current Mode: " (inChallengeMode ? "Challenge" : mode))
@@ -775,12 +775,14 @@ MonitorEndScreen() {
                     }
                 } else {
                     if (StoryDropdown.Text = "Shibuya District") {
-                        ModeDropdown.Text := "Portal"
-                        PortalDropdown.Text := "Shibuya Portal"
-                        PortalJoinDropdown.Text := "Solo"
-                        AddToLog("Returning to lobby, attempting to do Shibuya Portal...")
-                        ClickReturnToLobby()
-                        return CheckLobby()
+                        if (ShibuyaSwap.Value) {
+                            ModeDropdown.Text := "Portal"
+                            PortalDropdown.Text := "Shibuya Portal"
+                            PortalJoinDropdown.Text := "Solo"
+                            AddToLog("Returning to lobby, attempting to do Shibuya Portal...")
+                            ClickReturnToLobby()
+                            return CheckLobby()
+                        }
                     } else {
                         if (ReturnLobbyBox.Value) {
                             AddToLog("Return to lobby")
@@ -853,7 +855,7 @@ MonitorEndScreen() {
 
 
 MonitorStage() {
-    global Wins, loss, mode, StoryActDropdown
+global mode, StoryActDropdown
 
     lastClickTime := A_TickCount
     
@@ -861,86 +863,84 @@ MonitorStage() {
         Sleep(1000)
         
         if (mode = "Story" && StoryActDropdown.Text = "Infinity") {
-            timeElapsed := A_TickCount - lastClickTime
-            if (timeElapsed >= 60000) {  ; Every Minute
-                AddToLog("Performing anti-AFK click")
-                FixClick(560, 560)  ; Move click
-                FixClick(560, 560)  ; Move click
-                FixClick(560, 560)  ; Move click
-                lastClickTime := A_TickCount
-            }
+            PerformAntiAFK(lastClickTime)
         }
 
         if (mode = "Winter Event") {
             CheckForCardSelection()
         }
 
-        ; Check for XP screen
-        if CheckForXp() {
-            AddToLog("Checking win/loss status")
-            
-            ; Calculate stage end time here, before checking win/loss
-            stageEndTime := A_TickCount
-            stageLength := FormatStageTime(stageEndTime - stageStartTime)
+        if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
+            ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
+        }
 
-            if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
-                ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
-            } 
-            
-            ; Check for Victory or Defeat
-            if (ok := FindText(&X, &Y, 150, 180, 350, 260, 0, 0, VictoryText) or (ok:=FindText(&X, &Y, 150, 180, 350, 260, 0, 0, VictoryText2))) {
-                AddToLog("Victory detected - Stage Length: " stageLength)
-                Wins += 1
-                SendWebhookWithTime(true, stageLength)
-                if (mode = "Portal") {
-                    return HandlePortalEnd()            
-                } else if (mode = "Contract") {
-                    return HandleContractEnd() 
-                } else if (mode = "Dungeon") {
-                    return MonitorDungeonEnd()  ; New function for Dungeon endings
-                } else {
-                    return MonitorEndScreen() 
-                }
-            }
-            else if (ok := FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText) or (ok:=FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText2))) {
-                AddToLog("Defeat detected - Stage Length: " stageLength)
-                loss += 1
-                SendWebhookWithTime(false, stageLength) 
-                if (mode = "Portal") {
-                    return HandlePortalEnd()            
-                } else if (mode = "Contract") {
-                    return HandleContractEnd() 
-                } else if (mode = "Dungeon") {
-                    return MonitorDungeonEnd()  ; New function for Dungeon endings
-                } else {
-                    return MonitorEndScreen() 
-                }
-            }
+        if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
+            ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
         }
-        if !CheckForXp() {
-            if CheckForReturnToLobby() { ; Rare instance of clicking through the interface due to upgrading units
-                AddToLog("Found return To lobby but no results screen")
-                
-                ; Calculate stage end time here, before checking win/loss
-                stageEndTime := A_TickCount
-                stageLength := FormatStageTime(stageEndTime - stageStartTime)
-    
-                if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
-                    ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
-                }
-                AddToLog("Game Over Detected - Stage Length: " stageLength)
-                if (mode = "Portal") {
-                    return HandlePortalEnd()            
-                } else if (mode = "Contract") {
-                    return HandleContractEnd() 
-                } else if (mode = "Dungeon") {
-                    return MonitorDungeonEnd()  ; New function for Dungeon endings
-                } else {
-                    return MonitorEndScreen() 
-                }
-            }
+
+        if CheckForXp() {
+            HandleStageEnd()
+        } else if CheckForReturnToLobby() {
+            AddToLog("Return to lobby found, but not the results screen...")
+            HandleStageEnd()
         }
+
         Reconnect()
+    }
+}
+
+PerformAntiAFK(lastClickTime) {
+    if (A_TickCount - lastClickTime >= 60000) {
+        AddToLog("Performing anti-AFK click")
+        Loop 3 {
+            FixClick(560, 560)
+        }
+        lastClickTime := A_TickCount
+    }
+}
+
+HandleStageEnd() {
+    global Wins, loss, stageStartTime
+
+    isWin := false
+
+    stageEndTime := A_TickCount
+    stageLength := FormatStageTime(stageEndTime - stageStartTime)
+
+    if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
+        ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
+    }
+
+    if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
+        ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
+    }
+
+    if (ok := FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText) or (ok:=FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText2))) {
+        isWin := false
+    }
+
+    if (ok := FindText(&X, &Y, 150, 180, 350, 260, 0, 0, VictoryText) or (ok:=FindText(&X, &Y, 150, 180, 350, 260, 0, 0, VictoryText2))) {
+        isWin := true
+    }
+
+    if isWin {
+        AddToLog("Victory detected - Stage Length: " stageLength)
+        Wins += 1
+    } else {
+        AddToLog("Defeat detected - Stage Length: " stageLength)
+        loss += 1
+    }
+
+    SendWebhookWithTime(isWin, stageLength)
+
+    if (mode = "Portal") {
+        return HandlePortalEnd()            
+    } else if (mode = "Contract") {
+        return HandleContractEnd() 
+    } else if (mode = "Dungeon") {
+        return MonitorDungeonEnd()
+    } else {
+        return MonitorEndScreen() 
     }
 }
 
@@ -2095,6 +2095,7 @@ HandlePortalEnd() {
                     return CheckLobby()
                 }
             }
+            
             AddToLog("Found Lobby Text - creating/joining new portal")
             Sleep(2000)
 
@@ -2791,7 +2792,7 @@ CheckDungeonSpecials() {
 }
 
 SelectDungeonRoute() {
-    if (ok := FindText(&X, &Y, 140, 180, 480, 350, 0.20, 0.20, BossRoom) or (ok := FindText(&X, &Y, 140, 180, 480, 350, 0.20, 0.20, BossRoom2))) {
+    if (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom) or (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom2))) {
         AddToLog("Boss room detected!")
         global BossRoomCompleted := true
         FixClick(X, Y-30)
@@ -2924,7 +2925,7 @@ ClaimChestReward() {
     while (clicks < maxClicks) {
         ; Click to claim reward
         FixClick(560, 560)
-        Sleep(500)
+        Sleep(1500)
         
         ; Check if chest screen has returned
         if (IsChestScreenVisible()) {
@@ -2945,57 +2946,62 @@ IsChestScreenVisible() {
 CheckForPortal(lobby := false) {
     stageEndTime := A_TickCount
     stageLength := FormatStageTime(stageEndTime - stageStartTime)
-    if (!lobby) {
-        if (ok := FindText(&portalX, &portalY, 257, 419, 445, 520, 0, 0, SelectPortal)) {
-            AddToLog("Portal detected, restarting portal...")
+
+    if (lobby) {
+        if TryHandlePortal(211, 341, 401, 504, UsePortal, "starting portal") {
+            return
+        }
+        HandlePortalFallback()
+    } else {
+        if TryHandlePortal(257, 419, 445, 520, SelectPortal, "restarting portal") {
+            return
+        }
+        HandlePortalFallback()
+    }
+}
+
+TryHandlePortal(x1, y1, x2, y2, portalText, action) {
+    if (ok := FindText(&portalX, &portalY, x1, y1, x2, y2, 0, 0, portalText)) {
+        AddToLog("Portal detected, " action "...")
+        if (portalText = SelectPortal) {
             ClickSelectPortal()
         } else {
-            if (PortalDropdown.Text = "Shibuya Portal") {
-                ClickReturnToLobby()
-                Sleep(500)
-                AddToLog("Swapping to Shibuya District Infinite...")
-                ModeDropdown.Text := "Story"
-                StoryDropdown.Text := "Shibuya District"
-                StoryActDropdown.Text := "Infinity"
-                return CheckLobby()
-            } else {
-                AddToLog("No portal detected, shutting down...")
-                SendFinalWebhookBeforeExit()
-                Sleep(2000)
-                return Reload()
-            }
-        }
-    } else {
-        if (ok := FindText(&portalX, &portalY, 211, 341, 401, 504, 0, 0, UsePortal)) {
-            AddToLog("Portal detected, starting portal...")
             ClickUsePortal()
-        } else {
-            if (PortalDropdown.Text = "Shibuya Portal") {
-                AddToLog("No portal detected, changing to Shibuya District Infinite...")
-                ModeDropdown.Text := "Story"
-                StoryDropdown.Text := "Shibuya District"
-                StoryActDropdown.Text := "Infinity"
-                return CheckLobby()
-            } else {
-                AddToLog("No portal detected, shutting down...")
-                SendFinalWebhookBeforeExit()
-                Sleep(2000)
-                return Reload()
-            }
         }
+        return true
+    }
+    return false
+}
+
+HandlePortalFallback() {
+    FixClick(660, 187) ; Close Portal Interface if applicable
+
+    if (PortalDropdown.Text = "Shibuya Portal") {
+        AddToLog("No portal detected, changing to Shibuya District Infinite...")
+
+        ModeDropdown.Text := "Story"
+        StoryDropdown.Text := "Shibuya District"
+        StoryActDropdown.Text := "Infinity"
+
+        return CheckLobby()
+    } else {
+        AddToLog("No portal detected, shutting down...")
+        SendFinalWebhookBeforeExit()
+        Sleep(2000)
+        return Reload()
     }
 }
 
 CheckForFinishDungeon() {
     ; Check for the finish dungeon popup
-    if (ok := FindText(&X, &Y, 240, 260, 405, 310, 0, 0, FinishDungeon) or (ok := FindText(&X, &Y, 310, 395, 495, 440, 0.20, 0.20, EnterDungeon))) {
+    if (ok := FindText(&X, &Y, 240, 180, 565, 480, 0, 0, FinishDungeon) or (ok := FindText(&X, &Y, 310, 395, 495, 440, 0.20, 0.20, EnterDungeon)) or (ok := FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath))) {
         
         ; Click the Finish button
-        FixClick(330, 340)
+        ClickUntilGone(0, 0, 240, 180, 565, 480, DungeonFinish, -3, -35)
         Sleep(1500)
         
         ; Click the X in the top right
-        FixClick(670, 155)
+        ClickUntilGone(0, 0, 640, 175, 700, 205, DungeonRedX, -3, -35)
         Sleep(1000)
         
         ; Return to lobby

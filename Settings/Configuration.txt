@@ -1,5 +1,5 @@
-Mode=Story
-Map=Shibuya District
+Mode=
+
 
 Enabled1=1
 Enabled2=1
