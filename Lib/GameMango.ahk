@@ -15,7 +15,7 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-
+    MonitorStage()
 }
 
 F6:: {
@@ -837,6 +837,10 @@ MonitorEndScreen() {
                     return RestartStage()
                 }
             }
+            else if (mode = "Dungeon") {
+                AddToLog("Handling Dungeon end")
+                return MonitorDungeonEnd()
+            }
             else if (mode = "Infinity Castle") {
                 AddToLog("Handling Infinity Castle end")
                 if (lastResult = "win") {
@@ -892,8 +896,11 @@ global mode, StoryActDropdown
     Loop {
         Sleep(1000)
         
-        if (mode = "Story" && StoryActDropdown.Text = "Infinity") {
-            PerformAntiAFK(lastClickTime)
+        timeElapsed := A_TickCount - lastClickTime
+        if (timeElapsed >= 10000) {
+            AddToLog("Performing anti-AFK click")
+            FixClick(560, 560)
+            lastClickTime := A_TickCount
         }
 
         if (mode = "Winter Event") {
@@ -921,7 +928,7 @@ PerformAntiAFK(lastClickTime) {
         Loop 3 {
             FixClick(560, 560)
         }
-        lastClickTime := A_TickCount
+        return A_TickCount ; Return the updated lastClickTime
     }
 }
 
@@ -1656,7 +1663,6 @@ MoveForMagicTown() {
 
 MoveForMagicHill() {
     if (ok := FindText(&X, &Y, 518, 334, 566, 404, 0.15, 0.15, MagicHillsBench) or (ok := FindText(&X, &Y, 522, 339, 557, 402, 0.15, 0.15, MagicHillLegendStageBench))) {
-        AddToLog("Angle 2")
         Fixclick(500, 20, "Right")
         Sleep (3000)
         Fixclick(500, 20, "Right")
@@ -1672,7 +1678,6 @@ MoveForMagicHill() {
         Fixclick(545, 30, "Right")
         Sleep (3000)
     } else {
-        AddToLog("Angle 1")
         Fixclick(45, 185, "Right")
         Sleep (3000)
         Fixclick(140, 250, "Right")
@@ -1936,9 +1941,19 @@ MaxUpgrade() {
     Sleep 500
     ; Check for max text
     if (ok := FindText(&X, &Y, 225, 388, 278, 412 , 0, 0, MaxText) or (ok:=FindText(&X, &Y, 255, 234, 299, 250, 0, 0, MaxText2))) {
+        if (CheckForElyssiaSummon()) {
+            return false
+        }
         return true
     }
     return false
+}
+
+CheckForElyssiaSummon() {
+    if FindText(&X, &Y, 14, 226, 138, 246, 0, 0, ElyssiaSummons) {
+        AddToLog("Clicked on Elyssia Eel, ignoring...")
+        return true
+    }
 }
 
 MaxUpgraded(limit) {
@@ -1988,12 +2003,9 @@ WaitForUpgradeText(timeout := 4500) {
     startTime := A_TickCount
     while (A_TickCount - startTime < timeout) {
         if (FindText(&X, &Y, 160, 215, 330, 420, 0, 0, UpgradeText) or (FindText(&X, &Y, 160, 215, 330, 420, 0, 0, UpgradeText2))) {
-            /*if FindText(&X, &Y, 15, 220, 121, 250, 0, 0, ElyssiaSummon) {
-                if (debugMessages) {
-                    AddToLog("Clicked on Elyssia Summon")
-                    return false
-                }
-            }*/
+            if (CheckForElyssiaSummon()) {
+                return false
+            }
             timeSaved := (A_TickCount - startTime)  ; Time saved
             if (debugMessages) {
                 AddToLog("Placement Speed: " . PlacementSpeed() . " ms")
@@ -2851,7 +2863,7 @@ CheckIfFinalRoom() {
 
 ; Custom monitor for dungeon ending
 MonitorDungeonEnd() {
-    global mode, Wins, loss
+    global mode, Wins, loss, challengeStartTime, inChallengeMode
 
     failed := false
     
