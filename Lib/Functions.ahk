@@ -706,3 +706,46 @@ UpgradeDetect(x, y, w, h, inputX, inputY, upgradeLimit) {
     AddToLog("Could not detect valid upgrade level")
     return false
 }
+
+SearchFor(Name) {
+    FindTexts := Map()
+    FindTexts["Dungeon Room Enter"] := { coords: [120, 425, 680, 500], searchText: Enter }
+
+    ; Check if the FindText exists in the map
+    if !FindTexts.Has(Name) {
+        AddToLog("Error: Couldn't find " Name "...")
+        return false  ; Invalid name
+    }
+
+    coords := FindTexts[Name].coords
+    searchText := FindTexts[Name].searchText
+    x1 := coords[1], y1 := coords[2], x2 := coords[3], y2 := coords[4]
+
+    ; Perform the Find Text search
+    if (FindText(&X, &Y, x1, y1, x2, y2, 0.20, 0.20, searchText)) {
+        return true  ; Interface found
+    }
+
+    return false  ; Interface not found
+}
+
+WaitFor(Name, timeout := 5000) {
+    startTime := A_TickCount  ; Get current time
+
+    ; **Wait for the FindText to appear**
+    Loop {
+        if (SearchFor(Name)) {
+            if (debugMessages) {
+                AddToLog("✅ " Name " detected, proceeding...")
+            }
+            return true  ; Interface found, exit loop
+        }
+        if ((A_TickCount - startTime) > timeout) {
+            if (debugMessages) {
+                AddToLog("⚠ " Name " was not found in time.")
+            }
+            return false  ; Exit if timeout reached
+        }
+        Sleep 100  ; Fast checks for better responsiveness
+    }
+}

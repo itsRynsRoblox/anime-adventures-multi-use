@@ -15,7 +15,7 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-    MonitorStage()
+
 }
 
 F6:: {
@@ -416,9 +416,7 @@ UpgradeSlot(slot, priorityNum, totalUnits, upgradedCount) {
                 slotDone := false
                 UpgradeUnitWithLimit(coord, index)
 
-                if (CheckForTerminationConditions()) {
-                    return
-                }
+                CheckForTerminationConditions()
 
                 if (MaxUpgrade()) {
                     HandleMaxUpgrade(coord, index, totalUnits, upgradedCount)
@@ -450,9 +448,7 @@ UpgradeAllUnits(totalUnits, upgradedCount) {
             return RejoinPrivateServer()
         }
 
-        if (CheckForTerminationConditions()) {
-            return
-        }
+        CheckForTerminationConditions()
 
         if (MaxUpgrade()) {
             HandleMaxUpgrade(coord, index, totalUnits, upgradedCount)
@@ -484,7 +480,7 @@ CheckForTerminationConditions() {
         AddToLog("Stage ended during upgrades, proceeding to results")
         successfulCoordinates := []
         maxedCoordinates := []
-        return true
+        return MonitorStage()
     }
     if (CheckForRobloxApp()) {
         AddToLog("Found Roblox App, rejoining private server...")
@@ -493,7 +489,6 @@ CheckForTerminationConditions() {
     if (CheckForLobbyText()) {
         return CheckLobby()
     }
-    return false
 }
 
 HandleMaxUpgrade(coord, index, totalUnits, upgradedCount) {
@@ -897,7 +892,7 @@ global mode, StoryActDropdown
         Sleep(1000)
         
         timeElapsed := A_TickCount - lastClickTime
-        if (timeElapsed >= 10000) {
+        if (timeElapsed >= 20000) {
             AddToLog("Performing anti-AFK click")
             FixClick(560, 560)
             lastClickTime := A_TickCount
@@ -905,6 +900,10 @@ global mode, StoryActDropdown
 
         if (mode = "Winter Event") {
             CheckForCardSelection()
+        }
+
+        if CheckForDisconnect() {
+            return Reconnect()
         }
 
         if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
@@ -1845,6 +1844,7 @@ RestartStage() {
 
 CheckForDisconnect() {
     if (ok := FindText(&X, &Y, 450, 410, 539, 427, 0, 0, Disconnect)) {
+        AddToLog("Found 20 minute disconnect message...")
         return true
     }
     return false
@@ -1852,7 +1852,7 @@ CheckForDisconnect() {
 
 Reconnect() {   
     ; Check for Disconnected Screen using FindText
-    if (ok := FindText(&X, &Y, 330, 218, 474, 247, 0, 0, Disconnect)) {
+    if (ok := FindText(&X, &Y, 450, 410, 539, 427, 0, 0, Disconnect)) {
         AddToLog("Lost Connection! Attempting To Reconnect To Private Server...")
 
         psLink := FileExist("Settings\PrivateServer.txt") ? FileRead("Settings\PrivateServer.txt", "UTF-8") : ""
@@ -1993,6 +1993,7 @@ ReachedUpgradeLimit() {
 UnitPlaced() {
     if (WaitForUpgradeText(PlacementSpeed())) { ; Wait up to 4.5 seconds for the upgrade text to appear
         AddToLog("Unit Placed Successfully")
+        CheckAbility()
         FixClick(325, 185) ; Close upgrade menu
         return true
     }
@@ -2302,6 +2303,9 @@ HandlePortalEnd() {
 HandlePortalJoin() {
     selectedPortal := PortalDropdown.Text
     joinType := PortalJoinDropdown.Text
+
+    FixClick(640, 70) ; Closes Player leaderboard
+    Sleep (500)
 
     if (joinType = "Solo") {
     ; Click items
@@ -2850,10 +2854,6 @@ ClickDungeonContinue() {
     ClickUntilGone(0, 0, 380, 385, 615, 490, DungeonContinue, -3, -35, DungeonContinue2)
 }
 
-ClickChestContinue() {
-    ClickUntilGone(0, 0, 404, 420, 568, 455, ChestContinue, 0, -35)
-}
-
 CheckIfFinalRoom() {
     if (ok := FindText(&X, &Y, 434, 215, 479, 230, 0, 0, FinalRoom)) {
         return true
@@ -2993,22 +2993,22 @@ SelectDungeonRoute() {
         AddToLog("Boss room detected!")
         global BossRoomCompleted := true
         FixClick(X, Y-30)
-        Sleep(1000)
+        WaitFor("Dungeon Room Enter")
     }
     else if (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChest) or (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChestNoHover))) {
         AddToLog("Found Double Chest Room, clicking it")
         FixClick(X, Y-30)
-        Sleep(1000)
+        WaitFor("Dungeon Room Enter")
     }
     else if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Chest)) {
         AddToLog("Found Chest Room, clicking it")
         FixClick(X, Y-30)
-        Sleep(1000)
+        WaitFor("Dungeon Room Enter")
     }
     else if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Hoard)) {
         AddToLog("Found Hoard Room, clicking it")
         FixClick(X, Y-30)
-        Sleep(1000)
+        WaitFor("Dungeon Room Enter")
     } 
     else {
         ; If no chest/hoard found, click default positions
@@ -3016,7 +3016,7 @@ SelectDungeonRoute() {
         FixClick(400, 355)
         Sleep(500)
         FixClick(335, 355)
-        Sleep(500)
+        WaitFor("Dungeon Room Enter")
     }
     
     ; Look for Enter button and click until gone
@@ -3114,7 +3114,7 @@ HandleChestScreen() {
     }
 
 ClaimChestReward() {
-    maxClicks := 30  ; Safety limit
+    maxClicks := 40  ; Safety limit
     clicks := 0
     
     while (clicks < maxClicks) {
@@ -3169,10 +3169,12 @@ TryHandlePortal(x1, y1, x2, y2, portalText, action) {
 }
 
 HandlePortalFallback() {
+    global mode
     FixClick(660, 187) ; Close Portal Interface if applicable
 
     if (PortalDropdown.Text = "Shibuya Portal") {
         AddToLog("No portal detected, changing to Shibuya District Infinite...")
+        mode := "Story"
 
         ModeDropdown.Text := "Story"
         StoryDropdown.Text := "Shibuya District"
