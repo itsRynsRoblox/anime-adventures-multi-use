@@ -414,17 +414,37 @@ UpgradeSlot(slot, priorityNum, totalUnits, upgradedCount) {
         for index, coord in successfulCoordinates {
             if (coord.slot = slot) {
                 slotDone := false
-                UpgradeUnitWithLimit(coord, index)
 
-                CheckForTerminationConditions()
+                ; If upgradeOneAtATime is true, only upgrade one unit
+                if (MaxUpgradeBeforeMoving.Value) {
+                    UpgradeUnitWithLimit(coord, index)
 
-                if (MaxUpgrade()) {
-                    HandleMaxUpgrade(coord, index, totalUnits, upgradedCount)
+                    CheckForTerminationConditions()
+
+                    if (MaxUpgrade()) {
+                        HandleMaxUpgrade(coord, index, totalUnits, upgradedCount)
+                        break
+                    }
+
+                    Sleep(200)
+                    PostUpgradeChecks()
+
+                    ; After upgrading one unit, exit the loop to prevent further upgrades
                     break
-                }
+                } else {
+                    ; Perform the upgrade as usual for multiple units
+                    UpgradeUnitWithLimit(coord, index)
 
-                Sleep(200)
-                PostUpgradeChecks()
+                    CheckForTerminationConditions()
+
+                    if (MaxUpgrade()) {
+                        HandleMaxUpgrade(coord, index, totalUnits, upgradedCount)
+                        break
+                    }
+
+                    Sleep(200)
+                    PostUpgradeChecks()
+                }
             }
         }
 
@@ -1634,7 +1654,7 @@ MoveForSpiritWorld() {
     SendInput ("{d up}")
     SendInput ("{w up}")
     sleep(500)
-    Fixclick(400, 15, "Right")
+    Fixclick(614, 97, "Right")
     sleep(4000)
 }
 
@@ -1695,15 +1715,40 @@ MoveForMagicHill() {
 }
 
 MoveForHauntedAcademy() {
-    color := PixelGetColor(647, 187)
-    if (ok := FindText(&X, &Y, 620, 200, 750, 375, 0.15, 0.15, AcademyAngle2)) or (IsColorInRange(color, 0xFDF0B3)) {
-        SendInput ("{s down}")
-        sleep (3000)
-        SendInput ("{s up}")
-    } else {
-        SendInput ("{d down}")
-        Sleep (3000)
-        SendInput ("{d up}")
+    if (ok := FindText(&X, &Y, 173, 401, 224, 437, 0.15, 0.15, HauntedAcademyAngle)) {
+        if (ModeDropdown.Text = "Story") {
+            AddToLog("Angle 1")
+            SendInput ("{d up}")
+            Sleep 100
+            SendInput ("{d down}")
+            Sleep 3500
+            SendInput ("{d up}")
+            KeyWait "d"
+        } else {
+            SendInput ("{w up}")
+            Sleep 100
+            SendInput ("{w down}")
+            Sleep 6500
+            SendInput ("{w up}")
+            KeyWait "w"
+        }
+    }
+    if (ok := FindText(&X, &Y, 720, 124, 766, 170, 0.15, 0.15, HauntedAcademyAngle2)) {    
+        if (ModeDropdown.Text = "Story") {
+            SendInput ("{s up}")
+            Sleep 100
+            SendInput ("{s down}")
+            Sleep 3500
+            SendInput ("{s up}")
+            KeyWait "s"
+        } else {
+            SendInput ("{d up}")
+            Sleep 100
+            SendInput ("{d down}")
+            Sleep 6500
+            SendInput ("{d up}")
+            KeyWait "s"
+        }
     }
 }
 

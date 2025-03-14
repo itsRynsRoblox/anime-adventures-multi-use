@@ -241,6 +241,25 @@ OpenGuide(*) {
     GuideGUI.Show("w800")
 }
 
+OpenDungeonSettings(*) {
+    DungeonGUI := Gui("+AlwaysOnTop")
+    DungeonGUI.SetFont("s10 bold", "Segoe UI")
+    DungeonGUI.Title := "Dungeon Settings"
+
+    DungeonGUI.BackColor := "0c000a"
+    DungeonGUI.MarginX := 20
+    DungeonGUI.MarginY := 20
+
+    ; Add Guide content
+    DungeonGUI.SetFont("s16 bold", "Segoe UI")
+
+    DungeonGUI.Add("Text", "x0 w200 cWhite +Center", "1 - In your AA settings make sure you have these 2 settings set to this")
+    SaveChestsBox2 := DungeonGUI.Add("CheckBox", "x0 cffffff Checked", "Save Chests")
+
+
+    DungeonGUI.Show("w200")
+}
+
 aaMainUI.SetFont("s12 Bold c" uiTheme[1])
 global settingsBtn := aaMainUI.Add("Button", "x1200 y0 w90 h30", "Settings")
 settingsBtn.OnEvent("Click", ShowSettingsGUI)
@@ -259,6 +278,8 @@ SaveChestsBox := aaMainUI.Add("CheckBox", "x900 y451 cffffff Checked", "Save Che
 QuitIfFailBox := aaMainUI.Add("CheckBox", "x1005 y451 cffffff Checked", "Stop Upon Defeat")
 ;Contract Options
 global TeamSwap := aaMainUI.Add("CheckBox", "x1035 y451 cffffff", "Team Swap")
+;Upgrade Option Testing
+global MaxUpgradeBeforeMoving := aaMainUI.Add("CheckBox", "x200 y655 cffffff", "Upgrade units one at a time")
 ;Normal Options
 global MatchMaking := aaMainUI.Add("Checkbox", "x1035 y451 cffffff Hidden Checked", "Matchmaking")
 global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Return To Lobby")
@@ -281,6 +302,7 @@ DiscordButton := aaMainUI.Add("Picture", "x112 y645 w60 h34 +BackgroundTrans cff
 
 GithubButton.OnEvent("Click", (*) => OpenGithub())
 DiscordButton.OnEvent("Click", (*) => OpenDiscord())
+MaxUpgradeBeforeMoving.OnEvent("Click", (*) => SendWarningMessage())
 
 ShibuyaSwapText := aaMainUI.Add("Text", "x635 y642 w115 h20 +Center", "Shibuya Infinite")
 global ShibuyaSwap := aaMainUI.Add("CheckBox", "x611 y662 cffffff", "Rotate Infinite / Portals")
@@ -602,3 +624,6 @@ checkSizeTimer() {
     }
 }
 
+SendWarningMessage() {
+    AddToLog("This only works in main upgrade phase")
+}

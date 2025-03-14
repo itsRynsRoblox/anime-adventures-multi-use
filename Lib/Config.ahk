@@ -28,7 +28,7 @@ readInSettings() {
     global PhysicalTeam, MagicTeam, TeamSwap
     global QuitIfFailBox
     global RejoinRoblox
-    global ReturnLobbyBox, StoryUINav
+    global ReturnLobbyBox, StoryUINav, MaxUpgradeBeforeMoving
 
     try {
         settingsFile := setupFilePath()
@@ -110,6 +110,7 @@ readInSettings() {
                 case "FailsafeEnabled": RejoinRoblox.Value := parts[2] ; Set the checkbox value
                 case "ToLobby": ReturnLobbyBox.Value := parts[2] ; Set the checkbox value
                 case "UseNavigation": StoryUINav.Value := parts[2] ; Set the checkbox value
+                case "Upgrade1By1": MaxUpgradeBeforeMoving.Value := parts[2] ; Set the checkbox value
             }
         }
         AddToLog("Configuration settings loaded successfully")
@@ -131,7 +132,7 @@ SaveSettings(*) {
     global ChallengeBox, PriorityUpgrade
     global PlacementPatternDropdown, PlaceSpeed, MatchMaking
     global PhysicalTeam, MagicTeam, TeamSwap
-    global RejoinRoblox, ReturnLobbyBox, QuitIfFailBox, StoryUINav
+    global RejoinRoblox, ReturnLobbyBox, QuitIfFailBox, StoryUINav, MaxUpgradeBeforeMoving
 
     try {
         settingsFile := A_ScriptDir "\Settings\Configuration.txt"
@@ -242,6 +243,9 @@ SaveSettings(*) {
 
         content .= "`n`n[UINavigation]"
         content .= "`nUseNavigation=" StoryUINav.Value "`n"
+
+        content .= "`n`n[UpgradeTesting]"
+        content .= "`nUpgrade1By1=" MaxUpgradeBeforeMoving.Value "`n"
 
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")
