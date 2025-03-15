@@ -131,15 +131,15 @@ OpenDiscordLink() {
     PortalDropdown.Visible := false 
     PortalJoinDropdown.Visible := false  
     ContractPageDropdown.Visible := false  
-    ContractJoinDropdown.Visible := false 
+    ContractJoinDropdown.Visible := false
 
     ;Dungeon
     SaveChestsBox.Visible := false
     QuitIfFailBox.Visible := false
+    DenyShrines.Visible := false
 
     ;Shibuya Infinite
     ShibuyaSwap.Visible := false
-    ShibuyaSwapText.Visible := false
 
     ;Contracts
     TeamSwap.Visible := false
@@ -172,14 +172,14 @@ OpenDiscordLink() {
         MagicTeam.Visible := true
         PhysicalTeamText.Visible := true
         PhysicalTeam.Visible := true
+        ReturnLobbyBox.Visible := true
     } else if (selected = "Portal") {
         PortalDropdown.Visible := true
         PortalJoinDropdown.Visible := true
         mode := "Portal"
     } else if (selected = "Dungeon") {
         AddToLog("⚠️ Dungeon is still under development! Stay tuned for updates.")
-        SaveChestsBox.Visible := true
-        QuitIfFailBox.Visible := true
+        ToggleDungeonCheckboxes()
         mode := "Dungeon"
     } else if (selected = "Cursed Womb") {
         mode := "Cursed Womb"
@@ -201,14 +201,17 @@ OnStoryChange(*) {
 OnStoryActChange(*) {
     if (StoryActDropdown.Text = "Infinity") {
         if (StoryDropdown.Text = "Shibuya District") {
-            ShibuyaSwapText.Visible := true
+            ReturnLobbyBox.Visible := true
+            MatchMaking.Visible := true
             ShibuyaSwap.Visible := true
         } else {
-            ShibuyaSwapText.Visible := false
+            ReturnLobbyBox.Visible := false
+            MatchMaking.Visible := false
             ShibuyaSwap.Visible := false
         }
     } else {
-        ShibuyaSwapText.Visible := false
+        ReturnLobbyBox.Visible := false
+        MatchMaking.Visible := false
         ShibuyaSwap.Visible := false
     }
 }

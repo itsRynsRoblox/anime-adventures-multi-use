@@ -594,7 +594,11 @@ LegendMode() {
         StoryMovement()
     }
     AddToLog("Starting " currentLegendMap " - " currentLegendAct)
-    StartLegend(currentLegendMap, currentLegendAct)
+    if (StoryUINav.Value) {
+        StartLegend(currentLegendMap, currentLegendAct)
+    } else {
+        StartLegendNoUINavigation(currentLegendMap, currentLegendAct)
+    }
 
     ; Handle play mode selection
     if (MatchMaking.Value) {
@@ -623,7 +627,11 @@ RaidMode() {
         RaidMovement()
     }
     AddToLog("Starting " currentRaidMap " - " currentRaidAct)
-    StartRaid(currentRaidMap, currentRaidAct)
+    if (StoryUINav.Value) {
+        StartRaid(currentRaidMap, currentRaidAct)
+    } else {
+        StartRaidNoUINavigation(currentRaidMap, currentRaidAct)
+    }
     ; Handle play mode selection
     if (MatchMaking.Value) {
         FindMatch()
@@ -1117,6 +1125,11 @@ StartStoryNoUINavigation(map, act) {
     FixClick(640, 70)
     Sleep(500)
 
+    if (CheckForNotification()) {
+        ClickUntilGone(0, 0, 748, 94, 778, 551, ExitNotification, -3, -30)
+        Sleep (1000)
+    }
+
     ; Get Story map 
     StoryMap := GetMapData("StoryMap", map)
     
@@ -1159,35 +1172,35 @@ StartStoryNoUINavigation(map, act) {
 GetMapData(type, name) {
     data := Map(
         "StoryMap", Map(
-            "Planet Greenie", {x: 700, y: 250, scrolls: 0},
-            "Walled City", {x: 700, y: 300, scrolls: 0},
-            "Snowy Town", {x: 700, y: 350, scrolls: 0},
-            "Sand Village", {x: 700, y: 400, scrolls: 0},
+            "Planet Greenie", {x: 630, y: 250, scrolls: 0},
+            "Walled City", {x: 630, y: 300, scrolls: 0},
+            "Snowy Town", {x: 630, y: 350, scrolls: 0},
+            "Sand Village", {x: 630, y: 400, scrolls: 0},
 
-            "Navy Bay", {x: 700, y: 325, scrolls: 1},
-            "Fiend City", {x: 700, y: 375, scrolls: 1},
-            "Spirit World", {x: 700, y: 425, scrolls: 1},
+            "Navy Bay", {x: 630, y: 325, scrolls: 1},
+            "Fiend City", {x: 630, y: 375, scrolls: 1},
+            "Spirit World", {x: 630, y: 425, scrolls: 1},
 
-            "Ant Kingdom", {x: 700, y: 340, scrolls: 2},
-            "Magic Town", {x: 700, y: 375, scrolls: 2},
+            "Ant Kingdom", {x: 630, y: 340, scrolls: 2},
+            "Magic Town", {x: 630, y: 375, scrolls: 2},
 
-            "Haunted Academy", {x: 700, y: 310, scrolls: 3},
-            "Magic Hills", {x: 700, y: 360, scrolls: 3},
-            "Space Center", {x: 700, y: 410, scrolls: 3},
+            "Haunted Academy", {x: 630, y: 310, scrolls: 3},
+            "Magic Hills", {x: 630, y: 360, scrolls: 3},
+            "Space Center", {x: 630, y: 410, scrolls: 3},
 
-            "Alien Spaceship", {x: 700, y: 325, scrolls: 4},
-            "Fabled Kingdom", {x: 700, y: 375, scrolls: 4},
-            "Space Center", {x: 700, y: 435, scrolls: 4},
+            "Alien Spaceship", {x: 630, y: 325, scrolls: 4},
+            "Fabled Kingdom", {x: 630, y: 375, scrolls: 4},
+            "Space Center", {x: 630, y: 435, scrolls: 4},
 
-            "Puppet Island", {x: 700, y: 350, scrolls: 5},
-            "Virtual Dungeon", {x: 700, y: 400, scrolls: 5},
+            "Puppet Island", {x: 630, y: 350, scrolls: 5},
+            "Virtual Dungeon", {x: 630, y: 400, scrolls: 5},
 
-            "Snowy Kingdom", {x: 700, y: 315, scrolls: 6},
-            "Dungeon Throne", {x: 700, y: 365, scrolls: 6},
-            "Mountain Temple", {x: 700, y: 415, scrolls: 6},
+            "Snowy Kingdom", {x: 630, y: 315, scrolls: 6},
+            "Dungeon Throne", {x: 630, y: 365, scrolls: 6},
+            "Mountain Temple", {x: 630, y: 415, scrolls: 6},
 
-            "Rain Village", {x: 700, y: 335, scrolls: 7},
-            "Shibuya District", {x: 700, y: 385, scrolls: 7}
+            "Rain Village", {x: 630, y: 335, scrolls: 7},
+            "Shibuya District", {x: 630, y: 385, scrolls: 7}
         ),
         "StoryAct", Map(
             "Infinity", {x: 285, y: 235, scrolls: 0},
@@ -1198,6 +1211,38 @@ GetMapData(type, name) {
 
             "Act 5", {x: 300, y: 350, scrolls: 1},
             "Act 6", {x: 300, y: 385, scrolls: 1}
+        ),
+        "RaidMap", Map(
+            "Ant Kingdom", {x: 630, y: 250, scrolls: 0},
+            "Sacred Planet", {x: 630, y: 300, scrolls: 0},
+            "Strange Town", {x: 630, y: 350, scrolls: 0},
+            "Ruined City", {x: 630, y: 400, scrolls: 0},
+            "Cursed Festival", {x: 630, y: 325, scrolls: 1},
+        ),
+        "RaidAct", Map(
+            "Act 1", {x: 285, y: 235, scrolls: 0},
+            "Act 2", {x: 285, y: 270, scrolls: 0},
+            "Act 3", {x: 285, y: 305, scrolls: 0},
+            "Act 4", {x: 285, y: 340, scrolls: 0},
+            "Act 5", {x: 285, y: 375, scrolls: 0}
+        ),
+        "LegendMap", Map(
+            "Magic Hills", {x: 630, y: 240, scrolls: 0},
+            "Spirit Invasion", {x: 630, y: 290, scrolls: 0},
+            "Space Center", {x: 630, y: 340, scrolls: 0},
+            "Fabled Kingdom", {x: 630, y: 390, scrolls: 0},
+            "Ruined City", {x: 630, y: 440, scrolls: 0},
+
+            "Virtual Dungeon", {x: 630, y: 350, scrolls: 1},
+            "Dungeon Throne", {x: 630, y: 405, scrolls: 1},
+            "Rain Village", {x: 630, y: 440, scrolls: 1}
+        ),
+        "LegendAct", Map(
+            "Act 1", {x: 285, y: 235, scrolls: 0},
+            "Act 2", {x: 285, y: 270, scrolls: 0},
+            "Act 3", {x: 285, y: 305, scrolls: 0},
+            "Act 4", {x: 285, y: 340, scrolls: 0},
+            "Act 5", {x: 285, y: 375, scrolls: 0}
         )
     )
 
@@ -1247,6 +1292,60 @@ StartLegend(map, LegendActDropdown) {
     }
 }
 
+StartLegendNoUINavigation(map, act) {
+    AddToLog("Selecting map: " map " and act: " act)
+    
+    ; Closes Player leaderboard
+    FixClick(640, 70)
+    Sleep(500)
+
+    FixClick(660, 140) ; Click Legend Stages
+    Sleep(500)
+
+    if (CheckForNotification()) {
+        ClickUntilGone(0, 0, 748, 94, 778, 551, ExitNotification, -3, -30)
+        Sleep (1000)
+    }
+
+    ; Get Legend Stage Map 
+    LegendMap := GetMapData("LegendMap", map)
+    
+    ; Scroll if needed
+    if (LegendMap.scrolls > 0) {
+        AddToLog("Scrolling down " LegendMap.scrolls " for " map)
+        MouseMove(700, 210)
+        loop LegendMap.scrolls {
+            SendInput("{WheelDown}")
+            Sleep(250)
+        }
+    }
+    Sleep(1000)
+    
+    ; Click on the map
+    FixClick(LegendMap.x, LegendMap.y)
+    Sleep(1000)
+    
+    ; Get act details
+    LegendAct := GetMapData("LegendAct", act)
+    
+    ; Scroll if needed for act
+    if (LegendAct.scrolls > 0) {
+        AddToLog("Scrolling down " LegendAct.scrolls " times for " act)
+        MouseMove(300, 240)
+        loop LegendAct.scrolls {
+            SendInput("{WheelDown}")
+            Sleep(250)
+        }
+    }
+    Sleep(1000)
+    
+    ; Click on the act
+    FixClick(LegendAct.x, LegendAct.y)
+    Sleep(1000)
+    
+    return true
+}
+
 StartRaid(map, RaidActDropdown) {
     FixClick(640, 70) ; Closes Player leaderboard
     Sleep(500)
@@ -1294,6 +1393,56 @@ PlayHere() {
     Sleep (500)
 }
 
+StartRaidNoUINavigation(map, act) {
+    AddToLog("Selecting map: " map " and act: " act)
+    
+    ; Closes Player leaderboard
+    FixClick(640, 70)
+    Sleep(500)
+
+    if (CheckForNotification()) {
+        ClickUntilGone(0, 0, 748, 94, 778, 551, ExitNotification, -3, -30)
+        Sleep (1000)
+    }
+
+    ; Get Story map 
+    RaidMap := GetMapData("RaidMap", map)
+    
+    ; Scroll if needed
+    if (RaidMap.scrolls > 0) {
+        AddToLog("Scrolling down " RaidMap.scrolls " for " map)
+        MouseMove(700, 210)
+        loop RaidMap.scrolls {
+            SendInput("{WheelDown}")
+            Sleep(250)
+        }
+    }
+    Sleep(1000)
+    
+    ; Click on the map
+    FixClick(RaidMap.x, RaidMap.y)
+    Sleep(1000)
+    
+    ; Get act details
+    RaidAct := GetMapData("RaidAct", act)
+    
+    ; Scroll if needed for act
+    if (RaidAct.scrolls > 0) {
+        AddToLog("Scrolling down " RaidAct.scrolls " times for " act)
+        MouseMove(300, 240)
+        loop RaidAct.scrolls {
+            SendInput("{WheelDown}")
+            Sleep(250)
+        }
+    }
+    Sleep(1000)
+    
+    ; Click on the act
+    FixClick(RaidAct.x, RaidAct.y)
+    Sleep(1000)
+    
+    return true
+}
 
 
 FindMatch() {
@@ -1501,6 +1650,7 @@ DetectMap() {
             "Fiend City", Fiend,
             "Spirit World", Spirit,
             "Haunted Academy", Academy,
+            "Alien Spaceship", AlienSpaceship,
             "Space Center", SpaceCenter,
             "Mountain Temple", Mount,
             "Cursed Festival", Cursed,
@@ -1597,23 +1747,8 @@ MoveForAlienSpaceship() {
 }
 
 MoveForSnowyTown() {
-    FixClick(590, 15) ; click on paths
-    loop 50 {
-        Sleep 100
-
-        if FindAndMoveToPath() {
-            FixClick(590, 15) ; click on paths
-            break
-        }
-    }
-    /*Fixclick(700, 125, "Right")
-    Sleep (6000)
-    Fixclick(615, 115, "Right")
-    Sleep (3000)
-    Fixclick(725, 300, "Right")
-    Sleep (3000)
-    Fixclick(715, 395, "Right")
-    Sleep (3000)*/
+    Fixclick(672, 122, "Right")
+    Sleep (6500)
 }
 
 MoveForNavyBay() {
@@ -2072,10 +2207,8 @@ CheckAbility() {
     ; Only check ability if checkbox is checked
     if (AutoAbilityBox.Value) {
         if (ok := FindText(&X, &Y, 342, 253, 401, 281, 0, 0, AutoOff)) {
-            ;if (!CheckForErwin()) {
-                FixClick(373, 237)  ; Turn ability on
-                AddToLog("Auto Ability Enabled")
-            ;}
+            FixClick(373, 237)  ; Turn ability on
+            AddToLog("Auto Ability Enabled")
         }
     }
 }
@@ -2704,25 +2837,13 @@ IsColorInRange(color, targetColor, tolerance := 50) {
         && Abs(b1 - b2) <= tolerance
 }
 
+
 PlacementSpeed() {
-    if PlaceSpeed.Text = "Super Fast (1s)" {
-        return 1000
-    }
-    else if PlaceSpeed.Text = "Fast (1.5s)" {
-        return 1500
-    }
-    else if PlaceSpeed.Text = "Default (2s)" {
-        return 2000
-    }
-    else if PlaceSpeed.Text = "Slow (2.5s)" {
-        return 2500
-    }
-    else if PlaceSpeed.Text = "Very Slow (3s)" {
-        return 3000
-    }
-    else if PlaceSpeed.Text = "Toaster (4s)" {
-        return 4000
-    }
+    speeds := [1000, 1500, 2000, 2500, 3000, 4000, 5000]  ; Array of sleep values
+    speedIndex := PlaceSpeed.Value  ; Get the selected speed value
+
+    if speedIndex is number  ; Ensure it's a number
+        return speeds[speedIndex]  ; Use the value directly from the array
 }
 
 FindAndClickBeam(targetColor := 0x006783, searchArea := [0, 0, GetWindowCenter(rblxID).Width, GetWindowCenter(rblxID).Height]) {
@@ -3029,11 +3150,11 @@ CheckDungeonSpecials() {
     
     if (!foundShop && !foundShrine && !foundChest)
         AddToLog("No shop, shrine, or chest found")
-
-    return (foundShop || foundShrine || foundChest)
 }
 
 SelectDungeonRoute() {
+    CheckDungeonSpecials()
+    Sleep(2000)
     if (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom) or (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom2))) {
         AddToLog("Boss room detected!")
         global BossRoomCompleted := true
@@ -3054,7 +3175,7 @@ SelectDungeonRoute() {
         AddToLog("Found Hoard Room, clicking it")
         FixClick(X, Y-30)
         WaitFor("Dungeon Room Enter")
-    } 
+    }
     else {
         ; If no chest/hoard found, click default positions
         AddToLog("No chest/hoard found, clicking default positions")
@@ -3286,4 +3407,8 @@ CheckUpgradeLimit(upgradeCap) {
 
 CheckForRobloxApp() {
     return FindText(&X, &Y, 14, 55, 57, 115, 0, 0, RobloxApp) ? true : false
+}
+
+CheckForNotification() {
+    return FindText(&X, &Y, 748, 94, 778, 551, 0, 0, ExitNotification) ? true : false
 }

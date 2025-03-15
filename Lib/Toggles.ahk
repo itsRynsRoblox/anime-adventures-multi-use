@@ -10,7 +10,5 @@ global contractsEnabled := true
 
 global debugMessages := false
 
-global testUpgrade := false
-
 
 

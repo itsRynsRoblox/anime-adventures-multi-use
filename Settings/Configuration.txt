@@ -8,6 +8,23 @@ Enabled4=1
 Enabled5=1
 Enabled6=1
 
+[ChallengePlacement]
+ChallengePlacement1=1
+ChallengePlacement2=1
+ChallengePlacement3=1
+ChallengePlacement4=1
+ChallengePlacement5=1
+ChallengePlacement6=1
+
+[ChallengePriority]
+ChallengePriority1=1
+ChallengePriority2=1
+ChallengePriority3=1
+ChallengePriority4=1
+ChallengePriority5=1
+ChallengePriority6=1
+
+[Placement]
 Placement1=1
 Placement2=1
 Placement3=1
@@ -15,6 +32,7 @@ Placement4=1
 Placement5=1
 Placement6=1
 
+[Priority]
 Priority1=1
 Priority2=2
 Priority3=3
@@ -43,22 +61,6 @@ UpgradeLimitEnabled4=0
 UpgradeLimitEnabled5=0
 UpgradeLimitEnabled6=0
 
-[ChallengePlacement]
-ChallengePlacement1=1
-ChallengePlacement2=1
-ChallengePlacement3=1
-ChallengePlacement4=1
-ChallengePlacement5=1
-ChallengePlacement6=1
-
-[ChallengePriority]
-ChallengePriority1=1
-ChallengePriority2=1
-ChallengePriority3=1
-ChallengePriority4=1
-ChallengePriority5=1
-ChallengePriority6=1
-
 [PlacementLogic]
 Logic=1
 
@@ -70,7 +72,7 @@ Speed=3
 Matchmake=0
 
 [PriorityUpgrade]
-Upgrade=0
+Upgrade=1
 
 [AutoChallenge]
 Challenge=0

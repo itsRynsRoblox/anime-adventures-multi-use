@@ -156,19 +156,29 @@ SaveSettings(*) {
         content .= "`nEnabled5=" enabled5.Value
         content .= "`nEnabled6=" enabled6.Value
 
-        content .= "`n`nPlacement1=" placement1.Text
-        content .= "`nPlacement2=" placement2.Text
-        content .= "`nPlacement3=" placement3.Text
-        content .= "`nPlacement4=" placement4.Text
-        content .= "`nPlacement5=" placement5.Text
-        content .= "`nPlacement6=" placement6.Text
+        ; Create ChallengePlacement section
+        content .= "`n`n[ChallengePlacement]"
+        Loop 6 {
+            content .= "`nChallengePlacement" A_Index "=" ChallengePlacement%A_Index%.Text
+        }
 
-        content .= "`n`nPriority1=" priority1.Text
-        content .= "`nPriority2=" priority2.Text
-        content .= "`nPriority3=" priority3.Text
-        content .= "`nPriority4=" priority4.Text
-        content .= "`nPriority5=" priority5.Text
-        content .= "`nPriority6=" priority6.Text
+        ; Create ChallengePriority section
+        content .= "`n`n[ChallengePriority]"
+        Loop 6 {
+            content .= "`nChallengePriority" A_Index "=" ChallengePriority%A_Index%.Text
+        }
+
+        ; Create Placement section
+        content .= "`n`n[Placement]"
+        Loop 6 {
+            content .= "`nPlacement" A_Index "=" placement%A_Index%.Text
+        }
+
+        ; Create Priority section
+        content .= "`n`n[Priority]"
+        Loop 6 {
+            content .= "`nPriority" A_Index "=" priority%A_Index%.Text
+        }
 
         content .= "`n`nUpgradeLimit1=" UpgradeLimit1.Text
         content .= "`nUpgradeLimit2=" UpgradeLimit2.Text
@@ -190,23 +200,6 @@ SaveSettings(*) {
         content .= "`nUpgradeLimitEnabled4=" upgradeLimitEnabled4.Value
         content .= "`nUpgradeLimitEnabled5=" upgradeLimitEnabled5.Value
         content .= "`nUpgradeLimitEnabled6=" upgradeLimitEnabled6.Value
-
-
-        content .= "`n`n[ChallengePlacement]"
-        content .= "`nChallengePlacement1=" ChallengePlacement1.Text
-        content .= "`nChallengePlacement2=" ChallengePlacement2.Text
-        content .= "`nChallengePlacement3=" ChallengePlacement3.Text
-        content .= "`nChallengePlacement4=" ChallengePlacement4.Text
-        content .= "`nChallengePlacement5=" ChallengePlacement5.Text
-        content .= "`nChallengePlacement6=" ChallengePlacement6.Text
-
-        content .= "`n`n[ChallengePriority]"
-        content .= "`nChallengePriority1=" ChallengePriority1.Text
-        content .= "`nChallengePriority2=" ChallengePriority2.Text
-        content .= "`nChallengePriority3=" ChallengePriority3.Text
-        content .= "`nChallengePriority4=" ChallengePriority4.Text
-        content .= "`nChallengePriority5=" ChallengePriority5.Text
-        content .= "`nChallengePriority6=" ChallengePriority6.Text
 
         content .= "`n`n[PlacementLogic]"
         content .= "`nLogic=" PlacementPatternDropdown.Value "`n"

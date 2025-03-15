@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.10"
+global currentVersion := "1.10.1"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -270,27 +270,41 @@ placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
 aaMainUI.SetFont("s9")
 
-global StoryUINav := aaMainUI.Add("Checkbox", "x875 y8 c" uiTheme[1], "Use UI Navigation for Story")
-
-global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Next Level")
-; Dungeon Options
-SaveChestsBox := aaMainUI.Add("CheckBox", "x900 y451 cffffff Checked", "Save Chests")
-QuitIfFailBox := aaMainUI.Add("CheckBox", "x1005 y451 cffffff Checked", "Stop Upon Defeat")
-;Contract Options
-global TeamSwap := aaMainUI.Add("CheckBox", "x1035 y451 cffffff", "Team Swap")
-;Upgrade Option Testing
-global MaxUpgradeBeforeMoving := aaMainUI.Add("CheckBox", "x200 y655 cffffff", "Upgrade units one at a time")
 ;Normal Options
-global MatchMaking := aaMainUI.Add("Checkbox", "x1035 y451 cffffff Hidden Checked", "Matchmaking")
+global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Next Level")
 global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Return To Lobby")
-global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Auto Ability")
-global ChallengeBox := aaMainUI.Add("CheckBox", "x1150 y476 cffffff", "Auto Challenge")
-global PriorityUpgrade := aaMainUI.Add("CheckBox", "x1005 y476 cffffff", "Priority Upgrade")
-global RejoinRoblox := aaMainUI.Add("Checkbox", "x1150 y451 c" uiTheme[1], "Pending Teleport Failsafe")
+global MatchMaking := aaMainUI.Add("Checkbox", "x900 y476 cffffff Hidden Checked", "Matchmaking") ; Old : x1035 y451
+;Contract Options
+global TeamSwap := aaMainUI.Add("CheckBox", "x900 y476 cffffff", "Team Swap")
+PhysicalTeamText := aaMainUI.Add("Text", "x1135 y451 w115 h20 +Center", "Physical Team")
+global PhysicalTeam := aaMainUI.Add("DropDownList", "x1170 y471 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
+MagicTeamText := aaMainUI.Add("Text", "x1250 y451 w80 h20 +Center", "Magic Team")
+global MagicTeam := aaMainUI.Add("DropDownList", "x1270 y471 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
+; Dungeon Options
+SaveChestsBox := aaMainUI.Add("CheckBox", "x900 y451 cffffff Checked", "Save Chests For Rukia")
+QuitIfFailBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Stop Upon Defeat") ;x1005 y451
+DenyShrines := aaMainUI.Add("CheckBox", "x1075 y451 cffffff Checked", "Reject Shrines")
+;Upgrade Option Testing
+global UpgradeSettings := aaMainUI.Add("GroupBox", "x180 y630 w220 h60 +Center c" uiTheme[1], "Upgrade Settings")
+global PriorityUpgrade := aaMainUI.Add("CheckBox", "x185 y650 cffffff", "Priority Upgrade")
+global MaxUpgradeBeforeMoving := aaMainUI.Add("CheckBox", "x185 y670 cffffff", "Upgrade units one at a time")
+;Misc Options
+global MiscSettings := aaMainUI.Add("GroupBox", "x420 y630 w220 h60 +Center c" uiTheme[1], "Misc. Settings")
+global RejoinRoblox := aaMainUI.Add("Checkbox", "x425 y650 c" uiTheme[1], "Pending Teleport Failsafe")
+global StoryUINav := aaMainUI.Add("Checkbox", "x425 y670 c" uiTheme[1], "Use UI Navigation")
+;Auto Settings
+global AutoSettings := aaMainUI.Add("GroupBox", "x660 y630 w135 h60 +Center c" uiTheme[1], "Auto Settings")
+global AutoAbilityBox := aaMainUI.Add("CheckBox", "x665 y650 cffffff Checked", "Auto Ability")
+global ChallengeBox := aaMainUI.Add("CheckBox", "x665 y670 cffffff", "Auto Challenge")
+;Shibuya Settings
+global ShibuyaSwap := aaMainUI.Add("CheckBox", "x1150 y451 cffffff", "Rotate Infinite / Portals")
+;global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Auto Ability")
+;global ChallengeBox := aaMainUI.Add("CheckBox", "x1150 y476 cffffff", "Auto Challenge")
+;global ChallengeBox := aaMainUI.Add("CheckBox", "x1005 y476 cffffff", "Auto Challenge")
 PlacementPatternText := aaMainUI.Add("Text", "x1032 y390 w115 h20", "Placement Type")
 global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
 PlaceSpeedText := aaMainUI.Add("Text", "x1193 y390 w115 h20", "Placement Speed")
-global PlaceSpeed := aaMainUI.Add("DropDownList", "x1205 y410 w100 h180 Choose1 +Center", ["Super Fast (1s)", "Fast (1.5s)", "Default (2s)", "Slow (2.5s)", "Very Slow (3s)", "Toaster (4s)"])
+global PlaceSpeed := aaMainUI.Add("DropDownList", "x1205 y410 w100 h180 Choose1 +Center", ["Super Fast (1s)", "Fast (1.5s)", "Default (2s)", "Slow (2.5s)", "Very Slow (3s)", "Toaster (4s)", "Gameboy (5s)"])
 PlacementSelectionText := aaMainUI.Add("Text", "x857 y390 w130 h20", "Placement Settings")
 PlacementSelection := aaMainUI.Add("DropDownList", "x865 y410 w100 h180 Choose1 +Center", ["Normal", "Challenge"])
 placementSaveText := aaMainUI.Add("Text", "x807 y451 w80 h20", "Save Config")
@@ -303,16 +317,6 @@ DiscordButton := aaMainUI.Add("Picture", "x112 y645 w60 h34 +BackgroundTrans cff
 GithubButton.OnEvent("Click", (*) => OpenGithub())
 DiscordButton.OnEvent("Click", (*) => OpenDiscord())
 MaxUpgradeBeforeMoving.OnEvent("Click", (*) => SendWarningMessage())
-
-ShibuyaSwapText := aaMainUI.Add("Text", "x635 y642 w115 h20 +Center", "Shibuya Infinite")
-global ShibuyaSwap := aaMainUI.Add("CheckBox", "x611 y662 cffffff", "Rotate Infinite / Portals")
-
-;----------TEAM SWAPPING-----------;
-PhysicalTeamText := aaMainUI.Add("Text", "x576 y642 w115 h20 +Center", "Physical Team")
-global PhysicalTeam := aaMainUI.Add("DropDownList", "x611 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
-
-MagicTeamText := aaMainUI.Add("Text", "x680 y642 w115 h20 +Center", "Magic Team")
-global MagicTeam := aaMainUI.Add("DropDownList", "x711 y662 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
 
 ;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT
@@ -352,9 +356,10 @@ Hotkeytext2.Visible := false
 ;Dungeons
 SaveChestsBox.Visible := false
 QuitIfFailBox.Visible := false
+DenyShrines.Visible := false
 
+;Portal Farming
 ShibuyaSwap.Visible := false
-ShibuyaSwapText.Visible := false
 
 ;Contracts
 TeamSwap.Visible := false
@@ -626,4 +631,18 @@ checkSizeTimer() {
 
 SendWarningMessage() {
     AddToLog("This only works in main upgrade phase")
+}
+
+; Function to toggle visibility of the checkboxes
+ToggleDungeonCheckboxes() {
+    global SaveChestsBox, QuitIfFailBox, DenyShrines
+    
+    ; Check the current visibility state and toggle
+    currentState := SaveChestsBox.Visible  ; Use the visibility of the first checkbox to determine the state
+    newVisibility := !currentState  ; Toggle visibility
+
+    ; Set the visibility for all checkboxes
+    SaveChestsBox.Visible := newVisibility
+    QuitIfFailBox.Visible := newVisibility
+    ;DenyShrines.Visible := newVisibility
 }
