@@ -42,7 +42,7 @@ TogglePause(*) {
 
 PlacingUnits() {
     CheckForCardSelection()
-    global successfulCoordinates, maxedCoordinates
+    global successfulCoordinates, maxedCoordinates, inChallengeMode
     successfulCoordinates := []
     maxedCoordinates := []
     placedCounts := Map()  
@@ -164,7 +164,7 @@ PlacingUnits() {
 }
 
 AttemptUpgrade() {
-    global successfulCoordinates, maxedCoordinates, PriorityUpgrade, debugMessages
+    global successfulCoordinates, maxedCoordinates, PriorityUpgrade, debugMessages, inChallengeMode
 
     if (successfulCoordinates.Length = 0) {
         return ; No units placed yet
@@ -359,7 +359,7 @@ SetUnitAsMaxed(coord, index) {
 
 
 UpgradeUnits() {
-    global successfulCoordinates, maxedCoordinates, PriorityUpgrade
+    global successfulCoordinates, maxedCoordinates, PriorityUpgrade, inChallengeMode
 
     local totalUnits := Map()  ; Initialize as a local variable
     local upgradedCount := Map()  ; Initialize as a local variable
@@ -940,11 +940,8 @@ global mode, StoryActDropdown
 
         if CheckForXp(true) {
             HandleStageEnd()
-        } else if CheckForReturnToLobby() {
-            AddToLog("Return to lobby found, but not the results screen...")
-            HandleStageEnd()
         }
-
+        CheckEndAndRoute()
         Reconnect()
     }
 }
