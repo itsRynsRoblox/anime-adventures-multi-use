@@ -923,7 +923,7 @@ global mode, StoryActDropdown
     Loop {
         Sleep(1000)
         
-        if (mode = "Story" && StoryActDropdown.Text = "Infinity") || (mode := "Winter Event") {
+        if (mode = "Story" && StoryActDropdown.Text = "Infinity") || (mode = "Winter Event") {
             timeElapsed := A_TickCount - lastClickTime
             if (timeElapsed >= 30000) {
                 AddToLog("Performing anti-AFK click")
