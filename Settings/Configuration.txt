@@ -102,3 +102,12 @@ UseNavigation=0
 
 [UpgradeTesting]
 Upgrade1By1=0
+
+[FirstAdaptation]
+FirstAdapt=1
+
+[SecondAdaptation]
+SecondAdapt=2
+
+[FinalAdaptation]
+FinalAdapt=3

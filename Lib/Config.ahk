@@ -42,6 +42,9 @@ readInSettings() {
     ; Team settings
     global PhysicalTeam, MagicTeam, TeamSwap
 
+    ;Maharaga
+    global FirstAdaptation, SecondAdaptation, FinalAdaptation
+
     try {
         settingsFile := setupFilePath()
         if !FileExist(settingsFile) {
@@ -124,6 +127,10 @@ readInSettings() {
                 case "UseNavigation": StoryUINav.Value := parts[2] ; Set the checkbox value
                 case "Upgrade1By1": MaxUpgradeBeforeMoving.Value := parts[2] ; Set the checkbox value
                 case "AutoReject": DenyShrines.Value := parts[2] ; Set the checkbox value
+
+                case "FirstAdapt": FirstAdaptation.Value := parts[2] ; Set the checkbox value
+                case "SecondAdapt": SecondAdaptation.Value := parts[2] ; Set the checkbox value
+                case "FinalAdapt": FinalAdaptation.Value := parts[2] ; Set the checkbox value
             }
         }
         AddToLog("Configuration settings loaded successfully")
@@ -273,6 +280,15 @@ SaveSettings(*) {
 
         content .= "`n[UpgradeTesting]"
         content .= "`nUpgrade1By1=" MaxUpgradeBeforeMoving.Value "`n"
+
+        content .= "`n[FirstAdaptation]"
+        content .= "`nFirstAdapt=" FirstAdaptation.Value "`n"
+
+        content .= "`n[SecondAdaptation]"
+        content .= "`nSecondAdapt=" SecondAdaptation.Value "`n"
+
+        content .= "`n[FinalAdaptation]"
+        content .= "`nFinalAdapt=" FinalAdaptation.Value "`n"
 
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")

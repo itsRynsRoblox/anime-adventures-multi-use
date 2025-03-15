@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.11.0"
+global currentVersion := "1.11.1"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -241,34 +241,20 @@ OpenGuide(*) {
     GuideGUI.Show("w800")
 }
 
-OpenDungeonSettings(*) {
-    DungeonGUI := Gui("+AlwaysOnTop")
-    DungeonGUI.SetFont("s10 bold", "Segoe UI")
-    DungeonGUI.Title := "Dungeon Settings"
-
-    DungeonGUI.BackColor := "0c000a"
-    DungeonGUI.MarginX := 20
-    DungeonGUI.MarginY := 20
-
-    ; Add Guide content
-    DungeonGUI.SetFont("s16 bold", "Segoe UI")
-
-    DungeonGUI.Add("Text", "x0 w200 cWhite +Center", "1 - In your AA settings make sure you have these 2 settings set to this")
-    SaveChestsBox2 := DungeonGUI.Add("CheckBox", "x0 cffffff Checked", "Save Chests")
-
-
-    DungeonGUI.Show("w200")
-}
-
 aaMainUI.SetFont("s12 Bold c" uiTheme[1])
 global settingsBtn := aaMainUI.Add("Button", "x1200 y0 w90 h30", "Settings")
 settingsBtn.OnEvent("Click", ShowSettingsGUI)
+
 global guideBtn := aaMainUI.Add("Button", "x1100 y0 w90 h30", "Guide")
 guideBtn.OnEvent("Click", OpenGuide)
+
 
 placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
 aaMainUI.SetFont("s9")
+
+global MaharagaButton := aaMainUI.Add("Button", "x975 y0 w115 h30", "Maharaga Settings")
+MaharagaButton.OnEvent("Click", (*) => ToggleSettingsVisibility())
 
 ;Normal Options
 global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Next Level")
@@ -303,12 +289,24 @@ global ShibuyaSwap := aaMainUI.Add("CheckBox", "x1150 y451 cffffff", "Rotate Inf
 ;global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Auto Ability")
 ;global ChallengeBox := aaMainUI.Add("CheckBox", "x1150 y476 cffffff", "Auto Challenge")
 ;global ChallengeBox := aaMainUI.Add("CheckBox", "x1005 y476 cffffff", "Auto Challenge")
+;Maharaga Settings
+FirstAdaptationText := aaMainUI.Add("Text", "x850 y390 w130 h20 +Center", "First Adaptation")
+global FirstAdaptation := aaMainUI.Add("DropDownList", "x865 y410 w100 h180 Choose1", ["Divine Wings", "Heavenly Force", "Adapted Slash"])
+
+SecondAdaptationText := aaMainUI.Add("Text", "x1020 y390 w130 h20 +Center", "Second Adaptation")
+global SecondAdaptation := aaMainUI.Add("DropDownList", "x1035 w100 y410 h180 Choose2", ["Divine Wings", "Heavenly Force", "Adapted Slash"])
+
+FinalAdaptationText := aaMainUI.Add("Text", "x1190 y390 w130 h20 +Center", "Final Adaptation")
+global FinalAdaptation := aaMainUI.Add("DropDownList", "x1205 y410 w100 h180 Choose3", ["Divine Wings", "Heavenly Force", "Adapted Slash"])
+
 PlacementPatternText := aaMainUI.Add("Text", "x1032 y390 w115 h20", "Placement Type")
 global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
 PlaceSpeedText := aaMainUI.Add("Text", "x1193 y390 w115 h20", "Placement Speed")
 global PlaceSpeed := aaMainUI.Add("DropDownList", "x1205 y410 w100 h180 Choose1 +Center", ["Super Fast (1s)", "Fast (1.5s)", "Default (2s)", "Slow (2.5s)", "Very Slow (3s)", "Toaster (4s)", "Gameboy (5s)"])
 PlacementSelectionText := aaMainUI.Add("Text", "x857 y390 w130 h20", "Placement Settings")
 PlacementSelection := aaMainUI.Add("DropDownList", "x865 y410 w100 h180 Choose1 +Center", ["Normal", "Challenge"])
+
+
 placementSaveText := aaMainUI.Add("Text", "x807 y451 w80 h20", "Save Config")
 
 Hotkeytext := aaMainUI.Add("Text", "x807 y35 w530 h30", "To change keybinds click top right settings, Below are default hotkey settings ")
@@ -354,6 +352,14 @@ ReturnLobbyBox.Visible := false
 NextLevelBox.Visible := false
 Hotkeytext.Visible := false
 Hotkeytext2.Visible := false
+
+; Hide adaptation settings
+FirstAdaptationText.Visible := false
+FirstAdaptation.Visible := false
+SecondAdaptationText.Visible := false
+SecondAdaptation.Visible := false
+FinalAdaptationText.Visible := false
+FinalAdaptation.Visible := false
 
 ;Dungeons
 SaveChestsBox.Visible := false
@@ -649,4 +655,55 @@ ToggleDungeonCheckboxes() {
     QuitIfFailBox.Visible := newVisibility
     DenyShrines.Visible := newVisibility
     EditRoute.Visible := newVisibility
+}
+
+ToggleSettingsVisibility() {
+    global PlacementPatternText
+    global PlacementPatternDropdown
+    global PlaceSpeedText
+    global PlaceSpeed
+    global PlacementSelectionText
+    global PlacementSelection
+
+    global FirstAdaptationText
+    global FirstAdaptation
+    global SecondAdaptationText
+    global SecondAdaptation
+    global FinalAdaptationText
+    global FinalAdaptation
+
+    ; Check the current visibility state of the placement settings
+    if (PlacementPatternText.Visible) {
+        ; Hide placement settings
+        PlacementPatternText.Visible := false
+        PlacementPatternDropdown.Visible := false
+        PlaceSpeedText.Visible := false
+        PlaceSpeed.Visible := false
+        PlacementSelectionText.Visible := false
+        PlacementSelection.Visible := false
+        
+        ; Show adaptation settings
+        FirstAdaptationText.Visible := true
+        FirstAdaptation.Visible := true
+        SecondAdaptationText.Visible := true
+        SecondAdaptation.Visible := true
+        FinalAdaptationText.Visible := true
+        FinalAdaptation.Visible := true
+    } else {
+        ; Hide adaptation settings
+        FirstAdaptationText.Visible := false
+        FirstAdaptation.Visible := false
+        SecondAdaptationText.Visible := false
+        SecondAdaptation.Visible := false
+        FinalAdaptationText.Visible := false
+        FinalAdaptation.Visible := false
+        
+        ; Show placement settings
+        PlacementPatternText.Visible := true
+        PlacementPatternDropdown.Visible := true
+        PlaceSpeedText.Visible := true
+        PlaceSpeed.Visible := true
+        PlacementSelectionText.Visible := true
+        PlacementSelection.Visible := true
+    }
 }

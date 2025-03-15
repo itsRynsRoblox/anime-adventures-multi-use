@@ -128,7 +128,7 @@ StartDungeonRoute() {
     ; Look for Enter button and click until gone
     if (ok := FindText(&X, &Y, 120, 425, 680, 500, 0.20, 0.20, Enter)) {
         AddToLog("Found Enter button, joining dungeon")
-        RightClickUntilGone(0, 0, 120, 425, 680, 500, Enter, 0, -30)
+        ClickUntilGone(0, 0, 120, 425, 680, 500, Enter, 0, -30)
         Sleep(2000)
         
         ; Start dungeon run
@@ -210,7 +210,6 @@ HandleShop() {
     AddToLog("Closing shop")
     FixClick(485, 410)
 
-    WaitFor("Dungeon Continue")
     ClickDungeonContinue()
     Sleep(1000)
     return true
@@ -261,16 +260,13 @@ HandleChestScreen() {
 
         if (BossRoomCompleted) {
             BossRoomCompleted := false
-            WaitFor("Dungeon Continue")
             ClickDungeonContinue()
         } else {
-            WaitFor("Dungeon Continue")
             ClickDungeonContinue()
         }
 
         } else {
             AddToLog("Saving chests for boss room - clicking continue")
-            WaitFor("Dungeon Continue")
             ClickDungeonContinue()
         }
         Sleep(1000)

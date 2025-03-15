@@ -7,6 +7,8 @@ global contractSwitchPattern := 0
 global BossRoomCompleted := false
 global SaveChestsForBoss := true
 
+global adaptations:= 0
+
 LoadKeybindSettings()  ; Load saved keybinds
 CheckForUpdates()
 Hotkey(F1Key, (*) => moveRobloxWindow())
@@ -15,11 +17,11 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-
+    CheckForMaharagaAdaptation
 }
 
 F6:: {
-
+    ToggleSettingsVisibility
 }
 
 StartMacro(*) {
@@ -123,6 +125,7 @@ PlacingUnits() {
                         continue
                     if PlaceUnit(point.x, point.y, slotNum) {
                         CheckForCardSelection()
+                        CheckForMaharagaAdaptation()
                         successfulCoordinates.Push({x: point.x, y: point.y, slot: slotNum})
                         placedCounts[slotNum] += 1
                         AddToLog("Placed Unit " slotNum " (" placedCounts[slotNum] "/" placements ")")
@@ -156,6 +159,7 @@ PlacingUnits() {
                 Sleep(500)
             }
             CheckForCardSelection()
+            CheckForMaharagaAdaptation()
         }
     }
     
@@ -931,6 +935,8 @@ global mode, StoryActDropdown
         if (mode = "Winter Event") {
             CheckForCardSelection()
         }
+
+        CheckForMaharagaAdaptation()
 
         if CheckForDisconnect() {
             return Reconnect()
@@ -1991,6 +1997,10 @@ MoveForShibuya() {
 }
     
 RestartStage() {
+    global adaptations
+
+    adaptations := 0
+
     currentMap := DetectMap()
     
     ; Wait for loading
@@ -2118,6 +2128,7 @@ MaxUpgrade() {
         if (CheckForElyssiaSummon()) {
             return false
         }
+        CheckAbility()
         return true
     }
     return false
@@ -2205,6 +2216,57 @@ CheckAbility() {
             AddToLog("Auto Ability Enabled")
         }
     }
+}
+
+CheckForMaharaga() {
+    if (ok := FindText(&X, &Y, 342, 253, 401, 281, 0, 0, MaharagaDefend)) {
+        AddToLog("Maharaga Found")
+        return true
+    }
+}
+
+CheckForMaharagaAdaptation() {
+    global adaptations, FirstAdaptation, SecondAdaptation, FinalAdaptation
+
+    if (ok := FindText(&X, &Y, 198, 394, 391, 419, 0, 0, Adaptation)) {
+        adaptations += 1
+        AddToLog("Maharaga Upgrade Available")
+        switch (adaptations) {
+            case 1:
+                ChoseMaharagaAdaptation(FirstAdaptation.Value)
+            case 2:
+                ChoseMaharagaAdaptation(SecondAdaptation.Value)
+            case 3:
+                adaptations := 0
+                ChoseMaharagaAdaptation(FinalAdaptation.Value)
+        }
+        return true
+    }
+}
+
+ChoseMaharagaAdaptation(adaption := 1) {
+    switch (adaption) {
+        case 1:
+            FixClick(230, 410)
+            AddToLog("Adapting to become hybrid...")
+            return true
+        case 2:
+            FixClick(290, 408)
+            AddToLog("Adapting to enable knockback...")
+            return true
+        default:
+            FixClick(350, 408)
+            AddToLog("Adapting to gain 100% crit with slash...")
+            return true
+    }
+}
+
+ChangeMaharagaMode() {
+
+}
+
+GetAdaptationClicks() {
+    global FirstAdaptation, SecondAdaptation, FinalAdaptation
 }
 
 CheckForErwin() {
