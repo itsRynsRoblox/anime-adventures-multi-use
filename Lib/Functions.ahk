@@ -137,6 +137,7 @@ OpenDiscordLink() {
     SaveChestsBox.Visible := false
     QuitIfFailBox.Visible := false
     DenyShrines.Visible := false
+    EditRoute.Visible := false
 
     ;Shibuya Infinite
     ShibuyaSwap.Visible := false
@@ -712,7 +713,8 @@ UpgradeDetect(x, y, w, h, inputX, inputY, upgradeLimit) {
 
 SearchFor(Name) {
     FindTexts := Map()
-    FindTexts["Dungeon Room Enter"] := { coords: [120, 425, 680, 500], searchText: Enter }
+    FindTexts["Dungeon Continue"] := { coords: [380, 385, 615, 490], searchTexts: [DungeonContinue, DungeonContinue2] }
+    FindTexts["Dungeon Room Enter"] := { coords: [120, 425, 680, 500], searchTexts: [Enter] }
 
     ; Check if the FindText exists in the map
     if !FindTexts.Has(Name) {
@@ -721,15 +723,17 @@ SearchFor(Name) {
     }
 
     coords := FindTexts[Name].coords
-    searchText := FindTexts[Name].searchText
+    searchTexts := FindTexts[Name].searchTexts
     x1 := coords[1], y1 := coords[2], x2 := coords[3], y2 := coords[4]
 
-    ; Perform the Find Text search
-    if (FindText(&X, &Y, x1, y1, x2, y2, 0.20, 0.20, searchText)) {
-        return true  ; Interface found
+    ; Loop through all search texts to perform the Find Text search
+    for searchText in searchTexts {
+        if (FindText(&X, &Y, x1, y1, x2, y2, 0.20, 0.20, searchText)) {
+            return true  ; FindText found
+        }
     }
 
-    return false  ; Interface not found
+    return false  ; FindText not found
 }
 
 WaitFor(Name, timeout := 5000) {

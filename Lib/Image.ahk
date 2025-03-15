@@ -3,7 +3,8 @@
 ;GUI
 global Discord := "Images\discord_logo.png"
 global Minimize := "Images\minimizeButton.png" 
-global Exitbutton := "Images\exitButton.png" 
+global Exitbutton := "Images\exitButton.png"
+global RareChest := "Images\rare_chest.png"
 
 ;Explaining FindText
 ;AreaText is the area button in the lobby  / 746, 514, 789, 530
@@ -213,6 +214,20 @@ DoubleChestNoHover:="|<>*59$59.zzzzzzzzzzWoAszwKVb6JXqvzmgSbRs0Vrzj04CtqjPjz+lvB
 DungeonContinueRyn:="|<>*113$99.000000001k00000000TU00000zU0000000Dz0000Drw00000007ky0003zlk0000001s1k000MyC0000000C06TVzX3lzsyD7s03U0zzzzsTzzzzzzk0MDDkzRz1vrTrvwD073zw1k3U2A0wSC0Q0stz0C0A0FU3XlU3U771k0k0k6A0ASA4A0ssy66673lVVXlXVU77zlslssSASASA0A7sTyD6D73lXlVlU3zzUkkklssSASA0ADzzw0606D70lXlU1U3zzk0s1lsw6ASC0C0TzzUTUSD7klXlwFs3zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzU"
 ChestRoom:="|<>*138$72.zzzzzzzzzzzzzzzzzzzzzzzzz0Tw0Ts01lzkw07s07k00Uzks03s01k00UTkk01s01k00UDkU00s00k01UDkUT0sDUkTzU7k0zUMDUkTzU3k1zkMDkkTzU1k1zkMDUk0DU1k1zkMD0k07U0k1zkM00k07UUE1zkM01k0DUk01zkM03k0TUs00zUM07kTzUs0UT0s0zkTzUw0U40sDzk01Uy0k01sDzk01Uz0s03sDzk00Uz0w07sDzk01UzUz0TwTzs01lzkzzzzzzzzzzzzzzzzzzzzzzzzU"
 FinalRoom:="|<>*71$41.zzzzzzzzzzzzzz1szv1sw1UzY1UtWMyNWMw4ttw4tkNnbkNn1laT1la0kNy0kQ1lrw1lzzzzzzzzzzzzzzU"
+DungeonShop:="|<>*79$21.zzzyPMVhMlY86BhOoC/Mjzzzw"
+ShrineRoom:="|<>*58$26.zzzzsg4gSMBc7wku3sAYA7zzzzU"
+;Dungeon Shrine
+ShrineAccept:="|<>*111$73.DyDzjzzzzzzzi3i1y1k0E1w0S8yACA8zswDVy4S7674TwT7syDWDyDyDyDXQN7l7T7T077laAXsXDXDU3Xsn6E0Fzlzlzk1tX8QASQSMzsTslYT77774TwTssmDXkDkC02DsQN7nw7w70360CQzTzzDzzzz03yE"
+;Shrine Rewards
+SpeedyBoots:="|<>*82$74.zzzzzzzzzzzzwTzzzbzsDzyTyHzzzlzyNzzXzUU0006TU00E0x1U01Vbt1VaMCM222N1yMMNb1kbkkkkzUkkxUzzzzzzzzzzzzy"
+
+global roomTexts := Map(
+    "Multi Chest", DoubleChest,
+    "Chest", Chest,
+    "Hoard", Hoard,
+    "Shop", DungeonShop,
+    "Shrine", ShrineRoom
+)
 
 ;Story Mode
 StartStoryButton:="|<>*121$86.000000000000000000000000000000000000000000000Q0000000000000zw000000000000zzVz000000Ds00S0STs000003z00C03i7000001ks0300T1k00000MC01k07kQ0000063U0M01w7kTzbzvUy061sz1yTzzzzsDk1Uzz01z73kks0C0M7zk0D00M0601U70Ds03U060100M1k0S00k01U0E060C01k0A00M0601U3k0D0y0U60ns7s0T03kTUS1UTy3w0Dz0Q7sDUMDvUy07js71y3s63UMC01ly1kTUS1Us63s0s7UQ3s30MC1UT0C00D070063UM0k3U03s1k01Us70C0Q01y0S00MC1k3U7U0xk7k063UC0szy0zy1z33kzzkDzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzU"
@@ -223,13 +238,9 @@ FuturePathRareChest:="|<>*56$14.zzy0TEPUDtny03kizzzzzo2x6zzzU" ; 145, 257, 661, 
 ;Portals
 UsePortal:="|<>*141$48.00000000000000000y7s00001n6M00001XAA00001XAAk1k01XADyDw01XAC7QC01XAA1k30zXw81k3zzXw8vUVzzXw87XVzzVw83U1zzVsQ1U3zzkkTlVzzzk0s1U3zzs0s1k3zzw3w3s3zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzU"
 SelectPortal:="|<>*159$64.zzzzzzzzzzzwDzz7zzzzzz0DzwTzzzlzs0zzlzzzz3zVXzz7zzzwDyDzswTlzjkzsTy0lw1s60zUDk37U7001z0C64QA81UDz0MwFlsVz3zzVU1702DwDyT60AQ0MzkzsMMzklzV73zU1U31060A3z0D0A60Q1sDy3y0sQ1wDkzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy"
-
 ;Elyssia
 ElyssiaSummons:="|<>*127$106.zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzztzzzzzzzXzzzzXzzwTXzzzzzzyDs0zyDzzlyDzzzzzzszU3zszzy3szzzzzzzXy0TzXzzsDUSSA71saDszsCDzz0S0ksUM70MzUC0MzzwFs1X2BXM1Xy0M1XzzV3X24MC3X6Ds3X6Dzy0CCA1UM4QMzXw0Mzzk0MksDUs8lXyDs7Xzz7lU7UtWMU67s0VC7zsT20z70030MTU20MTznyM7wS1US9ly0A3lzzzzzzXzzzzzzzzzzzzzzzzyDzzzzzzzzzzzzzzzzkzzzzzzzzzzzzzzzzzbzzzzzzzzzzzy"
-
-
 ;Roblox App
 RobloxApp:="|<>*122$37.zzzzzzzzzzzzzzzzzzzzzzzzzzztzzzzzsTzzzzs7zzzzk0zzzzk0Dzzzk03zzzk00zzzs00Tzzw00Dzzy007zzz003zzzUA1zzzkD0zzzs7UTzzw3kDzzy1s7zzz0w3zzzkS3zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzbDzzzznbzzzztnXd77w1Uk19y0r/AgzCHZa0TbBmn/znaHNY7tnXgn3zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzU"
-
 ;Notification
 ExitNotification:="|<>*136$18.zzzwzjsT7wS7wADy0Tz0zzUzzUzz0Ty4DwC7sT7wzbzzzzzzU"

@@ -14,21 +14,33 @@ setupFilePath() {
 }
 
 readInSettings() {
+    ; General settings
+    global mode
+
+    ; General Unit Settings
     global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
+    global placement1, placement2, placement3, placement4, placement5, placement6
+    global priority1, priority2, priority3, priority4, priority5, priority6
+    global PlacementPatternDropdown
+
+    ; Upgrade limits
     global upgradeEnabled1, upgradeEnabled2, upgradeEnabled3, upgradeEnabled4, upgradeEnabled5, upgradeEnabled6
     global upgradeLimitEnabled1, upgradeLimitEnabled2, upgradeLimitEnabled3, upgradeLimitEnabled4, upgradeLimitEnabled5, upgradeLimitEnabled6
     global UpgradeLimit1, UpgradeLimit2, UpgradeLimit3, UpgradeLimit4, UpgradeLimit5, UpgradeLimit6
-    global placement1, placement2, placement3, placement4, placement5, placement6
-    global priority1, priority2, priority3, priority4, priority5, priority6
+
+
+    ; General settings
+    global ChallengeBox, PriorityUpgrade, PlaceSpeed, MatchMaking, MaxUpgradeBeforeMoving, RejoinRoblox, ReturnLobbyBox, StoryUINav
+
+    ; Challenge placements
     global ChallengePlacement1, ChallengePlacement2, ChallengePlacement3, ChallengePlacement4, ChallengePlacement5, ChallengePlacement6
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
-    global mode
-    global ChallengeBox, PriorityUpgrade
-    global PlacementPatternDropdown, PlaceSpeed, MatchMaking
+
+    ;Dungeon Settings
+    global QuitIfFailBox, DenyShrines
+
+    ; Team settings
     global PhysicalTeam, MagicTeam, TeamSwap
-    global QuitIfFailBox
-    global RejoinRoblox
-    global ReturnLobbyBox, StoryUINav, MaxUpgradeBeforeMoving
 
     try {
         settingsFile := setupFilePath()
@@ -111,28 +123,44 @@ readInSettings() {
                 case "ToLobby": ReturnLobbyBox.Value := parts[2] ; Set the checkbox value
                 case "UseNavigation": StoryUINav.Value := parts[2] ; Set the checkbox value
                 case "Upgrade1By1": MaxUpgradeBeforeMoving.Value := parts[2] ; Set the checkbox value
+                case "AutoReject": DenyShrines.Value := parts[2] ; Set the checkbox value
             }
         }
         AddToLog("Configuration settings loaded successfully")
         LoadWinterLocal()
+        LoadDungeonLocal()
     } 
 }
 
 
 SaveSettings(*) {
+    ; General settings
+    global mode
+
+    ; General Unit Settings
     global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
+    global placement1, placement2, placement3, placement4, placement5, placement6
+    global priority1, priority2, priority3, priority4, priority5, priority6
+    global PlacementPatternDropdown
+
+    ; Upgrade limits
     global upgradeEnabled1, upgradeEnabled2, upgradeEnabled3, upgradeEnabled4, upgradeEnabled5, upgradeEnabled6
     global upgradeLimitEnabled1, upgradeLimitEnabled2, upgradeLimitEnabled3, upgradeLimitEnabled4, upgradeLimitEnabled5, upgradeLimitEnabled6
     global UpgradeLimit1, UpgradeLimit2, UpgradeLimit3, UpgradeLimit4, UpgradeLimit5, UpgradeLimit6
-    global placement1, placement2, placement3, placement4, placement5, placement6
-    global priority1, priority2, priority3, priority4, priority5, priority6
-    global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
+
+
+    ; General settings
+    global ChallengeBox, PriorityUpgrade, PlaceSpeed, MatchMaking, MaxUpgradeBeforeMoving, RejoinRoblox, ReturnLobbyBox, StoryUINav
+
+    ; Challenge placements
     global ChallengePlacement1, ChallengePlacement2, ChallengePlacement3, ChallengePlacement4, ChallengePlacement5, ChallengePlacement6
-    global mode
-    global ChallengeBox, PriorityUpgrade
-    global PlacementPatternDropdown, PlaceSpeed, MatchMaking
+    global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
+
+    ;Dungeon Settings
+    global QuitIfFailBox, DenyShrines
+
+    ; Team settings
     global PhysicalTeam, MagicTeam, TeamSwap
-    global RejoinRoblox, ReturnLobbyBox, QuitIfFailBox, StoryUINav, MaxUpgradeBeforeMoving
 
     try {
         settingsFile := A_ScriptDir "\Settings\Configuration.txt"
@@ -146,7 +174,10 @@ SaveSettings(*) {
             content .= "Map=" StoryDropdown.Text
         } else if (mode = "Raid") {
             content .= "Map=" RaidDropdown.Text
+        } else if (mode = "Portal") {
+            content .= "Portal=" PortalDropdown.Text
         }
+        
         
         ; Save settings for each unit
         content .= "`n`nEnabled1=" enabled1.Value
@@ -204,7 +235,7 @@ SaveSettings(*) {
         content .= "`n`n[PlacementLogic]"
         content .= "`nLogic=" PlacementPatternDropdown.Value "`n"
 
-        content .= "`n`n[PlaceSpeed]"
+        content .= "`n[PlaceSpeed]"
         content .= "`nSpeed=" PlaceSpeed.Value "`n"
 
         content .= "`n[Matchmaking]"
@@ -225,24 +256,28 @@ SaveSettings(*) {
         content .= "`n[MagicTeam]"
         content .= "`nMagTeam=" magicTeam.Value "`n"
 
-        content .= "`n`n[QuitUponDefeat]"
+        content .= "`n[QuitUponDefeat]"
         content .= "`nStopAfterDefeat=" QuitIfFailBox.Value "`n"
 
-        content .= "`n`n[RejoinFailsafe]"
+        content .= "`n[Shrines]"
+        content .= "`nAutoReject=" DenyShrines.Value "`n"
+
+        content .= "`n[RejoinFailsafe]"
         content .= "`nFailsafeEnabled=" RejoinRoblox.Value "`n"
 
-        content .= "`n`n[ReturnToLobby]"
+        content .= "`n[ReturnToLobby]"
         content .= "`nToLobby=" ReturnLobbyBox.Value "`n"
 
-        content .= "`n`n[UINavigation]"
+        content .= "`n[UINavigation]"
         content .= "`nUseNavigation=" StoryUINav.Value "`n"
 
-        content .= "`n`n[UpgradeTesting]"
+        content .= "`n[UpgradeTesting]"
         content .= "`nUpgrade1By1=" MaxUpgradeBeforeMoving.Value "`n"
 
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")
         SaveWinterLocal()
+        SaveDungeonLocal()
     }
 }
 

@@ -64,7 +64,6 @@ UpgradeLimitEnabled6=0
 [PlacementLogic]
 Logic=1
 
-
 [PlaceSpeed]
 Speed=3
 
@@ -86,22 +85,20 @@ PhyTeam=1
 [MagicTeam]
 MagTeam=1
 
-
 [QuitUponDefeat]
 StopAfterDefeat=1
 
+[Shrines]
+AutoReject=1
 
 [RejoinFailsafe]
 FailsafeEnabled=1
 
-
 [ReturnToLobby]
 ToLobby=0
 
-
 [UINavigation]
 UseNavigation=0
-
 
 [UpgradeTesting]
 Upgrade1By1=0

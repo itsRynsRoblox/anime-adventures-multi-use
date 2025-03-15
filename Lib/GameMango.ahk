@@ -747,7 +747,7 @@ DungeonMode() {
     }
     Sleep(1000)
     ; Select dungeon route and enter
-    SelectDungeonRoute()
+    StartDungeonRoute()
 }
 
 CheckForReturnToLobby() {
@@ -919,11 +919,13 @@ global mode, StoryActDropdown
     Loop {
         Sleep(1000)
         
-        timeElapsed := A_TickCount - lastClickTime
-        if (timeElapsed >= 20000) {
-            AddToLog("Performing anti-AFK click")
-            FixClick(560, 560)
-            lastClickTime := A_TickCount
+        if (mode = "Story" && StoryActDropdown.Text = "Infinity") || (mode := "Winter Event") {
+            timeElapsed := A_TickCount - lastClickTime
+            if (timeElapsed >= 30000) {
+                AddToLog("Performing anti-AFK click")
+                FixClick(560, 560)
+                lastClickTime := A_TickCount
+            }
         }
 
         if (mode = "Winter Event") {
@@ -1889,13 +1891,8 @@ MoveForSpaceCenter() {
         Fixclick(160, 280, "Right")
         Sleep (7000)
     } else {
-        FixClick(590, 15) ; click on paths
-        loop {
-            if FindAndClickSpaceCenterPath() {
-                FixClick(590, 15) ; click on paths
-                break
-            }
-        }
+        Fixclick(648, 389, "Right")
+        Sleep (7000)
     }
 }
 
@@ -1917,9 +1914,9 @@ MoveForNightmareTrain() {
 }
 
 MoveForAirCraft() {
-    SendInput ("{w down}")
+    SendInput ("{s down}")
     sleep (800)
-    SendInput ("{w up}")
+    SendInput ("{s up}")
 }
 
 MoveForHellish() {
@@ -3007,298 +3004,6 @@ ClickSelectPortal() {
 
 ClickUsePortal() {
     ClickUntilGone(0, 0, 211, 341, 401, 504, UsePortal, 0, -35)
-}
-
-ClickDungeonContinueOld() {
-    ClickUntilGone(0, 0, 212, 280, 406, 476, DungeonContinue, 0, -35)
-}
-
-ClickDungeonContinue() {
-    ClickUntilGone(0, 0, 380, 385, 615, 490, DungeonContinue, -3, -35, DungeonContinue2)
-}
-
-CheckIfFinalRoom() {
-    if (ok := FindText(&X, &Y, 434, 215, 479, 230, 0, 0, FinalRoom)) {
-        return true
-    }
-    return false
-}
-
-; Custom monitor for dungeon ending
-MonitorDungeonEnd() {
-    global mode, Wins, loss, challengeStartTime, inChallengeMode
-
-    failed := false
-    
-    Loop {
-        Sleep(3000)  
-        
-        FixClick(560, 560)  ; Move click
-
-        ; Check for unit exit UI element
-        if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
-            ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
-        }
-        
-        if (ok := FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText) or (ok:=FindText(&X, &Y, 150, 180, 350, 260, 0, 0, DefeatText2))) {
-            failed := true
-        }
-
-        ; Check for next text UI element
-        if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
-            ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
-        }
-
-        ; Check for returning to lobby
-        if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
-
-            ; Challenge mode logic first
-            if (inChallengeMode) {
-                AddToLog("Challenge completed - returning to " mode " mode")
-               inChallengeMode := false
-               challengeStartTime := A_TickCount
-               ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
-               return CheckLobby()
-           }
-
-           ; Check if it's time for challenge mode
-           if (!inChallengeMode && ChallengeBox.Value) {
-               timeElapsed := A_TickCount - challengeStartTime
-               if (timeElapsed >= 1800000) {
-                   AddToLog("30 minutes passed - switching to Challenge mode")
-                   inChallengeMode := true
-                   challengeStartTime := A_TickCount
-                   ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
-                   return CheckLobby()
-               }
-           }
-
-            if (QuitIfFailBox.Value && failed) {
-                AddToLog("Dungeon run failed, stopping to save lives...")
-                ClickReturnToLobby()
-                SendFinalWebhookBeforeExit()
-                CheckLobby()
-                Sleep(2000)
-                return Reload()
-            } else  {
-                AddToLog("Dungeon run completed, clicking replay")
-            
-                ; Click replay button
-                ClickReplay()
-                
-                ; After clicking replay, check for shop/shrine/chest
-                CheckDungeonSpecials()
-    
-                if (CheckForFinishDungeon()) {
-                    AddToLog("Handled dungeon completion")
-                    return
-                }
-                
-                ; Start a new dungeon run
-                AddToLog("Starting next dungeon")
-                return SelectDungeonRoute()
-            }
-            Reconnect()
-        }
-    }
-}
-
-; Function to check for special dungeon elements after replay
-CheckDungeonSpecials() {
-    AddToLog("Checking for dungeon shop, shrine, open chest")
-    
-    ; Give time for special elements to appear
-    Sleep(2000)
-    
-    foundShop := false
-    foundShrine := false
-    foundChest := false
-
-    ; Check the area for shop, shrine, or chest
-    Loop 5 {
-        ; Check for shop
-        if (!foundShop && FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shop)) {
-            AddToLog("Found Shop")
-            Sleep(1000)
-            HandleShop()
-            Sleep(1000)
-            foundShop := true
-        }
-        ; Check for shrine
-        if (!foundShrine && FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shrine)) {
-            AddToLog("Found Shrine, Denying")
-            ClickUntilGone(0, 0, 490, 420, 605, 455, DenyShrine, 0, -30)
-            Sleep(1000)
-            foundShrine := true
-        }
-        ; Check for Chest Opening
-        if (!foundChest && FindText(&X, &Y, 140, 200, 375, 250, 0, 0, ChestRoom)) {
-            AddToLog("Found Chest Opening")
-            HandleChestScreen()
-            foundChest := true
-        }
-        
-        ; If all elements are found, exit early
-        if (foundShop && foundShrine && foundChest)
-            break
-
-        Sleep(1000)  ; Wait and check again
-    }
-    
-    if (!foundShop && !foundShrine && !foundChest)
-        AddToLog("No shop, shrine, or chest found")
-}
-
-SelectDungeonRoute() {
-    CheckDungeonSpecials()
-    Sleep(2000)
-    if (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom) or (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom2))) {
-        AddToLog("Boss room detected!")
-        global BossRoomCompleted := true
-        FixClick(X, Y-30)
-        WaitFor("Dungeon Room Enter")
-    }
-    else if (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChest) or (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChestNoHover))) {
-        AddToLog("Found Double Chest Room, clicking it")
-        FixClick(X, Y-30)
-        WaitFor("Dungeon Room Enter")
-    }
-    else if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Chest)) {
-        AddToLog("Found Chest Room, clicking it")
-        FixClick(X, Y-30)
-        WaitFor("Dungeon Room Enter")
-    }
-    else if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Hoard)) {
-        AddToLog("Found Hoard Room, clicking it")
-        FixClick(X, Y-30)
-        WaitFor("Dungeon Room Enter")
-    }
-    else {
-        ; If no chest/hoard found, click default positions
-        AddToLog("No chest/hoard found, clicking default positions")
-        FixClick(400, 355)
-        Sleep(500)
-        FixClick(335, 355)
-        WaitFor("Dungeon Room Enter")
-    }
-    
-    ; Look for Enter button and click until gone
-    if (ok := FindText(&X, &Y, 120, 425, 680, 500, 0.20, 0.20, Enter)) {
-        AddToLog("Found Enter button, joining dungeon")
-        ClickUntilGone(0, 0, 120, 425, 680, 500, Enter, 0, -30)
-        Sleep(2000)
-        
-        ; Start dungeon run
-        AddToLog("Starting dungeon run")
-        RestartStage()
-    }
-}
-
-HandleShop() {
-    AddToLog("Handling shop - buying available items")
-    
-    ; Give the shop time to fully load
-    Sleep(1000)
-    
-    ; Buy item in slot 3 (bottom)
-    FixClick(560, 335)
-    Sleep(1000)
-    
-    ; Buy item in slot 2 (middle)
-    FixClick(560, 280)
-    Sleep(1000)
-    
-    ; Buy item in slot 1 (top)
-    FixClick(560, 225)
-    Sleep(1000)
-    
-    ; Click continue to close the shop
-    AddToLog("Closing shop")
-    FixClick(485, 410)
-    ClickDungeonContinue()
-    Sleep(1000)
-    return true
-}
-
-HandleChestScreen() {
-    global BossRoomCompleted, SaveChestsForBoss
-    
-    ; Determine if we should open chests now
-    shouldOpenChests := BossRoomCompleted || !SaveChestsForBoss
-    
-    if (shouldOpenChests) {
-        AddToLog("Opening all available chests")
-        
-        ; Process first chest position - keep clicking until exhausted
-        firstChestExhausted := false
-        
-        while (!firstChestExhausted ) {
-            ; Click first chest OPEN button
-            FixClick(565, 260)
-            Sleep(2000)
-            
-            ; Check if we're still on the chest screen
-            if (!IsChestScreenVisible()) {
-                ClaimChestReward()
-            } else {
-                firstChestExhausted := true
-            }
-        }
-        
-        ; Process second chest position - keep clicking until exhausted
-        secondChestExhausted := false
-        
-        while (!secondChestExhausted) {
-            ; Click second chest OPEN button
-            FixClick(565, 320)
-            Sleep(1000)
-            
-            ; Check if we're still on the chest screen
-            if (!IsChestScreenVisible()) {
-                ClaimChestReward()
-            } else {
-                secondChestExhausted := true
-            }
-        }
-
-        AddToLog("All chests opened")
-
-        if (BossRoomCompleted) {
-            BossRoomCompleted := false
-            ClickDungeonContinue()
-        }
-        } else {
-            AddToLog("Saving chests for boss room - clicking continue")
-            ClickDungeonContinue()
-        }
-        Sleep(1000)
-        Reconnect()
-        return true
-    }
-
-ClaimChestReward() {
-    maxClicks := 40  ; Safety limit
-    clicks := 0
-    
-    while (clicks < maxClicks) {
-        ; Click to claim reward
-        FixClick(560, 560)
-        Sleep(1500)
-        
-        ; Check if chest screen has returned
-        if (IsChestScreenVisible()) {
-            return true
-        }
-        
-        clicks++
-    }
-    
-    AddToLog("Max clicks reached while claiming rewards")
-    return false
-}
-
-IsChestScreenVisible() {
-    return FindText(&X, &Y, 140, 200, 375, 250, 0, 0, ChestRoom)
 }
 
 CheckForPortal(lobby := false) {

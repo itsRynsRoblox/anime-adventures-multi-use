@@ -283,7 +283,9 @@ global MagicTeam := aaMainUI.Add("DropDownList", "x1270 y471 w45 h180 Choose1 +C
 ; Dungeon Options
 SaveChestsBox := aaMainUI.Add("CheckBox", "x900 y451 cffffff Checked", "Save Chests For Rukia")
 QuitIfFailBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Stop Upon Defeat") ;x1005 y451
-DenyShrines := aaMainUI.Add("CheckBox", "x1075 y451 cffffff Checked", "Reject Shrines")
+DenyShrines := aaMainUI.Add("CheckBox", "x1075 y451 cffffff Checked", "Reject Shrine Offers")
+EditRoute := aaMainUI.Add("Button", "x1050 y470 w80 h25", "Edit Route")
+EditRoute.OnEvent("Click", (*) => OpenRoutePriorityPicker())
 ;Upgrade Option Testing
 global UpgradeSettings := aaMainUI.Add("GroupBox", "x180 y630 w220 h60 +Center c" uiTheme[1], "Upgrade Settings")
 global PriorityUpgrade := aaMainUI.Add("CheckBox", "x185 y650 cffffff", "Priority Upgrade")
@@ -357,6 +359,7 @@ Hotkeytext2.Visible := false
 SaveChestsBox.Visible := false
 QuitIfFailBox.Visible := false
 DenyShrines.Visible := false
+EditRoute.Visible := false
 
 ;Portal Farming
 ShibuyaSwap.Visible := false
@@ -635,7 +638,7 @@ SendWarningMessage() {
 
 ; Function to toggle visibility of the checkboxes
 ToggleDungeonCheckboxes() {
-    global SaveChestsBox, QuitIfFailBox, DenyShrines
+    global SaveChestsBox, QuitIfFailBox, DenyShrines, EditRoute
     
     ; Check the current visibility state and toggle
     currentState := SaveChestsBox.Visible  ; Use the visibility of the first checkbox to determine the state
@@ -644,5 +647,6 @@ ToggleDungeonCheckboxes() {
     ; Set the visibility for all checkboxes
     SaveChestsBox.Visible := newVisibility
     QuitIfFailBox.Visible := newVisibility
-    ;DenyShrines.Visible := newVisibility
+    DenyShrines.Visible := newVisibility
+    EditRoute.Visible := newVisibility
 }

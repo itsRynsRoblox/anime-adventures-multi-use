@@ -37,8 +37,6 @@ OpenPriorityPicker() {
 
 global priorityOrder := ["new_path", "range_3", "attack_3", "cooldown_3", "range_2", "attack_2", "cooldown_2", "blessing_2", "range_1", "attack_1", "cooldown_1", "blessing_1", "shield", "explosive_death_21", "explosive_death_3", "speed", "health", "regen", "yen"]
 
-priority := []
-
 AttachDropDownEvent(dropDown, index) {
     dropDown.OnEvent("Change", (*) => OnDropDownChange(dropDown, index))
 }
