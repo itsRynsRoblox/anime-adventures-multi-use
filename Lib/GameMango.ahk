@@ -17,11 +17,11 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-    CheckForMaharagaAdaptation
+
 }
 
 F6:: {
-    ToggleSettingsVisibility
+
 }
 
 StartMacro(*) {
@@ -1764,7 +1764,7 @@ MoveForNavyBay() {
     SendInput ("{w up}")
 }
 
-MoveForSandVillage() {
+MoveForSandVillageOld() {
     Fixclick(777, 415, "Right")
     Sleep (3000)
     Fixclick(560, 555, "Right")
@@ -1773,6 +1773,34 @@ MoveForSandVillage() {
     Sleep (3000)
     Fixclick(200, 540, "Right")
     Sleep (3000)
+}
+
+MoveForSandVillage() {
+    SendInput ("{s down}")
+    Sleep (700)
+    SendInput ("{s up}")
+    KeyWait("s")
+    Sleep (1000)
+    SendInput ("{d down}")
+    Sleep (2700)
+    SendInput ("{d up}")
+    KeyWait("d")
+    Sleep (1000)
+    SendInput ("{s down}")
+    Sleep (2400)
+    SendInput ("{s up}")
+    KeyWait("s")
+    Sleep (1000)
+    SendInput ("{a down}")
+    Sleep (2400)
+    SendInput ("{a up}")
+    KeyWait("a")
+    Sleep (1000)
+    SendInput ("{s down}")
+    Sleep (1500)
+    SendInput ("{s up}")
+    KeyWait("s")
+
 }
 
 MoveForFiendCity() {
@@ -2108,6 +2136,7 @@ PlaceUnit(x, y, slot := 1) {
     if (ModeDropdown.Text = "Winter Event") {
         CheckForCardSelection()
     }
+    Sleep 50
     SendInput(slot)
     Sleep 50
     FixClick(x, y)

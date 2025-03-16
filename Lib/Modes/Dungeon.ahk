@@ -90,7 +90,7 @@ StartDungeonRoute() {
             continue
         }
     
-        if (CheckForBossRoom()) {
+        if (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom) or (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom2))) {
             global BossRoomCompleted := true
             FixClick(X, Y-30)
             foundRoom := true
