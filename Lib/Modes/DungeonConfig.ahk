@@ -1,6 +1,6 @@
 #Include %A_ScriptDir%\Lib\gui.ahk
 #Include %A_ScriptDir%\Main.ahk
-#Include %A_ScriptDir%\Lib\PriorityPicker.ahk
+#Include %A_ScriptDir%\Lib\Modes\RoutePriorityPicker.ahk
 
 SaveDungeonConfig(*) {
     SaveDungeonLocal
@@ -29,15 +29,16 @@ SaveDungeonConfigToFile(filePath) {
     }
 
     File.WriteLine("[RoutePriority]")
-    for index, dropDown in routeDropDowns
+    for index, routeDropDown in routeDropDowns
     {
-        File.WriteLine(Format("Room{}={}", index+1, dropDown.Text))
+        File.WriteLine(Format("Room{}={}", index+1, routeDropDown.Text))
     }
 
     File.Close()
     if (debugMessages) {
-        AddToLog("Dungeon configuration saved successfully to " filePath ".`n")
+        AddToLog("Dungeon configuration saved to " filePath ".`n")
     }
+
 }
 
 LoadDungeonConfigFromFile(filePath) {
@@ -71,12 +72,12 @@ LoadDungeonConfigFromFile(filePath) {
                     slot := match.1
                     value := match.2
 
-                    priorityOrder[slot - 1] := value
+                    routePriorityOrder[slot - 1] := value
 
-                    dropDown := routeDropDowns[slot - 1]
+                    routeDropDown := routeDropDowns[slot - 1]
 
-                    if (dropDown) {
-                        dropDown.Text := value
+                    if (routeDropDown) {
+                        routeDropDown.Text := value
                     }
 		    
                 }

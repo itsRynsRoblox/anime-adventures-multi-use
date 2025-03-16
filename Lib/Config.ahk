@@ -134,8 +134,8 @@ readInSettings() {
             }
         }
         AddToLog("Configuration settings loaded successfully")
-        LoadWinterLocal()
-        LoadDungeonLocal()
+        LoadDungeonLocal
+        LoadWinterLocal
     } 
 }
 

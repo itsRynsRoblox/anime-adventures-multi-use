@@ -3,6 +3,7 @@
 #NoTrayIcon
 SendMode "Event"
 #Include %A_ScriptDir%\lib/Image.ahk
+#Include %A_ScriptDir%\Lib\Toggles.ahk
 #Include %A_ScriptDir%\Lib\PriorityPicker.ahk
 #Include %A_ScriptDir%\Lib\Modes\RoutePriorityPicker.ahk
 #Include %A_ScriptDir%\lib/GUI.ahk
@@ -15,6 +16,5 @@ SendMode "Event"
 #Include %A_ScriptDir%\Lib\FindText.ahk
 #Include %A_ScriptDir%\Lib\OCR-main\Lib\OCR.ahk
 #Include %A_ScriptDir%\Lib\PlacementLogics.ahk 
-#Include %A_ScriptDir%\Lib\Toggles.ahk
 #Include %A_ScriptDir%\Lib\UpdateChecker.ahk
 #Include %A_ScriptDir%\Lib\Modes\Dungeon.ahk

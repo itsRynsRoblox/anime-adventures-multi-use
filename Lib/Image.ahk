@@ -222,7 +222,7 @@ ShrineAccept:="|<>*111$73.DyDzjzzzzzzzi3i1y1k0E1w0S8yACA8zswDVy4S7674TwT7syDWDyD
 SpeedyBoots:="|<>*82$74.zzzzzzzzzzzzwTzzzbzsDzyTyHzzzlzyNzzXzUU0006TU00E0x1U01Vbt1VaMCM222N1yMMNb1kbkkkkzUkkxUzzzzzzzzzzzzy"
 
 global roomTexts := Map(
-    "Multi Chest", DoubleChest,
+    "MultiChest", DoubleChest,
     "Chest", Chest,
     "Hoard", Hoard,
     "Shop", DungeonShop,
