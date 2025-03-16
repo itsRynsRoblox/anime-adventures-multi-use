@@ -253,7 +253,7 @@ placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
 aaMainUI.SetFont("s9")
 
-global MaharagaButton := aaMainUI.Add("Button", "x975 y0 w115 h30", "Maharaga Settings")
+global MaharagaButton := aaMainUI.Add("Button", "x975 y0 w115 h30", "Mahoraga Settings")
 MaharagaButton.OnEvent("Click", (*) => ToggleSettingsVisibility())
 
 ;Normal Options
@@ -289,15 +289,18 @@ global ShibuyaSwap := aaMainUI.Add("CheckBox", "x1150 y451 cffffff", "Rotate Inf
 ;global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Auto Ability")
 ;global ChallengeBox := aaMainUI.Add("CheckBox", "x1150 y476 cffffff", "Auto Challenge")
 ;global ChallengeBox := aaMainUI.Add("CheckBox", "x1005 y476 cffffff", "Auto Challenge")
-;Maharaga Settings
-FirstAdaptationText := aaMainUI.Add("Text", "x850 y390 w130 h20 +Center", "First Adaptation")
-global FirstAdaptation := aaMainUI.Add("DropDownList", "x865 y410 w100 h180 Choose1", ["Divine Wings", "Heavenly Force", "Adapted Slash"])
+;Mahoraga Settings
+FirstAdaptationText := aaMainUI.Add("Text", "x830 y390 w130 h20 +Center", "First Adaptation")
+global FirstAdaptation := aaMainUI.Add("DropDownList", "x845 y410 w100 h180 Choose1", ["Divine Wings", "Heavenly Force", "Adapted Slash"])
 
-SecondAdaptationText := aaMainUI.Add("Text", "x1020 y390 w130 h20 +Center", "Second Adaptation")
-global SecondAdaptation := aaMainUI.Add("DropDownList", "x1035 w100 y410 h180 Choose2", ["Divine Wings", "Heavenly Force", "Adapted Slash"])
+SecondAdaptationText := aaMainUI.Add("Text", "x960 y390 w130 h20 +Center", "Second Adaptation")
+global SecondAdaptation := aaMainUI.Add("DropDownList", "x975 w100 y410 h180 Choose2", ["Divine Wings", "Heavenly Force", "Adapted Slash"])
 
-FinalAdaptationText := aaMainUI.Add("Text", "x1190 y390 w130 h20 +Center", "Final Adaptation")
-global FinalAdaptation := aaMainUI.Add("DropDownList", "x1205 y410 w100 h180 Choose3", ["Divine Wings", "Heavenly Force", "Adapted Slash"])
+FinalAdaptationText := aaMainUI.Add("Text", "x1090 y390 w130 h20 +Center", "Final Adaptation")
+global FinalAdaptation := aaMainUI.Add("DropDownList", "x1105 y410 w100 h180 Choose3", ["Divine Wings", "Heavenly Force", "Adapted Slash"])
+
+MahoragoModeText := aaMainUI.Add("Text", "x1220 y390 w130 h20 +Center", "Attack Style")
+global MahoragoMode := aaMainUI.Add("DropDownList", "x1235 y410 w100 h180 Choose1", ["Defend", "Boss", "Attack"])
 
 PlacementPatternText := aaMainUI.Add("Text", "x1032 y390 w115 h20", "Placement Type")
 global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
@@ -360,6 +363,8 @@ SecondAdaptationText.Visible := false
 SecondAdaptation.Visible := false
 FinalAdaptationText.Visible := false
 FinalAdaptation.Visible := false
+MahoragoModeText.Visible := false
+MahoragoMode.Visible := false
 
 ;Dungeons
 SaveChestsBox.Visible := false
@@ -671,6 +676,8 @@ ToggleSettingsVisibility() {
     global SecondAdaptation
     global FinalAdaptationText
     global FinalAdaptation
+    global MahoragoModeText
+    global MahoragoMode
 
     ; Check the current visibility state of the placement settings
     if (PlacementPatternText.Visible) {
@@ -689,6 +696,8 @@ ToggleSettingsVisibility() {
         SecondAdaptation.Visible := true
         FinalAdaptationText.Visible := true
         FinalAdaptation.Visible := true
+        MahoragoModeText.Visible := true
+        MahoragoMode.Visible := true
     } else {
         ; Hide adaptation settings
         FirstAdaptationText.Visible := false
@@ -697,6 +706,8 @@ ToggleSettingsVisibility() {
         SecondAdaptation.Visible := false
         FinalAdaptationText.Visible := false
         FinalAdaptation.Visible := false
+        MahoragoModeText.Visible := false
+        MahoragoMode.Visible := false
         
         ; Show placement settings
         PlacementPatternText.Visible := true

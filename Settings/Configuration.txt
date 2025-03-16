@@ -1,4 +1,4 @@
-Mode=Dungeon
+Mode=
 
 
 Enabled1=1
@@ -111,3 +111,6 @@ SecondAdapt=2
 
 [FinalAdaptation]
 FinalAdapt=3
+
+[MahoragoMode]
+Style=1

@@ -8,7 +8,7 @@ global isSummer := false
 
 global contractsEnabled := true
 
-global debugMessages := false
+global debugMessages := true
 
 
 

@@ -90,9 +90,11 @@ Upgrade8:="|<>*89$21.zzzzzzzzzzwD31VU8Aw1lbX6Aw1lbUCAw1lbX6AsslbU6Aw1lbkSAzzlVzw
 Upgrade9:="|<>*87$19.zzzzzzzzzzzzz7z311VXUQtXCQl7CQ3bD1nbstnkwtkSQszCTzb7z3VzVzzzzzzs"
 Upgrade10:="|<>*91$25.zzzzzzzzzzzzzzzzyDzz33b1Vb30wn1WCNUXbAyFnaT8tnDYMtbn4QntUSNwsTAzzzaDzzX3zzVzzzzzzzzs"
 
-;Mist's Magic Hill / Academy
-MagicHillAngle2:="|<>*32$52.zU7w07zwDw0Dk0Tzkzk0z01zz3y01s07zzbw07U0TzyTk0C01zzxzU0s07zzzy01U0Tzzzw0601wzzzk0807nzzzU0U0S7xzy0001kTvzw00071zbzk000M7yDz00010Dszy00000zzzs00003zzzk0000Dzzz00000Tzzw00001zzzk00007zzz00000Tzzs00001zzzU00003zzy00U00Tzzk03003zkz00C00Dz0Q01s01zw0007U07zk000S00Tz0001w01zw000Dk07zs000z00Dzw003w00zzy00Dk03zzy00zU0Dzzw03y01zzzk0Ds00Dzz00zU00Tzw01y001zzk07k007zz00T000Tzy01w001zzs07k007zzU0C000Tzy00s001zzs01U03bzzU0U00Tzzw0zU01zzzU1s007zzy00000zzzk00003zzy000007zzk00000Tzz000001zzs000003zz000000Dzw00k000Tzk030001zz00Q0003zy03k000Tzs0T0001zzU1w0007zz0Dk080zzztz00U3zzzzw030Dzzzzk0A0zzzzz00s7zzzzw03UTzzzzk0D1zzzzz00wDzzzzw03szzzzzk0DXzzzzz00zTzzzzw03xzzzzzk0Tzzzzzz01zzzzzzs07zzzzzzU0Tzzzzzy01zzzzzzw1zzzzU"
-AcademyAngle2:="|<>*136$27.zzzzzzwDzzw7zzz1zzzkDzzw1zzz07zzs0zzy03zzk07zy003zk00Ty003zs00TzU07zy01zzs0Tzzszzzzzzw"
+;Mist's Angles
+AirCraftAngle:="|<>*27$46.zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz003zzzzw00Dzzzzk00zzzzy003zzzzs00DzzzzU00zzzzy003zzzzs00DzzzzU00zzzk00007zz00000Tzw00001zzk00007zz00000Tzw00001zzk00007zz00000Tzw00001zzk00007zz00000Tzw000001zU000007y000000Ts000001zU000007y000000Ts000003zU00000Dy000000zs000003zU0000Dzy00000zzs00003zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs"
+HellishAngle:="|<>*40$38.zzDzzzzzryTzzzxzrzzzzTxzzzzyDTzzzVwD7zzaSHwzy3nXvHzCyuNoTvbAI0Nyw4zyjTib7znrsPsnSxrz6lvqwzmSyyDruTrTzywyyDzzzjbrzzxxgzzzzTXbzzzjxxzzzrzjTzzzztjzzy"
+FestivalAngle:="|<>*55$39.W0043zw00000zU00007w000003n00000MVQ0003400k00MU00303A0000CNU00003C00000N0M0007805U00xU00707c0000Qx000007w00000z0k0007s07000z000C07s0002sz000007s00000z1U0007k06000S000M03s0001US000001k00000Ts0000jw3U000zUE6007zzxzyzzw03zzzzkDzzzw"
+ShibuyaAngle:="|<>*40$45.0000001s000000D0000001s000000DU000000w0000007U000000Q0000003k000000C0000001k000000C0000000k00000070000000s00000070000000w000000DU00000zy00001zzk0007zzzU00Dzzzy00Tzzzzs1zzzzw"
 
 ;Ryn's Map Angles
 MagicHillsBench:="|<>*38$34.0000000000000000000000000000000000000000000000000000000000000000000000RzU001zy0007zs000TzU00rzy0E7Tzs10RzzU41rzy0E7zzs100zzU403zz0E0Dzw100zzk403zz0E0/zw100jzk403zz0E07zw100Tzk401zz0k07zw300TzkA01zz0k07zw300TzkA01zz0k07zw300TzsA01zzUk07zy300TzsA01zzUk07zy300TzsQ01zzVk07zy700DzsQ00zzVk03zy700DzsQ00zzVk03zy700DzsQ00zzVk03zy700DzwQ00zzlk1rzzD07Tzww0Nzznk0bzzD02zzww00003k0000D00000w00003k0000DU"
@@ -216,13 +218,23 @@ ChestRoom:="|<>*138$72.zzzzzzzzzzzzzzzzzzzzzzzzz0Tw0Ts01lzkw07s07k00Uzks03s01k00
 FinalRoom:="|<>*71$41.zzzzzzzzzzzzzz1szv1sw1UzY1UtWMyNWMw4ttw4tkNnbkNn1laT1la0kNy0kQ1lrw1lzzzzzzzzzzzzzzU"
 DungeonShop:="|<>*79$21.zzzyPMVhMlY86BhOoC/Mjzzzw"
 ShrineRoom:="|<>*58$26.zzzzsg4gSMBc7wku3sAYA7zzzzU"
+Curse:="|<>*41$26.lO6MNKAOyxW0VbM5XwEd26"
 ;Dungeon Shrine
 ShrineAccept:="|<>*111$73.DyDzjzzzzzzzi3i1y1k0E1w0S8yACA8zswDVy4S7674TwT7syDWDyDyDyDXQN7l7T7T077laAXsXDXDU3Xsn6E0Fzlzlzk1tX8QASQSMzsTslYT77774TwTssmDXkDkC02DsQN7nw7w70360CQzTzzDzzzz03yE"
 ;Shrine Rewards
 SpeedyBoots:="|<>*82$74.zzzzzzzzzzzzwTzzzbzsDzyTyHzzzlzyNzzXzUU0006TU00E0x1U01Vbt1VaMCM222N1yMMNb1kbkkkkzUkkxUzzzzzzzzzzzzy"
 
+;Shop Items
+NimbleCloak:="|<>*82$74.aNzblzzklzzbsaTtyTzsaTzty1a01a1yTa101UNU6NUTbtaE0t6M1aMDwaNU0CN0d313zX130FU"
+IceDagger:="|<>*86$59.1zzy7zzzzzDzzwbzzzzyM0DtY800A4nkDn83309tbUzYUEE0nUUVz3UUUVjU"
+;Dungeon Curses
+CurseOfFlight:="|<>*48$62.VzzzzbVCyQvg0VsFsv816H70Sqyyu3Pk5UDVjj4Eqs"
+CurseOfWind:="|<>*41$67.lzzzzzlwazwmAV6Dsky2MMNmH23t8z1YVAV/k3waTUmEb45kVy7TmEM3"
+CurseOfMoney:="|<>*47$58.VzzzzbVzzyv08S4S003NAQ1vPsAk1k5UDVjg336"
+
+
 global roomTexts := Map(
-    "MultiChest", DoubleChest,
+    "MultiChest", DoubleChestNoHover,
     "Chest", Chest,
     "Hoard", Hoard,
     "Shop", DungeonShop,
@@ -245,5 +257,5 @@ RobloxApp:="|<>*122$37.zzzzzzzzzzzzzzzzzzzzzzzzzzztzzzzzsTzzzzs7zzzzk0zzzzk0Dzzz
 ;Notification
 ExitNotification:="|<>*136$18.zzzwzjsT7wS7wADy0Tz0zzUzzUzz0Ty4DwC7sT7wzbzzzzzzU"
 ;Maharaga 277, 513, 310, 546
-MaharagaDefend:="|<>*197$25.zzzzzzzzw70kA10E683sz70Q7XU61lk30wlDny1UNz1kBzzzzzU"
+MaharagaDefend:="|<>*204$24.zzzzVs610E4141wTb1yTb0C3b8S7a9yTUM6TVs6zU"
 Adaptation:="|<>*99$88.zzzjzzzzzzvzzzzwzwzzzvzzjbzzzzlznzzzbzySTzzzy7zDzzyTztzzzzzsDYzzzkTz1bzzzz0w3WNC1l86Q78tw1UA1UM60UNUA17U68k60ks33a0k4S01WANnb6CSFlCTk068lbCQMtt74sz3U0k60sM3Va0naMz030M7VUC6M3CFnytC9Yz74wNkQtbzzzzyTzzzzzzzzzzzzztzzzzzzzzzU"

@@ -43,7 +43,7 @@ readInSettings() {
     global PhysicalTeam, MagicTeam, TeamSwap
 
     ;Maharaga
-    global FirstAdaptation, SecondAdaptation, FinalAdaptation
+    global FirstAdaptation, SecondAdaptation, FinalAdaptation, MahoragoMode
 
     try {
         settingsFile := setupFilePath()
@@ -131,6 +131,7 @@ readInSettings() {
                 case "FirstAdapt": FirstAdaptation.Value := parts[2] ; Set the checkbox value
                 case "SecondAdapt": SecondAdaptation.Value := parts[2] ; Set the checkbox value
                 case "FinalAdapt": FinalAdaptation.Value := parts[2] ; Set the checkbox value
+                case "Style": MahoragoMode.Value := parts[2] ; Set the checkbox value
             }
         }
         AddToLog("Configuration settings loaded successfully")
@@ -168,6 +169,9 @@ SaveSettings(*) {
 
     ; Team settings
     global PhysicalTeam, MagicTeam, TeamSwap
+
+    ;Maharaga
+    global FirstAdaptation, SecondAdaptation, FinalAdaptation, MahoragoMode
 
     try {
         settingsFile := A_ScriptDir "\Settings\Configuration.txt"
@@ -289,6 +293,9 @@ SaveSettings(*) {
 
         content .= "`n[FinalAdaptation]"
         content .= "`nFinalAdapt=" FinalAdaptation.Value "`n"
+
+        content .= "`n[MahoragoMode]"
+        content .= "`nStyle=" MahoragoMode.Value "`n"
 
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")

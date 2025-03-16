@@ -7,21 +7,22 @@ global contractSwitchPattern := 0
 global BossRoomCompleted := false
 global SaveChestsForBoss := true
 
-global adaptations:= 0
+global adaptations := 0
+global setMahoragoStyle := false
 
 LoadKeybindSettings()  ; Load saved keybinds
-CheckForUpdates()
+;CheckForUpdates()
 Hotkey(F1Key, (*) => moveRobloxWindow())
 Hotkey(F2Key, (*) => StartMacro())
 Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-
+    CheckDungeonRooms
 }
 
 F6:: {
-
+    CheckDungeonRoomsNew
 }
 
 StartMacro(*) {
@@ -125,7 +126,8 @@ PlacingUnits() {
                         continue
                     if PlaceUnit(point.x, point.y, slotNum) {
                         CheckForCardSelection()
-                        CheckForMaharagaAdaptation()
+                        CheckForMahoraga()
+                        CheckForMahoragaAdaptation()
                         successfulCoordinates.Push({x: point.x, y: point.y, slot: slotNum})
                         placedCounts[slotNum] += 1
                         AddToLog("Placed Unit " slotNum " (" placedCounts[slotNum] "/" placements ")")
@@ -159,7 +161,8 @@ PlacingUnits() {
                 Sleep(500)
             }
             CheckForCardSelection()
-            CheckForMaharagaAdaptation()
+            CheckForMahoraga()
+            CheckForMahoragaAdaptation()
         }
     }
     
@@ -936,7 +939,8 @@ global mode, StoryActDropdown
             CheckForCardSelection()
         }
 
-        CheckForMaharagaAdaptation()
+        CheckForMahoraga()
+        CheckForMahoragaAdaptation()
 
         if CheckForDisconnect() {
             return Reconnect()
@@ -1847,6 +1851,23 @@ MoveForMagicTown() {
     SendInput ("{d up}")
 }
 
+MoveForMagicTownNew() {
+    SendInput ("{d down}")
+    Sleep (3000)
+    SendInput ("{d up}")
+    KeyWait("d")
+    Sleep (1000)
+    SendInput ("{s down}")
+    Sleep (1200)
+    SendInput ("{s up}")
+    KeyWait("s")
+    Sleep (1000)
+    SendInput ("{d down}")
+    Sleep (3200)
+    SendInput ("{d up}")
+    KeyWait("d")
+}
+
 
 MoveForMagicHill() {
     if (ok := FindText(&X, &Y, 518, 334, 566, 404, 0.15, 0.15, MagicHillsBench) or (ok := FindText(&X, &Y, 522, 339, 557, 402, 0.15, 0.15, MagicHillLegendStageBench))) {
@@ -1935,10 +1956,25 @@ MoveForMountainTemple() {
     Sleep (4000)
 }
 
-MoveForCursedFestival(){
+MoveForCursedFestivalOld(){
     SendInput ("{d down}")
     sleep (1800)
     SendInput ("{d up}")
+    KeyWait "d"
+}
+
+MoveForCursedFestival(){
+    if (ok := FindText(&X, &Y, 560, 285, 615, 350, 0.15, 0.15, FestivalAngle)) {
+        SendInput ("{d down}")
+        Sleep (1800)
+        SendInput ("{d up}")
+        KeyWait "d"
+    } else {
+        SendInput ("{a down}")
+        Sleep (1800)
+        SendInput ("{a up}")
+        KeyWait "a"
+    }
 }
 
 MoveForNightmareTrain() {
@@ -1947,15 +1983,37 @@ MoveForNightmareTrain() {
     SendInput ("{a up}")
 }
 
-MoveForAirCraft() {
+MoveForAirCraftOld() {
     SendInput ("{s down}")
     sleep (800)
     SendInput ("{s up}")
 }
 
-MoveForHellish() {
+MoveForAirCraft() {
+    if (ok := FindText(&X, &Y, 535, 110, 620, 175, 0.15, 0.15, AirCraftAngle)) {
+        Fixclick(90, 560, "Right")
+        Sleep (5000)
+    } else {
+        Fixclick(655, 122, "Right")
+        Sleep (5000)
+    }
+}
+
+MoveForHellishOld() {
     Fixclick(600, 300, "Right")
     Sleep (7000)
+}
+
+MoveForHellish() {
+    if (ok := FindText(&X, &Y, 370, 210, 465, 265, 0.15, 0.15, HellishAngle)) {
+        SendInput ("{d down}")
+        Sleep (1200)
+        SendInput ("{d up}")
+        KeyWait "d"
+    } else {
+        Fixclick(600, 300, "Right")
+        Sleep (7000)
+    }
 }
 
 MoveForWinterEvent() {
@@ -2025,9 +2083,10 @@ MoveForShibuya() {
 }
     
 RestartStage() {
-    global adaptations
+    global adaptations, setMahoragoStyle
 
     adaptations := 0
+    setMahoragoStyle := false
 
     currentMap := DetectMap()
     
@@ -2136,6 +2195,7 @@ PlaceUnit(x, y, slot := 1) {
     if (ModeDropdown.Text = "Winter Event") {
         CheckForCardSelection()
     }
+
     Sleep 50
     SendInput(slot)
     Sleep 50
@@ -2247,33 +2307,37 @@ CheckAbility() {
     }
 }
 
-CheckForMaharaga() {
-    if (ok := FindText(&X, &Y, 342, 253, 401, 281, 0, 0, MaharagaDefend)) {
-        AddToLog("Maharaga Found")
-        return true
+CheckForMahoraga() {
+    global setMahoragoStyle
+    if (!setMahoragoStyle) {
+        if (ok := FindText(&X, &Y, 279, 517, 308, 541, 0, 0, MaharagaDefend)) {
+            AddToLog("Found Mahoraga")
+            ChangeMahoragaMode()
+            return true
+        }
     }
 }
 
-CheckForMaharagaAdaptation() {
+CheckForMahoragaAdaptation() {
     global adaptations, FirstAdaptation, SecondAdaptation, FinalAdaptation
 
     if (ok := FindText(&X, &Y, 198, 394, 391, 419, 0, 0, Adaptation)) {
         adaptations += 1
-        AddToLog("Maharaga Upgrade Available")
+        AddToLog("Mahoraga Upgrade Available")
         switch (adaptations) {
             case 1:
-                ChoseMaharagaAdaptation(FirstAdaptation.Value)
+                ChoseMahoragaAdaptation(FirstAdaptation.Value)
             case 2:
-                ChoseMaharagaAdaptation(SecondAdaptation.Value)
+                ChoseMahoragaAdaptation(SecondAdaptation.Value)
             case 3:
                 adaptations := 0
-                ChoseMaharagaAdaptation(FinalAdaptation.Value)
+                ChoseMahoragaAdaptation(FinalAdaptation.Value)
         }
         return true
     }
 }
 
-ChoseMaharagaAdaptation(adaption := 1) {
+ChoseMahoragaAdaptation(adaption := 1) {
     switch (adaption) {
         case 1:
             FixClick(230, 410)
@@ -2290,12 +2354,22 @@ ChoseMaharagaAdaptation(adaption := 1) {
     }
 }
 
-ChangeMaharagaMode() {
+ChangeMahoragaMode() {
+    global setMahoragoStyle
 
-}
+    if (!setMahoragoStyle) {
+        if (MahoragoMode.Value = 3) {
+            FixClick(292, 496)
+            setMahoragoStyle := true
+        } else if (MahoragoMode.Value = 2) {
+            FixClick(292, 496)
+            Sleep(1000)
+            FixClick(292, 496)
+            setMahoragoStyle := true
+        }
 
-GetAdaptationClicks() {
-    global FirstAdaptation, SecondAdaptation, FinalAdaptation
+    }
+
 }
 
 CheckForErwin() {

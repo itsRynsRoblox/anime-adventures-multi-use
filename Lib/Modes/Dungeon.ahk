@@ -25,11 +25,22 @@ CheckForShrineRoom() {
     return FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, ShrineRoom)
 }
 
+CheckRoomForCurse() {
+   return FindText(&X, &Y, 121, 168, 681, 493, 0.20, 0.20, CurseOfFlight)
+}
+
 CheckDungeonRooms() {
+
+    foundRoom := false
+
     roomDefs := [
         {x: 506, y: 284, search: {x1: 213, y1: 357, x2: 282, y2: 424}}, ;First Room : 213, 357, 282, 423
         {x: 296, y: 284, search: {x1: 370, y1: 357, x2: 436, y2: 424}}, ;Second Room : 370, 357, 436, 424
-        {x: 506, y: 284, search: {x1: 524, y1: 356, x2: 590, y2: 424}} ;Third Room : 524, 356, 590, 424
+        {x: 506, y: 284, search: {x1: 524, y1: 356, x2: 590, y2: 424}}, ;Third Room : 524, 356, 590, 424
+
+        ;Only 2 Rooms
+        {x: 506, y: 284, search: {x1: 283, y1: 350, x2: 365, y2: 430}}, ;First Room : 283, 350, 365, 430
+        {x: 506, y: 284, search: {x1: 439, y1: 349, x2: 523, y2: 428}} ;Second Room : 439, 349, 523, 428
     ]
     
     rooms := roomDefs
@@ -38,7 +49,7 @@ CheckDungeonRooms() {
 
         for index, priority in routePriorityOrder {
             if (!roomTexts.Has(priority)) {		
-                AddToLog(Format("{} room not available in textCards", priority))														
+                AddToLog(Format("{} room not available", priority))														
                 continue
             }
     
@@ -46,15 +57,144 @@ CheckDungeonRooms() {
                 if (debugMessages) {
                     AddToLog("Found room: " (i))
                 }
+                if (priority = "MultiChest" || priority = "Chest") {
+                    if (ok := ImageSearch(&searchX, &searchY, room.search.x1, room.search.y1, room.search.x2, room.search.y2, RareChest)) {
+                        AddToLog("Found Room: Rare Chest")
+                        FixClick(X, Y-30)
+                        foundRoom := true
+                        break
+    
+                    }
+                }
+                foundRoom := true
                 AddToLog(Format("Found Room: {}", priority))
-                MouseMove(X + 2, Y + 2, 1)
-                return true
+                MouseMove(X + 2, Y - 30, 1)
+                Sleep (500)
+                MouseMove(X - 2, Y - 30, 1)
+                Sleep (500)
+                DetectCurse()
+                break
             }
         }
     }
-    AddToLog("Failed to find a preferred room, Defautling to center room...")
-    Sleep 1000
-    return false
+
+    if (!foundRoom) {
+        ; If no chest/hoard found, click default positions
+        AddToLog("No chest/hoard found, clicking default positions")
+        FixClick(400, 355)
+        Sleep(500)
+        FixClick(335, 355)
+    }
+}
+
+CheckDungeonRoomsNew() {
+    foundRoom := false
+    unsafeRooms := []
+    lastFoundRoom := {} ; Store last found room to fall back on
+
+    roomDefs := [
+        {x: 246, y: 357, search: {x1: 213, y1: 357, x2: 282, y2: 424}}, ; First Room
+        {x: 400, y: 360, search: {x1: 370, y1: 357, x2: 436, y2: 424}}, ; Second Room
+        {x: 555, y: 358, search: {x1: 524, y1: 356, x2: 590, y2: 424}}, ; Third Room
+
+        {x: 506, y: 284, search: {x1: 283, y1: 350, x2: 365, y2: 430}}, ; First Room (2 Rooms)
+        {x: 506, y: 284, search: {x1: 439, y1: 349, x2: 523, y2: 428}}  ; Second Room (2 Rooms)
+    ]
+
+    rooms := roomDefs
+
+    for i, room in rooms {
+        if (unsafeRooms.Has(i))
+            continue
+
+        for index, priority in routePriorityOrder {
+            if (!roomTexts.Has(priority)) {
+                AddToLog(Format("{} room not available", priority))
+                continue
+            }
+
+            if (ok := FindText(&X, &Y, room.search.x1, room.search.y1, room.search.x2, room.search.y2, 0.20, 0.20, roomTexts.Get(priority))) {
+                if (debugMessages) {
+                    AddToLog("Found room: " (i))
+                }
+                lastFoundRoom := room ; Store this room as fallback
+
+                if (priority = "MultiChest" || priority = "Chest") {
+                    if (ok := ImageSearch(&searchX, &searchY, room.search.x1, room.search.y1, room.search.x2, room.search.y2, RareChest)) {
+                        AddToLog("Found Room: Rare Chest")
+                        FixClick(room.x, room.y)
+                        foundRoom := true
+                        break
+                    }
+                }
+                foundRoom := true
+                AddToLog(Format("Found Room: {}", priority))
+                FixClick(room.x, room.y)
+                Sleep(500)
+                if (priority = "Hoard") {
+                    AddToLog("Curse detected! Marking room as unsafe.")
+                    unsafeRooms.Push(i)
+                    foundRoom := false
+                    FixClick(room.x, room.y)
+                    continue
+                }
+                break
+            }
+        }
+        if (foundRoom)
+            break
+    }
+
+    if (!foundRoom && lastFoundRoom) {
+        AddToLog("All rooms marked unsafe. Clicking fallback room.")
+        FixClick(lastFoundRoom.x, lastFoundRoom.y)
+    } else if (!foundRoom) {
+        AddToLog("No safe chest/hoard found, clicking default positions")
+        FixClick(400, 355)
+        Sleep(500)
+        FixClick(335, 355)
+    }
+}
+
+CheckAllDungeonRooms() {
+
+    foundRooms := []  ; Initialize an empty list to store found rooms
+
+    roomDefs := [
+        {x: 506, y: 284, search: {x1: 213, y1: 357, x2: 282, y2: 424}}, ; First Room
+        {x: 296, y: 284, search: {x1: 370, y1: 357, x2: 436, y2: 424}}, ; Second Room
+        {x: 506, y: 284, search: {x1: 524, y1: 356, x2: 590, y2: 424}}, ; Third Room
+
+        ; Instance of 2 rooms
+        {x: 506, y: 284, search: {x1: 283, y1: 350, x2: 365, y2: 430}}, ; First Room
+        {x: 506, y: 284, search: {x1: 439, y1: 350, x2: 523, y2: 430}}  ; Second Room
+    ]
+    
+    rooms := roomDefs
+
+    for i, room in rooms {
+
+        for index, priority in routePriorityOrder {
+            if (!roomTexts.Has(priority)) {		
+                AddToLog(Format("{} room not available", priority))														
+                continue
+            }
+    
+            if (ok := FindText(&X, &Y, room.search.x1, room.search.y1, room.search.x2, room.search.y2, 0.20, 0.20, roomTexts.Get(priority))) {
+                if (debugMessages) {
+                    AddToLog("Found room: " (i))
+                }
+                if (priority = "MultiChest" || priority = "Chest") {
+                    if (ok := ImageSearch(&searchX, &searchY, room.search.x1, room.search.y1, room.search.x2, room.search.y2, RareChest)) {
+                        AddToLog("Chest room contains a rare chest...")
+                    }
+                }
+                AddToLog(Format("Found Room: {}", priority))
+                foundRooms.Push(priority)  ; Add the found room to the list
+            }
+        }
+    }
+    return foundRooms  ; Return the list of found rooms
 }
 
 CheckDungeonRoomsCopy(roomSet) {
@@ -69,7 +209,7 @@ CheckDungeonRoomsCopy(roomSet) {
     for i, room in rooms {
         if (ok := FindText(&X, &Y, room.search.x1, room.search.y1, room.search.x2, room.search.y2, 0.20, 0.20, roomSet)) {
             AddToLog("Found room: " (i))
-            MouseMove(X + 2, Y + 2, 1)
+            MouseMove(X + 2, Y - 30, 1)
             return true
         }
     }
@@ -387,4 +527,31 @@ CheckIfFinalRoom() {
         return true
     }
     return false
+}
+
+DetectCurse() {
+    AddToLog("Checking room for curse...")
+    curseCheckTime := A_TickCount
+    
+    Loop {
+
+        if (A_TickCount - startTime > 3000) {
+            AddToLog("Could not detect curse after 3 seconds - proceeding...")
+            return "no curse found"
+        }
+
+        curseTexts := Map(
+            "Curse of Flight", CurseOfFlight,
+            "Curse of Wind", CurseOfWind,
+            "Curse of Money", CurseOfMoney
+        )
+
+        for curseName, curse in curseTexts {
+            if (ok := FindText(&X, &Y, 121, 168, 681, 493, 0.10, 0.10, curse)) {
+                AddToLog("Detected Curse: " curseName)
+                return curseName
+            }
+        }
+        Sleep 1000
+    }
 }
