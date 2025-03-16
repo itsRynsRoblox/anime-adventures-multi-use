@@ -1,6 +1,7 @@
 [RoutePriority]
-Room2=MultiChest
+Room2=Hoard
 Room3=Chest
 Room4=Hoard
 Room5=Shop
 Room6=Shrine
+Room7=Empty

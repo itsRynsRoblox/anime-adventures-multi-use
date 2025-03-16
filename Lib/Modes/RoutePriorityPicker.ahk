@@ -5,9 +5,9 @@ RoutePrioritySelector.MarginX := 20
 RoutePrioritySelector.MarginY := 20
 RoutePrioritySelector.Title := "Route Priority"
 
-RoutePriorityOrder := RoutePrioritySelector.Add("GroupBox", "x30 y25 w180 h180  +Center cWhite", "Route Priority Order")
+RoutePriorityOrder := RoutePrioritySelector.Add("GroupBox", "x30 y25 w180 h200  +Center cWhite", "Route Priority Order")
 
-roomOptions := ["MultiChest", "Chest", "Hoard", "Shop", "Shrine"]
+roomOptions := ["MultiChest", "Chest", "Hoard", "Shop", "Shrine", "Empty"]
 
 numDropDowns := 19
 yStart := 50
@@ -30,7 +30,7 @@ OpenRoutePriorityPicker() {
     RoutePrioritySelector.Show()
 }
 
-global routePriorityOrder := ["MultiChest", "Chest", "Hoard", "Shop", "Shrine"]
+global routePriorityOrder := ["MultiChest", "Chest", "Hoard", "Shop", "Shrine", "Empty"]
 
 AttachRouteDropDownEvent(dropDown, index) {
     dropDown.OnEvent("Change", (*) => OnRouteDropDownChange(dropDown, index))

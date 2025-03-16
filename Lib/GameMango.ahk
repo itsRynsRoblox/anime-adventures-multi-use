@@ -18,11 +18,11 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-    CheckDungeonRooms
+    BasicSetup
 }
 
 F6:: {
-    CheckDungeonRoomsNew
+    CountVisibleRooms
 }
 
 StartMacro(*) {
@@ -1870,7 +1870,7 @@ MoveForMagicTownNew() {
 
 
 MoveForMagicHill() {
-    if (ok := FindText(&X, &Y, 518, 334, 566, 404, 0.15, 0.15, MagicHillsBench) or (ok := FindText(&X, &Y, 522, 339, 557, 402, 0.15, 0.15, MagicHillLegendStageBench))) {
+    if (ok := FindText(&X, &Y, 518, 334, 566, 404, 0.15, 0.15, MagicHillsBench) or (ok := FindText(&X, &Y, 522, 339, 557, 402, 0.20, 0.20, MagicHillLegendStageBench))) {
         Fixclick(500, 20, "Right")
         Sleep (3000)
         Fixclick(500, 20, "Right")

@@ -218,7 +218,12 @@ ChestRoom:="|<>*138$72.zzzzzzzzzzzzzzzzzzzzzzzzz0Tw0Ts01lzkw07s07k00Uzks03s01k00
 FinalRoom:="|<>*71$41.zzzzzzzzzzzzzz1szv1sw1UzY1UtWMyNWMw4ttw4tkNnbkNn1laT1la0kNy0kQ1lrw1lzzzzzzzzzzzzzzU"
 DungeonShop:="|<>*79$21.zzzyPMVhMlY86BhOoC/Mjzzzw"
 ShrineRoom:="|<>*58$26.zzzzsg4gSMBc7wku3sAYA7zzzzU"
+EmptyRoom:="|<>*32$55.zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw"
 Curse:="|<>*41$26.lO6MNKAOyxW0VbM5XwEd26"
+DungeonRoomBorder:="|<>*46$15.zzzzzsQD2VsIz3bzzzbzzzz3ksRzDjtxzzjU"
+DungeonRoomBorderDark:="|<>*12$16.0zYTzl3V4+4kdn3bDzwtznzzAD0kvnDjAywzvs"
+DungeonRoomBorderCursed:="|<>*23$9.zsQ2UI3bzbzz3sTDtzztzDtzU"
+
 ;Dungeon Shrine
 ShrineAccept:="|<>*111$73.DyDzjzzzzzzzi3i1y1k0E1w0S8yACA8zswDVy4S7674TwT7syDWDyDyDyDXQN7l7T7T077laAXsXDXDU3Xsn6E0Fzlzlzk1tX8QASQSMzsTslYT77774TwTssmDXkDkC02DsQN7nw7w70360CQzTzzDzzzz03yE"
 ;Shrine Rewards
@@ -238,7 +243,8 @@ global roomTexts := Map(
     "Chest", Chest,
     "Hoard", Hoard,
     "Shop", DungeonShop,
-    "Shrine", ShrineRoom
+    "Shrine", ShrineRoom,
+    "Empty", EmptyRoom
 )
 
 ;Story Mode
