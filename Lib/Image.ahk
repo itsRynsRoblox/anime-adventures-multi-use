@@ -225,6 +225,7 @@ DungeonRoomBorder:="|<>*46$15.zzzzzsQD2VsIz3bzzzbzzzz3ksRzDjtxzzjU"
 DungeonRoomBorderDark:="|<>*12$16.0zYTzl3V4+4kdn3bDzwtznzzAD0kvnDjAywzvs"
 DungeonRoomBorderCursed:="|<>*23$9.zsQ2UI3bzbzz3sTDtzztzDtzU"
 DungeonRoomBorderChestOpen:="|<>*24$13.zzzzsQA+65D3bzztkDk4824DC0b0TU8"
+DungeonRoomBorderBoss:="|<>*9$13.00TjsQA+65D3bzzdkDk4824DC0U"
 
 ;Dungeon Shrine
 ShrineAccept:="|<>*111$73.DyDzjzzzzzzzi3i1y1k0E1w0S8yACA8zswDVy4S7674TwT7syDWDyDyDyDXQN7l7T7T077laAXsXDXDU3Xsn6E0Fzlzlzk1tX8QASQSMzsTslYT77774TwTssmDXkDkC02DsQN7nw7w70360CQzTzzDzzzz03yE"
@@ -234,8 +235,9 @@ SpeedyBoots:="|<>*82$74.zzzzzzzzzzzzwTzzzbzsDzyTyHzzzlzyNzzXzUU0006TU00E0x1U01Vb
 ;Shop Items
 NimbleCloak:="|<>*82$74.aNzblzzklzzbsaTtyTzsaTzty1a01a1yTa101UNU6NUTbtaE0t6M1aMDwaNU0CN0d313zX130FU"
 IceDagger:="|<>*86$59.1zzy7zzzzzDzzwbzzzzyM0DtY800A4nkDn83309tbUzYUEE0nUUVz3UUUVjU"
+ArchmageHat:="|<>*53$71.zzzzzzzzzzzzXztzzzyTzYzi2gEVX6Asz96AYnY10UDVy26M/b8000zVwUBqLUk48Fy7v8Pzzzzzzzzzzzz"
 ;Dungeon Curses
-CurseOfFlight:="|<>*48$62.VzzzzbVCyQvg0VsFsv816H70Sqyyu3Pk5UDVjj4Eqs"
+CurseOfFlight:="|<>*58$62.zzzzzzzzzzwTzzzttnjjivE8S4SCm0Fapk7hjjiUqwFMHwPvl4BjzzzzzzzzzzU"
 CurseOfFlightLobby:="|<>*38$47.zzzzzzzz2pjgshVaoECdlOZC1UQLiE+zzzzzzzzk"
 CurseOfWind:="|<>*41$67.lzzzzzlwazwmAV6Dsky2MMNmH23t8z1YVAV/k3waTUmEb45kVy7TmEM3"
 CurseOfMoney:="|<>*47$58.VzzzzbVzzyv08S4S003NAQ1vPsAk1k5UDVjg336"
@@ -252,7 +254,7 @@ global roomTexts := Map(
     "Hoard", Hoard,
     "Shop", DungeonShop,
     "Shrine", ShrineRoom,
-    "Empty", EmptyRoom
+    "Boss", BossRoom or BossRoom2
 )
 
 ;Story Mode

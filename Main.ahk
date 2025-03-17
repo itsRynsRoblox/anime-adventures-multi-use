@@ -6,6 +6,7 @@ SendMode "Event"
 #Include %A_ScriptDir%\Lib\Toggles.ahk
 #Include %A_ScriptDir%\Lib\PriorityPicker.ahk
 #Include %A_ScriptDir%\Lib\Modes\RoutePriorityPicker.ahk
+#Include %A_ScriptDir%\Lib\Modes\CursePriorityPicker.ahk
 #Include %A_ScriptDir%\lib/GUI.ahk
 #Include %A_ScriptDir%\lib/GameMango.ahk
 #Include %A_ScriptDir%\lib/Functions.ahk

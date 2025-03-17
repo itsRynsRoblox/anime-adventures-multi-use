@@ -37,7 +37,7 @@ readInSettings() {
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
 
     ;Dungeon Settings
-    global QuitIfFailBox, DenyShrines
+    global StopAfterDefeat, DenyShrines, UseNewDungeonRoute, SaveChestsBox
 
     ; Team settings
     global PhysicalTeam, MagicTeam, TeamSwap
@@ -121,11 +121,15 @@ readInSettings() {
                 case "PhyTeam": physicalTeam.Text := parts[2]
                 case "MagTeam": magicTeam.Text := parts[2]
 
-                case "StopAfterDefeat": QuitIfFailBox.Value := parts[2] ; Set the checkbox value
                 case "FailsafeEnabled": RejoinRoblox.Value := parts[2] ; Set the checkbox value
                 case "ToLobby": ReturnLobbyBox.Value := parts[2] ; Set the checkbox value
                 case "UseNavigation": StoryUINav.Value := parts[2] ; Set the checkbox value
                 case "Upgrade1By1": MaxUpgradeBeforeMoving.Value := parts[2] ; Set the checkbox value
+
+                ;Dungeon settings
+                case "StopAfterDefeat": StopAfterDefeat.Value := parts[2] ; Set the checkbox value
+                case "SaveChests": SaveChestsBox.Value := parts[2] ; Set the checkbox value
+                case "NewSystem": UseNewDungeonRoute.Value := parts[2] ; Set the checkbox value
                 case "AutoReject": DenyShrines.Value := parts[2] ; Set the checkbox value
 
                 case "FirstAdapt": FirstAdaptation.Value := parts[2] ; Set the checkbox value
@@ -165,7 +169,7 @@ SaveSettings(*) {
     global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
 
     ;Dungeon Settings
-    global QuitIfFailBox, DenyShrines
+    global StopAfterDefeat, DenyShrines, UseNewDungeonRoute, SaveChestsBox
 
     ; Team settings
     global PhysicalTeam, MagicTeam, TeamSwap
@@ -267,11 +271,11 @@ SaveSettings(*) {
         content .= "`n[MagicTeam]"
         content .= "`nMagTeam=" magicTeam.Value "`n"
 
-        content .= "`n[QuitUponDefeat]"
-        content .= "`nStopAfterDefeat=" QuitIfFailBox.Value "`n"
-
-        content .= "`n[Shrines]"
+        content .= "`n[Dungeons]"
+        content .= "`nStopAfterDefeat=" StopAfterDefeat.Value "`n"
         content .= "`nAutoReject=" DenyShrines.Value "`n"
+        content .= "`nSaveChests=" SaveChestsBox.Value "`n"
+        content .= "`nNewSystem=" UseNewDungeonRoute.Value "`n"
 
         content .= "`n[RejoinFailsafe]"
         content .= "`nFailsafeEnabled=" RejoinRoblox.Value "`n"

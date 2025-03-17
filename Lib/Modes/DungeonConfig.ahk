@@ -1,6 +1,7 @@
 #Include %A_ScriptDir%\Lib\gui.ahk
 #Include %A_ScriptDir%\Main.ahk
 #Include %A_ScriptDir%\Lib\Modes\RoutePriorityPicker.ahk
+#Include %A_ScriptDir%\Lib\Modes\CursePriorityPicker.ahk
 
 SaveDungeonConfig(*) {
     SaveDungeonLocal
@@ -34,6 +35,12 @@ SaveDungeonConfigToFile(filePath) {
         File.WriteLine(Format("Room{}={}", index+1, routeDropDown.Text))
     }
 
+    File.WriteLine("`n[CurseProtection]")
+    for index, curseDropDown in curseDropDowns
+    {
+        File.WriteLine(Format("Curse{}={}", index+1, curseDropDown.Text))
+    }
+
     File.Close()
     if (debugMessages) {
         AddToLog("Dungeon configuration saved to " filePath ".`n")
@@ -43,6 +50,7 @@ SaveDungeonConfigToFile(filePath) {
 
 LoadDungeonConfigFromFile(filePath) {
     global routeDropDowns
+    global curseDropDowns
 
     if !FileExist(filePath) {
         AddToLog("No dungeon configuration file found. Creating new local configuration.")
@@ -82,6 +90,22 @@ LoadDungeonConfigFromFile(filePath) {
 		    
                 }
             }
+
+            if (section = "CurseProtection") {
+                if RegExMatch(line, "Curse(\d+)=(\w+)", &match) {
+                    slot := match.1
+                    value := match.2
+
+                    cursePriorityOrder[slot - 1] := value
+
+                    curseDropDown := curseDropDowns[slot - 1]
+
+                    if (curseDropDown) {
+                        curseDropDown.Text := value
+                    }
+		    
+                }
+            }
         }
         file.Close()
         if (debugMessages) {
@@ -97,4 +121,5 @@ SaveDungeonLocal(*) {
 
 LoadDungeonLocal(*) {
     LoadDungeonConfigFromFile("Settings\RoutePriority.txt")
+    UpdateEnabledCurses()
 }

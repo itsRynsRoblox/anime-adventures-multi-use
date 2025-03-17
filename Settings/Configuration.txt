@@ -1,4 +1,4 @@
-Mode=Dungeon
+Mode=
 
 
 Enabled1=1
@@ -68,7 +68,7 @@ Logic=1
 Speed=3
 
 [Matchmaking]
-Matchmake=0
+Matchmake=1
 
 [PriorityUpgrade]
 Upgrade=1
@@ -85,11 +85,14 @@ PhyTeam=1
 [MagicTeam]
 MagTeam=1
 
-[QuitUponDefeat]
+[Dungeons]
 StopAfterDefeat=1
 
-[Shrines]
 AutoReject=1
+
+SaveChests=1
+
+NewSystem=1
 
 [RejoinFailsafe]
 FailsafeEnabled=1

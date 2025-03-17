@@ -22,7 +22,7 @@ F5:: {
 }
 
 F6:: {
-    CountVisibleRooms
+
 }
 
 StartMacro(*) {
@@ -754,7 +754,11 @@ DungeonMode() {
     }
     Sleep(1000)
     ; Select dungeon route and enter
-    StartDungeonRoute()
+    if (UseNewDungeonRoute.Value) {
+        LookForDungeonRooms()
+    } else {
+        StartDungeonRoute()
+    }
 }
 
 CheckForReturnToLobby() {
@@ -2439,6 +2443,18 @@ CheckForLobbyText() {
         return true
     }
     return false
+}
+
+CheckForLobby() {
+    loop {
+        Sleep 1000
+        if (ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
+            break
+        }
+        Reconnect()
+    }
+    AddToLog("Returned to lobby.")
+    return true
 }
 
 CheckLoaded() {

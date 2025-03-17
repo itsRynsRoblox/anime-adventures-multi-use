@@ -1,39 +1,11 @@
 #Requires AutoHotkey v2.0
 
-
-CheckForChestRoom() {
-    return FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Chest)
-}
-
-CheckForDoubleChestRoom() {
-    return FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChest) or (ok := FindText(&X, &Y, 360, 348, 443, 434, 0.20, 0.20, DoubleChestNoHover))
-}
-
-CheckForHoardRoom() {
-    return FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, Hoard)
-}
-
-CheckForBossRoom() {
-    return FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom) or (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom2))
-}
-
-CheckForDungeonShop() {
-    return FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, DungeonShop)
-}
-
-CheckForShrineRoom() {
-    return FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, ShrineRoom)
-}
-
-CheckRoomForCurse() {
-   return FindText(&X, &Y, 121, 168, 681, 493, 0.20, 0.20, CurseOfFlight)
-}
-
-CountVisibleRooms() {
+LookForDungeonRooms() {
     visibleRooms := 0
     unavailableRooms := 0
     cursedRooms := 0
     openingRooms := 0
+    bossRooms := 0
     foundRooms := []
 
     roomSearchAreas := [
@@ -85,22 +57,30 @@ CountVisibleRooms() {
             visibleRooms++
             openingRooms++
         }
+        else if (FindText(&X, &Y, room.x1, room.y1, room.x2, room.y2, 0.10, 0.10, DungeonRoomBorderBoss)) {
+            foundRooms.Push({index: index, type: "Boss", coords: room})
+            if (debugMessages) {
+                AddToLog("Room " index " found via FindText (Boss)")
+            }
+            visibleRooms++
+            bossrooms++
+        }
     }
 
     if (debugMessages) {
         AddToLog(Format("Visible Rooms Count: {}", visibleRooms))
         AddToLog(Format("Cursed Rooms Count: {}", cursedRooms))
+        AddToLog(Format("Boss Rooms Count: {}", bossRooms))
         AddToLog(Format("Unavailable Rooms Count: {}", unavailableRooms))
     }
 
-    return CheckDungeonRoomsNew(visibleRooms, foundRooms)
+    return SelectBestRoom(visibleRooms, foundRooms)
 }
 
-CheckDungeonRoomsNew(totalrooms, foundRooms) {
+SelectBestRoom(totalrooms, foundRooms) {
+    CheckDungeonSpecials()
     foundRoom := false
     unsafeRooms := Map()
-    lastFoundRoom := {}
-    bestRoom := {}
     bestRoomFound := false
     bestRoomIndex := -1
 
@@ -109,46 +89,69 @@ CheckDungeonRoomsNew(totalrooms, foundRooms) {
     for index, room in foundRooms {
         roomDefs.Push({
             search: {x1: room.coords.searchX1, y1: room.coords.searchY1, x2: room.coords.searchX2, y2: room.coords.searchY2},
-            click: {x : room.coords.clickX, y: room.coords.clickY}
+            click: {x : room.coords.clickX, y: room.coords.clickY},
+            type: {roomType : room.type}
         })
     }
 
     for index, priority in routePriorityOrder {
         roomFoundForPriority := false
-        bestRoomForPriority := {} ; Track the best room for each priority
-        bestRoomIndexForPriority := -1
+        bestRoomForPriority := Map() ; Use a Map to store rooms by index
     
         for i, room in roomDefs {
             if (unsafeRooms.Has(i))
                 continue
     
             if (!roomTexts.Has(priority)) {
-                if (debugMessages) AddToLog(Format("{} room not available", priority))
+                if (debugMessages)
+                    AddToLog(Format("{} room not available", priority))
                 continue
             }
     
             if (ok := FindText(&X, &Y, room.search.x1, room.search.y1, room.search.x2, room.search.y2, 0.20, 0.20, roomTexts.Get(priority))) {
-                roomFoundForPriority := true
                 if (debugMessages)
                     AddToLog("Found room: " i)
-    
-                ; Always check for a better room (don't stop at the first one)
-                if (!bestRoomFound || i < bestRoomIndex) {
-                    lastFoundRoom := room
-                    bestRoomForPriority := room
-                    bestRoomIndexForPriority := i
-                    bestRoomFound := true
-                    if (debugMessages)
-                        AddToLog(Format("Found room for priority {}: {}", priority, i))
-                }
+
+                ; Track the room if it matches the priority
+                bestRoomForPriority[i] := room
             }
         }
     
-        ; Only assign the best room after all potential rooms for the priority are checked
-        if (bestRoomForPriority) {
-            bestRoom := bestRoomForPriority
-            bestRoomIndex := bestRoomIndexForPriority
+        ; Check if there are any rooms for this priority
+        if (bestRoomForPriority.Count > 0) {
+            for i, room in bestRoomForPriority {
+                if (!room)  ; Skip invalid entries
+                    continue
+                
+                if (debugMessages) {
+                    AddToLog(Format("Found room for priority {}: {}", priority, i))
+                }
+                
+                ; Click logic for each valid room
+                FixClick(room.click.x, room.click.y)
+                foundRoom := true
+                if (room.type.roomType = "Cursed") {
+                    curseResult := DetectCurse()
+                    if (curseResult.curse != "no curse found") {
+                        if (curseResult.skip) {
+                            unsafeRooms[i] := true
+                            foundRoom := false
+                            bestRoomFound := false
+                            FixClick(room.click.x, room.click.y)
+                            Sleep(1000)
+                            continue
+                        }
+                    }
+                }
+                if (room.type.roomType = "Boss") {
+                    global BossRoomCompleted := true
+                }
+                AddToLog(Format("Entering {} room", room.type.roomType))
+                return CheckForEnterButton()
+            }
         }
+
+
     
         if (!roomFoundForPriority) {
             if (debugMessages) {
@@ -156,159 +159,33 @@ CheckDungeonRoomsNew(totalrooms, foundRooms) {
             }
             continue
         }
-    
-        ; Click logic remains the same
-        if (bestRoom) {
-            if (debugMessages) {
-                AddToLog(Format("Found highest priority room: {} with priority: {}", bestRoom.click.x, priority))
-            }
-            AddToLog("X: " bestRoom.click.x " Y: " bestRoom.click.y)
-            FixClick(bestRoom.click.x, bestRoom.click.y)
-            foundRoom := true
-            curseResult := DetectCurse()
-            if (curseResult != "no curse found") {
-                AddToLog(Format("Curse detected: {}!", curseResult))
-                unsafeRooms[bestRoomIndex] := true
-                foundRoom := false
-                bestRoomFound := false
-                Sleep(1000)
-                FixClick(bestRoom.click.x, bestRoom.click.y)
-                continue
-            } else {
-                break
-            }
-        }
     }
 
-    if (!foundRoom && !lastFoundRoom = {} ) {
-        AddToLog("All rooms marked unsafe. Clicking fallback room.")
-        FixClick(lastFoundRoom.click.x, lastFoundRoom.click.y)
-    } else if (!foundRoom) {
+    ; Fallback logic if no room is found
+    if (!foundRoom) {
         AddToLog("No safe chest/hoard found, clicking default positions")
         Sleep(500)
-        FixClick(400, 355)
+        if (foundRooms.Length > 0) {
+            firstRoom := foundRooms[1]
+            FixClick(firstRoom.coords.clickX, firstRoom.coords.clickY)
+        } else {
+            FixClick(400, 355)
+            return CheckForEnterButton()
+        }
     }
 }
 
-
-CheckDungeonRooms() {
-
-    foundRoom := false
-
-    roomDefs := [
-        {x: 506, y: 284, search: {x1: 213, y1: 357, x2: 282, y2: 424}}, ;First Room : 213, 357, 282, 423
-        {x: 296, y: 284, search: {x1: 370, y1: 357, x2: 436, y2: 424}}, ;Second Room : 370, 357, 436, 424
-        {x: 506, y: 284, search: {x1: 524, y1: 356, x2: 590, y2: 424}}, ;Third Room : 524, 356, 590, 424
-
-        ;Only 2 Rooms
-        {x: 506, y: 284, search: {x1: 283, y1: 350, x2: 365, y2: 430}}, ;First Room : 283, 350, 365, 430
-        {x: 506, y: 284, search: {x1: 439, y1: 349, x2: 523, y2: 428}} ;Second Room : 439, 349, 523, 428
-    ]
-    
-    rooms := roomDefs
-
-    for i, room in rooms {
-
-        for index, priority in routePriorityOrder {
-            if (!roomTexts.Has(priority)) {		
-                AddToLog(Format("{} room not available", priority))														
-                continue
-            }
-    
-            if (ok := FindText(&X, &Y, room.search.x1, room.search.y1, room.search.x2, room.search.y2, 0.20, 0.20, roomTexts.Get(priority))) {
-                if (debugMessages) {
-                    AddToLog("Found room: " (i))
-                }
-                if (priority = "MultiChest" || priority = "Chest") {
-                    if (ok := ImageSearch(&searchX, &searchY, room.search.x1, room.search.y1, room.search.x2, room.search.y2, RareChest)) {
-                        AddToLog("Found Room: Rare Chest")
-                        FixClick(X, Y-30)
-                        foundRoom := true
-                        break
-    
-                    }
-                }
-                foundRoom := true
-                AddToLog(Format("Found Room: {}", priority))
-                MouseMove(X + 2, Y - 30, 1)
-                Sleep (500)
-                MouseMove(X - 2, Y - 30, 1)
-                Sleep (500)
-                DetectCurse()
-                break
-            }
-        }
+CheckForEnterButton() {
+    WaitFor("Dungeon Room Enter")
+    if (ok := FindText(&X, &Y, 120, 425, 680, 500, 0.20, 0.20, Enter)) {
+        AddToLog("Found Enter button, joining dungeon")
+        ClickUntilGone(0, 0, 120, 425, 680, 500, Enter, 0, -30)
+        Sleep(2000)
+        
+        ; Start dungeon run
+        AddToLog("Starting dungeon run")
+        RestartStage()
     }
-
-    if (!foundRoom) {
-        ; If no chest/hoard found, click default positions
-        AddToLog("No chest/hoard found, clicking default positions")
-        FixClick(400, 355)
-        Sleep(500)
-        FixClick(335, 355)
-    }
-}
-
-CheckAllDungeonRooms() {
-
-    foundRooms := []  ; Initialize an empty list to store found rooms
-
-    roomDefs := [
-        {x: 506, y: 284, search: {x1: 213, y1: 357, x2: 282, y2: 424}}, ; First Room
-        {x: 296, y: 284, search: {x1: 370, y1: 357, x2: 436, y2: 424}}, ; Second Room
-        {x: 506, y: 284, search: {x1: 524, y1: 356, x2: 590, y2: 424}}, ; Third Room
-
-        ; Instance of 2 rooms
-        {x: 506, y: 284, search: {x1: 283, y1: 350, x2: 365, y2: 430}}, ; First Room
-        {x: 506, y: 284, search: {x1: 439, y1: 350, x2: 523, y2: 430}}  ; Second Room
-    ]
-    
-    rooms := roomDefs
-
-    for i, room in rooms {
-
-        for index, priority in routePriorityOrder {
-            if (!roomTexts.Has(priority)) {		
-                AddToLog(Format("{} room not available", priority))														
-                continue
-            }
-    
-            if (ok := FindText(&X, &Y, room.search.x1, room.search.y1, room.search.x2, room.search.y2, 0.20, 0.20, roomTexts.Get(priority))) {
-                if (debugMessages) {
-                    AddToLog("Found room: " (i))
-                }
-                if (priority = "MultiChest" || priority = "Chest") {
-                    if (ok := ImageSearch(&searchX, &searchY, room.search.x1, room.search.y1, room.search.x2, room.search.y2, RareChest)) {
-                        AddToLog("Chest room contains a rare chest...")
-                    }
-                }
-                AddToLog(Format("Found Room: {}", priority))
-                foundRooms.Push(priority)  ; Add the found room to the list
-            }
-        }
-    }
-    return foundRooms  ; Return the list of found rooms
-}
-
-CheckDungeonRoomsCopy(roomSet) {
-    roomDefs := [
-        {x: 506, y: 284, search: {x1: 213, y1: 357, x2: 282, y2: 424}}, ;First Room : 213, 357, 282, 423
-        {x: 296, y: 284, search: {x1: 370, y1: 357, x2: 436, y2: 424}}, ;Second Room : 370, 357, 436, 424
-        {x: 506, y: 284, search: {x1: 524, y1: 356, x2: 590, y2: 424}} ;Third Room : 524, 356, 590, 424
-    ]
-    
-    rooms := roomDefs
-
-    for i, room in rooms {
-        if (ok := FindText(&X, &Y, room.search.x1, room.search.y1, room.search.x2, room.search.y2, 0.20, 0.20, roomSet)) {
-            AddToLog("Found room: " (i))
-            MouseMove(X + 2, Y - 30, 1)
-            return true
-        }
-    }
-    AddToLog("No preferred room found. Defaulting to center room.")
-    Sleep 1000
-    return false
 }
 
 StartDungeonRoute() {
@@ -357,11 +234,6 @@ StartDungeonRoute() {
     } else {
         WaitFor("Dungeon Room Enter")
     }
-
-    if (FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath)) {
-        AddToLog("Found Death Screen")
-        ClickDungeonDeathContinue()
-    }
     
     ; Look for Enter button and click until gone
     if (ok := FindText(&X, &Y, 120, 425, 680, 500, 0.20, 0.20, Enter)) {
@@ -388,6 +260,12 @@ CheckDungeonSpecials() {
 
     ; Check the area for shop, shrine, or chest
     Loop 5 {
+        ;Check for Death Screen
+        if (FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath)) {
+            AddToLog("Found Death Screen")
+            ClickDungeonDeathContinue()
+            break
+        }
         ; Check for shop
         if (!foundShop && FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shop)) {
             AddToLog("Found Shop")
@@ -512,13 +390,15 @@ HandleChestScreen() {
         return true
     }
 
-ClaimChestReward() {
+    ClaimChestReward() {
     maxClicks := 40  ; Safety limit
     clicks := 0
     
     while (clicks < maxClicks) {
         ; Click to claim reward
         FixClick(560, 560)
+        Sleep(1500)
+        FixClick(490, 120) ; If you have maxed cursed tokens it will close the interface
         Sleep(1500)
         
         ; Check if chest screen has returned
@@ -586,11 +466,11 @@ MonitorDungeonEnd() {
                }
            }
 
-            if (QuitIfFailBox.Value && failed) {
+            if (StopAfterDefeat.Value && failed) {
                 AddToLog("Dungeon run failed, stopping to save lives...")
                 ClickReturnToLobby()
                 SendFinalWebhookBeforeExit()
-                CheckLobby()
+                CheckForLobby()
                 Sleep(2000)
                 return Reload()
             } else  {
@@ -638,25 +518,28 @@ DetectCurse() {
     Loop {
         if (A_TickCount - curseCheckTime > 3000) {
             AddToLog("Could not detect curse after 3 seconds - proceeding...")
-            return "no curse found"
+            return {curse: "no curse found", skip: false}
         }
 
         curseTexts := Map(
-            "Curse of Flight", CurseOfFlight,
-            "Curse of Flight", CurseOfFlightLobby,
-            "Curse of Wind", CurseOfWind,
-            "Curse of Money", CurseOfMoney,
-            "Curse of Health", CurseOfHealth,
-            "Curse of Shielding", CurseOfShielding,
-            "Curse of Shielding", CurseOfShieldingLobby,
-            "Curse of Regen", CurseOfRegen,
-            "Curse of Explosion", CurseofExplosion
+            "Flying", CurseOfFlight,
+            "Wind", CurseOfWind,
+            "Money", CurseOfMoney,
+            "Health", CurseOfHealth,
+            "Shielding", CurseOfShielding,
+            "Regen", CurseOfRegen,
+            "Explosion", CurseofExplosion
         )
 
         for curseName, curse in curseTexts {
             if (ok := FindText(&X, &Y, 121, 168, 681, 493, 0.05, 0.05, curse)) {
-                AddToLog("Detected Curse: " curseName)
-                return curseName
+                skip := ShouldSkipCurse(curseName)
+                if (skip) {
+                    AddToLog("Skipping because of curse: " curseName)
+                } else {
+                    AddToLog("Detected Curse: " curseName)
+                }
+                return {curse: curseName, skip: skip}
             }
         }
         Sleep 1000

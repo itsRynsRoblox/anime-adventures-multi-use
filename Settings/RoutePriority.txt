@@ -4,4 +4,14 @@ Room3=Chest
 Room4=Hoard
 Room5=Shop
 Room6=Shrine
-Room7=Empty
+Room7=Boss
+
+[CurseProtection]
+Curse2=Regen
+Curse3=Shielding
+Curse4=None
+Curse5=None
+Curse6=None
+Curse7=None
+Curse8=None
+Curse9=None

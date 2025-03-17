@@ -135,9 +135,11 @@ OpenDiscordLink() {
 
     ;Dungeon
     SaveChestsBox.Visible := false
-    QuitIfFailBox.Visible := false
+    StopAfterDefeat.Visible := false
     DenyShrines.Visible := false
+    UseNewDungeonRoute.Visible := false
     EditRoute.Visible := false
+    EditCurses.Visible := false
 
     ;Shibuya Infinite
     ShibuyaSwap.Visible := false

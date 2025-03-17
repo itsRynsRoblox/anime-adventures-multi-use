@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.11.3"
+global currentVersion := "1.12.0"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -268,10 +268,13 @@ MagicTeamText := aaMainUI.Add("Text", "x1250 y451 w80 h20 +Center", "Magic Team"
 global MagicTeam := aaMainUI.Add("DropDownList", "x1270 y471 w45 h180 Choose1 +Center", ["1", "2", "3", "4", "5", "6"])
 ; Dungeon Options
 SaveChestsBox := aaMainUI.Add("CheckBox", "x900 y451 cffffff Checked", "Save Chests For Rukia")
-QuitIfFailBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Stop Upon Defeat") ;x1005 y451
-DenyShrines := aaMainUI.Add("CheckBox", "x1075 y451 cffffff Checked", "Reject Shrine Offers")
+StopAfterDefeat := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Stop Upon Defeat") ;x1005 y451
+DenyShrines := aaMainUI.Add("CheckBox", "x1075 y451 cffffff Checked", "Reject Shrines")
+UseNewDungeonRoute := aaMainUI.Add("CheckBox", "x1200 y451 cffffff Checked", "New Route System")
 EditRoute := aaMainUI.Add("Button", "x1050 y470 w80 h25", "Edit Route")
 EditRoute.OnEvent("Click", (*) => OpenRoutePriorityPicker())
+EditCurses := aaMainUI.Add("Button", "x1150 y470 w80 h25", "Edit Curses")
+EditCurses.OnEvent("Click", (*) => OpenCursePriorityPicker())
 ;Upgrade Option Testing
 global UpgradeSettings := aaMainUI.Add("GroupBox", "x180 y630 w220 h60 +Center c" uiTheme[1], "Upgrade Settings")
 global PriorityUpgrade := aaMainUI.Add("CheckBox", "x185 y650 cffffff", "Priority Upgrade")
@@ -368,9 +371,11 @@ MahoragoMode.Visible := false
 
 ;Dungeons
 SaveChestsBox.Visible := false
-QuitIfFailBox.Visible := false
+StopAfterDefeat.Visible := false
 DenyShrines.Visible := false
+UseNewDungeonRoute.Visible := false
 EditRoute.Visible := false
+EditCurses.Visible := false
 
 ;Portal Farming
 ShibuyaSwap.Visible := false
@@ -649,7 +654,7 @@ SendWarningMessage() {
 
 ; Function to toggle visibility of the checkboxes
 ToggleDungeonCheckboxes() {
-    global SaveChestsBox, QuitIfFailBox, DenyShrines, EditRoute
+    global SaveChestsBox, StopAfterDefeat, DenyShrines, UseNewDungeonRoute, EditRoute, EditCurses
     
     ; Check the current visibility state and toggle
     currentState := SaveChestsBox.Visible  ; Use the visibility of the first checkbox to determine the state
@@ -657,9 +662,11 @@ ToggleDungeonCheckboxes() {
 
     ; Set the visibility for all checkboxes
     SaveChestsBox.Visible := newVisibility
-    QuitIfFailBox.Visible := newVisibility
+    StopAfterDefeat.Visible := newVisibility
     DenyShrines.Visible := newVisibility
+    UseNewDungeonRoute.Visible := newVisibility
     EditRoute.Visible := newVisibility
+    EditCurses.Visible := newVisibility
 }
 
 ToggleSettingsVisibility() {
