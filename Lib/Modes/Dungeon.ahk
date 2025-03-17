@@ -37,9 +37,9 @@ CountVisibleRooms() {
     foundRooms := []
 
     roomSearchAreas := [
-        {x1: 200, y1: 343, x2: 297, y2: 442},
-        {x1: 353, y1: 343, x2: 448, y2: 442},
-        {x1: 510, y1: 343, x2: 607, y2: 442},
+        {x1: 200, y1: 340, x2: 222, y2: 437}, ;200, 344, 222, 435
+        {x1: 353, y1: 340, x2: 378, y2: 437}, ;353, 340, 378, 436
+        {x1: 507, y1: 340, x2: 530, y2: 437}, ;507, 341, 530, 437
         
         {x1: 275, y1: 340, x2: 300, y2: 437},
         {x1: 428, y1: 340, x2: 455, y2: 437}
@@ -339,6 +339,11 @@ StartDungeonRoute() {
     } else {
         WaitFor("Dungeon Room Enter")
     }
+
+    if (FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath)) {
+        AddToLog("Found Death Screen")
+        ClickDungeonDeathContinue()
+    }
     
     ; Look for Enter button and click until gone
     if (ok := FindText(&X, &Y, 120, 425, 680, 500, 0.20, 0.20, Enter)) {
@@ -390,11 +395,6 @@ CheckDungeonSpecials() {
             AddToLog("Found Chest Opening")
             HandleChestScreen()
             foundChest := true
-        }
-
-        if (FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath)) {
-            AddToLog("Found Death Screen")
-            ClickDungeonDeathContinue()
         }
         
         ; If all elements are found, exit early
