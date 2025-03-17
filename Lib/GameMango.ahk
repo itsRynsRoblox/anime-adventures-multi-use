@@ -1870,7 +1870,7 @@ MoveForMagicTownNew() {
 
 
 MoveForMagicHill() {
-    if (ok := FindText(&X, &Y, 518, 334, 566, 404, 0.15, 0.15, MagicHillsBench) or (ok := FindText(&X, &Y, 522, 339, 557, 402, 0.20, 0.20, MagicHillLegendStageBench))) {
+    if (ok := FindText(&X, &Y, 518, 334, 566, 404, 0.20, 0.20, MagicHillsBench) or (ok := FindText(&X, &Y, 522, 339, 557, 402, 0.20, 0.20, MagicHillLegendStageBench))) {
         Fixclick(500, 20, "Right")
         Sleep (3000)
         Fixclick(500, 20, "Right")
@@ -1942,11 +1942,11 @@ MoveForHauntedAcademy() {
 }
 
 MoveForSpaceCenter() {
-    if (ok := FindText(&X, &Y, 248, 402, 283, 438, 0.15, 0.15, SpaceCenterAngle)) {
-        Fixclick(160, 280, "Right")
+    if (ok := FindText(&X, &Y, 248, 402, 283, 438, 0.20, 0.20, SpaceCenterAngle)) {
+        FixClick(160, 280, "Right")
         Sleep (7000)
     } else {
-        Fixclick(648, 389, "Right")
+        FixClick(648, 389, "Right")
         Sleep (7000)
     }
 }
@@ -3228,6 +3228,10 @@ CheckForFinishDungeon() {
         
         ; Click the Finish button
         ClickUntilGone(0, 0, 240, 180, 565, 480, DungeonFinish, -3, -35)
+        Sleep(1500)
+
+        ; Click Dungeon Death if needed
+        ClickDungeonDeathContinue()
         Sleep(1500)
         
         ; Click the X in the top right

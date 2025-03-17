@@ -33,138 +33,138 @@ CountVisibleRooms() {
     visibleRooms := 0
     unavailableRooms := 0
     cursedRooms := 0
+    openingRooms := 0
+    foundRooms := []
+
     roomSearchAreas := [
-        {x1: 200, y1: 343, x2: 297, y2: 442}, ; First Room (200, 344, 297, 437)
-        {x1: 353, y1: 343, x2: 448, y2: 442}, ; Second Room (353, 342, 448, 437)
-        {x1: 510, y1: 343, x2: 607, y2: 442},  ; Third Room (510, 343, 607, 442)
-
-        {x1: 275, y1: 340, x2: 300, y2: 437}, ;275, 339, 300, 437
-        {x1: 428, y1: 340, x2: 455, y2: 437} ;434, 345, 524, 436 / 428, 340, 455, 437
-
+        {x1: 200, y1: 343, x2: 297, y2: 442},
+        {x1: 353, y1: 343, x2: 448, y2: 442},
+        {x1: 510, y1: 343, x2: 607, y2: 442},
+        
+        {x1: 275, y1: 340, x2: 300, y2: 437},
+        {x1: 428, y1: 340, x2: 455, y2: 437}
     ]
 
     for index, room in roomSearchAreas {
         if (FindText(&X, &Y, room.x1, room.y1, room.x2, room.y2, 0.20, 0.20, DungeonRoomBorder)) {
-            AddToLog("Room " index " found via FindText (Available)")
-            visibleRooms++  ; Count as visible room
+            foundRooms.Push({index: index, type: "Available", coords: room})
+            if (debugMessages) {
+                AddToLog("Room " index " found via FindText (Available)")
+            }
+            visibleRooms++
         }
         else if (FindText(&X, &Y, room.x1, room.y1, room.x2, room.y2, 0.10, 0.10, DungeonRoomBorderDark)) {
-            AddToLog("Room " index " found via FindText (Unavailable)")
-            visibleRooms++  ; Count as a visible room
-            unavailableRooms++  ; Increment unavailable room count
-        } else if (FindText(&X, &Y, room.x1, room.y1, room.x2, room.y2, 0.10, 0.10, DungeonRoomBorderCursed)) {
-            AddToLog("Room " index " found via FindText (Cursed)")
-            visibleRooms++  ; Count as a visible room
-            cursedRooms++  ; Increment unavailable room count
+            foundRooms.Push({index: index, type: "Unavailable", coords: room})
+            if (debugMessages) {
+                AddToLog("Room " index " found via FindText (Unavailable)")
+            }
+            visibleRooms++
+            unavailableRooms++
+        }
+        else if (FindText(&X, &Y, room.x1, room.y1, room.x2, room.y2, 0.10, 0.10, DungeonRoomBorderCursed)) {
+            foundRooms.Push({index: index, type: "Cursed", coords: room})
+            if (debugMessages) {
+                AddToLog("Room " index " found via FindText (Cursed)")
+            }
+            visibleRooms++
+            cursedRooms++
+        }
+        else if (FindText(&X, &Y, room.x1, room.y1, room.x2, room.y2, 0.10, 0.10, DungeonRoomBorderChestOpen)) {
+            foundRooms.Push({index: index, type: "Opening", coords: room})
+            if (debugMessages) {
+                AddToLog("Room " index " found via FindText (Opening)")
+            }
+            visibleRooms++
+            openingRooms++
         }
     }
 
-    AddToLog(Format("Visible Rooms Count: {}", visibleRooms))
-    AddToLog(Format("Cursed Rooms Count: {}", cursedRooms))
-    AddToLog(Format("Unavailable Rooms Count: {}", unavailableRooms))
+    if (debugMessages) {
+        AddToLog(Format("Visible Rooms Count: {}", visibleRooms))
+        AddToLog(Format("Cursed Rooms Count: {}", cursedRooms))
+        AddToLog(Format("Unavailable Rooms Count: {}", unavailableRooms))
+    }
 
-    return CheckDungeonRoomsNew(visibleRooms)
+    return CheckDungeonRoomsNew(visibleRooms, foundRooms)
 }
 
-CheckDungeonRoomsNew(totalrooms) {
+CheckDungeonRoomsNew(totalrooms, foundRooms) {
     foundRoom := false
-    unsafeRooms := [] ; Store unsafe rooms
-    lastFoundRoom := {} ; Store last found room to fall back on
+    unsafeRooms := Map()
+    lastFoundRoom := {}
+    bestRoom := {}
+    bestRoomFound := false
+    bestRoomIndex := -1
 
-    roomDefs := [
-        {x: 250, y: 360, search: {x1: 213, y1: 357, x2: 282, y2: 424}}, ; First Room
-        {x: 400, y: 360, search: {x1: 370, y1: 357, x2: 436, y2: 424}}, ; Second Room (First Room if only one room)
-        {x: 555, y: 360, search: {x1: 524, y1: 356, x2: 590, y2: 424}}, ; Third Room
-        {x: 325, y: 360, search: {x1: 283, y1: 350, x2: 365, y2: 430}}, ; First Room (2 Rooms)
-        {x: 480, y: 360, search: {x1: 439, y1: 349, x2: 523, y2: 430}}  ; Second Room (2 Rooms)
-    ]
+    ; Use foundRooms data for dynamic room coordinates
+    roomDefs := []
+    for index, room in foundRooms {
+        roomDefs.Push({x: (room.coords.x1 + room.coords.x2) // 2, y: (room.coords.y1 + room.coords.y2) // 2, search: room.coords})
+    }
 
-    visibleRoomsCount := totalrooms
-    rooms := (visibleRoomsCount == 2) ? [roomDefs[4], roomDefs[5]] : (visibleRoomsCount == 1) ? [roomDefs[2]] : [roomDefs[1], roomDefs[2], roomDefs[3]] ; Filter rooms based on visibility
-
-    ; Begin loop to go through rooms
-    while (!foundRoom && rooms.Length > 0) {
-        for i, room in rooms {
-            if (unsafeRooms.Has(i))  ; Skip rooms marked as unsafe
+    for index, priority in routePriorityOrder {
+        roomFoundForPriority := false
+        for i, room in roomDefs {
+            if (unsafeRooms.Has(i))
                 continue
 
-            roomFound := false ; Track whether a room is found in this iteration
+            if (!roomTexts.Has(priority)) {
+                if (debugMessages) AddToLog(Format("{} room not available", priority))
+                continue
+            }
 
-            for index, priority in routePriorityOrder {
-                if (!roomTexts.Has(priority)) {
-                    if (debugMessages) {
-                        AddToLog(Format("{} room not available", priority))
-                    }
+            if (ok := FindText(&X, &Y, room.search.x1, room.search.y1, room.search.x2, room.search.y2, 0.20, 0.20, roomTexts.Get(priority))) {
+                roomFoundForPriority := true
+                if (debugMessages)
+                    AddToLog("Found room: " i)
+
+                if (unsafeRooms.Has(i))
                     continue
-                }
 
-                ; Searching for room
-                if (ok := FindText(&X, &Y, room.search.x1, room.search.y1, room.search.x2, room.search.y2, 0.20, 0.20, roomTexts.Get(priority))) {
-                    if (debugMessages) {
-                        AddToLog("Found room: " (i))
-                    }
+                lastFoundRoom := room
 
-                    if (unsafeRooms.Has(i))  ; Skip rooms marked as unsafe
-                        continue
-
-                    lastFoundRoom := room ; Store this room as fallback
-
-                    if (priority = "MultiChest" || priority = "Chest") {
-                        if (ok := ImageSearch(&searchX, &searchY, room.search.x1, room.search.y1, room.search.x2, room.search.y2, RareChest)) {
-                            AddToLog("Found Room: Rare Chest")
-                            FixClick(room.x, room.y)
-                            foundRoom := true
-                            roomFound := true ; Mark room as found for this iteration
-                            break
-                        }
-                    }
-                    foundRoom := true
-                    AddToLog(Format("Found Room: {}", priority))
-                    FixClick(room.x, room.y)
-                    Sleep(500)
-                    roomFound := true ; Mark room as found
-
-                    ; Now call DetectCurse only if necessary
-                    curseResult := DetectCurse()
-                    if (curseResult != "no curse found") {
-                        AddToLog(Format("Curse detected: {}! Marking room as unsafe.", curseResult))
-                        unsafeRooms.Push(i) ; Mark room as unsafe
-                        foundRoom := false ; Reset found room for this loop, don't break yet
-                        roomFound := false
-                        FixClick(room.x, room.y)
-                        continue ; Skip to next room
-                    }
-
-                    break
+                if (!bestRoomFound) {
+                    bestRoom := room
+                    bestRoomFound := true
+                    bestRoomIndex := i
+                    if (debugMessages)
+                        AddToLog(Format("Found room for priority {}: {}", priority, i))
                 }
             }
-
-            ; If no priority is found but it's the only room, don't mark it unsafe
-            if (!roomFound && i = rooms.Length) {
-                AddToLog("No priority found in room but it's the last room.")
-                continue
-            }
-
-            if (roomFound) ; If a valid room is found, break out of the outer loop
-                break
         }
 
-        ; If no room is found, loop through again
-        if (!foundRoom && unsafeRooms.Length < rooms.Length) {
-            AddToLog("All rooms marked unsafe. Retrying.")
-            ; Remove the unsafe room from the list and loop back through the remaining ones
-            rooms := rooms.Filter(room => !unsafeRooms.Has(rooms.IndexOf(room)))
-            Sleep(1000) ; Give some time before retrying
+        if (!roomFoundForPriority) {
+            if (debugMessages)
+                AddToLog(Format("No room found for priority: {}", priority))
+            continue
+        }
+
+        if (bestRoom) {
+            if (debugMessages) 
+                AddToLog(Format("Found highest priority room: {} with priority: {}", bestRoom.x, priority))
+            AddToLog("X: " bestRoom.x " Y: " bestRoom.y)
+            FixClick(bestRoom.x, bestRoom.y - 30)
+            foundRoom := true
+
+            curseResult := DetectCurse()
+            if (curseResult != "no curse found") {
+                AddToLog(Format("Curse detected: {}!", curseResult))
+                unsafeRooms[bestRoomIndex] := true
+                foundRoom := false
+                bestRoomFound := false
+                Sleep(1000)
+                FixClick(bestRoom.x, bestRoom.y - 30, 1)
+                continue
+            }
+
+            break
         }
     }
 
-    ; If no room is found but fallback room exists, use it.
     if (!foundRoom && lastFoundRoom) {
         AddToLog("All rooms marked unsafe. Clicking fallback room.")
         FixClick(lastFoundRoom.x, lastFoundRoom.y)
-    }
-    ; If no room is found and no fallback, click default positions
-    else if (!foundRoom && !lastFoundRoom) {
+    } else if (!foundRoom && !lastFoundRoom) {
         AddToLog("No safe chest/hoard found, clicking default positions")
         FixClick(400, 355)
         Sleep(500)
@@ -391,6 +391,11 @@ CheckDungeonSpecials() {
             HandleChestScreen()
             foundChest := true
         }
+
+        if (FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath)) {
+            AddToLog("Found Death Screen")
+            ClickDungeonDeathContinue()
+        }
         
         ; If all elements are found, exit early
         if (foundShop && foundShrine && foundChest)
@@ -597,6 +602,10 @@ ClickDungeonContinue() {
     ClickUntilGone(0, 0, 380, 385, 615, 490, DungeonContinue, -3, -35, DungeonContinue2)
 }
 
+ClickDungeonDeathContinue() {
+    ClickUntilGone(0, 0, 308, 391, 494, 437, DungeonDeathContinue, -0, -30)
+}
+
 CheckIfFinalRoom() {
     if (ok := FindText(&X, &Y, 434, 215, 479, 230, 0, 0, FinalRoom)) {
         return true
@@ -616,8 +625,12 @@ DetectCurse() {
 
         curseTexts := Map(
             "Curse of Flight", CurseOfFlight,
+            "Curse of Flight", CurseOfFlightLobby,
             "Curse of Wind", CurseOfWind,
-            "Curse of Money", CurseOfMoney
+            "Curse of Money", CurseOfMoney,
+            "Curse of Health", CurseOfHealth,
+            "Curse of Shielding", CurseOfShielding,
+            "Curse of Shielding", CurseOfShieldingLobby
         )
 
         for curseName, curse in curseTexts {

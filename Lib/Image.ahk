@@ -209,7 +209,7 @@ DungeonContinue:="|<>*114$90.3zk0003xz000000DVw0007zXU00000S0Q0006DXU00000Q0Az7z
 
 DungeonRedX:="|<>*143$30.zk0DzzU07zzU03zz081zy0Q0zw0y0Ts1y0Dk3z07k3zU7k7zk7kDzsDwTzwTzzzzzzzzzzU"
 DungeonDeath:="|<>*124$120.zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs003zzzk3zzzzzzzzzw1s003zzzk3zzzzzzzzzw1s003zzzk3zzzzzzzzzw1s003zzzk7zzzzzzzzzw1s3z0Tzzzzzzzzzzzzzw1s3z0Tzzzzzzzzzzzzzw1s3z0Tzzzzzzzzzzzzzw1s3zs1zy07zzU00TzU001s3zw1zw03zzU00TzU001s3zw1zw03zzU00TzU001s3zw1zw03zzU00TzU001s3zw1zzk3zs3zs1s3zw1s3zw1zzk3zs3zw1s3zw1s3zw1zzk3zs3zw1s3zw1s3zw1zzk3zs1zs1s3zw1s3zw1zzk3zs0001s3zw1s3zw1zzk3zs0001s3zw1s3zw1zzk3zs0001s3zw1s3z0Dzzk3zs1zzzs3zw1s3z0Tzzk3zs3zzzs3zw1s3z0Tzzk3zs3zzzs3zw1s3z0Tzzk3zs3zzzs3zw1s003zzU001zU00TzU001s003zzU001zU00TzU001s003zzU001zU00TzU001s007zzU001zU00TzU001zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzU"
-
+DungeonDeathContinue:="|<>*91$138.1zw0000003y07w0000000003zy0000003z07y000000000707000000630A6000000000D07U00000630A6000000000Q71bztzzkS3sDyDzyTUz7zsw7Vzzzzzty3wzyTzzzlzzzwkDVs0D00NU0As6M03klVs0Akxzs0D00TU0Ak6M03ktVs0Dkszs0D00TU0Ak6M03ktVs0Dks1Vz33y7y3ww6MTkktVVz3ks1Vz33y6y3sQ6MTkktVUz3kxzVn33a6630A6MQkktVU03kzzVn33a6630A6MQkktVU03w7VVz33a6631w7sQkkzVVzzw7VVz33a6633w7sQkkzVVzzD07s0D3a663300MQkw01s0AD07s0D3a663300MQkw01s0A3zyTzzzby7z3zzzwzzzzzzw3zyTzzz7y3z3zzzszzzzzzw0zw7zty3w1w0zzzkTXzz7zsU"
 ;Ryn's Dungeon FindText
 DoubleChest:="|<>*61$66.zzzzzzzzzzzkYUVkzV913VbYbbtzD9DDnjUVktzD13VnagjgtzBNTNnliUlvzXR1XrzzzzzzzzzzzU"
 DoubleChestNoHover:="|<>*59$59.zzzzzzzzzzWoAszwKVb6JXqvzmgSbRs0Vrzj04CtqjPjz+lvBsh37Tz5cMvzzzzzzzzzz"
@@ -220,9 +220,11 @@ DungeonShop:="|<>*79$21.zzzyPMVhMlY86BhOoC/Mjzzzw"
 ShrineRoom:="|<>*58$26.zzzzsg4gSMBc7wku3sAYA7zzzzU"
 EmptyRoom:="|<>*32$55.zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw"
 Curse:="|<>*41$26.lO6MNKAOyxW0VbM5XwEd26"
+
 DungeonRoomBorder:="|<>*46$15.zzzzzsQD2VsIz3bzzzbzzzz3ksRzDjtxzzjU"
 DungeonRoomBorderDark:="|<>*12$16.0zYTzl3V4+4kdn3bDzwtznzzAD0kvnDjAywzvs"
 DungeonRoomBorderCursed:="|<>*23$9.zsQ2UI3bzbzz3sTDtzztzDtzU"
+DungeonRoomBorderChestOpen:="|<>*24$13.zzzzsQA+65D3bzztkDk4824DC0b0TU8"
 
 ;Dungeon Shrine
 ShrineAccept:="|<>*111$73.DyDzjzzzzzzzi3i1y1k0E1w0S8yACA8zswDVy4S7674TwT7syDWDyDyDyDXQN7l7T7T077laAXsXDXDU3Xsn6E0Fzlzlzk1tX8QASQSMzsTslYT77774TwTssmDXkDkC02DsQN7nw7w70360CQzTzzDzzzz03yE"
@@ -234,8 +236,12 @@ NimbleCloak:="|<>*82$74.aNzblzzklzzbsaTtyTzsaTzty1a01a1yTa101UNU6NUTbtaE0t6M1aMD
 IceDagger:="|<>*86$59.1zzy7zzzzzDzzwbzzzzyM0DtY800A4nkDn83309tbUzYUEE0nUUVz3UUUVjU"
 ;Dungeon Curses
 CurseOfFlight:="|<>*48$62.VzzzzbVCyQvg0VsFsv816H70Sqyyu3Pk5UDVjj4Eqs"
+CurseOfFlightLobby:="|<>*38$47.zzzzzzzz2pjgshVaoECdlOZC1UQLiE+zzzzzzzzk"
 CurseOfWind:="|<>*41$67.lzzzzzlwazwmAV6Dsky2MMNmH23t8z1YVAV/k3waTUmEb45kVy7TmEM3"
 CurseOfMoney:="|<>*47$58.VzzzzbVzzyv08S4S003NAQ1vPsAk1k5UDVjg336"
+CurseOfShielding:="|<>*42$38.nzzzzbtc0XsVyu68SYzm1WDXDzzzzzzzzzzzzzWyzCPzsX8m4W62G4d+1WY30EYTzzzzzC"
+CurseOfShieldingLobby:="|<>*39$36.bzzzzDB04T4DR34DGTY34T6Tzzzzzzzzzzzz5xyQrz4N6EYE192IZ0504010zzzzztU"
+CurseOfHealth:="|<>*49$62.zzzzzzzzzzwTzzztvTwuSv08S4S0Fg1Ylk7hjg0PfQ1M3sPv24OrzzzzzzzzzzU"
 
 
 global roomTexts := Map(
