@@ -18,7 +18,7 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-    BasicSetup
+
 }
 
 F6:: {
@@ -1841,7 +1841,7 @@ MoveForAntKingdom() {
     sleep (3000)
 }
 
-MoveForMagicTown() {
+MoveForMagicTownOld() {
     Fixclick(700, 315, "Right")
     Sleep (2500)
     Fixclick(585, 535, "Right")
@@ -1851,7 +1851,7 @@ MoveForMagicTown() {
     SendInput ("{d up}")
 }
 
-MoveForMagicTownNew() {
+MoveForMagicTown() {
     SendInput ("{d down}")
     Sleep (3000)
     SendInput ("{d up}")

@@ -37,12 +37,20 @@ CountVisibleRooms() {
     foundRooms := []
 
     roomSearchAreas := [
-        {x1: 200, y1: 340, x2: 222, y2: 437}, ;200, 344, 222, 435
-        {x1: 353, y1: 340, x2: 378, y2: 437}, ;353, 340, 378, 436
-        {x1: 507, y1: 340, x2: 530, y2: 437}, ;507, 341, 530, 437
+        ; Left Box (3 Rooms)
+        {x1: 200, y1: 340, x2: 222, y2: 437, searchX1: 204, searchY1: 343, searchX2: 290, searchY2: 435, clickX: 250, clickY: 360}, ; (Entire Box: 204, 348, 290, 433)
         
-        {x1: 275, y1: 340, x2: 300, y2: 437},
-        {x1: 428, y1: 340, x2: 455, y2: 437}
+        ; Right Box (3 Rooms)
+        {x1: 507, y1: 340, x2: 530, y2: 437, searchX1: 514, searchY1: 343, searchX2: 600, searchY2: 435, clickX: 555, clickY: 360}, ; (Entire Box : 514, 347, 600, 433)
+
+        ;Center Box (3/1 Roooms)
+        {x1: 352, y1: 343, x2: 379, y2: 437, searchX1: 358, searchY1: 343, searchX2: 447, searchY2: 435, clickX: 400, clickY: 360}, ; Border Search : 352, 343, 379, 437 (Entire Box : 358, 346, 447, 435)
+
+        
+        ; Left / Right Box (2 Rooms)
+        {x1: 275, y1: 340, x2: 300, y2: 437, searchX1: 280, searchY1: 343, searchX2: 370, searchY2: 435, clickX: 322, clickY: 360}, ; (Entire Box : 280, 346, 369, 434)
+
+        {x1: 430, y1: 340, x2: 450, y2: 437, searchX1: 438, searchY1: 343, searchX2: 525, searchY2: 435, clickX: 477, clickY: 360} ; (Entire Box : 438, 347, 523, 435) 431, 348, 450, 438
     ]
 
     for index, room in roomSearchAreas {
@@ -99,53 +107,64 @@ CheckDungeonRoomsNew(totalrooms, foundRooms) {
     ; Use foundRooms data for dynamic room coordinates
     roomDefs := []
     for index, room in foundRooms {
-        roomDefs.Push({x: (room.coords.x1 + room.coords.x2) // 2, y: (room.coords.y1 + room.coords.y2) // 2, search: room.coords})
+        roomDefs.Push({
+            search: {x1: room.coords.searchX1, y1: room.coords.searchY1, x2: room.coords.searchX2, y2: room.coords.searchY2},
+            click: {x : room.coords.clickX, y: room.coords.clickY}
+        })
     }
 
     for index, priority in routePriorityOrder {
         roomFoundForPriority := false
+        bestRoomForPriority := {} ; Track the best room for each priority
+        bestRoomIndexForPriority := -1
+    
         for i, room in roomDefs {
             if (unsafeRooms.Has(i))
                 continue
-
+    
             if (!roomTexts.Has(priority)) {
                 if (debugMessages) AddToLog(Format("{} room not available", priority))
                 continue
             }
-
+    
             if (ok := FindText(&X, &Y, room.search.x1, room.search.y1, room.search.x2, room.search.y2, 0.20, 0.20, roomTexts.Get(priority))) {
                 roomFoundForPriority := true
                 if (debugMessages)
                     AddToLog("Found room: " i)
-
-                if (unsafeRooms.Has(i))
-                    continue
-
-                lastFoundRoom := room
-
-                if (!bestRoomFound) {
-                    bestRoom := room
+    
+                ; Always check for a better room (don't stop at the first one)
+                if (!bestRoomFound || i < bestRoomIndex) {
+                    lastFoundRoom := room
+                    bestRoomForPriority := room
+                    bestRoomIndexForPriority := i
                     bestRoomFound := true
-                    bestRoomIndex := i
                     if (debugMessages)
                         AddToLog(Format("Found room for priority {}: {}", priority, i))
                 }
             }
         }
-
+    
+        ; Only assign the best room after all potential rooms for the priority are checked
+        if (bestRoomForPriority) {
+            bestRoom := bestRoomForPriority
+            bestRoomIndex := bestRoomIndexForPriority
+        }
+    
         if (!roomFoundForPriority) {
-            if (debugMessages)
+            if (debugMessages) {
                 AddToLog(Format("No room found for priority: {}", priority))
+            }
             continue
         }
-
+    
+        ; Click logic remains the same
         if (bestRoom) {
-            if (debugMessages) 
-                AddToLog(Format("Found highest priority room: {} with priority: {}", bestRoom.x, priority))
-            AddToLog("X: " bestRoom.x " Y: " bestRoom.y)
-            FixClick(bestRoom.x, bestRoom.y - 30)
+            if (debugMessages) {
+                AddToLog(Format("Found highest priority room: {} with priority: {}", bestRoom.click.x, priority))
+            }
+            AddToLog("X: " bestRoom.click.x " Y: " bestRoom.click.y)
+            FixClick(bestRoom.click.x, bestRoom.click.y)
             foundRoom := true
-
             curseResult := DetectCurse()
             if (curseResult != "no curse found") {
                 AddToLog(Format("Curse detected: {}!", curseResult))
@@ -153,22 +172,21 @@ CheckDungeonRoomsNew(totalrooms, foundRooms) {
                 foundRoom := false
                 bestRoomFound := false
                 Sleep(1000)
-                FixClick(bestRoom.x, bestRoom.y - 30, 1)
+                FixClick(bestRoom.click.x, bestRoom.click.y)
                 continue
+            } else {
+                break
             }
-
-            break
         }
     }
 
-    if (!foundRoom && lastFoundRoom) {
+    if (!foundRoom && !lastFoundRoom = {} ) {
         AddToLog("All rooms marked unsafe. Clicking fallback room.")
-        FixClick(lastFoundRoom.x, lastFoundRoom.y)
-    } else if (!foundRoom && !lastFoundRoom) {
+        FixClick(lastFoundRoom.click.x, lastFoundRoom.click.y)
+    } else if (!foundRoom) {
         AddToLog("No safe chest/hoard found, clicking default positions")
-        FixClick(400, 355)
         Sleep(500)
-        FixClick(335, 355)
+        FixClick(400, 355)
     }
 }
 
@@ -630,11 +648,13 @@ DetectCurse() {
             "Curse of Money", CurseOfMoney,
             "Curse of Health", CurseOfHealth,
             "Curse of Shielding", CurseOfShielding,
-            "Curse of Shielding", CurseOfShieldingLobby
+            "Curse of Shielding", CurseOfShieldingLobby,
+            "Curse of Regen", CurseOfRegen,
+            "Curse of Explosion", CurseofExplosion
         )
 
         for curseName, curse in curseTexts {
-            if (ok := FindText(&X, &Y, 121, 168, 681, 493, 0.10, 0.10, curse)) {
+            if (ok := FindText(&X, &Y, 121, 168, 681, 493, 0.05, 0.05, curse)) {
                 AddToLog("Detected Curse: " curseName)
                 return curseName
             }
