@@ -350,13 +350,16 @@ TextWebhook() {
         
 
     ; Send the webhook
+    try {
     webhook.send({
         content: (""),
         embeds: [myEmbed],
         files: []
     })
-
-    ; Clean up resources
+    AddToLog("Sent webhook successfully")
+    } catch {
+        AddToLog("Failed to send webhook")
+    }
 }
 
 InitiateWinWebhook() {

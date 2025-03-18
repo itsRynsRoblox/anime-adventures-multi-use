@@ -21,7 +21,7 @@ readInSettings() {
     global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
     global placement1, placement2, placement3, placement4, placement5, placement6
     global priority1, priority2, priority3, priority4, priority5, priority6
-    global PlacementPatternDropdown
+    global PlacementPatternDropdown, LobbySleepTimer
 
     ; Upgrade limits
     global upgradeEnabled1, upgradeEnabled2, upgradeEnabled3, upgradeEnabled4, upgradeEnabled5, upgradeEnabled6
@@ -114,6 +114,7 @@ readInSettings() {
                 case "ChallengePriority6": ChallengePriority6.Text := parts[2]
                 case "Speed": PlaceSpeed.Value := parts[2] ; Set the dropdown value
                 case "Logic": PlacementPatternDropdown.Value := parts[2] ; Set the dropdown value
+                case "Sleep": LobbySleepTimer.Value := parts[2] ; Set the dropdown value
                 case "Upgrade": PriorityUpgrade.Value := parts[2] ; Set the checkbox value
                 case "Matchmake": MatchMaking.Value := parts[2] ; Set the checkbox value
                 case "Challenge": ChallengeBox.Value := parts[2] ; Set the checkbox value
@@ -153,7 +154,7 @@ SaveSettings(*) {
     global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
     global placement1, placement2, placement3, placement4, placement5, placement6
     global priority1, priority2, priority3, priority4, priority5, priority6
-    global PlacementPatternDropdown
+    global PlacementPatternDropdown, LobbySleepTimer
 
     ; Upgrade limits
     global upgradeEnabled1, upgradeEnabled2, upgradeEnabled3, upgradeEnabled4, upgradeEnabled5, upgradeEnabled6
@@ -252,6 +253,9 @@ SaveSettings(*) {
 
         content .= "`n[PlaceSpeed]"
         content .= "`nSpeed=" PlaceSpeed.Value "`n"
+
+        content .= "`n[SleepTimer]"
+        content .= "`nSleep=" LobbySleepTimer.Value "`n"
 
         content .= "`n[Matchmaking]"
         content .= "`nMatchmake=" MatchMaking.Value "`n"

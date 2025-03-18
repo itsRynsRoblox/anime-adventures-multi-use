@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.12.0"
+global currentVersion := "1.12.2"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -305,13 +305,18 @@ global FinalAdaptation := aaMainUI.Add("DropDownList", "x1105 y410 w100 h180 Cho
 MahoragoModeText := aaMainUI.Add("Text", "x1220 y390 w130 h20 +Center", "Attack Style")
 global MahoragoMode := aaMainUI.Add("DropDownList", "x1235 y410 w100 h180 Choose1", ["Defend", "Boss", "Attack"])
 
-PlacementPatternText := aaMainUI.Add("Text", "x1032 y390 w115 h20", "Placement Type")
-global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x1035 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
-PlaceSpeedText := aaMainUI.Add("Text", "x1193 y390 w115 h20", "Placement Speed")
-global PlaceSpeed := aaMainUI.Add("DropDownList", "x1205 y410 w100 h180 Choose1 +Center", ["Super Fast (1s)", "Fast (1.5s)", "Default (2s)", "Slow (2.5s)", "Very Slow (3s)", "Toaster (4s)", "Gameboy (5s)"])
-PlacementSelectionText := aaMainUI.Add("Text", "x857 y390 w130 h20", "Placement Settings")
-PlacementSelection := aaMainUI.Add("DropDownList", "x865 y410 w100 h180 Choose1 +Center", ["Normal", "Challenge"])
+; General Settings
+PlacementSelectionText := aaMainUI.Add("Text", "x810 y390 w130 h20", "Placement Settings")
+PlacementSelection := aaMainUI.Add("DropDownList", "x825 y410 w100 h180 Choose1 +Center", ["Normal", "Challenge"])
 
+PlacementPatternText := aaMainUI.Add("Text", "x960 y390 w115 h20", "Placement Type")
+global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x962 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
+
+PlaceSpeedText := aaMainUI.Add("Text", "x1090 y390 w115 h20", "Placement Speed")
+global PlaceSpeed := aaMainUI.Add("DropDownList", "x1095 y410 w100 h180 Choose1 +Center", ["Super Fast (1s)", "Fast (1.5s)", "Default (2s)", "Slow (2.5s)", "Very Slow (3s)", "Toaster (4s)", "Gameboy (5s)"])
+
+LobbySleepText := aaMainUI.Add("Text", "x1220 y390 w130 h20 +Center", "Lobby Sleep Timer")
+global LobbySleepTimer := aaMainUI.Add("DropDownList", "x1235 y410 w100 h180 Choose1", ["No Delay", "5 Seconds", "10 Seconds", "15 Seconds", "20 Seconds", "25 Seconds", "30 Seconds", "35 Seconds", "40 Seconds", "45 Seconds", "50 Seconds", "55 Seconds", "60 Seconds"])
 
 placementSaveText := aaMainUI.Add("Text", "x807 y451 w80 h20", "Save Config")
 
@@ -508,7 +513,6 @@ readInSettings()
 aaMainUI.Show("w1366 h700")
 WinMove(0, 0,,, "ahk_id " aaMainUIHwnd)
 forceRobloxSize()  ; Initial force size and position
-SetTimer(checkRobloxSize, 600000)  ; Check every 10 minutes
 ;------UNIT CONFIGURATION ;------UNIT CONFIGURATION ;------UNIT CONFIGURATION ;------UNIT CONFIGURATION ;------UNIT CONFIGURATION ;------UNIT CONFIGURATION ;------UNIT CONFIGURATION
 ;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS;------FUNCTIONS
 
@@ -676,6 +680,8 @@ ToggleSettingsVisibility() {
     global PlaceSpeed
     global PlacementSelectionText
     global PlacementSelection
+    global LobbySleepText
+    global LobbySleepTimer
 
     global FirstAdaptationText
     global FirstAdaptation
@@ -695,6 +701,8 @@ ToggleSettingsVisibility() {
         PlaceSpeed.Visible := false
         PlacementSelectionText.Visible := false
         PlacementSelection.Visible := false
+        LobbySleepText.Visible := false
+        LobbySleepTimer.Visible := false
         
         ; Show adaptation settings
         FirstAdaptationText.Visible := true
@@ -723,5 +731,7 @@ ToggleSettingsVisibility() {
         PlaceSpeed.Visible := true
         PlacementSelectionText.Visible := true
         PlacementSelection.Visible := true
+        LobbySleepText.Visible := true
+        LobbySleepTimer.Visible := true
     }
 }

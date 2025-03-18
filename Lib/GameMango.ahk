@@ -749,6 +749,11 @@ DungeonMode() {
     AddToLog("Entering Dungeon Mode")
     FixClick(85, 400)  ; Click Dungeon mode button
     Sleep(1000)
+    if (ok := FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath)) {
+        AddToLog("Found Death Screen")
+        ClickDungeonDeathContinue()
+    }
+    Sleep(2000)
     if (ok := FindText(&X, &Y, 310, 395, 495, 440, 0.20, 0.20, EnterDungeon)) {
         FixClick(395,380)
     }
@@ -1226,7 +1231,7 @@ GetMapData(type, name) {
             "Act 6", {x: 300, y: 385, scrolls: 1}
         ),
         "RaidMap", Map(
-            "Ant Kingdom", {x: 630, y: 250, scrolls: 0},
+            "The Spider", {x: 630, y: 250, scrolls: 0},
             "Sacred Planet", {x: 630, y: 300, scrolls: 0},
             "Strange Town", {x: 630, y: 350, scrolls: 0},
             "Ruined City", {x: 630, y: 400, scrolls: 0},
@@ -1255,11 +1260,19 @@ GetMapData(type, name) {
             "Act 2", {x: 285, y: 270, scrolls: 0},
             "Act 3", {x: 285, y: 305, scrolls: 0},
             "Act 4", {x: 285, y: 340, scrolls: 0},
-            "Act 5", {x: 285, y: 375, scrolls: 0}
+            "Act 5", {x: 285, y: 375, scrolls: 0},
+            "Act 6", {x: 285, y: 395, scrolls: 0},
+            "Random", GetRandomAct()
         )
     )
 
     return data.Has(type) && data[type].Has(name) ? data[type][name] : {}
+}
+
+GetRandomAct() {
+    randomAct := Random(1, 3) ; Generates a random number between 1 and 3
+    AddToLog("Randomly selected Act " randomAct)
+    return {x: 285, y: 235 + (randomAct - 1) * 35, scrolls: 0}
 }
 
 StartLegend(map, LegendActDropdown) {
@@ -1523,6 +1536,8 @@ GetStoryActDownArrows(StoryActDropdown) {
         case "Act 6": return 7
     }
 }
+
+
 
 
 GetLegendDownArrows(map) {
@@ -1947,11 +1962,29 @@ MoveForHauntedAcademy() {
 
 MoveForSpaceCenter() {
     if (ok := FindText(&X, &Y, 248, 402, 283, 438, 0.20, 0.20, SpaceCenterAngle)) {
-        FixClick(160, 280, "Right")
-        Sleep (7000)
+        SendInput ("{a up}")
+        Sleep (100)
+        SendInput ("{a down}")
+        Sleep (2000)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (600)
+        SendInput ("{w up}")
+        KeyWait "w"
     } else {
-        FixClick(648, 389, "Right")
-        Sleep (7000)
+        SendInput ("{d up}")
+        Sleep (100)
+        SendInput ("{d down}")
+        Sleep (2000)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (600)
+        SendInput ("{s up}")
+        KeyWait "s"
     }
 }
 
@@ -2107,11 +2140,7 @@ RestartStage() {
     StartedGame()
 
     ; Begin unit placement and management
-    if (PlacementPatternDropdown.Text = "Spiral(WIP)") {
-        SpiralPlacement()
-    } else {
-        PlacingUnits()
-    }
+    PlacingUnits()
     
     ; Monitor stage progress
     MonitorStage()
@@ -2434,6 +2463,7 @@ CheckLobby() {
         }
         Reconnect()
     }
+    Sleep(SleepTime())
     AddToLog("Returned to lobby, restarting selected mode")
     return StartSelectedMode()
 }
@@ -2462,7 +2492,7 @@ CheckLoaded() {
         Sleep(1000)
         
         ; Check for vote screen
-        if (ok := FindText(&X, &Y, 326, 60, 547, 173, 0, 0, VoteStart) or PixelGetColor(320, 60) = 0x00EE00) {
+        if (ok := FindText(&X, &Y, 301, 64, 503, 154, 0, 0, VoteStart) or (ok := FindText(&X, &Y, 301, 64, 503, 154, 0, 0, VoteStartLaptop) or PixelGetColor(320, 60) = 0x00EE00)) {
             AddToLog("Successfully Loaded In")
             Sleep(1000)
             break
@@ -3019,6 +3049,14 @@ PlacementSpeed() {
 
     if speedIndex is number  ; Ensure it's a number
         return speeds[speedIndex]  ; Use the value directly from the array
+}
+
+SleepTime() {
+    time := [0, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000]  ; Array of sleep values
+    timeIndex := LobbySleepTimer.Value  ; Get the selected speed value
+
+    if timeIndex is number  ; Ensure it's a number
+        return time[timeIndex]  ; Use the value directly from the array
 }
 
 FindAndClickBeam(targetColor := 0x006783, searchArea := [0, 0, GetWindowCenter(rblxID).Width, GetWindowCenter(rblxID).Height]) {

@@ -164,10 +164,11 @@ SelectBestRoom(totalrooms, foundRooms) {
     ; Fallback logic if no room is found
     if (!foundRoom) {
         AddToLog("No safe chest/hoard found, clicking default positions")
-        Sleep(500)
+        Sleep(1000)
         if (foundRooms.Length > 0) {
             firstRoom := foundRooms[1]
             FixClick(firstRoom.coords.clickX, firstRoom.coords.clickY)
+            return CheckForEnterButton()
         } else {
             FixClick(400, 355)
             return CheckForEnterButton()
@@ -181,10 +182,16 @@ CheckForEnterButton() {
         AddToLog("Found Enter button, joining dungeon")
         ClickUntilGone(0, 0, 120, 425, 680, 500, Enter, 0, -30)
         Sleep(2000)
-        
         ; Start dungeon run
         AddToLog("Starting dungeon run")
         RestartStage()
+    } else {
+        AddToLog("Enter button not found, retrying...")
+        ClickUntilGone(0, 0, 640, 175, 700, 205, DungeonRedX, -3, -35)
+        Sleep(2500)
+        ClickReturnToLobby()
+        Sleep(2000)
+        return CheckLobby()
     }
 }
 
@@ -260,12 +267,6 @@ CheckDungeonSpecials() {
 
     ; Check the area for shop, shrine, or chest
     Loop 5 {
-        ;Check for Death Screen
-        if (FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath)) {
-            AddToLog("Found Death Screen")
-            ClickDungeonDeathContinue()
-            break
-        }
         ; Check for shop
         if (!foundShop && FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shop)) {
             AddToLog("Found Shop")
@@ -301,7 +302,7 @@ CheckDungeonSpecials() {
     }
     
     if (!foundShop && !foundShrine && !foundChest)
-        AddToLog("No shop, shrine, or chest found")
+        AddToLog("No shop, shrine, or chest opening found")
 }
 
 HandleShop() {

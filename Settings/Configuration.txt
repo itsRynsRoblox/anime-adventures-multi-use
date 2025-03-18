@@ -28,7 +28,7 @@ ChallengePriority6=1
 Placement1=1
 Placement2=1
 Placement3=1
-Placement4=1
+Placement4=2
 Placement5=1
 Placement6=1
 
@@ -51,8 +51,8 @@ UpgradeEnabled1=1
 UpgradeEnabled2=1
 UpgradeEnabled3=1
 UpgradeEnabled4=1
-UpgradeEnabled5=1
-UpgradeEnabled6=1
+UpgradeEnabled5=0
+UpgradeEnabled6=0
 
 UpgradeLimitEnabled1=0
 UpgradeLimitEnabled2=0
@@ -67,8 +67,11 @@ Logic=1
 [PlaceSpeed]
 Speed=3
 
+[SleepTimer]
+Sleep=1
+
 [Matchmaking]
-Matchmake=1
+Matchmake=0
 
 [PriorityUpgrade]
 Upgrade=1
