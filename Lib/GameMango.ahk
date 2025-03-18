@@ -1614,7 +1614,7 @@ TpSpawn() {
         SendInput("{WheelDown 1}") ;scroll
     }
     Sleep 300
-    if (ok := FindText(&X, &Y, 215, 160, 596, 480, 0, 0, Spawn)) {
+    if (ok := FindText(&X, &Y, 215, 160, 596, 480, 0.20, 0.20, Spawn) or (ok := FindText(&X, &Y, 215, 160, 596, 480, 0.20, 0.20, SpawnLaptop))) {
         AddToLog("Found Teleport to Spawn button")
         FixClick(X + 100, Y - 30)
     } else {
@@ -2505,7 +2505,7 @@ CheckLoaded() {
 StartedGame() {
     loop {
         Sleep(1000)
-        if (ok := FindText(&X, &Y, 326, 60, 547, 173, 0, 0, VoteStart)) {
+        if (ok := FindText(&X, &Y, 301, 64, 503, 154, 0, 0, VoteStart) or (ok := FindText(&X, &Y, 301, 64, 503, 154, 0, 0, VoteStartLaptop))) {
             FixClick(350, 103) ; click yes
             FixClick(350, 100)
             FixClick(350, 97)
