@@ -350,16 +350,11 @@ TextWebhook() {
         
 
     ; Send the webhook
-    try {
     webhook.send({
         content: (""),
         embeds: [myEmbed],
         files: []
     })
-    AddToLog("Sent webhook successfully")
-    } catch {
-        AddToLog("Failed to send webhook")
-    }
 }
 
 InitiateWinWebhook() {
@@ -518,12 +513,16 @@ WebhookScreenshot(title, description, color := 0x0dffff, status := "") {
     myEmbed.setColor(color)
     myEmbed.setImage(attachment)
     myEmbed.setFooter({ text: footerText })
-
-    webhook.send({
-        content: UserIDSent,
-        embeds: [myEmbed],
-        files: [attachment]
-    })
+    
+    try {
+        webhook.send({
+            content: UserIDSent,
+            embeds: [myEmbed],
+            files: [attachment]
+        })
+    } catch {
+        AddToLog("Unable to send webhook - continuing without sending")
+    }
 
     ; Cleanup
     Gdip_DisposeImage(pBitmap)

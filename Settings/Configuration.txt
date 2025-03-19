@@ -37,7 +37,7 @@ Priority1=1
 Priority2=2
 Priority3=3
 Priority4=4
-Priority5=4
+Priority5=5
 Priority6=6
 
 UpgradeLimit1=0
@@ -101,7 +101,7 @@ NewSystem=1
 FailsafeEnabled=1
 
 [ReturnToLobby]
-ToLobby=1
+ToLobby=0
 
 [UINavigation]
 UseNavigation=0

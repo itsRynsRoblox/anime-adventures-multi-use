@@ -23,7 +23,7 @@ SwitchActiveFarm() {
             ModeDropdown.Text := "Portal"
             PortalDropdown.Text := newMap
             PortalJoinDropdown.Text := "Solo"
-            AddToLog("Switched to " newMap " Portals")
+            AddToLog("Switched to " newMap)
             if (debugMessages) {
                 AddToLog("Mode: " ModeDropdown.Text)
                 AddToLog("Portal: " PortalDropdown.Text)
@@ -148,9 +148,10 @@ TryHandlePortal(x1, y1, x2, y2, portalText, action) {
     return false
 }
 
-HandlePortalFallback(lobby) {
+HandlePortalFallback(lobby := false) {
     FixClick(660, 187) ; Close Portal Interface
     SwitchActiveFarm()
+    Sleep(1500)
     if (!lobby) {
         ClickReturnToLobby()
     }
@@ -168,10 +169,12 @@ HandlePortalEnd() {
 
         if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
             ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
+            Sleep(1500)
         }
 
-        if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
+        if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0.10, 0.10, NextText)) {
             ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
+            Sleep(1500)
         }
 
         if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
