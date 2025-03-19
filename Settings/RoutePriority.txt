@@ -7,8 +7,8 @@ Room6=Shrine
 Room7=Boss
 
 [CurseProtection]
-Curse2=Regen
-Curse3=Shielding
+Curse2=None
+Curse3=None
 Curse4=None
 Curse5=None
 Curse6=None

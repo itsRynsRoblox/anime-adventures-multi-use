@@ -1,7 +1,7 @@
 #Include %A_ScriptDir%\Lib\gui.ahk
 #Include %A_ScriptDir%\Main.ahk
-#Include %A_ScriptDir%\Lib\Modes\RoutePriorityPicker.ahk
-#Include %A_ScriptDir%\Lib\Modes\CursePriorityPicker.ahk
+#Include %A_ScriptDir%\Lib\Modes\Dungeon\RoutePriorityPicker.ahk
+#Include %A_ScriptDir%\Lib\Modes\Dungeon\CursePriorityPicker.ahk
 
 SaveDungeonConfig(*) {
     SaveDungeonLocal
