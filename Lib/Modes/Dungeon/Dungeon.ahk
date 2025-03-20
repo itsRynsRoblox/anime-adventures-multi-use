@@ -143,7 +143,7 @@ SelectBestRoom(totalrooms, foundRooms) {
                         }
                     }
                 }
-                if (room.type.roomType = "Boss") {
+                if (room.type.roomType = "Boss" || priority = "Boss") {
                     global BossRoomCompleted := true
                 }
                 AddToLog(Format("Entering {} room", room.type.roomType))
@@ -178,6 +178,12 @@ SelectBestRoom(totalrooms, foundRooms) {
 
 CheckForEnterButton() {
     WaitFor("Dungeon Room Enter")
+    if (CheckIfFinalRoom()) {
+        global BossRoomCompleted := true
+        if (debugMessages) {
+            AddToLog("Final room detected, setting BossRoomCompleted to true")
+        }
+    }
     if (ok := FindText(&X, &Y, 120, 425, 680, 500, 0.20, 0.20, Enter)) {
         AddToLog("Found Enter button, joining dungeon")
         ClickUntilGone(0, 0, 120, 425, 680, 500, Enter, 0, -30)

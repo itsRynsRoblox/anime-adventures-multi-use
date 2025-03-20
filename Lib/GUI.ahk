@@ -287,11 +287,8 @@ global StoryUINav := aaMainUI.Add("Checkbox", "x425 y670 c" uiTheme[1], "Use UI 
 global AutoSettings := aaMainUI.Add("GroupBox", "x660 y630 w135 h60 +Center c" uiTheme[1], "Auto Settings")
 global AutoAbilityBox := aaMainUI.Add("CheckBox", "x665 y650 cffffff Checked", "Auto Ability")
 global ChallengeBox := aaMainUI.Add("CheckBox", "x665 y670 cffffff", "Auto Challenge")
-;Shibuya Settings
-global ShibuyaSwap := aaMainUI.Add("CheckBox", "x1150 y451 cffffff", "Rotate Infinite / Portals")
-;global AutoAbilityBox := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Auto Ability")
-;global ChallengeBox := aaMainUI.Add("CheckBox", "x1150 y476 cffffff", "Auto Challenge")
-;global ChallengeBox := aaMainUI.Add("CheckBox", "x1005 y476 cffffff", "Auto Challenge")
+;Portal Settings
+global PortalSwap := aaMainUI.Add("CheckBox", "x1050 y451 cffffff", "Rotate Portals / Infinite")
 ;Mahoraga Settings
 FirstAdaptationText := aaMainUI.Add("Text", "x830 y390 w130 h20 +Center", "First Adaptation")
 global FirstAdaptation := aaMainUI.Add("DropDownList", "x845 y410 w100 h180 Choose1", ["Divine Wings", "Heavenly Force", "Adapted Slash"])
@@ -383,7 +380,7 @@ EditRoute.Visible := false
 EditCurses.Visible := false
 
 ;Portal Farming
-ShibuyaSwap.Visible := false
+PortalSwap.Visible := false
 
 ;Contracts
 TeamSwap.Visible := false

@@ -25,6 +25,7 @@ F6:: {
 
 }
 
+
 StartMacro(*) {
     if (!ValidateMode()) {
         return
@@ -554,12 +555,20 @@ StoryMode() {
     
     ; Execute the movement pattern
     AddToLog("Moving to position for " currentStoryMap)
-    StoryMovement()
+    if (Random(1, 2) = 1) {
+        StoryMovement()
+    } else {
+        OppositeStoryMovement()
+    }
     
     ; Start stage
     while !(ok := FindText(&X, &Y, 325, 520, 489, 587, 0, 0, ModeCancel)) {
         Reconnect() ; Added Disconnect Check
-        StoryMovement()
+        if (Random(1, 2) = 1) {
+            StoryMovement()
+        } else {
+            OppositeStoryMovement()
+        }
     }
     AddToLog("Starting " currentStoryMap " - " currentStoryAct)
     
@@ -791,11 +800,17 @@ MonitorEndScreen() {
 
         if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
             ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
+            Sleep(1500)
         }
+
+        CloseChat()
 
         if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
             ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
+            Sleep(1500)
         }
+
+        
 
         ; Now handle each mode
         if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
@@ -823,7 +838,6 @@ MonitorEndScreen() {
                 }
             }
 
-
             if (mode = "Story") {
                 AddToLog("Handling Story mode end")
                 if (StoryActDropdown.Text != "Infinity") {
@@ -835,31 +849,17 @@ MonitorEndScreen() {
                         ClickReplay()
                     }
                 } else {
-                    if (StoryDropdown.Text = "Shibuya District") {
-                        if (ShibuyaSwap.Value) {
-                            ModeDropdown.Text := "Portal"
-                            PortalDropdown.Text := "Shibuya Portal"
-                            PortalJoinDropdown.Text := "Solo"
-                            AddToLog("Returning to lobby, attempting to do Shibuya Portal...")
-                            ClickReturnToLobby()
-                            return CheckLobby()
-                        } else {
-                            if (ReturnLobbyBox.Value) {
-                                AddToLog("Return to lobby")
-                                ClickReturnToLobby()
-                            } else {
-                                AddToLog("Story Infinity replay")
-                                ClickReplay()
-                            }
-                        }
+                    if (PortalSwap.Value && GetMapForFarming(StoryDropdown.Text) != "no map found") {
+                        SwitchActiveFarm()
+                        Sleep(1500)
+                        ClickReturnToLobby()
+                        return CheckLobby()
+                    } else if (ReturnLobbyBox.Value) {
+                        AddToLog("Return to lobby")
+                        ClickReturnToLobby()
                     } else {
-                        if (ReturnLobbyBox.Value) {
-                            AddToLog("Return to lobby")
-                            ClickReturnToLobby()
-                        } else {
-                            AddToLog("Story Infinity replay")
-                            ClickReplay()
-                        }
+                        AddToLog("Story Infinity replay")
+                        ClickReplay()
                     }
                 }
                 return RestartStage()
@@ -959,9 +959,12 @@ global mode, StoryActDropdown
             ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
         }
 
+        CloseChat() ; Close chat if open
+
         if CheckForXp(true) {
             HandleStageEnd()
         }
+
         CheckEndAndRoute()
         Reconnect()
     }
@@ -1030,6 +1033,21 @@ StoryMovement() {
     Sleep(4500)
     SendInput ("{d up}")
     SendInput ("{w up}")
+    Sleep(500)
+}
+
+OppositeStoryMovement() {
+    FixClick(85, 295)
+    Sleep(1000)
+    SendInput("{s down}")
+    Sleep(300)
+    SendInput("{s up}")
+    Sleep(300)
+    SendInput("{d down}")
+    SendInput("{s down}")
+    Sleep(4500)
+    SendInput("{d up}")
+    SendInput("{s up}")
     Sleep(500)
 }
 
@@ -1271,7 +1289,6 @@ GetMapData(type, name) {
 
 GetRandomAct() {
     randomAct := Random(1, 3) ; Generates a random number between 1 and 3
-    AddToLog("Randomly selected Act " randomAct)
     return {x: 285, y: 235 + (randomAct - 1) * 35, scrolls: 0}
 }
 
@@ -1628,6 +1645,28 @@ TpSpawn() {
 
 }
 
+TpLobby() {
+    FixClick(26, 570) ;click settings
+    Sleep 300
+    FixClick(400, 215)
+    Sleep 300
+    loop 4 {
+        Sleep 250
+        SendInput("{WheelDown 1}") ;scroll
+    }
+    Sleep 300
+    if (ok := FindText(&X, &Y, 233, 424, 567, 471, 0.20, 0.20, ReturnToLobbySettings)) {
+        AddToLog("Found Teleport to Lobby button")
+        FixClick(X + 150, Y - 30)
+    } else {
+        AddToLog("Could not find Teleport button")
+    }
+    Sleep 300
+    FixClick(525, 415)
+    Sleep 300
+    return CheckLobby()
+}
+
 CloseChat() {
     if (ok := FindText(&X, &Y, 123, 50, 156, 79, 0, 0, OpenChat)) {
         AddToLog "Closing Chat"
@@ -1648,7 +1687,7 @@ BasicSetup() {
 }
 
 DetectMap() {
-    AddToLog("Determining Movement Necessity on Map...")
+    AddToLog("Trying to determine map...")
     startTime := A_TickCount
     
     Loop {
@@ -1669,17 +1708,29 @@ DetectMap() {
         }
 
         mapPatterns := Map(
-            "Ant Kingdom", Ant,
-            "Sand Village", Sand,
-            "Magic Town", MagicTown, 
-            "Magic Hills", MagicHills,
-            "Navy Bay", Navy,
+            "Planet Greenie", PlanetGreenie,
+            "Walled City", WalledCity,
             "Snowy Town", SnowyTown,
+            "Sand Village", Sand,
+            "Navy Bay", Navy,
             "Fiend City", Fiend,
             "Spirit World", Spirit,
+            "Ant Kingdom", Ant,
+            "Magic Town", MagicTown, 
+            "Magic Hills", MagicHills,
             "Haunted Academy", Academy,
             "Alien Spaceship", AlienSpaceship,
             "Space Center", SpaceCenter,
+
+            "Fabled Kingdom", Fabled,
+            "Ruined City", Ruined,
+            "Puppet Island", Puppet,
+            "Virtual Dungeon", Virtual,
+            "Snowy Kingdom", SnowyKingdom,
+            "Dungeon Throne", DungeonThrone,
+            "Rain Village", RainVillage,
+            "Spirit Town", SpiritTown,
+
             "Mountain Temple", Mount,
             "Cursed Festival", Cursed,
             "Nightmare Train", Nightmare,
@@ -1706,6 +1757,21 @@ DetectMap() {
         
         Sleep 1000
         Reconnect()
+    }
+}
+
+IsCorrectMap(mapName) {
+    if (ModeDropdown.Text = "Story") {
+        if (mapName = "no map found") {
+            return false
+        }
+        return mapName = StoryDropdown.Text
+    } else if (ModeDropdown.Text = "Legend") {
+        return mapName = LegendDropdown.Text
+    } else if (ModeDropdown.Text = "Raid") {
+        return mapName = RaidDropdown.Text
+    } else {
+        return true
     }
 }
 
@@ -2136,6 +2202,11 @@ RestartStage() {
     ; Wait for loading
     CheckLoaded()
 
+    if (!IsCorrectMap(currentMap)) {
+        AddToLog("Incorrect map detected, teleporting to lobby")
+        return TpLobby()
+    }
+
     ; Do initial setup and map-specific movement during vote timer
     BasicSetup()
     if (currentMap != "no map found") {
@@ -2349,7 +2420,7 @@ CheckAbility() {
 CheckForMahoraga() {
     global setMahoragoStyle
     if (!setMahoragoStyle) {
-        if (ok := FindText(&X, &Y, 279, 517, 308, 541, 0, 0, MaharagaDefend)) {
+        if (ok := FindText(&X, &Y, 279, 517, 308, 541, 0.10, 0.10, MaharagaDefend)) {
             AddToLog("Found Mahoraga")
             ChangeMahoragaMode()
             return true
@@ -2427,7 +2498,7 @@ CheckForCardSelection() {
 CheckForXp(closeLeaderboard := false) {
     if (closeLeaderboard) {
         FixClick(564, 72)
-        Sleep(500)
+        Sleep(1200)
     }
     ; Check for lobby text
     if (ok := FindText(&X, &Y, 340, 369, 437, 402, 0, 0, XpText) or (ok:=FindText(&X, &Y, 539, 155, 760, 189, 0, 0, XpText2))) {
@@ -2467,11 +2538,21 @@ CheckLobby() {
         if (ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
             break
         }
+        if (CheckForEndGameScreens()) {
+            return MonitorStage()
+        }
         Reconnect()
     }
     Sleep(SleepTime())
     AddToLog("Returned to lobby, restarting selected mode")
     return StartSelectedMode()
+}
+
+CheckForEndGameScreens() {
+    if (CheckForXp(true) || CheckForReturnToLobby() || CheckForNextText()) {
+        AddToLog("Detected end game screen when should have already returned to lobby")
+        CloseChat()
+    }
 }
 
 CheckForLobbyText() {

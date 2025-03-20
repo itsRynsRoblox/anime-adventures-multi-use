@@ -141,8 +141,8 @@ OpenDiscordLink() {
     EditRoute.Visible := false
     EditCurses.Visible := false
 
-    ;Shibuya Infinite
-    ShibuyaSwap.Visible := false
+    ;Portals / Infinite
+    PortalSwap.Visible := false
 
     ;Contracts
     TeamSwap.Visible := false
@@ -180,6 +180,7 @@ OpenDiscordLink() {
         PortalDropdown.Visible := true
         PortalJoinDropdown.Visible := true
         mode := "Portal"
+        PortalSwap.Visible := true
     } else if (selected = "Dungeon") {
         AddToLog("⚠️ Dungeon is still under development! Stay tuned for updates.")
         ToggleDungeonCheckboxes()
@@ -202,21 +203,7 @@ OnStoryChange(*) {
 }
 
 OnStoryActChange(*) {
-    if (StoryActDropdown.Text = "Infinity") {
-        if (StoryDropdown.Text = "Shibuya District") {
-            ReturnLobbyBox.Visible := true
-            MatchMaking.Visible := true
-            ShibuyaSwap.Visible := true
-        } else {
-            ReturnLobbyBox.Visible := false
-            MatchMaking.Visible := false
-            ShibuyaSwap.Visible := false
-        }
-    } else {
-        ReturnLobbyBox.Visible := false
-        MatchMaking.Visible := false
-        ShibuyaSwap.Visible := false
-    }
+
 }
 
 OnLegendChange(*) {
@@ -251,6 +238,7 @@ OnConfirmClick(*) {
         MatchMaking.Visible := (StoryActDropdown.Text = "Infinity")
         ReturnLobbyBox.Visible := (StoryActDropdown.Text = "Infinity")
         NextLevelBox.Visible := (StoryActDropdown.Text != "Infinity")
+        PortalSwap.Visible := (StoryActDropdown.Text = "Infinity" && GetMapForFarming(StoryDropdown.Text) != "no map found")
     }
     ; For Legend mode, check if both Legend and Act are selected
     else if (ModeDropdown.Text = "Legend") {
@@ -291,6 +279,9 @@ OnConfirmClick(*) {
     if (PortalDropdown.Text = "" || PortalJoinDropdown.Text = "") {
         AddToLog("Please select both Portal and Join Type before confirming")
         return
+    }
+    if (GetMapForFarming(PortalDropdown.Text) != "no map found") {
+        MatchMaking.Visible := true
     }
     AddToLog("Selected " PortalDropdown.Text " - " PortalJoinDropdown.Text)
     } 
