@@ -1,5 +1,8 @@
 #Requires AutoHotkey v2.0
 
+global BossRoomCompleted := false
+global SaveChestsForBoss := true
+
 LookForDungeonRooms() {
     visibleRooms := 0
     unavailableRooms := 0
@@ -146,13 +149,13 @@ SelectBestRoom(totalrooms, foundRooms) {
                 if (room.type.roomType = "Boss" || priority = "Boss") {
                     global BossRoomCompleted := true
                 }
-                AddToLog(Format("Entering {} room", room.type.roomType))
+                if (debugMessages) {
+                    AddToLog(Format("Entering {} room", room.type.roomType))
+                }
+                AddToLog(Format("Entering {} room", priority))
                 return CheckForEnterButton()
             }
         }
-
-
-    
         if (!roomFoundForPriority) {
             if (debugMessages) {
                 AddToLog(Format("No room found for priority: {}", priority))
@@ -177,9 +180,10 @@ SelectBestRoom(totalrooms, foundRooms) {
 }
 
 CheckForEnterButton() {
+    global BossRoomCompleted
     WaitFor("Dungeon Room Enter")
     if (CheckIfFinalRoom()) {
-        global BossRoomCompleted := true
+        BossRoomCompleted := true
         if (debugMessages) {
             AddToLog("Final room detected, setting BossRoomCompleted to true")
         }
@@ -281,6 +285,7 @@ CheckDungeonSpecials() {
             Sleep(1000)
             foundShop := true
         }
+        Sleep(1000)
         ; Check for shrine
         if (!foundShrine && FindText(&X, &Y, 140, 200, 375, 250, 0, 0, Shrine)) {
             if (DenyShrines.Value) {
@@ -293,8 +298,9 @@ CheckDungeonSpecials() {
             Sleep(1000)
             foundShrine := true
         }
+        Sleep(1000)
         ; Check for Chest Opening
-        if (!foundChest && FindText(&X, &Y, 140, 200, 375, 250, 0, 0, ChestRoom)) {
+        if (!foundChest && IsChestScreenVisible()) {
             AddToLog("Found Chest Opening")
             HandleChestScreen()
             foundChest := true
@@ -338,6 +344,18 @@ HandleShop() {
     return true
 }
 
+IsChestScreenVisible() {
+    return FindText(&X, &Y, 140, 200, 375, 250, 0, 0, ChestRoom) or FindText(&X, &Y, 358, 238, 604, 261, 0, 0, ChestRoomLuck)
+}
+
+IsCommonChestDone() {
+    return FindText(&X, &Y, 357, 265, 407, 315, 0.10, 0.10, EmptyCommonChest)
+}
+
+IsRareChestDone() {
+    return FindText(&X, &Y, 353, 324, 408, 379, 0.10, 0.10, EmptyRareChest)
+}
+
 HandleChestScreen() {
     global BossRoomCompleted, SaveChestsForBoss
     
@@ -348,9 +366,9 @@ HandleChestScreen() {
         AddToLog("Opening all available chests")
         
         ; Process first chest position - keep clicking until exhausted
-        firstChestExhausted := false
+        commonChestExhausted := false
         
-        while (!firstChestExhausted ) {
+        while (!commonChestExhausted ) {
             ; Click first chest OPEN button
             FixClick(565, 260)
             Sleep(2000)
@@ -359,23 +377,29 @@ HandleChestScreen() {
             if (!IsChestScreenVisible()) {
                 ClaimChestReward()
             } else {
-                firstChestExhausted := true
+                if (IsCommonChestDone()) {
+                    AddToLog("Common chest is now empty, moving on...")
+                    commonChestExhausted := true
+                }
             }
         }
+
+        ; Process rare chest position - keep clicking until exhausted
+        rareChestExhausted := false
         
-        ; Process second chest position - keep clicking until exhausted
-        secondChestExhausted := false
-        
-        while (!secondChestExhausted) {
-            ; Click second chest OPEN button
+        while (!rareChestExhausted ) {
+            ; Click first chest OPEN button
             FixClick(565, 320)
-            Sleep(1000)
+            Sleep(2000)
             
             ; Check if we're still on the chest screen
             if (!IsChestScreenVisible()) {
                 ClaimChestReward()
             } else {
-                secondChestExhausted := true
+                if (IsRareChestDone()) {
+                    AddToLog("Rare chest is now empty, moving on...")
+                    rareChestExhausted := true
+                }
             }
         }
 
@@ -395,9 +419,9 @@ HandleChestScreen() {
         Sleep(1000)
         Reconnect()
         return true
-    }
+}
 
-    ClaimChestReward() {
+ClaimChestReward() {
     maxClicks := 40  ; Safety limit
     clicks := 0
     
@@ -405,11 +429,17 @@ HandleChestScreen() {
         ; Click to claim reward
         FixClick(560, 560)
         Sleep(1500)
-        FixClick(490, 120) ; If you have maxed cursed tokens it will close the interface
-        Sleep(1500)
         
         ; Check if chest screen has returned
         if (IsChestScreenVisible()) {
+            return true
+        }
+
+        ;Check for return to lobby test
+        if (CheckForReturnToLobby()) {
+            AddToLog("Found return to lobby text, might have max cursed tokens...")
+            FixClick(490, 120) ; If you have maxed cursed tokens it will close the interface
+            Sleep(1500)
             return true
         }
         
@@ -418,10 +448,6 @@ HandleChestScreen() {
     
     AddToLog("Max clicks reached while claiming rewards")
     return false
-}
-
-IsChestScreenVisible() {
-    return FindText(&X, &Y, 140, 200, 375, 250, 0, 0, ChestRoom)
 }
 
 ; Custom monitor for dungeon ending

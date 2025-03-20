@@ -4,8 +4,6 @@ global macroStartTime := A_TickCount
 global stageStartTime := A_TickCount
 global contractPageCounter := 0
 global contractSwitchPattern := 0
-global BossRoomCompleted := false
-global SaveChestsForBoss := true
 
 global adaptations := 0
 global setMahoragoStyle := false
@@ -18,11 +16,13 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-
+ 
 }
 
 F6:: {
-
+    if (IsRareChestDone()) {
+        AddToLog("Rare Chest already done")
+    }
 }
 
 
