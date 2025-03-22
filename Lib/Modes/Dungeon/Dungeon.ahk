@@ -148,6 +148,7 @@ SelectBestRoom(totalrooms, foundRooms) {
                 }
                 if (room.type.roomType = "Boss" || priority = "Boss") {
                     global BossRoomCompleted := true
+                    AddToLog("Boos room detected, setting BossRoomCompleted to true")
                 }
                 if (debugMessages) {
                     AddToLog(Format("Entering {} room", room.type.roomType))
@@ -184,9 +185,7 @@ CheckForEnterButton() {
     WaitFor("Dungeon Room Enter")
     if (CheckIfFinalRoom()) {
         BossRoomCompleted := true
-        if (debugMessages) {
-            AddToLog("Final room detected, setting BossRoomCompleted to true")
-        }
+        AddToLog("Final room detected, setting BossRoomCompleted to true")
     }
     if (ok := FindText(&X, &Y, 120, 425, 680, 500, 0.20, 0.20, Enter)) {
         AddToLog("Found Enter button, joining dungeon")
@@ -437,7 +436,9 @@ ClaimChestReward() {
 
         ;Check for return to lobby test
         if (CheckForReturnToLobby()) {
-            AddToLog("Found return to lobby text, might have max cursed tokens...")
+            if (debugMessages) {
+                AddToLog("Found return to lobby text, might have max cursed tokens...")
+            }
             FixClick(490, 120) ; If you have maxed cursed tokens it will close the interface
             Sleep(1500)
             return true

@@ -43,25 +43,10 @@ TogglePause(*) {
 }
 
 GetNameForMode() {
-    if (UseCustomSettings.Value) {
-        if (ModeDropdown.Text = "Challenge") {
-            return "challenge"
-        }
-        if (ModeDropdown.Text = "Contract") {
-            return "contract"
-        }
-        if (ModeDropdown.Text = "Dungeon") {
-            return "dungeon"
-        }
-        if (ModeDropdown.Text = "Raid") {
-            return "raid"
-        }
-        if (ModeDropdown.Text = "Winter Event") {
-            return "winter"
-        }
-        return ""
+    if (PlacementSelection.Text = "Winter Event") {
+        return "winter"
     }
-    return ""
+    return PlacementSelection.Text
 }
 
 PlacingUnits() {
@@ -229,7 +214,7 @@ AttemptUpgrade() {
 
             for index, coord in successfulCoordinates { 
                 ; Check if upgrading is enabled for this unit's slot
-                upgradeEnabled := inChallengeMode && ChallengeBox.Value ? "challengUpgradeEnabled" coord.slot : GetNameForMode() "upgradeEnabled" coord.slot
+                upgradeEnabled := inChallengeMode && ChallengeBox.Value ? "challengeUpgradeEnabled" coord.slot : GetNameForMode() "upgradeEnabled" coord.slot
                 upgradeEnabled := %upgradeEnabled%
 
                 if (!upgradeEnabled.Value) {
@@ -309,7 +294,7 @@ AttemptUpgrade() {
         ; Normal (non-priority) upgrading - upgrade all available units
         for index, coord in successfulCoordinates {
             ; Check if upgrading is enabled for this unit's slot
-            upgradeEnabled := inChallengeMode && ChallengeBox.Value ? "challengUpgradeEnabled" coord.slot : GetNameForMode() "upgradeEnabled" coord.slot
+            upgradeEnabled := inChallengeMode && ChallengeBox.Value ? "challengeUpgradeEnabled" coord.slot : GetNameForMode() "upgradeEnabled" coord.slot
             upgradeEnabled := %upgradeEnabled%
 
             upgradeLimitEnabled := inChallengeMode && ChallengeBox.Value ? "challengeUpgradeLimitEnabled" coord.slot : GetNameForMode() "upgradeLimitEnabled" coord.slot
@@ -1970,16 +1955,19 @@ MoveForMagicTown() {
     SendInput ("{d down}")
     Sleep (3000)
     SendInput ("{d up}")
+    Sleep (1000)
     KeyWait("d")
     Sleep (1000)
     SendInput ("{s down}")
     Sleep (1200)
     SendInput ("{s up}")
+    Sleep (1000)
     KeyWait("s")
     Sleep (1000)
     SendInput ("{d down}")
     Sleep (3200)
     SendInput ("{d up}")
+    Sleep (1000)
     KeyWait("d")
 }
 

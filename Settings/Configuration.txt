@@ -1,4 +1,4 @@
-Mode=
+Mode=Dungeon
 
 
 [Enabled]
@@ -26,10 +26,10 @@ Priority5=5
 Priority6=6
 
 [UpgradeEnabled]
-UpgradeEnabled1=0
-UpgradeEnabled2=0
-UpgradeEnabled3=0
-UpgradeEnabled4=0
+UpgradeEnabled1=1
+UpgradeEnabled2=1
+UpgradeEnabled3=1
+UpgradeEnabled4=1
 UpgradeEnabled5=0
 UpgradeEnabled6=0
 
@@ -299,7 +299,7 @@ Speed=3
 Sleep=1
 
 [Matchmaking]
-Matchmake=1
+Matchmake=0
 
 [PriorityUpgrade]
 Upgrade=1
@@ -317,7 +317,7 @@ PhyTeam=1
 MagTeam=1
 
 [Dungeons]
-StopAfterDefeat=1
+StopAfterDefeat=0
 
 AutoReject=1
 

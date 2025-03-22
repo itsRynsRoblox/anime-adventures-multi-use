@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.12.10"
+global currentVersion := "1.13.0"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -277,7 +277,7 @@ EditCurses.OnEvent("Click", (*) => OpenCursePriorityPicker())
 global MiscSettings := aaMainUI.Add("GroupBox", "x110 y630 w290 h60 +Center c" uiTheme[1], "Misc. Settings")
 global RejoinRoblox := aaMainUI.Add("Checkbox", "x115 y650 c" uiTheme[1], "Pending Teleport Failsafe")
 global StoryUINav := aaMainUI.Add("Checkbox", "x115 y670 c" uiTheme[1], "UI Navigation")
-global UseCustomSettings := aaMainUI.Add("Checkbox", "x235 y670 c" uiTheme[1], "Custom Settings")
+global UseCustomSettings := aaMainUI.Add("Checkbox", "x235 y670 Hidden c" uiTheme[1], "Custom Settings")
 
 
 ;Upgrade Option Testing
