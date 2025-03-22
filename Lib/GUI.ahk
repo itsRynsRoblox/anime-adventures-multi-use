@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.12.6"
+global currentVersion := "1.12.10"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -240,14 +240,12 @@ OpenGuide(*) {
 
     GuideGUI.Show("w800")
 }
-
 aaMainUI.SetFont("s12 Bold c" uiTheme[1])
 global settingsBtn := aaMainUI.Add("Button", "x1200 y0 w90 h30", "Settings")
 settingsBtn.OnEvent("Click", ShowSettingsGUI)
 
 global guideBtn := aaMainUI.Add("Button", "x1100 y0 w90 h30", "Guide")
 guideBtn.OnEvent("Click", OpenGuide)
-
 
 placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
@@ -275,14 +273,17 @@ EditRoute := aaMainUI.Add("Button", "x1050 y470 w80 h25", "Edit Route")
 EditRoute.OnEvent("Click", (*) => OpenRoutePriorityPicker())
 EditCurses := aaMainUI.Add("Button", "x1150 y470 w80 h25", "Edit Curses")
 EditCurses.OnEvent("Click", (*) => OpenCursePriorityPicker())
-;Upgrade Option Testing
-global UpgradeSettings := aaMainUI.Add("GroupBox", "x180 y630 w220 h60 +Center c" uiTheme[1], "Upgrade Settings")
-global PriorityUpgrade := aaMainUI.Add("CheckBox", "x185 y650 cffffff", "Priority Upgrade")
-global MaxUpgradeBeforeMoving := aaMainUI.Add("CheckBox", "x185 y670 cffffff", "Upgrade units one at a time")
 ;Misc Options
-global MiscSettings := aaMainUI.Add("GroupBox", "x420 y630 w220 h60 +Center c" uiTheme[1], "Misc. Settings")
-global RejoinRoblox := aaMainUI.Add("Checkbox", "x425 y650 c" uiTheme[1], "Pending Teleport Failsafe")
-global StoryUINav := aaMainUI.Add("Checkbox", "x425 y670 c" uiTheme[1], "Use UI Navigation")
+global MiscSettings := aaMainUI.Add("GroupBox", "x110 y630 w290 h60 +Center c" uiTheme[1], "Misc. Settings")
+global RejoinRoblox := aaMainUI.Add("Checkbox", "x115 y650 c" uiTheme[1], "Pending Teleport Failsafe")
+global StoryUINav := aaMainUI.Add("Checkbox", "x115 y670 c" uiTheme[1], "UI Navigation")
+global UseCustomSettings := aaMainUI.Add("Checkbox", "x235 y670 c" uiTheme[1], "Custom Settings")
+
+
+;Upgrade Option Testing
+global UpgradeSettings := aaMainUI.Add("GroupBox", "x420 y630 w220 h60 +Center c" uiTheme[1], "Upgrade Settings")
+global PriorityUpgrade := aaMainUI.Add("CheckBox", "x425 y650 cffffff", "Priority Upgrade")
+global MaxUpgradeBeforeMoving := aaMainUI.Add("CheckBox", "x425 y670 cffffff", "Upgrade units one at a time")
 ;Auto Settings
 global AutoSettings := aaMainUI.Add("GroupBox", "x660 y630 w135 h60 +Center c" uiTheme[1], "Auto Settings")
 global AutoAbilityBox := aaMainUI.Add("CheckBox", "x665 y650 cffffff Checked", "Auto Ability")
@@ -304,7 +305,7 @@ global MahoragoMode := aaMainUI.Add("DropDownList", "x1235 y410 w100 h180 Choose
 
 ; General Settings
 PlacementSelectionText := aaMainUI.Add("Text", "x810 y390 w130 h20", "Placement Settings")
-PlacementSelection := aaMainUI.Add("DropDownList", "x825 y410 w100 h180 Choose1 +Center", ["Normal", "Challenge"])
+PlacementSelection := aaMainUI.Add("DropDownList", "x825 y410 w100 h180 Choose1 +Center", ["Default", "Challenge", "Contract", "Dungeon", "Raid", "Winter Event"])
 
 PlacementPatternText := aaMainUI.Add("Text", "x960 y390 w115 h20", "Placement Type")
 global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x962 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
@@ -319,8 +320,8 @@ placementSaveText := aaMainUI.Add("Text", "x807 y451 w80 h20", "Save Config")
 
 Hotkeytext := aaMainUI.Add("Text", "x807 y35 w530 h30", "To change keybinds click top right settings, Below are default hotkey settings ")
 Hotkeytext2 := aaMainUI.Add("Text", "x807 y50 w530 h30", "F1:Reposition roblox window|F2:Start Macro|F3:Stop Macro|F4:Pause Macro")
-GithubButton := aaMainUI.Add("Picture", "x30 y640 w40 h40 +BackgroundTrans cffffff", GithubImage)
-DiscordButton := aaMainUI.Add("Picture", "x112 y645 w60 h34 +BackgroundTrans cffffff", DiscordImage)
+GithubButton := aaMainUI.Add("Picture", "x30 y640 w40 h40 +BackgroundTrans cffffff Hidden", GithubImage)
+DiscordButton := aaMainUI.Add("Picture", "x30 y645 w60 h34 +BackgroundTrans cffffff", DiscordImage)
 
 GithubButton.OnEvent("Click", (*) => OpenGithub())
 DiscordButton.OnEvent("Click", (*) => OpenDiscord())
@@ -454,6 +455,111 @@ upgradeLimitEnabled4 := aaMainUI.Add("CheckBox", "x1210 y255 w15 h15", "")
 upgradeLimitEnabled5 := aaMainUI.Add("CheckBox", "x1210 y305 w15 h15", "")
 upgradeLimitEnabled6 := aaMainUI.Add("CheckBox", "x1210 y355 w15 h15", "")
 
+ChallengeEnabled1 := aaMainUI.Add("CheckBox", "x818 y105 w15 h15 Hidden", "")
+ChallengeEnabled2 := aaMainUI.Add("CheckBox", "x818 y155 w15 h15 Hidden", "")
+ChallengeEnabled3 := aaMainUI.Add("CheckBox", "x818 y205 w15 h15 Hidden", "")
+ChallengeEnabled4 := aaMainUI.Add("CheckBox", "x818 y255 w15 h15 Hidden", "")
+ChallengeEnabled5 := aaMainUI.Add("CheckBox", "x818 y305 w15 h15 Hidden", "")
+ChallengeEnabled6 := aaMainUI.Add("CheckBox", "x818 y355 w15 h15 Hidden", "")
+
+challengeUpgradeEnabled1 := aaMainUI.Add("CheckBox", "x1070 y105 w15 h15 Hidden", "")
+challengeUpgradeEnabled2 := aaMainUI.Add("CheckBox", "x1070 y155 w15 h15 Hidden", "")
+challengeUpgradeEnabled3 := aaMainUI.Add("CheckBox", "x1070 y205 w15 h15 Hidden", "")
+challengeUpgradeEnabled4 := aaMainUI.Add("CheckBox", "x1070 y255 w15 h15 Hidden", "")
+challengeUpgradeEnabled5 := aaMainUI.Add("CheckBox", "x1070 y305 w15 h15 Hidden", "")
+challengeUpgradeEnabled6 := aaMainUI.Add("CheckBox", "x1070 y355 w15 h15 Hidden", "")
+
+challengeUpgradeLimitEnabled1 := aaMainUI.Add("CheckBox", "x1210 y105 w15 h15 Hidden", "")
+challengeUpgradeLimitEnabled2 := aaMainUI.Add("CheckBox", "x1210 y155 w15 h15 Hidden", "")
+challengeUpgradeLimitEnabled3 := aaMainUI.Add("CheckBox", "x1210 y205 w15 h15 Hidden", "")
+challengeUpgradeLimitEnabled4 := aaMainUI.Add("CheckBox", "x1210 y255 w15 h15 Hidden", "")
+challengeUpgradeLimitEnabled5 := aaMainUI.Add("CheckBox", "x1210 y305 w15 h15 Hidden", "")
+challengeUpgradeLimitEnabled6 := aaMainUI.Add("CheckBox", "x1210 y355 w15 h15 Hidden", "")
+
+ContractEnabled1 := aaMainUI.Add("CheckBox", "x818 y105 w15 h15 Hidden", "")
+ContractEnabled2 := aaMainUI.Add("CheckBox", "x818 y155 w15 h15 Hidden", "")
+ContractEnabled3 := aaMainUI.Add("CheckBox", "x818 y205 w15 h15 Hidden", "")
+ContractEnabled4 := aaMainUI.Add("CheckBox", "x818 y255 w15 h15 Hidden", "")
+ContractEnabled5 := aaMainUI.Add("CheckBox", "x818 y305 w15 h15 Hidden", "")
+ContractEnabled6 := aaMainUI.Add("CheckBox", "x818 y355 w15 h15 Hidden", "")
+
+contractUpgradeEnabled1 := aaMainUI.Add("CheckBox", "x1070 y105 w15 h15 Hidden", "")
+contractUpgradeEnabled2 := aaMainUI.Add("CheckBox", "x1070 y155 w15 h15 Hidden", "")
+contractUpgradeEnabled3 := aaMainUI.Add("CheckBox", "x1070 y205 w15 h15 Hidden", "")
+contractUpgradeEnabled4 := aaMainUI.Add("CheckBox", "x1070 y255 w15 h15 Hidden", "")
+contractUpgradeEnabled5 := aaMainUI.Add("CheckBox", "x1070 y305 w15 h15 Hidden", "")
+contractUpgradeEnabled6 := aaMainUI.Add("CheckBox", "x1070 y355 w15 h15 Hidden", "")
+
+contractUpgradeLimitEnabled1 := aaMainUI.Add("CheckBox", "x1210 y105 w15 h15 Hidden", "")
+contractUpgradeLimitEnabled2 := aaMainUI.Add("CheckBox", "x1210 y155 w15 h15 Hidden", "")
+contractUpgradeLimitEnabled3 := aaMainUI.Add("CheckBox", "x1210 y205 w15 h15 Hidden", "")
+contractUpgradeLimitEnabled4 := aaMainUI.Add("CheckBox", "x1210 y255 w15 h15 Hidden", "")
+contractUpgradeLimitEnabled5 := aaMainUI.Add("CheckBox", "x1210 y305 w15 h15 Hidden", "")
+contractUpgradeLimitEnabled6 := aaMainUI.Add("CheckBox", "x1210 y355 w15 h15 Hidden", "")
+
+DungeonEnabled1 := aaMainUI.Add("CheckBox", "x818 y105 w15 h15 Hidden", "")
+DungeonEnabled2 := aaMainUI.Add("CheckBox", "x818 y155 w15 h15 Hidden", "")
+DungeonEnabled3 := aaMainUI.Add("CheckBox", "x818 y205 w15 h15 Hidden", "")
+DungeonEnabled4 := aaMainUI.Add("CheckBox", "x818 y255 w15 h15 Hidden", "")
+DungeonEnabled5 := aaMainUI.Add("CheckBox", "x818 y305 w15 h15 Hidden", "")
+DungeonEnabled6 := aaMainUI.Add("CheckBox", "x818 y355 w15 h15 Hidden", "")
+
+dungeonUpgradeEnabled1 := aaMainUI.Add("CheckBox", "x1070 y105 w15 h15 Hidden", "")
+dungeonUpgradeEnabled2 := aaMainUI.Add("CheckBox", "x1070 y155 w15 h15 Hidden", "")
+dungeonUpgradeEnabled3 := aaMainUI.Add("CheckBox", "x1070 y205 w15 h15 Hidden", "")
+dungeonUpgradeEnabled4 := aaMainUI.Add("CheckBox", "x1070 y255 w15 h15 Hidden", "")
+dungeonUpgradeEnabled5 := aaMainUI.Add("CheckBox", "x1070 y305 w15 h15 Hidden", "")
+dungeonUpgradeEnabled6 := aaMainUI.Add("CheckBox", "x1070 y355 w15 h15 Hidden", "")
+
+dungeonUpgradeLimitEnabled1 := aaMainUI.Add("CheckBox", "x1210 y105 w15 h15 Hidden", "")
+dungeonUpgradeLimitEnabled2 := aaMainUI.Add("CheckBox", "x1210 y155 w15 h15 Hidden", "")
+dungeonUpgradeLimitEnabled3 := aaMainUI.Add("CheckBox", "x1210 y205 w15 h15 Hidden", "")
+dungeonUpgradeLimitEnabled4 := aaMainUI.Add("CheckBox", "x1210 y255 w15 h15 Hidden", "")
+dungeonUpgradeLimitEnabled5 := aaMainUI.Add("CheckBox", "x1210 y305 w15 h15 Hidden", "")
+dungeonUpgradeLimitEnabled6 := aaMainUI.Add("CheckBox", "x1210 y355 w15 h15 Hidden", "")
+
+RaidEnabled1 := aaMainUI.Add("CheckBox", "x818 y105 w15 h15 Hidden", "")
+RaidEnabled2 := aaMainUI.Add("CheckBox", "x818 y155 w15 h15 Hidden", "")
+RaidEnabled3 := aaMainUI.Add("CheckBox", "x818 y205 w15 h15 Hidden", "")
+RaidEnabled4 := aaMainUI.Add("CheckBox", "x818 y255 w15 h15 Hidden", "")
+RaidEnabled5 := aaMainUI.Add("CheckBox", "x818 y305 w15 h15 Hidden", "")
+RaidEnabled6 := aaMainUI.Add("CheckBox", "x818 y355 w15 h15 Hidden", "")
+
+raidUpgradeEnabled1 := aaMainUI.Add("CheckBox", "x1070 y105 w15 h15 Hidden", "")
+raidUpgradeEnabled2 := aaMainUI.Add("CheckBox", "x1070 y155 w15 h15 Hidden", "")
+raidUpgradeEnabled3 := aaMainUI.Add("CheckBox", "x1070 y205 w15 h15 Hidden", "")
+raidUpgradeEnabled4 := aaMainUI.Add("CheckBox", "x1070 y255 w15 h15 Hidden", "")
+raidUpgradeEnabled5 := aaMainUI.Add("CheckBox", "x1070 y305 w15 h15 Hidden", "")
+raidUpgradeEnabled6 := aaMainUI.Add("CheckBox", "x1070 y355 w15 h15 Hidden", "")
+
+raidUpgradeLimitEnabled1 := aaMainUI.Add("CheckBox", "x1210 y105 w15 h15 Hidden", "")
+raidUpgradeLimitEnabled2 := aaMainUI.Add("CheckBox", "x1210 y155 w15 h15 Hidden", "")
+raidUpgradeLimitEnabled3 := aaMainUI.Add("CheckBox", "x1210 y205 w15 h15 Hidden", "")
+raidUpgradeLimitEnabled4 := aaMainUI.Add("CheckBox", "x1210 y255 w15 h15 Hidden", "")
+raidUpgradeLimitEnabled5 := aaMainUI.Add("CheckBox", "x1210 y305 w15 h15 Hidden", "")
+raidUpgradeLimitEnabled6 := aaMainUI.Add("CheckBox", "x1210 y355 w15 h15 Hidden", "")
+
+WinterEnabled1 := aaMainUI.Add("CheckBox", "x818 y105 w15 h15 Hidden", "")
+WinterEnabled2 := aaMainUI.Add("CheckBox", "x818 y155 w15 h15 Hidden", "")
+WinterEnabled3 := aaMainUI.Add("CheckBox", "x818 y205 w15 h15 Hidden", "")
+WinterEnabled4 := aaMainUI.Add("CheckBox", "x818 y255 w15 h15 Hidden", "")
+WinterEnabled5 := aaMainUI.Add("CheckBox", "x818 y305 w15 h15 Hidden", "")
+WinterEnabled6 := aaMainUI.Add("CheckBox", "x818 y355 w15 h15 Hidden", "")
+
+winterUpgradeEnabled1 := aaMainUI.Add("CheckBox", "x1070 y105 w15 h15 Hidden", "")
+winterUpgradeEnabled2 := aaMainUI.Add("CheckBox", "x1070 y155 w15 h15 Hidden", "")
+winterUpgradeEnabled3 := aaMainUI.Add("CheckBox", "x1070 y205 w15 h15 Hidden", "")
+winterUpgradeEnabled4 := aaMainUI.Add("CheckBox", "x1070 y255 w15 h15 Hidden", "")
+winterUpgradeEnabled5 := aaMainUI.Add("CheckBox", "x1070 y305 w15 h15 Hidden", "")
+winterUpgradeEnabled6 := aaMainUI.Add("CheckBox", "x1070 y355 w15 h15 Hidden", "")
+
+winterUpgradeLimitEnabled1 := aaMainUI.Add("CheckBox", "x1210 y105 w15 h15 Hidden", "")
+winterUpgradeLimitEnabled2 := aaMainUI.Add("CheckBox", "x1210 y155 w15 h15 Hidden", "")
+winterUpgradeLimitEnabled3 := aaMainUI.Add("CheckBox", "x1210 y205 w15 h15 Hidden", "")
+winterUpgradeLimitEnabled4 := aaMainUI.Add("CheckBox", "x1210 y255 w15 h15 Hidden", "")
+winterUpgradeLimitEnabled5 := aaMainUI.Add("CheckBox", "x1210 y305 w15 h15 Hidden", "")
+winterUpgradeLimitEnabled6 := aaMainUI.Add("CheckBox", "x1210 y355 w15 h15 Hidden", "")
+
 aaMainUI.SetFont("s8 c" uiTheme[6])
 
 ; Mode selection dropdown
@@ -496,14 +602,188 @@ ChallengePriority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose1 +
 ChallengePriority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
 ChallengePriority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
 
+ChallengeUpgradeLimit1 := aaMainUI.Add("DropDownList", "x1290 y105 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+ChallengeUpgradeLimit2 := aaMainUI.Add("DropDownList", "x1290 y155 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+ChallengeUpgradeLimit3 := aaMainUI.Add("DropDownList", "x1290 y205 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+ChallengeUpgradeLimit4 := aaMainUI.Add("DropDownList", "x1290 y255 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+ChallengeUpgradeLimit5 := aaMainUI.Add("DropDownList", "x1290 y305 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+ChallengeUpgradeLimit6 := aaMainUI.Add("DropDownList", "x1290 y355 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+
+ContractPlacement1 := aaMainUI.Add("DropDownList", "x908 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ContractPlacement2 := aaMainUI.Add("DropDownList", "x908 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ContractPlacement3 := aaMainUI.Add("DropDownList", "x908 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ContractPlacement4 := aaMainUI.Add("DropDownList", "x908 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ContractPlacement5 := aaMainUI.Add("DropDownList", "x908 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ContractPlacement6 := aaMainUI.Add("DropDownList", "x908 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+
+ContractPriority1 := aaMainUI.Add("DropDownList", "x990 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ContractPriority2 := aaMainUI.Add("DropDownList", "x990 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ContractPriority3 := aaMainUI.Add("DropDownList", "x990 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ContractPriority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ContractPriority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+ContractPriority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+
+ContractUpgradeLimit1 := aaMainUI.Add("DropDownList", "x1290 y105 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+ContractUpgradeLimit2 := aaMainUI.Add("DropDownList", "x1290 y155 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+ContractUpgradeLimit3 := aaMainUI.Add("DropDownList", "x1290 y205 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+ContractUpgradeLimit4 := aaMainUI.Add("DropDownList", "x1290 y255 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+ContractUpgradeLimit5 := aaMainUI.Add("DropDownList", "x1290 y305 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+ContractUpgradeLimit6 := aaMainUI.Add("DropDownList", "x1290 y355 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+
+DungeonPlacement1 := aaMainUI.Add("DropDownList", "x908 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+DungeonPlacement2 := aaMainUI.Add("DropDownList", "x908 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+DungeonPlacement3 := aaMainUI.Add("DropDownList", "x908 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+DungeonPlacement4 := aaMainUI.Add("DropDownList", "x908 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+DungeonPlacement5 := aaMainUI.Add("DropDownList", "x908 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+DungeonPlacement6 := aaMainUI.Add("DropDownList", "x908 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+
+DungeonPriority1 := aaMainUI.Add("DropDownList", "x990 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+DungeonPriority2 := aaMainUI.Add("DropDownList", "x990 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+DungeonPriority3 := aaMainUI.Add("DropDownList", "x990 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+DungeonPriority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+DungeonPriority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+DungeonPriority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+
+DungeonUpgradeLimit1 := aaMainUI.Add("DropDownList", "x1290 y105 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+DungeonUpgradeLimit2 := aaMainUI.Add("DropDownList", "x1290 y155 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+DungeonUpgradeLimit3 := aaMainUI.Add("DropDownList", "x1290 y205 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+DungeonUpgradeLimit4 := aaMainUI.Add("DropDownList", "x1290 y255 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+DungeonUpgradeLimit5 := aaMainUI.Add("DropDownList", "x1290 y305 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+DungeonUpgradeLimit6 := aaMainUI.Add("DropDownList", "x1290 y355 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+
+RaidPlacement1 := aaMainUI.Add("DropDownList", "x908 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+RaidPlacement2 := aaMainUI.Add("DropDownList", "x908 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+RaidPlacement3 := aaMainUI.Add("DropDownList", "x908 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+RaidPlacement4 := aaMainUI.Add("DropDownList", "x908 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+RaidPlacement5 := aaMainUI.Add("DropDownList", "x908 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+RaidPlacement6 := aaMainUI.Add("DropDownList", "x908 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+
+RaidPriority1 := aaMainUI.Add("DropDownList", "x990 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+RaidPriority2 := aaMainUI.Add("DropDownList", "x990 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+RaidPriority3 := aaMainUI.Add("DropDownList", "x990 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+RaidPriority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+RaidPriority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+RaidPriority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+
+RaidUpgradeLimit1 := aaMainUI.Add("DropDownList", "x1290 y105 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+RaidUpgradeLimit2 := aaMainUI.Add("DropDownList", "x1290 y155 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+RaidUpgradeLimit3 := aaMainUI.Add("DropDownList", "x1290 y205 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+RaidUpgradeLimit4 := aaMainUI.Add("DropDownList", "x1290 y255 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+RaidUpgradeLimit5 := aaMainUI.Add("DropDownList", "x1290 y305 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+RaidUpgradeLimit6 := aaMainUI.Add("DropDownList", "x1290 y355 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+
+WinterPlacement1 := aaMainUI.Add("DropDownList", "x908 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+WinterPlacement2 := aaMainUI.Add("DropDownList", "x908 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+WinterPlacement3 := aaMainUI.Add("DropDownList", "x908 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+WinterPlacement4 := aaMainUI.Add("DropDownList", "x908 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+WinterPlacement5 := aaMainUI.Add("DropDownList", "x908 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+WinterPlacement6 := aaMainUI.Add("DropDownList", "x908 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+
+WinterPriority1 := aaMainUI.Add("DropDownList", "x990 y105 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+WinterPriority2 := aaMainUI.Add("DropDownList", "x990 y155 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+WinterPriority3 := aaMainUI.Add("DropDownList", "x990 y205 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+WinterPriority4 := aaMainUI.Add("DropDownList", "x990 y255 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+WinterPriority5 := aaMainUI.Add("DropDownList", "x990 y305 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+WinterPriority6 := aaMainUI.Add("DropDownList", "x990 y355 w60 h180 Choose1 +Center Hidden", ["1","2","3","4","5","6"])
+
+WinterUpgradeLimit1 := aaMainUI.Add("DropDownList", "x1290 y105 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+WinterUpgradeLimit2 := aaMainUI.Add("DropDownList", "x1290 y155 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+WinterUpgradeLimit3 := aaMainUI.Add("DropDownList", "x1290 y205 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+WinterUpgradeLimit4 := aaMainUI.Add("DropDownList", "x1290 y255 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+WinterUpgradeLimit5 := aaMainUI.Add("DropDownList", "x1290 y305 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+WinterUpgradeLimit6 := aaMainUI.Add("DropDownList", "x1290 y355 w60 h180 Choose1 +Center Hidden", ["0","1","2","3","4","5","6","7","8","9","10"])
+
 ToggleMode(*) {
     mode := PlacementSelection.Text
-    isChallenge := (mode = "Challenge")
     Loop 6 {
-        Placement%A_Index%.Visible := !isChallenge
-        Priority%A_Index%.Visible := !isChallenge
-        ChallengePlacement%A_Index%.Visible := isChallenge
-        ChallengePriority%A_Index%.Visible := isChallenge
+        ; Hide all placements and priorities by default
+        Enabled%A_Index%.Visible := false
+        Placement%A_Index%.Visible := false
+        Priority%A_Index%.Visible := false
+        upgradeEnabled%A_Index%.Visible := false
+        upgradeLimit%A_Index%.Visible := false
+        upgradeLimitEnabled%A_Index%.Visible := false
+
+        ChallengeEnabled%A_Index%.Visible := false
+        ChallengePlacement%A_Index%.Visible := false
+        ChallengePriority%A_Index%.Visible := false
+        challengeUpgradeEnabled%A_Index%.Visible := false
+        challengeUpgradeLimit%A_Index%.Visible := false
+        challengeUpgradeLimitEnabled%A_Index%.Visible := false
+
+        ContractEnabled%A_Index%.Visible := false
+        ContractPlacement%A_Index%.Visible := false
+        ContractPriority%A_Index%.Visible := false
+        contractUpgradeEnabled%A_Index%.Visible := false
+        contractUpgradeLimit%A_Index%.Visible := false
+        contractUpgradeLimitEnabled%A_Index%.Visible := false
+
+        DungeonEnabled%A_Index%.Visible := false
+        DungeonPlacement%A_Index%.Visible := false
+        DungeonPriority%A_Index%.Visible := false
+        dungeonUpgradeEnabled%A_Index%.Visible := false
+        dungeonUpgradeLimit%A_Index%.Visible := false
+        dungeonUpgradeLimitEnabled%A_Index%.Visible := false
+
+        RaidPlacement%A_Index%.Visible := false
+        RaidPriority%A_Index%.Visible := false
+        RaidEnabled%A_Index%.Visible := false
+        raidUpgradeEnabled%A_Index%.Visible := false
+        raidUpgradeLimit%A_Index%.Visible := false
+        raidUpgradeLimitEnabled%A_Index%.Visible := false
+
+        WinterPlacement%A_Index%.Visible := false
+        WinterPriority%A_Index%.Visible := false
+        WinterEnabled%A_Index%.Visible := false
+        winterUpgradeEnabled%A_Index%.Visible := false
+        winterUpgradeLimit%A_Index%.Visible := false
+        winterUpgradeLimitEnabled%A_Index%.Visible := false
+        
+        ; Add more modes as needed
+        if (mode = "Default") {
+            Enabled%A_Index%.Visible := true
+            Placement%A_Index%.Visible := true
+            Priority%A_Index%.Visible := true
+            upgradeEnabled%A_Index%.Visible := true
+            upgradeLimit%A_Index%.Visible := true
+            upgradeLimitEnabled%A_Index%.Visible := true
+        } else if (mode = "Challenge") {
+            ChallengeEnabled%A_Index%.Visible := true
+            ChallengePlacement%A_Index%.Visible := true
+            ChallengePriority%A_Index%.Visible := true
+            challengeUpgradeEnabled%A_Index%.Visible := true
+            challengeUpgradeLimit%A_Index%.Visible := true
+            challengeUpgradeLimitEnabled%A_Index%.Visible := true
+        } else if (mode = "Contract") {
+            ContractEnabled%A_Index%.Visible := true
+            ContractPlacement%A_Index%.Visible := true
+            ContractPriority%A_Index%.Visible := true
+            contractUpgradeEnabled%A_Index%.Visible := true
+            contractUpgradeLimit%A_Index%.Visible := true
+            contractUpgradeLimitEnabled%A_Index%.Visible := true 
+        } else if (mode = "Raid") {
+            RaidEnabled%A_Index%.Visible := true
+            RaidPlacement%A_Index%.Visible := true
+            RaidPriority%A_Index%.Visible := true
+            raidUpgradeEnabled%A_Index%.Visible := true
+            raidUpgradeLimit%A_Index%.Visible := true
+            raidUpgradeLimitEnabled%A_Index%.Visible := true
+        } else if (mode = "Winter Event") {
+            WinterEnabled%A_Index%.Visible := true
+            WinterPlacement%A_Index%.Visible := true
+            WinterPriority%A_Index%.Visible := true
+            winterUpgradeEnabled%A_Index%.Visible := true
+            winterUpgradeLimit%A_Index%.Visible := true
+            winterUpgradeLimitEnabled%A_Index%.Visible := true
+        } else if (mode = "Dungeon") {
+            DungeonEnabled%A_Index%.Visible := true
+            DungeonPlacement%A_Index%.Visible := true
+            DungeonPriority%A_Index%.Visible := true
+            dungeonUpgradeEnabled%A_Index%.Visible := true
+            dungeonUpgradeLimit%A_Index%.Visible := true
+            dungeonUpgradeLimitEnabled%A_Index%.Visible := true
+        }
+        ; Add more modes as needed
     }
 }
 readInSettings()

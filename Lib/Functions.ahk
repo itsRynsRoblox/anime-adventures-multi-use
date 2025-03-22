@@ -183,8 +183,8 @@ OpenDiscordLink() {
         PortalSwap.Visible := true
     } else if (selected = "Dungeon") {
         AddToLog("⚠️ Dungeon is still under development! Stay tuned for updates.")
-        ToggleDungeonCheckboxes()
         mode := "Dungeon"
+        ToggleDungeonCheckboxes()
     } else if (selected = "Cursed Womb") {
         mode := "Cursed Womb"
     } else if (selected = "Winter Event") {
@@ -235,6 +235,7 @@ OnConfirmClick(*) {
             return
         }
         AddToLog("Selected " StoryDropdown.Text " - " StoryActDropdown.Text)
+        mode := "Story"
         MatchMaking.Visible := (StoryActDropdown.Text = "Infinity")
         ReturnLobbyBox.Visible := (StoryActDropdown.Text = "Infinity")
         NextLevelBox.Visible := (StoryActDropdown.Text != "Infinity")
@@ -246,12 +247,14 @@ OnConfirmClick(*) {
             AddToLog("Please select both Legend Stage and Act before confirming")
             return
         }
+        mode := "Legend"
         AddToLog("Selected " LegendDropDown.Text " - " LegendActDropdown.Text)
         MatchMaking.Visible := true
         ReturnLobbyBox.Visible := true
     }
         ; For Cursed Womb, check if both Legend and Act are selected
     else if (ModeDropdown.Text = "Cursed Womb") {
+        mode := "Cursed Womb"
         AddToLog("Selected " LegendDropDown.Text " - " LegendActDropdown.Text)
     }
     ; For Raid mode, check if both Raid and RaidAct are selected
@@ -260,6 +263,7 @@ OnConfirmClick(*) {
             AddToLog("Please select both Raid and Act before confirming")
             return
         }
+        mode := "Raid"
         AddToLog("Selected " RaidDropdown.Text " - " RaidActDropdown.Text)
         MatchMaking.Visible := true
         ReturnLobbyBox.Visible := true
@@ -270,6 +274,7 @@ OnConfirmClick(*) {
         AddToLog("Please select an Infinity Castle difficulty before confirming")
         return
     }
+    mode := "Infinity Castle"
     AddToLog("Selected Infinity Castle - " InfinityCastleDropdown.Text)
     MatchMaking.Visible := false  
     ReturnLobbyBox.Visible := false
@@ -280,6 +285,7 @@ OnConfirmClick(*) {
         AddToLog("Please select both Portal and Join Type before confirming")
         return
     }
+    mode := "Portal"
     if (GetMapForFarming(PortalDropdown.Text) != "no map found") {
         MatchMaking.Visible := true
     }
@@ -291,15 +297,18 @@ OnConfirmClick(*) {
             AddToLog("Please select both Contract Page and Join Type before confirming")
             return
         }
+        mode := "Contract"
         AddToLog("Selected Contract Page " ContractPageDropdown.Text " - " ContractJoinDropdown.Text)
         MatchMaking.Visible := false
         ReturnLobbyBox.Visible := true
     }
     ; Winter Event
     else if (ModeDropdown.Text = "Winter Event") {
+        mode := "Winter Event"
         AddToLog("Selected Winter Event")
     }
     else {
+        mode := ModeDropdown.Text
         AddToLog("Selected " ModeDropdown.Text " mode")
         MatchMaking.Visible := false
         ReturnLobbyBox.Visible := false

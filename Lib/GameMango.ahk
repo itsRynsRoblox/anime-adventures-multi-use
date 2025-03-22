@@ -16,13 +16,11 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
- 
+
 }
 
 F6:: {
-    if (IsRareChestDone()) {
-        AddToLog("Rare Chest already done")
-    }
+
 }
 
 
@@ -44,6 +42,28 @@ TogglePause(*) {
     }
 }
 
+GetNameForMode() {
+    if (UseCustomSettings.Value) {
+        if (ModeDropdown.Text = "Challenge") {
+            return "challenge"
+        }
+        if (ModeDropdown.Text = "Contract") {
+            return "contract"
+        }
+        if (ModeDropdown.Text = "Dungeon") {
+            return "dungeon"
+        }
+        if (ModeDropdown.Text = "Raid") {
+            return "raid"
+        }
+        if (ModeDropdown.Text = "Winter Event") {
+            return "winter"
+        }
+        return ""
+    }
+    return ""
+}
+
 PlacingUnits() {
     CheckForCardSelection()
     global successfulCoordinates, maxedCoordinates, inChallengeMode
@@ -53,7 +73,7 @@ PlacingUnits() {
 
     anyEnabled := false
     for slotNum in [1, 2, 3, 4, 5, 6] {
-        enabled := "enabled" slotNum
+        enabled := inChallengeMode && ChallengeBox.Value ? "challengeEnabled" slotNum : GetNameForMode() "enabled" slotNum
         enabled := %enabled%
         enabled := enabled.Value
         if (enabled) {
@@ -89,12 +109,12 @@ PlacingUnits() {
     
     ; Go through each slot
     for slotNum in [1, 2, 3, 4, 5, 6] {
-        enabled := "enabled" slotNum
+        enabled := inChallengeMode && ChallengeBox.Value ? "challengeEnabled" slotNum : GetNameForMode() "enabled" slotNum
         enabled := %enabled%
         enabled := enabled.Value
         
         ; Get number of placements wanted for this slot
-        placements := inChallengeMode && ChallengeBox.Value ? "challengeplacement" slotNum : "placement" slotNum
+        placements := inChallengeMode && ChallengeBox.Value ? "challengeplacement" slotNum : GetNameForMode() "placement" slotNum
         placements := %placements%
         placements := Integer(placements.Text)
         
@@ -182,7 +202,7 @@ AttemptUpgrade() {
 
     anyEnabled := false
     for slotNum in [1, 2, 3, 4, 5, 6] {
-        enabled := "upgradeEnabled" slotNum
+        enabled := inChallengeMode && ChallengeBox.Value ? "challengeEnabled" slotNum : GetNameForMode() "Enabled" slotNum
         enabled := %enabled%
         enabled := enabled.Value
         if (enabled) {
@@ -209,7 +229,7 @@ AttemptUpgrade() {
 
             for index, coord in successfulCoordinates { 
                 ; Check if upgrading is enabled for this unit's slot
-                upgradeEnabled := "upgradeEnabled" coord.slot
+                upgradeEnabled := inChallengeMode && ChallengeBox.Value ? "challengUpgradeEnabled" coord.slot : GetNameForMode() "upgradeEnabled" coord.slot
                 upgradeEnabled := %upgradeEnabled%
 
                 if (!upgradeEnabled.Value) {
@@ -220,13 +240,13 @@ AttemptUpgrade() {
                 }
 
                 ; Get the priority value for this unit's slot
-                priority := inChallengeMode && ChallengeBox.Value ? "challengepriority" coord.slot : "priority" coord.slot
+                priority := inChallengeMode && ChallengeBox.Value ? "challengepriority" coord.slot : GetNameForMode() "priority" coord.slot
                 priority := %priority%
 
-                upgradeLimitEnabled := "upgradeLimitEnabled" coord.slot
+                upgradeLimitEnabled := inChallengeMode && ChallengeBox.Value ? "challengeUpgradeLimitEnabled" coord.slot : GetNameForMode() "upgradeLimitEnabled" coord.slot
                 upgradeLimitEnabled := %upgradeLimitEnabled%
 
-                upgradeLimit := "UpgradeLimit" coord.slot
+                upgradeLimit := inChallengeMode && ChallengeBox.Value ? "challengeUpgradeLimit" coord.slot : GetNameForMode() "upgradeLimit" coord.slot
                 upgradeLimit := %upgradeLimit%
                 upgradeLimit := String(upgradeLimit.Text)
 
@@ -289,13 +309,13 @@ AttemptUpgrade() {
         ; Normal (non-priority) upgrading - upgrade all available units
         for index, coord in successfulCoordinates {
             ; Check if upgrading is enabled for this unit's slot
-            upgradeEnabled := "upgradeEnabled" coord.slot
+            upgradeEnabled := inChallengeMode && ChallengeBox.Value ? "challengUpgradeEnabled" coord.slot : GetNameForMode() "upgradeEnabled" coord.slot
             upgradeEnabled := %upgradeEnabled%
 
-            upgradeLimitEnabled := "upgradeLimitEnabled" coord.slot
+            upgradeLimitEnabled := inChallengeMode && ChallengeBox.Value ? "challengeUpgradeLimitEnabled" coord.slot : GetNameForMode() "upgradeLimitEnabled" coord.slot
             upgradeLimitEnabled := %upgradeLimitEnabled%
 
-            upgradeLimit := "UpgradeLimit" coord.slot
+            upgradeLimit := inChallengeMode && ChallengeBox.Value ? "challengeUpgradeLimit" coord.slot : GetNameForMode() "upgradeLimit" coord.slot
             upgradeLimit := %upgradeLimit%
             upgradeLimit := String(upgradeLimit.Text)
 
@@ -385,7 +405,7 @@ UpgradeUnits() {
         ; Go through each priority level (1-6)
         for priorityNum in [1, 2, 3, 4, 5, 6] {
             for slot in [1, 2, 3, 4, 5, 6] {
-                priority := inChallengeMode && ChallengeBox.Value ? "challengepriority" slot : "priority" slot
+                priority := inChallengeMode && ChallengeBox.Value ? "challengepriority" slot : GetNameForMode() "priority" slot
                 priority := %priority%
 
                 if (priority.Text = priorityNum && HasUnitsInSlot(slot, successfulCoordinates)) {
@@ -489,10 +509,11 @@ UpgradeAllUnits(totalUnits, upgradedCount) {
 }
 
 UpgradeUnitWithLimit(coord, index) {
-    upgradeLimitEnabled := "upgradeLimitEnabled" coord.slot
+    global inChallengeMode
+    upgradeLimitEnabled := inChallengeMode && ChallengeBox.Value ? "challengeUpgradeLimitEnabled" coord.slot : GetNameForMode() "upgradeLimitEnabled" coord.slot
     upgradeLimitEnabled := %upgradeLimitEnabled%
 
-    upgradeLimit := "UpgradeLimit" coord.slot
+    upgradeLimit := inChallengeMode && ChallengeBox.Value ? "challengeUpgradeLimit" coord.slot : GetNameForMode() "upgradeLimit" coord.slot
     upgradeLimit := %upgradeLimit%
     upgradeLimit := String(upgradeLimit.Text)
 
@@ -542,7 +563,6 @@ ChallengeMode() {
         Reconnect() ; Added Disconnect Check
         ChallengeMovement()
     }
-
     RestartStage()
 }
 
@@ -1708,6 +1728,7 @@ DetectMap() {
         }
 
         mapPatterns := Map(
+            "Sacred Planet", SacredPlanet,
             "Planet Greenie", PlanetGreenie,
             "Walled City", WalledCity,
             "Snowy Town", SnowyTown,
@@ -1769,7 +1790,10 @@ IsCorrectMap(mapName) {
     } else if (ModeDropdown.Text = "Legend") {
         return mapName = LegendDropdown.Text
     } else if (ModeDropdown.Text = "Raid") {
-        return mapName = RaidDropdown.Text
+        if (RaidDropdown.Text = "Sacred Planet") {
+            return mapName = RaidDropdown.Text
+        }
+        return true
     } else {
         return true
     }
@@ -2192,7 +2216,7 @@ MoveForShibuya() {
 }
     
 RestartStage() {
-    global adaptations, setMahoragoStyle
+    global adaptations, setMahoragoStyle, inChallengeMode
 
     adaptations := 0
     setMahoragoStyle := false
@@ -2202,9 +2226,11 @@ RestartStage() {
     ; Wait for loading
     CheckLoaded()
 
-    if (!IsCorrectMap(currentMap)) {
-        AddToLog("Incorrect map detected, teleporting to lobby")
-        return TpLobby()
+    if (!inChallengeMode) {
+        if (!IsCorrectMap(currentMap)) {
+            AddToLog("Incorrect map detected, teleporting to lobby")
+            return TpLobby()
+        }
     }
 
     ; Do initial setup and map-specific movement during vote timer
@@ -3165,9 +3191,11 @@ CheckForFinishDungeon() {
         ClickUntilGone(0, 0, 240, 180, 565, 480, DungeonFinish, -3, -35)
         Sleep(1500)
 
-        ; Click Dungeon Death if needed
-        ClickDungeonDeathContinue()
-        Sleep(1500)
+        if (!dungeonDeathBroken) {
+            ; Click Dungeon Death if needed
+            ClickDungeonDeathContinue()
+            Sleep(1500)
+        }
         
         ; Click the X in the top right
         ClickUntilGone(0, 0, 640, 175, 700, 205, DungeonRedX, -3, -35)
