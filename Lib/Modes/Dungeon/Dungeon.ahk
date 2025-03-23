@@ -226,7 +226,7 @@ StartDungeonRoute() {
     
         else if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, roomTexts.Get(priority))) {
             if (priority = "Chest") {
-                if (ok := ImageSearch(&searchX, &searchY, 200, 350, 600, 435, RareChest)) {
+                if (ok := FindText(&searchX, &searchY, 200, 350, 600, 435, 0.20, 0.20 RareChest)) {
                     AddToLog("Found Room: Rare Chest")
                     FixClick(X, Y-30)
                     foundRoom := true
@@ -525,7 +525,11 @@ MonitorDungeonEnd() {
                 
                 ; Start a new dungeon run
                 AddToLog("Starting next dungeon")
-                return StartDungeonRoute()
+                if (UseNewDungeonRoute.Value) {
+                    return LookForDungeonRooms()
+                } else {
+                    return StartDungeonRoute()
+                }
             }
             Reconnect()
         }
