@@ -132,6 +132,7 @@ SelectBestRoom(totalrooms, foundRooms) {
                 
                 ; Click logic for each valid room
                 FixClick(room.click.x, room.click.y)
+                Sleep (500)
                 foundRoom := true
                 if (room.type.roomType = "Cursed") {
                     curseResult := DetectCurse()
@@ -376,10 +377,8 @@ HandleChestScreen() {
             if (!IsChestScreenVisible()) {
                 ClaimChestReward()
             } else {
-                if (IsCommonChestDone()) {
-                    AddToLog("Common chest is now empty, moving on...")
-                    commonChestExhausted := true
-                }
+                AddToLog("Common chest is now empty, moving on...")
+                commonChestExhausted := true
             }
         }
 
@@ -395,10 +394,8 @@ HandleChestScreen() {
             if (!IsChestScreenVisible()) {
                 ClaimChestReward()
             } else {
-                if (IsRareChestDone()) {
-                    AddToLog("Rare chest is now empty, moving on...")
-                    rareChestExhausted := true
-                }
+                AddToLog("Rare chest is now empty, moving on...")
+                rareChestExhausted := true
             }
         }
 
@@ -436,6 +433,9 @@ ClaimChestReward() {
 
         ;Check for return to lobby test
         if (CheckForReturnToLobby()) {
+            if (IsChestScreenVisible()) {
+                return true
+            }
             if (debugMessages) {
                 AddToLog("Found return to lobby text, might have max cursed tokens...")
             }
@@ -515,6 +515,8 @@ MonitorDungeonEnd() {
                 
                 ; After clicking replay, check for shop/shrine/chest
                 CheckDungeonSpecials()
+
+                Sleep(2500)
     
                 if (CheckForFinishDungeon()) {
                     AddToLog("Handled dungeon completion")

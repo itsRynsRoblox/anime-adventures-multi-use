@@ -1,5 +1,5 @@
 [RoutePriority]
-Room2=MultiChest
+Room2=Rare_Chest
 Room3=Chest
 Room4=Hoard
 Room5=Shop

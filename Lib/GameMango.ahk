@@ -46,6 +46,9 @@ GetNameForMode() {
     if (PlacementSelection.Text = "Winter Event") {
         return "winter"
     }
+    if (PlacementSelection.Text = "Default") {
+        return ""
+    }
     return PlacementSelection.Text
 }
 
@@ -181,8 +184,6 @@ AttemptUpgrade() {
 
     if (successfulCoordinates.Length = 0) {
         return ; No units placed yet
-    } else {
-        AddToLog("Attempting to upgrade placed units...")
     }
 
     anyEnabled := false
@@ -201,6 +202,8 @@ AttemptUpgrade() {
             AddToLog("No units enabled - skipping")
         }
         return
+    } else {
+        AddToLog("Attempting to upgrade placed units...")
     }
 
     if (PriorityUpgrade.Value) {
