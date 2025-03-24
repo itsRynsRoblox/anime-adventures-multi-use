@@ -2250,7 +2250,7 @@ CheckForDisconnect() {
 
 Reconnect() {   
     ; Check for Disconnected Screen using FindText
-    if (ok := FindText(&X, &Y, 450, 410, 539, 427, 0, 0, Disconnect)) {
+    if (ok := FindText(&X, &Y, 330, 218, 474, 247, 0, 0, Disconnect)) {
         AddToLog("Lost Connection! Attempting To Reconnect To Private Server...")
 
         psLink := FileExist("Settings\PrivateServer.txt") ? FileRead("Settings\PrivateServer.txt", "UTF-8") : ""
@@ -2274,13 +2274,7 @@ Reconnect() {
             moveRobloxWindow()
             Sleep(1000)
             }
-            
-            if (ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
-                AddToLog("Reconnected Successfully!")
-                return StartSelectedMode()
-            } else {
-                Reconnect() 
-            }
+            CheckLobby()
         }
     }
 }
