@@ -816,9 +816,7 @@ MonitorEndScreen() {
         if (ok := FindText(&X, &Y, 260, 400, 390, 450, 0, 0, NextText)) {
             ClickUntilGone(0, 0, 260, 400, 390, 450, NextText, 0, -40)
             Sleep(1500)
-        }
-
-        
+        }   
 
         ; Now handle each mode
         if (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText) or (ok := FindText(&X, &Y, 80, 85, 739, 224, 0, 0, LobbyText2))) {
@@ -2242,8 +2240,10 @@ RestartStage() {
 
 CheckForDisconnect() {
     if (ok := FindText(&X, &Y, 450, 410, 539, 427, 0, 0, Disconnect)) {
-        AddToLog("Found 20 minute disconnect message...")
-        return true
+        if (debugMessages) {
+            AddToLog("Found 20 minute disconnect message...")
+        }
+        return Reconnect()
     }
     return false
 }
@@ -2563,6 +2563,7 @@ CheckForEndGameScreens() {
     if (CheckForXp(true) || CheckForReturnToLobby() || CheckForNextText()) {
         AddToLog("Detected end game screen when should have already returned to lobby")
         CloseChat()
+        return true
     }
 }
 

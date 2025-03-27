@@ -29,12 +29,14 @@ SetMapForPortalFarm(name) {
 }
 
 SwitchActiveFarm() {
+    global mode
     if (ModeDropdown.Text = "Story") {
         newMap := GetMapForFarming(StoryDropdown.Text)
         if (newMap != "no map found") {
             ModeDropdown.Text := "Portal"
             PortalDropdown.Text := newMap
             PortalJoinDropdown.Text := "Solo"
+            mode := "Portal"
             AddToLog("Switched to " newMap)
             if (debugMessages) {
                 AddToLog("Mode: " ModeDropdown.Text)
@@ -52,6 +54,7 @@ SwitchActiveFarm() {
             ModeDropdown.Text := "Story"
             StoryActDropdown.Text := "Infinity"
             StoryDropdown.Text := newMap
+            mode := "Story"
             AddToLog("Switched to " newMap " for farming portals")
             if (debugMessages) {
                 AddToLog("Mode: " ModeDropdown.Text)
