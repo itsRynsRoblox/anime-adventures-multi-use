@@ -80,18 +80,11 @@ PlacingUnits() {
         return MonitorStage()
     }
 
-    if (CheckForRobloxApp()) {
-        AddToLog("Found Roblox App, rejoining private server...")
-        return RejoinPrivateServer()
-    }
-
     if CheckForLobbyText() {
         return CheckLobby()
     }
 
-    if CheckForDisconnect() {
-        return Reconnect()
-    }
+    Reconnect()
 
     placementPoints := PlacementPatternDropdown.Text = "3x3 Grid" ? GenerateMoreGridPoints(3) : PlacementPatternDropdown.Text = "Circle" ? GenerateCirclePoints() : PlacementPatternDropdown.Text = "Grid" ? GenerateGridPoints() : PlacementPatternDropdown.Text = "Spiral(WIP)" ? GenerateSpiralGridPoints() : PlacementPatternDropdown.Text = "Up and Down" ? GenerateUpandDownPoints() : GenerateRandomPoints()
     
@@ -152,19 +145,11 @@ PlacingUnits() {
                         return MonitorStage()
                     }
 
-                    if (CheckForRobloxApp()) {
-                        AddToLog("Found Roblox App, rejoining private server...")
-                        return RejoinPrivateServer()
-                    }
-
                     if CheckForLobbyText() {
                         return CheckLobby()
                     }
 
-                    if CheckForDisconnect() {
-                        return Reconnect()
-                    }
-
+                    Reconnect()
                     CheckEndAndRoute()
                 }
                 Sleep(500)
@@ -257,17 +242,8 @@ AttemptUpgrade() {
                         return MonitorStage()
                     }
 
-                    if (CheckForRobloxApp()) {
-                        AddToLog("Found Roblox App, rejoining private server...")
-                        return RejoinPrivateServer()
-                    }
-
                     if CheckForLobbyText() {
                         return CheckLobby()
-                    }
-
-                    if CheckForDisconnect() {
-                        return Reconnect()
                     }
 
                     if MaxUpgrade() {
@@ -331,17 +307,8 @@ AttemptUpgrade() {
                 return MonitorStage()
             }
 
-            if (CheckForRobloxApp()) {
-                AddToLog("Found Roblox App, rejoining private server...")
-                return RejoinPrivateServer()
-            }
-
             if CheckForLobbyText() {
                 return CheckLobby()
-            }
-
-            if CheckForDisconnect() {
-                return Reconnect()
             }
 
             if MaxUpgrade() {
@@ -475,14 +442,7 @@ UpgradeAllUnits(totalUnits, upgradedCount) {
     for index, coord in successfulCoordinates {
         UpgradeUnitWithLimit(coord, index)
 
-        if (CheckForDisconnect()) {
-            return Reconnect()
-        }
-
-        if (CheckForRobloxApp()) {
-            AddToLog("Found Roblox App, rejoining private server...")
-            return RejoinPrivateServer()
-        }
+        Reconnect()
 
         CheckForTerminationConditions()
 
@@ -519,10 +479,7 @@ CheckForTerminationConditions() {
         maxedCoordinates := []
         return MonitorStage()
     }
-    if (CheckForRobloxApp()) {
-        AddToLog("Found Roblox App, rejoining private server...")
-        return RejoinPrivateServer()
-    }
+    Reconnect()
     if (CheckForLobbyText()) {
         return CheckLobby()
     }
@@ -956,10 +913,6 @@ global mode, StoryActDropdown
 
         CheckForMahoraga()
         CheckForMahoragaAdaptation()
-
-        if CheckForDisconnect() {
-            return Reconnect()
-        }
 
         if (ok := FindText(&X, &Y, 300, 190, 360, 250, 0, 0, UnitExit)) {
             ClickUntilGone(0, 0, 300, 190, 360, 250, UnitExit, -4, -35)
@@ -1909,10 +1862,12 @@ MoveForSandVillage() {
 }
 
 MoveForFiendCity() {
-    Fixclick(185, 410, "Right")
-    Sleep (3000)
+    SendInput ("{s down}")
+    Sleep (500)
+    SendInput ("{s up}")
+    Sleep (500)
     SendInput ("{a down}")
-    Sleep (3000)
+    Sleep (3800)
     SendInput ("{a up}")
     Sleep (500)
     SendInput ("{s down}")
@@ -2238,20 +2193,17 @@ RestartStage() {
     MonitorStage()
 }
 
-CheckForDisconnect() {
-    if (ok := FindText(&X, &Y, 450, 410, 539, 427, 0, 0, Disconnect)) {
-        if (debugMessages) {
-            AddToLog("Found 20 minute disconnect message...")
-        }
-        return Reconnect()
+Reconnect() {
+    ;Credit: @Haie
+    color_home := PixelGetColor(10, 10)
+    color_reconnect := PixelGetColor(519,329)
+    if (WinExist(rblxID)) { 
+        WinActivate(rblxID)
     }
-    return false
-}
-
-Reconnect() {   
-    ; Check for Disconnected Screen using FindText
-    if (ok := FindText(&X, &Y, 330, 218, 474, 247, 0, 0, Disconnect)) {
-        AddToLog("Lost Connection! Attempting To Reconnect To Private Server...")
+    
+    if (color_home == 0x121215 or color_reconnect == 0x393B3D) {
+        AddToLog("Disconnected! Attempting to reconnect...")
+        sendDCWebhook()
 
         psLink := FileExist("Settings\PrivateServer.txt") ? FileRead("Settings\PrivateServer.txt", "UTF-8") : ""
 
@@ -2260,21 +2212,25 @@ Reconnect() {
             AddToLog("Connecting to private server...")
             Run(psLink)
         } else {
-            Run("roblox://placeID=8304191830")
+            Run("roblox://placeID=" 8304191830)
         }
 
-        Sleep(5000)  
-
-        loop {
-            AddToLog("Reconnecting to Roblox...")
-            Sleep(15000)
-
-            if WinExist(rblxID) {
+        Sleep 2000
+        if WinExist(rblxID) {
             forceRobloxSize()
             moveRobloxWindow()
-            Sleep(1000)
+            Sleep 1000
+        }
+        loop {
+            FixClick(490, 400)
+            AddToLog("Reconnecting to Roblox...")
+            Sleep 15000
+            if (ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
+                AddToLog("Reconnected Successfully!")
+                return StartSelectedMode()
+            } else {
+                Reconnect() 
             }
-            CheckLobby()
         }
     }
 }
@@ -3171,7 +3127,7 @@ ClickStartStory() {
 
 CheckForFinishDungeon() {
     ; Check for the finish dungeon popup
-    if (ok := FindText(&X, &Y, 240, 180, 565, 480, 0, 0, FinishDungeon) or (ok := FindText(&X, &Y, 310, 395, 495, 440, 0.20, 0.20, EnterDungeon)) or (ok := FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath))) {
+    if (ok := FindText(&X, &Y, 240, 180, 565, 480, 0.20, 0.20, FinishDungeon) or (ok := FindText(&X, &Y, 310, 395, 495, 440, 0.20, 0.20, EnterDungeon)) or (ok := FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath))) {
         
         ; Click the Finish button
         ClickUntilGone(0, 0, 240, 180, 565, 480, DungeonFinish, -3, -35)

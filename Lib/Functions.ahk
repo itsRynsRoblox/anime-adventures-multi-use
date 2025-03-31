@@ -102,14 +102,17 @@ OpenDiscordLink() {
      FileAppend(content, currentOutputFile)
  }
  
- ;Gets the current time
  getCurrentTime() {
-     currentHour := A_Hour
-     currentMinute := A_Min
-     currentSecond := A_Sec
- 
-     return Format("{:d}h.{:02}m.{:02}s", currentHour, currentMinute, currentSecond)
- }
+    currentHour := A_Hour
+    currentMinute := A_Min
+    currentSecond := A_Sec
+    amPm := (currentHour >= 12) ? "PM" : "AM"
+    
+    ; Convert to 12-hour format
+    currentHour := Mod(currentHour - 1, 12) + 1
+
+    return Format("{:d}:{:02}:{:02} {}", currentHour, currentMinute, currentSecond, amPm)
+}
 
 
 

@@ -224,30 +224,6 @@ SendFinalWebhookBeforeExit() {
     )
 }
 
-SendBanner() {
-    global DiscordUserID, StartTime
-
-    ; Calculate how long it took to find the unit
-    ElapsedTimeMs := A_TickCount - StartTime
-    ElapsedTimeSec := Floor(ElapsedTimeMs / 1000)
-    ElapsedHours := Floor(ElapsedTimeSec / 3600)
-    ElapsedMinutes := Floor(Mod(ElapsedTimeSec, 3600) / 60)
-    Runtime := Format("{:02}h {:02}m", ElapsedHours, ElapsedMinutes)
-
-    ; Build banner alert info
-    bannerInfo := "🎉 **Banner Unit Found!** 🎉`n"
-    . ":stopwatch: Time Taken: " Runtime
-
-    ; If you have BannerUnitBox from settings, show which unit was found
-    if FileExist("Settings\BannerUnit.txt") {
-        bannerUnitName := FileRead("Settings\BannerUnit.txt", "UTF-8")
-        if (bannerUnitName != "")
-            bannerInfo .= "`n:partying_face: Found Unit: " bannerUnitName " :partying_face:"
-    }
-
-    WebhookScreenshot("Special Unit Found!", bannerInfo, 0xFFD700,) 
-}
-
 CropImage(pBitmap, x, y, width, height) {
     ; Initialize GDI+ Graphics from the source bitmap
     pGraphics := Gdip_GraphicsFromImage(pBitmap)
@@ -387,16 +363,6 @@ WebhookLog() {
         global webhook := WebHookBuilder(WebhookURL)
         TextWebhook()
     } 
-}
-
-BannerFound() {
-    global WebhookURL := FileRead(WebhookURLFile, "UTF-8")
-    global DiscordUserID := FileRead(DiscordUserIDFile, "UTF-8")
-
-    if (webhookURL ~= 'i)https?:\/\/discord\.com\/api\/webhooks\/(\d{18,19})\/[\w-]{68}') {
-        global webhook := WebHookBuilder(WebhookURL)
-        SendBanner()
-    }
 }
 
 SaveWebhookBtnClick() {
@@ -541,5 +507,71 @@ SendWebhookRequest(webhook, params, maxRetries := 3) {
     } catch {
         AddToLog("Unable to send webhook - continuing without sending")
         return false
+    }
+}
+
+sendDCWebhook() {
+    MacroRuntime := CalculateElapsedTime(MacroStartTime)
+    StageRuntime := CalculateElapsedTime(StageStartTime)
+
+    ; Prepare the embed
+    myEmbed := EmbedBuilder()
+    myEmbed.setTitle(":exclamation: Client Disconnected :exclamation:")
+    myEmbed.setDescription(":stopwatch: Disconnected At: " MacroRuntime "`n:stopwatch: Stage Runtime: " StageRuntime "")
+    myEmbed.setColor(0xB00A0A)
+
+    try {
+        if (WebhookURL.Value != "") {
+            global Webhook := WebHookBuilder(WebhookURL.Value)
+        }
+    } catch {
+        AddToLog("No webhook configured - skipping webhook")
+        return
+    }
+
+    ; Send the webhook
+    try {
+        Webhook.send({
+            embeds: [myEmbed],
+        })
+
+        AddToLog("Sent webhook successfully")
+    } catch {
+        AddToLog("Failed to send webhook")
+    }
+
+}
+
+SendBanner() {
+    global DiscordUserID, StartTime
+
+    ; Calculate how long it took to find the unit
+    ElapsedTimeMs := A_TickCount - StartTime
+    ElapsedTimeSec := Floor(ElapsedTimeMs / 1000)
+    ElapsedHours := Floor(ElapsedTimeSec / 3600)
+    ElapsedMinutes := Floor(Mod(ElapsedTimeSec, 3600) / 60)
+    Runtime := Format("{:02}h {:02}m", ElapsedHours, ElapsedMinutes)
+
+    ; Build banner alert info
+    bannerInfo := "🎉 **Banner Unit Found!** 🎉`n"
+    . ":stopwatch: Time Taken: " Runtime
+
+    ; If you have BannerUnitBox from settings, show which unit was found
+    if FileExist("Settings\BannerUnit.txt") {
+        bannerUnitName := FileRead("Settings\BannerUnit.txt", "UTF-8")
+        if (bannerUnitName != "")
+            bannerInfo .= "`n:partying_face: Found Unit: " bannerUnitName " :partying_face:"
+    }
+
+    WebhookScreenshot("Special Unit Found!", bannerInfo, 0xFFD700,) 
+}
+
+BannerFound() {
+    global WebhookURL := FileRead(WebhookURLFile, "UTF-8")
+    global DiscordUserID := FileRead(DiscordUserIDFile, "UTF-8")
+
+    if (webhookURL ~= 'i)https?:\/\/discord\.com\/api\/webhooks\/(\d{18,19})\/[\w-]{68}') {
+        global webhook := WebHookBuilder(WebhookURL)
+        SendBanner()
     }
 }
