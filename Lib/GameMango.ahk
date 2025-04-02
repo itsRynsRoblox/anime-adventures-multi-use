@@ -46,6 +46,9 @@ GetNameForMode() {
     if (PlacementSelection.Text = "Winter Event") {
         return "winter"
     }
+    if (PlacementSelection.Text = "Fools Event") {
+        return "winter"
+    }
     if (PlacementSelection.Text = "Default") {
         return ""
     }
@@ -162,6 +165,63 @@ PlacingUnits() {
     
     AddToLog("All units placed to requested amounts")
     UpgradeUnits()
+}
+
+PlaceFoolUnits() {
+    placementPoints := PlacementPatternDropdown.Text = "3x3 Grid" ? GenerateMoreGridPoints(3) : PlacementPatternDropdown.Text = "Circle" ? GenerateCirclePoints() : PlacementPatternDropdown.Text = "Grid" ? GenerateGridPoints() : PlacementPatternDropdown.Text = "Spiral(WIP)" ? GenerateSpiralGridPoints() : PlacementPatternDropdown.Text = "Up and Down" ? GenerateUpandDownPoints() : GenerateRandomPoints()
+    
+    ; Collect enabled slots
+    enabledSlots := []
+    for slotNum in [1, 2, 3, 4, 5, 6] {
+        enabled := "enabled" slotNum
+        enabled := %enabled%
+        enabled := enabled.Value
+        if (enabled) {
+            enabledSlots.Push(slotNum)
+        }
+    }
+
+    if (enabledSlots.Length = 0) {
+        if (debugMessages) {
+            AddToLog("No units enabled - exiting")
+        }
+        return
+    }
+
+    ; Loop through placement points and assign them to enabled slots in order
+    pointIndex := 1
+    while true {
+        for slotIndex, slotNum in enabledSlots {
+            point := placementPoints[pointIndex]
+            if PlaceUnit(point.x, point.y, slotNum) {
+                successfulCoordinates.Push({x: point.x, y: point.y, slot: slotNum})
+                CheckAbility()
+                FixClick(560, 560) ; Move Click
+            }
+
+            AttemptUpgrade()
+
+            if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
+                AddToLog("Stage ended during placements, proceeding to results")
+                return MonitorStage()
+            }
+
+            if CheckForLobbyText() {
+                return CheckLobby()
+            }
+
+            Reconnect()
+            CheckEndAndRoute()
+
+            Sleep(500) ; Prevent spamming
+
+            ; Move to the next placement point, loop back if at the end
+            pointIndex++
+            if (pointIndex > placementPoints.Length) {
+                pointIndex := 1
+            }
+        }
+    }
 }
 
 AttemptUpgrade() {
@@ -655,9 +715,9 @@ InfinityCastleMode() {
     RestartStage()
 }
 
-WinterEvent() {
+FoolsEvent() {
     ; Execute the movement pattern
-    AddToLog("Moving to position for Winter Event")
+    AddToLog("Moving to position for April Fools Event")
     WinterEventMovement()
     
     ; Start stage
@@ -673,7 +733,7 @@ WinterEvent() {
         PlayHere()
     }
 
-    AddToLog("Starting Winter Event")
+    AddToLog("Starting April Fools Event")
     RestartStage()
 }
 
@@ -860,6 +920,18 @@ MonitorEndScreen() {
                 ClickReturnToLobby()
                 return CheckLobby()
             }
+            else if (mode = "Fools Event") {
+                AddToLog("Handling Fools Event end")
+                if (ReturnLobbyBox.Value) {
+                    AddToLog("Return to lobby enabled")
+                    ClickReturnToLobby()
+                    return CheckLobby()
+                } else {
+                    AddToLog("Replaying")
+                    ClickReplay()
+                }
+                return RestartStage()
+            }
             else if (mode = "Winter Event") {
                 AddToLog("Handling Winter Event end")
                 if (ReturnLobbyBox.Value) {
@@ -910,6 +982,11 @@ global mode, StoryActDropdown
         if (mode = "Winter Event") {
             CheckForCardSelection()
         }
+
+        if (mode = "Fools Event") {
+            CheckForCardSelection()
+        }
+
 
         CheckForMahoraga()
         CheckForMahoragaAdaptation()
@@ -1058,20 +1135,6 @@ CursedWombMovement() {
     SendInput ("{s down}")
     sleep (4000)
     SendInput ("{s up}")
-}
-
-WinterEventMovement() {
-    FixClick(592, 204) ; Close Matchmaking UI (Just in case)
-    Sleep (200)
-    FixClick(85, 295) ; Click Play
-    sleep (1000)
-    SendInput ("{a up}")
-    Sleep 100
-    SendInput ("{a down}")
-    Sleep 6000
-    SendInput ("{a up}")
-    KeyWait "a" ; Wait for "d" to be fully processed
-    Sleep 1200
 }
 
 StartStory(map, StoryActDropdown) {
@@ -1778,6 +1841,8 @@ HandleMapMovement(MapName) {
             MoveForHellish()
         case "Winter Event":
             MoveForWinterEventNoClick()
+        case "Fools Event":
+            MoveForFoolsEvent()
         case "Contracts":
             MoveForContracts()
         case "Shibuya District":
@@ -2093,34 +2158,6 @@ MoveForHellish() {
     }
 }
 
-MoveForWinterEvent() {
-    loop {
-        if FindAndClickColor() {
-            break
-        }
-        else {
-            AddToLog("Color not found. Turning again.")
-            SendInput ("{Left up}")
-            Sleep 200
-            SendInput ("{Left down}")
-            Sleep 750
-            SendInput ("{Left up}")
-            KeyWait "Left" ; Wait for key to be fully processed
-            Sleep 200
-        }
-    }
-}
-
-MoveForWinterEventNoClick() {
-    loop 200 {
-        Sleep 100
-
-        if FindAndClickBeam() {
-            break
-        }
-    }
-}
-
 MoveForContracts() {
     FixClick(590, 15) ; click on paths
     loop {
@@ -2180,14 +2217,22 @@ RestartStage() {
     ; Do initial setup and map-specific movement during vote timer
     BasicSetup()
     if (currentMap != "no map found") {
-        HandleMapMovement(currentMap)
+        if (NoMovement.Visible && NoMovement.Value) {
+            AddToLog("Skipping movement...")
+        } else {
+            HandleMapMovement(currentMap)
+        }
     }
 
     ; Wait for game to actually start
     StartedGame()
 
     ; Begin unit placement and management
-    PlacingUnits()
+    if (NewPlacementMethod.Visible && NewPlacementMethod.Value) { ; For April Fools Event
+        PlaceFoolUnits()
+    } else {
+        PlacingUnits()
+    }
     
     ; Monitor stage progress
     MonitorStage()
@@ -2270,6 +2315,9 @@ RejoinPrivateServer() {
 
 PlaceUnit(x, y, slot := 1) {
     if (ModeDropdown.Text = "Winter Event") {
+        CheckForCardSelection()
+    }
+    if (ModeDropdown.Text = "Fools Event") {
         CheckForCardSelection()
     }
 
@@ -2612,6 +2660,9 @@ StartSelectedMode() {
         } else {
             AddToLog("Contracts are is not currently in Anime Adventures!")
         }
+    }
+    else if (ModeDropdown.Text = "Fools Event") {
+        FoolsEvent()
     }
     else if (ModeDropdown.Text = "Winter Event") {
         if (isWinter) {
@@ -3187,4 +3238,16 @@ CheckForRobloxApp() {
 
 CheckForNotification() {
     return FindText(&X, &Y, 748, 94, 778, 551, 0, 0, ExitNotification) ? true : false
+}
+
+MoveForFoolsEvent() {
+    FixClick(590, 15) ; click on paths
+    loop 200 {
+        Sleep 100
+
+        if FindAndMoveToPath() {
+            FixClick(590, 15) ; click on paths
+            break
+        }
+    }
 }

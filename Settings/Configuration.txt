@@ -1,4 +1,4 @@
-Mode=
+Mode=Fools Event
 
 
 [Enabled]
@@ -10,12 +10,12 @@ Enabled5=1
 Enabled6=1
 
 [Placement]
-Placement1=1
-Placement2=1
-Placement3=1
-Placement4=1
-Placement5=1
-Placement6=1
+Placement1=6
+Placement2=6
+Placement3=6
+Placement4=6
+Placement5=6
+Placement6=6
 
 [Priority]
 Priority1=1
@@ -26,12 +26,12 @@ Priority5=5
 Priority6=6
 
 [UpgradeEnabled]
-UpgradeEnabled1=0
-UpgradeEnabled2=0
-UpgradeEnabled3=0
-UpgradeEnabled4=0
-UpgradeEnabled5=0
-UpgradeEnabled6=0
+UpgradeEnabled1=1
+UpgradeEnabled2=1
+UpgradeEnabled3=1
+UpgradeEnabled4=1
+UpgradeEnabled5=1
+UpgradeEnabled6=1
 
 [UpgradeLimitEnabled]
 UpgradeLimitEnabled1=0
@@ -290,7 +290,7 @@ WinterUpgradeLimit5=0
 WinterUpgradeLimit6=0
 
 [PlacementLogic]
-Logic=1
+Logic=6
 
 [PlaceSpeed]
 Speed=3

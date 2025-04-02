@@ -190,6 +190,8 @@ OpenDiscordLink() {
         ToggleDungeonCheckboxes()
     } else if (selected = "Cursed Womb") {
         mode := "Cursed Womb"
+    } else if (selected = "Fools Event") {
+        mode := "Fools Event"
     } else if (selected = "Winter Event") {
         mode := "Winter Event"
         MatchMaking.Visible := true
@@ -304,6 +306,15 @@ OnConfirmClick(*) {
         AddToLog("Selected Contract Page " ContractPageDropdown.Text " - " ContractJoinDropdown.Text)
         MatchMaking.Visible := false
         ReturnLobbyBox.Visible := true
+    }
+    ; Fools Event
+    else if (ModeDropdown.Text = "Fools Event") {
+        mode := "Fools Event"
+        AddToLog("Selected Fools Event")
+        MatchMaking.Visible := true
+        ReturnLobbyBox.Visible := true
+        NoMovement.Visible := true
+        NewPlacementMethod.Visible := true
     }
     ; Winter Event
     else if (ModeDropdown.Text = "Winter Event") {

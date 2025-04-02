@@ -1,6 +1,6 @@
 #Include %A_ScriptDir%\Lib\gui.ahk
 #Include %A_ScriptDir%\Main.ahk
-#Include %A_ScriptDir%\Lib\PriorityPicker.ahk
+#Include %A_ScriptDir%\Lib\Modes\Winter\PriorityPicker.ahk
 
 SaveWinterConfig(*) {
     SaveWinterLocal

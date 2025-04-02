@@ -4,7 +4,7 @@
 SendMode "Event"
 #Include %A_ScriptDir%\lib/Image.ahk
 #Include %A_ScriptDir%\Lib\Toggles.ahk
-#Include %A_ScriptDir%\Lib\PriorityPicker.ahk
+#Include %A_ScriptDir%\Lib\Modes\Winter\PriorityPicker.ahk
 #Include %A_ScriptDir%\Lib\Modes\Dungeon\RoutePriorityPicker.ahk
 #Include %A_ScriptDir%\Lib\Modes\Dungeon\CursePriorityPicker.ahk
 #Include %A_ScriptDir%\lib/GUI.ahk
@@ -20,3 +20,4 @@ SendMode "Event"
 #Include %A_ScriptDir%\Lib\UpdateChecker.ahk
 #Include %A_ScriptDir%\Lib\Modes\Dungeon\Dungeon.ahk
 #Include %A_ScriptDir%\Lib\Modes\Portal.ahk
+#Include %A_ScriptDir%\Lib\Modes\Winter\Winter2024.ahk

@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.13.7"
+global currentVersion := "1.14.0"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -273,6 +273,9 @@ EditRoute := aaMainUI.Add("Button", "x1050 y470 w80 h25", "Edit Route")
 EditRoute.OnEvent("Click", (*) => OpenRoutePriorityPicker())
 EditCurses := aaMainUI.Add("Button", "x1150 y470 w80 h25", "Edit Curses")
 EditCurses.OnEvent("Click", (*) => OpenCursePriorityPicker())
+;April Fools Event Option
+NewPlacementMethod := aaMainUI.Add("CheckBox", "x1050 y451 cffffff Checked", "Test Unit Method")
+NoMovement := aaMainUI.Add("CheckBox", "x1050 y476 cffffff Checked", "No Movement")
 ;Misc Options
 global MiscSettings := aaMainUI.Add("GroupBox", "x110 y630 w290 h60 +Center c" uiTheme[1], "Misc. Settings")
 global RejoinRoblox := aaMainUI.Add("Checkbox", "x115 y650 c" uiTheme[1], "Pending Teleport Failsafe")
@@ -305,7 +308,7 @@ global MahoragoMode := aaMainUI.Add("DropDownList", "x1235 y410 w100 h180 Choose
 
 ; General Settings
 PlacementSelectionText := aaMainUI.Add("Text", "x810 y390 w130 h20", "Placement Settings")
-PlacementSelection := aaMainUI.Add("DropDownList", "x825 y410 w100 h180 Choose1 +Center", ["Default", "Challenge", "Contract", "Dungeon", "Raid", "Winter Event"])
+PlacementSelection := aaMainUI.Add("DropDownList", "x825 y410 w100 h180 Choose1 +Center", ["Default", "Challenge", "Contract", "Dungeon", "Raid", "Fools Event"])
 
 PlacementPatternText := aaMainUI.Add("Text", "x960 y390 w115 h20", "Placement Type")
 global PlacementPatternDropdown := aaMainUI.Add("DropDownList", "x962 y410 w100 h180 Choose2 +Center", ["Circle", "Grid", "3x3 Grid", "Spiral(WIP)", "Up and Down", "Random"])
@@ -331,7 +334,7 @@ MaxUpgradeBeforeMoving.OnEvent("Click", (*) => SendWarningMessage())
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT
 global modeSelectionGroup := aaMainUI.Add("GroupBox", "x808 y38 w500 h45 Background" uiTheme[2], "Mode Select")
 aaMainUI.SetFont("s10 c" uiTheme[6])
-global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["Story", "Contract", "Dungeon", "Legend", "Raid", "Portal", "Infinity Castle", "Cursed Womb", "Winter Event"])
+global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["Story", "Contract", "Dungeon", "Legend", "Raid", "Portal", "Infinity Castle", "Cursed Womb", "Fools Event"])
 global StoryDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Planet Greenie", "Walled City", "Snowy Town", "Sand Village", "Navy Bay", "Fiend City", "Spirit World", "Ant Kingdom", "Magic Town", "Haunted Academy", "Magic Hills", "Space Center", "Alien Spaceship", "Fabled Kingdom", "Ruined City", "Puppet Island", "Virtual Dungeon", "Snowy Kingdom", "Dungeon Throne", "Mountain Temple", "Rain Village", "Shibuya District"])
 global StoryActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Act 1", "Act 2", "Act 3", "Act 4", "Act 5", "Act 6", "Infinity"])
 global LegendDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Magic Hills", "Space Center", "Fabled Kingdom", "Virtual Dungeon", "Dungeon Throne", "Rain Village"] )
@@ -379,6 +382,10 @@ DenyShrines.Visible := false
 UseNewDungeonRoute.Visible := false
 EditRoute.Visible := false
 EditCurses.Visible := false
+
+;April Fools Event
+NewPlacementMethod.Visible := false
+NoMovement.Visible := false
 
 ;Portal Farming
 PortalSwap.Visible := false
@@ -768,7 +775,7 @@ ToggleMode(*) {
             raidUpgradeEnabled%A_Index%.Visible := true
             raidUpgradeLimit%A_Index%.Visible := true
             raidUpgradeLimitEnabled%A_Index%.Visible := true
-        } else if (mode = "Winter Event") {
+        } else if (mode = "Fools Event") {
             WinterEnabled%A_Index%.Visible := true
             WinterPlacement%A_Index%.Visible := true
             WinterPriority%A_Index%.Visible := true

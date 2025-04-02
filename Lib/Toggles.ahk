@@ -1,6 +1,6 @@
 #Requires AutoHotkey v2.0
 
-global isWinter := true
+global isWinter := false
 
 global isHalloween := false
 
