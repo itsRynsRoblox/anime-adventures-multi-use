@@ -1,4 +1,4 @@
-Mode=Fools Event
+Mode=
 
 
 [Enabled]
@@ -290,7 +290,7 @@ WinterUpgradeLimit5=0
 WinterUpgradeLimit6=0
 
 [PlacementLogic]
-Logic=6
+Logic=1
 
 [PlaceSpeed]
 Speed=3

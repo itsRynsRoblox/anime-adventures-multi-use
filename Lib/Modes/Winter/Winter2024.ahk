@@ -3,12 +3,12 @@
 WinterEvent() {
     ; Execute the movement pattern
     AddToLog("Moving to position for Winter Event")
-    WinterEventMovement()
+    EventMovement()
     
     ; Start stage
     while !(ok:=FindText(&X, &Y, 468-150000, 386-150000, 468+150000, 386+150000, 0, 0, JoinMatchmaking)) {
         Reconnect() ; Added Disconnect Check
-        WinterEventMovement()
+        EventMovement()
     }
 
     ; Handle play mode selection
@@ -20,20 +20,6 @@ WinterEvent() {
 
     AddToLog("Starting Winter Event")
     RestartStage()
-}
-
-WinterEventMovement() {
-    FixClick(592, 204) ; Close Matchmaking UI (Just in case)
-    Sleep (200)
-    FixClick(85, 295) ; Click Play
-    sleep (1000)
-    SendInput ("{a up}")
-    Sleep 100
-    SendInput ("{a down}")
-    Sleep 6000
-    SendInput ("{a up}")
-    KeyWait "a" ; Wait for "d" to be fully processed
-    Sleep 1200
 }
 
 MoveForWinterEvent() {

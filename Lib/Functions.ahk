@@ -190,8 +190,8 @@ OpenDiscordLink() {
         ToggleDungeonCheckboxes()
     } else if (selected = "Cursed Womb") {
         mode := "Cursed Womb"
-    } else if (selected = "Fools Event") {
-        mode := "Fools Event"
+    } else if (selected = "Fool's Hunt") {
+        mode := "Fool's Hunt"
     } else if (selected = "Winter Event") {
         mode := "Winter Event"
         MatchMaking.Visible := true
@@ -308,9 +308,9 @@ OnConfirmClick(*) {
         ReturnLobbyBox.Visible := true
     }
     ; Fools Event
-    else if (ModeDropdown.Text = "Fools Event") {
-        mode := "Fools Event"
-        AddToLog("Selected Fools Event")
+    else if (ModeDropdown.Text = "Fool's Hunt") {
+        mode := "Fool's Hunt"
+        AddToLog("Selected Fool's Hunt")
         MatchMaking.Visible := true
         ReturnLobbyBox.Visible := true
         NoMovement.Visible := true

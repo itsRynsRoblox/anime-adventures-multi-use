@@ -299,3 +299,47 @@ ExitNotification:="|<>*136$18.zzzwzjsT7wS7wADy0Tz0zzUzzUzz0Ty4DwC7sT7wzbzzzzzzU"
 ;Maharaga 277, 513, 310, 546
 MaharagaDefend:="|<>*204$24.zzzzVs610E4141wTb1yTb0C3b8S7a9yTUM6TVs6zU"
 Adaptation:="|<>*99$88.zzzjzzzzzzvzzzzwzwzzzvzzjbzzzzlznzzzbzySTzzzy7zDzzyTztzzzzzsDYzzzkTz1bzzzz0w3WNC1l86Q78tw1UA1UM60UNUA17U68k60ks33a0k4S01WANnb6CSFlCTk068lbCQMtt74sz3U0k60sM3Va0naMz030M7VUC6M3CFnytC9Yz74wNkQtbzzzzyTzzzzzzzzzzzzztzzzzzzzzzU"
+
+;Fool's Hunt Loading Screens
+
+;Story Maps
+PlanetGreenieLoadingScreen := "Images\loading_screens\planetgreenie.png"
+WalledCityLoadingScreen := "Images\loading_screens\walledcity.png"
+SnowyTownLoadingScreen := "Images\loading_screens\snowytown.png"
+SandVillageLoadingScreen := "Images\loading_screens\sandvillage.png"
+NavyBayLoadingScreen := "Images\loading_screens\navybay.png"
+FiendCityLoadingScreen := "Images\loading_screens\fiendcity.png"
+SpiritWorldLoadingScreen := "Images\loading_screens\spiritworld.png"
+AntKingdomLoadingScreen := "Images\loading_screens\antkingdom.png"
+MagicTownLoadingScreen := "Images\loading_screens\magictown.png"
+MagicHillsLoadingScreen := "Images\loading_screens\magichills.png"
+HauntedAcademyLoadingScreen := "Images\loading_screens\hauntedacademy.png"
+AlienSpaceshipLoadingScreen := "Images\loading_screens\alienspaceship.png"
+SpaceCenterLoadingScreen := "Images\loading_screens\spacecenter.png"
+FabledKingdomLoadingScreen := "Images\loading_screens\fabledkingdom.png"
+RuinedCityLoadingScreen := "Images\loading_screens\ruinedcity.png"
+PuppetIslandLoadingScreen := "Images\loading_screens\puppetisland.png"
+VirtualDungeonLoadingScreen := "Images\loading_screens\virtualdungeon.png"
+SnowyKingdomLoadingScreen := "Images\loading_screens\snowykingdom.png"
+DungeonThroneLoadingScreen := "Images\loading_screens\dungeonthrone.png"
+MountainTempleLoadingScreen := "Images\loading_screens\mountaintemple.png"
+RainVillageLoadingScreen := "Images\loading_screens\rainvillage.png"
+ShibuyaDistrictLoadingScreen := "Images\loading_screens\shibuyadistrict.png"
+
+;Legend Stages
+SpiritTownLoadingScreen := "Images\loading_screens\spirittown.png"
+
+;Raids
+SacredPlanetLoadingScreen := "Images\loading_screens\sacredplanet.png"
+StrangeTownLoadingScreen := "Images\loading_screens\strangetown.png"
+CursedFestivalLoadingScreen := "Images\loading_screens\cursedfestival.png"
+StormHideoutLoadingScreen := "Images\loading_screens\stormhideout.png"
+NightmareTrainLoadingScreen := "Images\loading_screens\nightmaretrain.png"
+
+;Events
+AssassinParkLoadingScreen := "Images\loading_screens\assassinpark.png"
+HauntedMansionLoadingScreen := "Images\loading_screens\hauntedmansion.png"
+
+;Unfinished
+AirCraftLoadingScreen := "Images\loading_screens\aircraft.png"
+HellishCityLoadingScreen := "Images\loading_screens\hellishcity.png"

@@ -46,7 +46,7 @@ GetNameForMode() {
     if (PlacementSelection.Text = "Winter Event") {
         return "winter"
     }
-    if (PlacementSelection.Text = "Fools Event") {
+    if (PlacementSelection.Text = "Fool's Hunt") {
         return "winter"
     }
     if (PlacementSelection.Text = "Default") {
@@ -717,13 +717,13 @@ InfinityCastleMode() {
 
 FoolsEvent() {
     ; Execute the movement pattern
-    AddToLog("Moving to position for April Fools Event")
-    WinterEventMovement()
+    AddToLog("Moving to position for Fool's Hunt")
+    EventMovement()
     
     ; Start stage
     while !(ok:=FindText(&X, &Y, 468-150000, 386-150000, 468+150000, 386+150000, 0, 0, JoinMatchmaking)) {
         Reconnect() ; Added Disconnect Check
-        WinterEventMovement()
+        EventMovement()
     }
 
     ; Handle play mode selection
@@ -920,8 +920,8 @@ MonitorEndScreen() {
                 ClickReturnToLobby()
                 return CheckLobby()
             }
-            else if (mode = "Fools Event") {
-                AddToLog("Handling Fools Event end")
+            else if (mode = "Fool's Hunt") {
+                AddToLog("Handling Fool's Hunt end")
                 if (ReturnLobbyBox.Value) {
                     AddToLog("Return to lobby enabled")
                     ClickReturnToLobby()
@@ -1070,6 +1070,20 @@ StoryMovement() {
     SendInput ("{d up}")
     SendInput ("{w up}")
     Sleep(500)
+}
+
+EventMovement() {
+    FixClick(592, 204) ; Close Matchmaking UI (Just in case)
+    Sleep (200)
+    FixClick(85, 295) ; Click Play
+    sleep (1000)
+    SendInput ("{a up}")
+    Sleep 100
+    SendInput ("{a down}")
+    Sleep 6000
+    SendInput ("{a up}")
+    KeyWait "a" ; Wait for "d" to be fully processed
+    Sleep 1200
 }
 
 OppositeStoryMovement() {
@@ -1783,6 +1797,90 @@ DetectMap() {
     }
 }
 
+DetectHuntMap() {
+    AddToLog("Trying to determine map for Fool's Hunt...")
+    startTime := A_TickCount
+    
+    Loop {
+        ; Check if we waited more than 5 minute for votestart
+        if (A_TickCount - startTime > 300000) {
+            if (ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
+                AddToLog("Found in lobby - restarting selected mode")
+                return StartSelectedMode()
+            }
+            AddToLog("Could not detect map after 5 minutes - proceeding without movement")
+            return "no map found"
+        }
+
+        ; Check for vote screen
+        if (ok := FindText(&X, &Y, 326, 60, 547, 173, 0, 0, VoteStart) or (ok := FindText(&X, &Y, 340, 537, 468, 557, 0, 0, Yen)))  {
+            AddToLog("No Map Found or Movement Unnecessary")
+            return "no map found"
+        }
+
+        loadingScreens := Map(
+            ;Story
+            "Planet Greenie", PlanetGreenieLoadingScreen,
+            "Walled City", WalledCityLoadingScreen,
+            "Snowy Town", SnowyTownLoadingScreen,
+            "Sand Village", SandVillageLoadingScreen,
+            "Navy Bay", NavyBayLoadingScreen,
+            "Fiend City", FiendCityLoadingScreen,
+            "Spirit World", SpiritWorldLoadingScreen,
+            "Ant Kingdom", AntKingdomLoadingScreen,
+            "Magic Town", MagicTownLoadingScreen, 
+            "Magic Hills", MagicHillsLoadingScreen,
+            "Haunted Academy", HauntedAcademyLoadingScreen,
+            "Alien Spaceship", AlienSpaceshipLoadingScreen,
+            "Space Center", SpaceCenterLoadingScreen,
+            "Fabled Kingdom", FabledKingdomLoadingScreen,
+            "Ruined City", RuinedCityLoadingScreen,
+            "Puppet Island", PuppetIslandLoadingScreen,
+            "Virtual Dungeon", VirtualDungeonLoadingScreen,
+            "Snowy Kingdom", SnowyKingdomLoadingScreen,
+            "Dungeon Throne", DungeonThroneLoadingScreen,
+            "Mountain Temple", MountainTempleLoadingScreen,
+            "Rain Village", RainVillageLoadingScreen,
+            "Shibuya District", ShibuyaDistrictLoadingScreen,
+
+            ; Legend Stages
+            "Spirit Town", SpiritTownLoadingScreen,
+
+            ;Raids
+            "Sacred Planet", SacredPlanetLoadingScreen,
+            "Strange Town", StrangeTownLoadingScreen,
+            "Cursed Festival", CursedFestivalLoadingScreen,
+            "Storm Hideout", StormHideoutLoadingScreen,
+            "Nightmare Train", NightmareTrainLoadingScreen,
+            
+            ;Event Maps
+            "Assassin Park", AssassinParkLoadingScreen,
+            "Haunted Mansion", HauntedMansionLoadingScreen,
+
+            ;Unfinished
+            "Air Craft", AirCraftLoadingScreen,
+            "Hellish City", HellishCityLoadingScreen
+        )
+
+        for mapName, pattern in loadingScreens {
+
+            try {
+                if (ok := ImageSearch(&X, &Y, 0, 0, A_ScreenWidth, A_ScreenHeight, pattern)) {
+                    AddToLog("Detected Map: " mapName)
+                    return mapName
+                }
+            } catch  {
+                if (debugMessages) {
+                    AddToLog("Error occured during map detection.")
+                }
+            }
+        }
+        
+        Sleep 1000
+        Reconnect()
+    }
+}
+
 IsCorrectMap(mapName) {
     if (ModeDropdown.Text = "Story") {
         if (mapName = "no map found") {
@@ -2202,7 +2300,8 @@ RestartStage() {
     adaptations := 0
     setMahoragoStyle := false
 
-    currentMap := DetectMap()
+    currentMap := (ModeDropdown.Text = "Fool's Hunt") ? DetectHuntMap() : DetectMap()
+
     
     ; Wait for loading
     CheckLoaded()
@@ -2317,7 +2416,7 @@ PlaceUnit(x, y, slot := 1) {
     if (ModeDropdown.Text = "Winter Event") {
         CheckForCardSelection()
     }
-    if (ModeDropdown.Text = "Fools Event") {
+    if (ModeDropdown.Text = "Fool's Hunt") {
         CheckForCardSelection()
     }
 
@@ -2661,7 +2760,7 @@ StartSelectedMode() {
             AddToLog("Contracts are is not currently in Anime Adventures!")
         }
     }
-    else if (ModeDropdown.Text = "Fools Event") {
+    else if (ModeDropdown.Text = "Fool's Hunt") {
         FoolsEvent()
     }
     else if (ModeDropdown.Text = "Winter Event") {
