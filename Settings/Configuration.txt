@@ -299,7 +299,7 @@ Speed=3
 Sleep=1
 
 [Matchmaking]
-Matchmake=0
+Matchmake=1
 
 [PriorityUpgrade]
 Upgrade=1

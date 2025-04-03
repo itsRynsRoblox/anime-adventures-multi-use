@@ -20,7 +20,11 @@ F5:: {
 }
 
 F6:: {
+    
+}
 
+F7:: {
+    
 }
 
 
@@ -1740,6 +1744,7 @@ DetectMap() {
         ; Check for vote screen
         if (ok := FindText(&X, &Y, 326, 60, 547, 173, 0, 0, VoteStart) or (ok := FindText(&X, &Y, 340, 537, 468, 557, 0, 0, Yen)))  {
             AddToLog("No Map Found or Movement Unnecessary")
+            UpdateMap("No Map Found") ; For Webhook
             return "no map found"
         }
 
@@ -1782,11 +1787,13 @@ DetectMap() {
             if (ModeDropdown.Text = "Winter Event" or ModeDropdown.Text = "Contracts") {
                 if (ok := FindText(&X, &Y, 10, 70, 350, 205, 0, 0, pattern)) {
                     AddToLog("Detected map: " mapName)
+                    UpdateMap(mapName) ; For Webhook
                     return mapName
                 }
             } else {
                 if (ok := FindText(&X, &Y, 10, 90, 415, 160, 0, 0, pattern)) {
                     AddToLog("Detected map: " mapName)
+                    UpdateMap(mapName) ; For Webhook
                     return mapName
                 }
             }
@@ -1815,6 +1822,7 @@ DetectHuntMap() {
         ; Check for vote screen
         if (ok := FindText(&X, &Y, 326, 60, 547, 173, 0, 0, VoteStart) or (ok := FindText(&X, &Y, 340, 537, 468, 557, 0, 0, Yen)))  {
             AddToLog("No Map Found or Movement Unnecessary")
+            UpdateMap("No Map Found") ; For Webhook
             return "no map found"
         }
 
@@ -1867,6 +1875,7 @@ DetectHuntMap() {
             try {
                 if (ok := ImageSearch(&X, &Y, 0, 0, A_ScreenWidth, A_ScreenHeight, pattern)) {
                     AddToLog("Detected Map: " mapName)
+                    UpdateMap(mapName) ; For Webhook
                     return mapName
                 }
             } catch  {
@@ -1914,7 +1923,7 @@ HandleMapMovement(MapName) {
         case "Magic Town":
             MoveForMagicTown()
         case "Magic Hills":
-            MoveForMagicHill()
+            (ModeDropdown.Text = "Fool's Hunt") ? MoveForMagicHills() : MoveForMagicHill()
         case "Navy Bay":
             MoveForNavyBay()
         case "Alien Spaceship":
@@ -1937,14 +1946,22 @@ HandleMapMovement(MapName) {
             MoveForAirCraft()
         case "Hellish City":
             MoveForHellish()
-        case "Winter Event":
-            MoveForWinterEventNoClick()
-        case "Fools Event":
-            MoveForFoolsEvent()
         case "Contracts":
             MoveForContracts()
+        case "Fools Event":
+            MoveForFoolsEvent()
+        case "Winter Event":
+            MoveForWinterEventNoClick()
         case "Shibuya District":
-            MoveForShibuya()    
+            MoveForShibuya()
+        case "Sacred Planet":
+            MoveForSacredPlanet()  
+        case "Snowy Kingdom":
+            MoveForSnowyKingdom()  
+        case "Future City":
+            MoveForFutureCity()
+        case "Fabled Kingdom":
+            MoveForFabledKingdom()    
     }
 }
 
@@ -1958,11 +1975,57 @@ MoveForPlanetGreenie() {
 
 MoveForAlienSpaceship() {
     if (ok := FindText(&X, &Y, 0, 244, 48, 278, 0.15, 0.15, AlienSpaceshipAngle)) {
-        FixClick(73, 176, "Right")
-        Sleep (2500)
+        if (ModeDropdown.Text = "Fool's Hunt") {
+            SendInput ("{a down}")
+            Sleep (700)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (500)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{a down}")
+            Sleep (1300)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (1000)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+        } else {
+            FixClick(73, 176, "Right")
+            Sleep (2500)
+        }
     } else {
-        FixClick(658, 61, "Right")
-        Sleep (2500)
+        if (ModeDropdown.Text = "Fool's Hunt") {
+            SendInput ("{w down}")
+            Sleep (700)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (700)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (1500)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (1600)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+        } else {
+            FixClick(658, 61, "Right")
+            Sleep (2500)
+        }
     }
 }
 
@@ -2050,6 +2113,74 @@ MoveForSpiritWorld() {
 }
 
 MoveForAntKingdom() {
+    SendInput ("{a down}")
+    Sleep (500)
+    SendInput ("{a up}")
+    KeyWait "a"
+    Sleep (1000)
+    SendInput ("{s down}")
+    Sleep (500)
+    SendInput ("{s up}")
+    KeyWait "s"
+    Sleep (1000)
+    SendInput ("{a down}")
+    Sleep (500)
+    SendInput ("{a up}")
+    KeyWait "a"
+    Sleep (1000)
+    SendInput ("{s down}")
+    Sleep (1400)
+    SendInput ("{s up}")
+    KeyWait "s"
+    Sleep (1000)
+    SendInput ("{a down}")
+    Sleep (800)
+    SendInput ("{a up}")
+    KeyWait "a"
+    Sleep (1000)
+    SendInput ("{s down}")
+    Sleep (3000)
+    SendInput ("{s up}")
+    KeyWait "s"
+    Sleep (1000)
+    SendInput ("{a down}")
+    Sleep (2800)
+    SendInput ("{a up}")
+    KeyWait "a"
+    Sleep (1000)
+    SendInput ("{w down}")
+    Sleep (1500)
+    SendInput ("{w up}")
+    KeyWait "w"
+    Sleep (1000)
+    SendInput ("{a down}")
+    Sleep (1500)
+    SendInput ("{a up}")
+    KeyWait "a"
+    Sleep (1000)
+    SendInput ("{w down}")
+    Sleep (2000)
+    SendInput ("{w up}")
+    KeyWait "w"
+    Sleep (1000)
+    SendInput ("{a down}")
+    Sleep (500)
+    SendInput ("{a up}")
+    KeyWait "a"
+    Sleep (1000)
+    SendInput ("{w down}")
+    Sleep (1000)
+    SendInput ("{w up}")
+    KeyWait "w"
+    Sleep (1000)
+    SendInput ("{a down}")
+    Sleep (800)
+    SendInput ("{a up}")
+    KeyWait "a"
+    Sleep (1000)
+}
+
+MoveForAntKingdomOld() {
     Fixclick(130, 550, "Right")
     Sleep (3000)
     Fixclick(130, 550, "Right")
@@ -2083,45 +2214,252 @@ MoveForMagicTown() {
     Sleep (1000)
     KeyWait("s")
     Sleep (1000)
-    SendInput ("{d down}")
-    Sleep (3200)
-    SendInput ("{d up}")
-    Sleep (1000)
-    KeyWait("d")
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        SendInput ("{d down}")
+        Sleep (5800)
+        SendInput ("{d up}")
+        Sleep (1000)
+        KeyWait("d")
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (700)
+        SendInput ("{s up}")
+        Sleep (1000)
+        KeyWait("s")
+        /*SendInput ("{d down}") ;Garden
+        Sleep (4700)
+        SendInput ("{d up}")
+        Sleep (1000)
+        KeyWait("d")*/
+    } else {
+        SendInput ("{d down}")
+        Sleep (3200)
+        SendInput ("{d up}")
+        Sleep (1000)
+        KeyWait("d")
+    }
 }
 
 
 MoveForMagicHill() {
     if (ok := FindText(&X, &Y, 518, 334, 566, 404, 0.20, 0.20, MagicHillsBench) or (ok := FindText(&X, &Y, 522, 339, 557, 402, 0.20, 0.20, MagicHillLegendStageBench))) {
-        Fixclick(500, 20, "Right")
-        Sleep (3000)
-        Fixclick(500, 20, "Right")
-        Sleep (3500)
-        Fixclick(285, 15, "Right")
-        Sleep (2500)
-        Fixclick(285, 25, "Right")
-        Sleep (3000)
-        Fixclick(410, 25, "Right")
-        Sleep (3000)
-        Fixclick(765, 150, "Right")
-        Sleep (3000)
-        Fixclick(545, 30, "Right")
-        Sleep (3000)
-    } else {
-        Fixclick(45, 185, "Right")
-        Sleep (3000)
-        Fixclick(140, 250, "Right")
-        Sleep (2500)
-        Fixclick(25, 485, "Right")
-        Sleep (3000)
+        SendInput ("{d down}")
+        Sleep (500)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (2600)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{d down}")
+        Sleep (500)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (4000)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
         SendInput ("{a down}")
-        sleep (3000)
+        Sleep (1000)
         SendInput ("{a up}")
-        Sleep (3000)
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (4000)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{d down}")
+        Sleep (2500)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (2800)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{d down}")
+        Sleep (1500)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+    } else {
+        SendInput ("{w down}")
+        Sleep (500)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (7000)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
         SendInput ("{s down}")
-        sleep (1200)
+        Sleep (1400)
         SendInput ("{s up}")
-        Sleep (3000)
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (3500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (2800)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (3500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (1100)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+    }
+}
+
+MoveForMagicHills() {
+    if (ok := FindText(&X, &Y, 518, 334, 566, 404, 0.20, 0.20, MagicHillsBench) or (ok := FindText(&X, &Y, 522, 339, 557, 402, 0.20, 0.20, MagicHillLegendStageBench))) {
+        SendInput ("{d down}")
+        Sleep (500)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (2600)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{d down}")
+        Sleep (500)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (4000)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (1000)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (4000)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{d down}")
+        Sleep (2500)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (2800)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{d down}")
+        Sleep (1900)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (2700)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (1300)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (1500)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (1000)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (700)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (800)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+    } else {
+        SendInput ("{w down}")
+        Sleep (500)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (7000)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (1400)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (3500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (2800)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (3500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (1500)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (2700)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (1800)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (1600)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (1800)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
     }
 }
 
@@ -2194,6 +2532,66 @@ MoveForSpaceCenter() {
 MoveForMountainTemple() {
     Fixclick(40, 500, "Right")
     Sleep (4000)
+}
+
+MoveForFabledKingdom() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (ok := FindText(&X, &Y, 506, 248, 564, 308, 0.15, 0.15, FabledKingdomAngle)) {
+            SendInput ("{s down}")
+            Sleep (6000)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+            SendInput ("{a down}")
+            Sleep (400)
+            SendInput ("{a up}")
+            KeyWait "a"
+        } else {
+            SendInput ("{w down}")
+            Sleep (6000)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (400)
+            SendInput ("{d up}")
+            KeyWait "d"
+        }
+    }
+}
+
+MoveForFutureCity() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        SendInput ("{s down}")
+        Sleep (7300)
+        SendInput ("{s up}")
+        KeyWait "a"
+        Sleep (1000)
+    }
+}
+
+MoveForSnowyKingdom() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        SendInput ("{a down}")
+        Sleep (300)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (3000)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (2800)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (2000)
+        SendInput ("{s up}")
+        KeyWait "s"
+    }
 }
 
 MoveForCursedFestivalOld(){
@@ -2291,6 +2689,22 @@ MoveForShibuya() {
         SendInput ("{d down}")
         Sleep(2000)
         SendInput ("{d up}")
+    }
+}
+
+MoveForSacredPlanet() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        SendInput ("{w down}")
+        Sleep (2400)
+        SendInput ("{w up}")
+        Sleep (1500)
+        SendInput ("{a down}")
+        Sleep (1500)
+        SendInput ("{a up}")
+        Sleep (1500)
+        SendInput ("{w down}")
+        Sleep (300)
+        SendInput ("{w up}")
     }
 }
     

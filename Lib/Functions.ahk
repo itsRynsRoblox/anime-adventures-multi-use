@@ -192,6 +192,7 @@ OpenDiscordLink() {
         mode := "Cursed Womb"
     } else if (selected = "Fool's Hunt") {
         mode := "Fool's Hunt"
+        AddToLog("⚠️ Fool's Hunt is still under development! Stay tuned for updates.")
     } else if (selected = "Winter Event") {
         mode := "Winter Event"
         MatchMaking.Visible := true
@@ -306,6 +307,10 @@ OnConfirmClick(*) {
         AddToLog("Selected Contract Page " ContractPageDropdown.Text " - " ContractJoinDropdown.Text)
         MatchMaking.Visible := false
         ReturnLobbyBox.Visible := true
+    }
+    else if (ModeDropdown.Text = "Dungeon") {
+        mode := "Dungeon"
+        AddToLog("Selected Dungeon")
     }
     ; Fools Event
     else if (ModeDropdown.Text = "Fool's Hunt") {
