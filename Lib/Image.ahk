@@ -357,3 +357,14 @@ HauntedMansionLoadingScreen := "Images\loading_screens\hauntedmansion.png"
 ;Unfinished
 AirCraftLoadingScreen := "Images\loading_screens\aircraft.png"
 HellishCityLoadingScreen := "Images\loading_screens\hellishcity.png"
+
+;Fool's Hunt
+; (0.35, 0.35)
+AstralGate:="|<>*102$36.zk0zzzzq3zzzzz3zzsyTzTzswTyTzswC4480tCS480tCCQk0k76Qk0rq74s4rq74w4yzzzzzwTwzDz0S00D10zk7z15lkCz07UTwzs76zwSQ7Ds08AaMM086rAF4k6vCF4kAv0M48Azkw6AAzzzzzzU"
+; (0.25, 0.25)
+AstralSummon:="|<>*77$37.Us807zUw7k3zkTDzjDsBzbzaEAQl630Aik21U634aEk31WH0Q3ilVka0zzzzy0DzbXz1t001k4zzEzyy3zzzzzbh5lSMsY0E60D+4d+Ma42IZUH61/Klhzzzzzzs"
+;(255, 561, 551, 605 : 0.35, 0.35)
+RandomBuff:="|<>*97$33.1zzDztgFla98048082480Z80U04dc4V4Zzzzzzzzzzzz0zUzs0CDAH01UzYs0Aqk300Ya0M04kYb01UkYk0A65a0U"
+; (0.25, 0.25)
+Merge:="|<>*83$37.rtzzzzlszzzzsMTzzzw4888A604046H4E0An9XM169blwUXUnxyEPsQTzzzvDzzzzw7z"
+

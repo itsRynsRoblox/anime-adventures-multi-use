@@ -20,7 +20,7 @@ F5:: {
 }
 
 F6:: {
-
+    
 }
 
 F7:: {
@@ -145,7 +145,12 @@ PlacingUnits() {
                         AttemptUpgrade()
                         break
                     }
-                        AttemptUpgrade()
+
+                    if (ModeDropdown.Text = "Fool's Hunt") {
+                        CheckForFoolBuffs()
+                    }
+
+                    AttemptUpgrade()
 
                     if CheckForXp() || CheckForReturnToLobby() || CheckForNextText() {
                         AddToLog("Stage ended during placements, proceeding to results")
@@ -201,6 +206,10 @@ PlaceFoolUnits() {
                 successfulCoordinates.Push({x: point.x, y: point.y, slot: slotNum})
                 CheckAbility()
                 FixClick(560, 560) ; Move Click
+            }
+
+            if (ModeDropdown.Text = "Fool's Hunt") {
+                CheckForFoolBuffs()
             }
 
             AttemptUpgrade()
@@ -562,6 +571,9 @@ PostUpgradeChecks() {
     CheckForCardSelection()
     Reconnect()
     CheckEndAndRoute()
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        CheckForFoolBuffs()
+    }
 }
 
 ChallengeMode() {    
@@ -2832,11 +2844,60 @@ MoveForAirCraftOld() {
 
 MoveForAirCraft() {
     if (ok := FindText(&X, &Y, 535, 110, 620, 175, 0.15, 0.15, AirCraftAngle)) {
-        Fixclick(90, 560, "Right")
-        Sleep (5000)
+        SendInput ("{s down}")
+        Sleep (800)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{d down}")
+        Sleep (1000)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (800)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
     } else {
-        Fixclick(655, 122, "Right")
-        Sleep (5000)
+        if (ModeDropdown.Text = "Fool's Hunt") {
+            SendInput ("{w down}")
+            Sleep (800)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{a down}")
+            Sleep (1000)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (800)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+        } else {
+            SendInput ("{w down}")
+            Sleep (1000)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (1000)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (400)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (1000)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+        }
     }
 }
 
@@ -3966,4 +4027,62 @@ MoveForFoolsEvent() {
             break
         }
     }
+}
+
+CheckForFoolBuffs() {
+    CheckForRandomBuff()
+    CheckForAstralGate()
+    CheckForAstralSummon()
+    CheckForMerge()
+}
+
+CheckForRandomBuff() {
+    global successfulCoordinates
+    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.35, 0.35, RandomBuff)) {
+        for index, coord in successfulCoordinates {
+            AddToLog("Found buff, applying to unit at X" coord.x " Y" coord.y)
+            FindText().Click(X, Y)
+            Sleep(500)
+            Click(coord.x, coord.y)
+            Sleep(250)
+            return true
+        }
+    }
+    return false
+}
+
+CheckForMerge() {
+    global successfulCoordinates
+
+    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.25, 0.25, Merge)) {
+        for index, coord in successfulCoordinates {
+            AddToLog("Found merge, applying to unit at X" coord.x " Y" coord.y)
+            FindText().Click(X, Y)
+            Sleep(500)
+            Click(coord.x, coord.y)
+            Sleep(250)
+            return true
+        }
+    }
+    return false
+}
+
+CheckForAstralGate() {
+    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.35, 0.35, AstralGate)) {
+        AddToLog("Found astral gate, attempting to use...")
+        FindText().Click(X, Y)
+        Sleep(500)
+        return true
+    }
+    return false
+}
+
+CheckForAstralSummon() {
+    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.25, 0.25, AstralSummon)) {
+        AddToLog("Found astral summon, attempting to use...")
+        FindText().Click(X, Y)
+        Sleep(500)
+        return true
+    }
+    return false
 }

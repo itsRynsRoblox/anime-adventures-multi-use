@@ -1,4 +1,4 @@
-Mode=
+Mode=Fool's Hunt
 
 
 [Enabled]
