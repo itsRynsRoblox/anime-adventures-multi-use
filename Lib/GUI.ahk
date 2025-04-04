@@ -775,7 +775,7 @@ ToggleMode(*) {
             raidUpgradeEnabled%A_Index%.Visible := true
             raidUpgradeLimit%A_Index%.Visible := true
             raidUpgradeLimitEnabled%A_Index%.Visible := true
-        } else if (mode = "Fools Event") {
+        } else if (mode = "Fool's Hunt") {
             WinterEnabled%A_Index%.Visible := true
             WinterPlacement%A_Index%.Visible := true
             WinterPriority%A_Index%.Visible := true

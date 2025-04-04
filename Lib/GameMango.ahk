@@ -16,15 +16,15 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-
+    BasicSetup
 }
 
 F6:: {
-
+    MoveForRainVillage()
 }
 
 F7:: {
-    
+    DetectHuntMap
 }
 
 
@@ -1827,62 +1827,62 @@ DetectHuntMap() {
         }
 
         loadingScreens := Map(
-            ;Story
-            "Planet Greenie", PlanetGreenieLoadingScreen,
-            "Walled City", WalledCityLoadingScreen,
-            "Snowy Town", SnowyTownLoadingScreen,
-            "Sand Village", SandVillageLoadingScreen,
-            "Navy Bay", NavyBayLoadingScreen,
-            "Fiend City", FiendCityLoadingScreen,
-            "Spirit World", SpiritWorldLoadingScreen,
-            "Ant Kingdom", AntKingdomLoadingScreen,
-            "Magic Town", MagicTownLoadingScreen, 
-            "Magic Hills", MagicHillsLoadingScreen,
-            "Haunted Academy", HauntedAcademyLoadingScreen,
-            "Alien Spaceship", AlienSpaceshipLoadingScreen,
-            "Space Center", SpaceCenterLoadingScreen,
-            "Fabled Kingdom", FabledKingdomLoadingScreen,
-            "Ruined City", RuinedCityLoadingScreen,
-            "Puppet Island", PuppetIslandLoadingScreen,
-            "Virtual Dungeon", VirtualDungeonLoadingScreen,
-            "Snowy Kingdom", SnowyKingdomLoadingScreen,
-            "Dungeon Throne", DungeonThroneLoadingScreen,
-            "Mountain Temple", MountainTempleLoadingScreen,
-            "Rain Village", RainVillageLoadingScreen,
-            "Shibuya District", ShibuyaDistrictLoadingScreen,
-
+            ; Story Maps
+            "Planet Greenie", [PlanetGreenieLoadingScreen],
+            "Walled City", [WalledCityLoadingScreen],
+            "Snowy Town", [SnowyTownLoadingScreen],  ; Example of multiple images
+            "Sand Village", [SandVillageLoadingScreen],
+            "Navy Bay", [NavyBayLoadingScreen],
+            "Fiend City", [FiendCityLoadingScreen],
+            "Spirit World", [SpiritWorldLoadingScreen],
+            "Ant Kingdom", [AntKingdomLoadingScreen, AntKingdomLoadingScreen2, AntKingdomLoadingScreen3],
+            "Magic Town", [MagicTownLoadingScreen], 
+            "Magic Hills", [MagicHillsLoadingScreen],
+            "Haunted Academy", [HauntedAcademyLoadingScreen],
+            "Alien Spaceship", [AlienSpaceshipLoadingScreen],
+            "Space Center", [SpaceCenterLoadingScreen],
+            "Fabled Kingdom", [FabledKingdomLoadingScreen],
+            "Ruined City", [RuinedCityLoadingScreen],
+            "Puppet Island", [PuppetIslandLoadingScreen],
+            "Virtual Dungeon", [VirtualDungeonLoadingScreen],
+            "Snowy Kingdom", [SnowyKingdomLoadingScreen],
+            "Dungeon Throne", [DungeonThroneLoadingScreen],
+            "Mountain Temple", [MountainTempleLoadingScreen],
+            "Rain Village", [RainVillageLoadingScreen],
+            "Shibuya District", [ShibuyaDistrictLoadingScreen],
+        
             ; Legend Stages
-            "Spirit Town", SpiritTownLoadingScreen,
-
-            ;Raids
-            "Sacred Planet", SacredPlanetLoadingScreen,
-            "Strange Town", StrangeTownLoadingScreen,
-            "Cursed Festival", CursedFestivalLoadingScreen,
-            "Storm Hideout", StormHideoutLoadingScreen,
-            "Nightmare Train", NightmareTrainLoadingScreen,
-            "Future City", FutureCityLoadingScreen,
-            
-            ;Event Maps
-            "Assassin Park", AssassinParkLoadingScreen,
-            "Haunted Mansion", HauntedMansionLoadingScreen,
-
-            ;Unfinished
-            "Air Craft", AirCraftLoadingScreen,
-            "Hellish City", HellishCityLoadingScreen
+            "Spirit Town", [SpiritTownLoadingScreen],
+        
+            ; Raids
+            "Sacred Planet", [SacredPlanetLoadingScreen],
+            "Strange Town", [StrangeTownLoadingScreen],
+            "Cursed Festival", [CursedFestivalLoadingScreen],
+            "Storm Hideout", [StormHideoutLoadingScreen],
+            "Nightmare Train", [NightmareTrainLoadingScreen],
+            "Future City", [FutureCityLoadingScreen],
+        
+            ; Event Maps
+            "Assassin Park", [AssassinParkLoadingScreen],
+            "Haunted Mansion", [HauntedMansionLoadingScreen],
+        
+            ; Unfinished Maps
+            "Air Craft", [AirCraftLoadingScreen],
+            "Hellish City", [HellishCityLoadingScreen]
         )
 
-        for mapName, pattern in loadingScreens {
-
+        for mapName, patterns in loadingScreens {
             try {
-                if (ok := ImageSearch(&X, &Y, 0, 0, A_ScreenWidth, A_ScreenHeight, pattern)) {
-
-                    AddToLog("Detected Map: " mapName)
-                    UpdateMap(mapName) ; For Webhook
-                    return mapName
+                for pattern in patterns {  ; Iterate through multiple images for each map
+                    if (ok := ImageSearch(&X, &Y, 0, 0, A_ScreenWidth, A_ScreenHeight, "*10 " pattern)) {
+                        AddToLog("Detected Map: " mapName)
+                        UpdateMap(mapName) ; For Webhook
+                        return mapName
+                    }
                 }
-            } catch  {
+            } catch {
                 if (debugMessages) {
-                    AddToLog("Error occured during map detection.")
+                    AddToLog("Error occurred during map detection.")
                 }
             }
         }
@@ -1966,6 +1966,14 @@ HandleMapMovement(MapName) {
             MoveForFabledKingdom()  
         case "Puppet Island":
             MoveForPuppetIsland()
+        case "Virtual Dungeon":
+            MoveForVirtualDungeon()
+        case "Dungeon Throne":
+            MoveForDungeonThrone()
+        case "Storm Hideout":
+            MoveForStormHideout()
+        case "Rain Village":
+            MoveForRainVillage()
     }
 }
 
@@ -2117,71 +2125,133 @@ MoveForSpiritWorld() {
 }
 
 MoveForAntKingdom() {
-    SendInput ("{a down}")
-    Sleep (500)
-    SendInput ("{a up}")
-    KeyWait "a"
-    Sleep (1000)
-    SendInput ("{s down}")
-    Sleep (500)
-    SendInput ("{s up}")
-    KeyWait "s"
-    Sleep (1000)
-    SendInput ("{a down}")
-    Sleep (500)
-    SendInput ("{a up}")
-    KeyWait "a"
-    Sleep (1000)
-    SendInput ("{s down}")
-    Sleep (1400)
-    SendInput ("{s up}")
-    KeyWait "s"
-    Sleep (1000)
-    SendInput ("{a down}")
-    Sleep (800)
-    SendInput ("{a up}")
-    KeyWait "a"
-    Sleep (1000)
-    SendInput ("{s down}")
-    Sleep (3000)
-    SendInput ("{s up}")
-    KeyWait "s"
-    Sleep (1000)
-    SendInput ("{a down}")
-    Sleep (2800)
-    SendInput ("{a up}")
-    KeyWait "a"
-    Sleep (1000)
-    SendInput ("{w down}")
-    Sleep (1500)
-    SendInput ("{w up}")
-    KeyWait "w"
-    Sleep (1000)
-    SendInput ("{a down}")
-    Sleep (1500)
-    SendInput ("{a up}")
-    KeyWait "a"
-    Sleep (1000)
-    SendInput ("{w down}")
-    Sleep (2000)
-    SendInput ("{w up}")
-    KeyWait "w"
-    Sleep (1000)
-    SendInput ("{a down}")
-    Sleep (500)
-    SendInput ("{a up}")
-    KeyWait "a"
-    Sleep (1000)
-    SendInput ("{w down}")
-    Sleep (1000)
-    SendInput ("{w up}")
-    KeyWait "w"
-    Sleep (1000)
-    SendInput ("{a down}")
-    Sleep (800)
-    SendInput ("{a up}")
-    KeyWait "a"
-    Sleep (1000)
+    if (ok := FindText(&X, &Y, 531, 205, 582, 251, 0.15, 0.15, AntKingdomAngle)) {
+        SendInput ("{a down}") ; Move Towards Gate
+        Sleep (1000)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (500)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (500)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (900)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+    
+        SendInput ("{s down}") ; Move Out Of Gate
+        Sleep (300)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (4000)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+    
+        SendInput ("{w down}") ; Move Towards Enemy Spawn
+        Sleep (1000)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (3000)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        if (ModeDropdown.Text = "Fool's Hunt") {
+            SendInput ("{a down}")
+            Sleep (1500)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+        }
+    } else {
+        SendInput ("{a down}")
+        Sleep (500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (500)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (1400)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (800)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (3000)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (2800)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (1500)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (1500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (2000)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (1000)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (800)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+    }
 }
 
 MoveForAntKingdomOld() {
@@ -2629,6 +2699,99 @@ MoveForPuppetIsland() {
             Sleep (2000)
             SendInput ("{d up}")
             KeyWait "d"
+            Sleep (1000)
+        }
+    }
+}
+
+MoveForVirtualDungeon() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (ok := FindText(&X, &Y, 592, 505, 663, 571, 0.15, 0.15, VirtualDungeonAngle)) {
+            SendInput ("{w down}")
+            Sleep (1800)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+        } else if (ok := FindText(&X, &Y, 160, 515, 228, 591, 0.15, 0.15, VirtualDungeonAngle2)) {
+            SendInput ("{d down}")
+            Sleep (1800)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+        } else {
+            SendInput ("{a down}")
+            Sleep (1800)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+        }
+    }
+}
+
+MoveForStormHideout() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        SendInput ("{a down}")
+        Sleep (200)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (5000)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{d down}")
+        Sleep (1500)
+        SendInput ("{d up}")
+        KeyWait "d"
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (200)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+    }
+}
+
+MoveForRainVillage() {
+    if (ok := FindText(&X, &Y, 16, 369, 155, 470, 0.15, 0.15, RainVillageAngle)) {
+        SendInput ("{w down}")
+        Sleep (2000)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+        SendInput ("{a down}")
+        Sleep (500)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+    } else {
+        SendInput ("{a down}")
+        Sleep (2000)
+        SendInput ("{a up}")
+        KeyWait "a"
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (500)
+        SendInput ("{s up}")
+        KeyWait "s"
+        Sleep (1000)
+    }
+}
+
+MoveForDungeonThrone() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (ok := FindText(&X, &Y, 15, 335, 80, 461, 0.15, 0.15, DungeonThroneAngle)) {
+            SendInput ("{s down}")
+            Sleep (4500)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+        } else {
+            SendInput ("{w down}")
+            Sleep (4500)
+            SendInput ("{w up}")
+            KeyWait "w"
             Sleep (1000)
         }
     }
