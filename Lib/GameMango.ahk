@@ -20,7 +20,7 @@ F5:: {
 }
 
 F6:: {
-    
+
 }
 
 F7:: {
@@ -1990,11 +1990,13 @@ HandleMapMovement(MapName) {
 }
 
 MoveForPlanetGreenie() {
-    SendInput ("{a down}")
-    SendInput ("{w down}")
-    Sleep (2200)
-    SendInput ("{a up}")
-    SendInput ("{w up}")
+    if !(ModeDropdown.Text = "Fool's Hunt") {
+        SendInput ("{a down}")
+        SendInput ("{w down}")
+        Sleep (2200)
+        SendInput ("{a up}")
+        SendInput ("{w up}")
+    }
 }
 
 MoveForAlienSpaceship() {
@@ -2054,14 +2056,44 @@ MoveForAlienSpaceship() {
 }
 
 MoveForSnowyTown() {
-    SendInput ("{d down}")
-    Sleep (3000)
-    SendInput ("{d up}")
-    KeyWait("d")
-    SendInput ("{w down}")
-    Sleep (1000)
-    SendInput ("{w up}")
-    KeyWait("w")
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        SendInput ("{d down}")
+        Sleep (3000)
+        SendInput ("{d up}")
+        KeyWait("d")
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (2400)
+        SendInput ("{w up}")
+        KeyWait("w")
+        Sleep (1000)
+        SendInput ("{d down}")
+        Sleep (4300)
+        SendInput ("{d up}")
+        KeyWait("d")
+        Sleep (1000)
+        SendInput ("{s down}")
+        Sleep (800)
+        SendInput ("{s up}")
+        KeyWait("s")
+        Sleep (1000)
+        SendInput ("{d down}")
+        Sleep (1000)
+        SendInput ("{d up}")
+        KeyWait("d")
+        Sleep (1000)
+    } else {
+        SendInput ("{d down}")
+        Sleep (3000)
+        SendInput ("{d up}")
+        KeyWait("d")
+        Sleep (1000)
+        SendInput ("{w down}")
+        Sleep (1000)
+        SendInput ("{w up}")
+        KeyWait("w")
+        Sleep (1000)
+    }
 }
 
 MoveForNavyBay() {
