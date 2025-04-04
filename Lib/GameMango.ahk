@@ -20,7 +20,7 @@ F5:: {
 }
 
 F6:: {
-    
+
 }
 
 F7:: {
@@ -737,7 +737,7 @@ FoolsEvent() {
         PlayHere()
     }
 
-    AddToLog("Starting April Fools Event")
+    AddToLog("Starting Fool's Hunt")
     RestartStage()
 }
 
@@ -1860,6 +1860,7 @@ DetectHuntMap() {
             "Cursed Festival", CursedFestivalLoadingScreen,
             "Storm Hideout", StormHideoutLoadingScreen,
             "Nightmare Train", NightmareTrainLoadingScreen,
+            "Future City", FutureCityLoadingScreen,
             
             ;Event Maps
             "Assassin Park", AssassinParkLoadingScreen,
@@ -1874,6 +1875,7 @@ DetectHuntMap() {
 
             try {
                 if (ok := ImageSearch(&X, &Y, 0, 0, A_ScreenWidth, A_ScreenHeight, pattern)) {
+
                     AddToLog("Detected Map: " mapName)
                     UpdateMap(mapName) ; For Webhook
                     return mapName
@@ -1961,7 +1963,9 @@ HandleMapMovement(MapName) {
         case "Future City":
             MoveForFutureCity()
         case "Fabled Kingdom":
-            MoveForFabledKingdom()    
+            MoveForFabledKingdom()  
+        case "Puppet Island":
+            MoveForPuppetIsland()
     }
 }
 
@@ -2562,11 +2566,19 @@ MoveForFabledKingdom() {
 
 MoveForFutureCity() {
     if (ModeDropdown.Text = "Fool's Hunt") {
-        SendInput ("{s down}")
-        Sleep (7300)
-        SendInput ("{s up}")
-        KeyWait "a"
-        Sleep (1000)
+        if (ok := FindText(&X, &Y, 699, 526, 797, 574, 0.15, 0.15, FutureCityAngle)) {
+            SendInput ("{s down}")
+            Sleep (7300)
+            SendInput ("{s up}")
+            KeyWait "a"
+            Sleep (1000)
+        } else {
+            SendInput ("{w down}")
+            Sleep (7300)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+        }
     }
 }
 
@@ -2591,6 +2603,34 @@ MoveForSnowyKingdom() {
         Sleep (2000)
         SendInput ("{s up}")
         KeyWait "s"
+    }
+}
+
+MoveForPuppetIsland() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (ok := FindText(&X, &Y, 519, 484, 594, 559, 0.15, 0.15, PuppetIslandAngle)) {
+            SendInput ("{w down}")
+            Sleep (2800)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{a down}")
+            Sleep (2000)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+        } else {
+            SendInput ("{s down}")
+            Sleep (2800)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (2000)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+        }
     }
 }
 
