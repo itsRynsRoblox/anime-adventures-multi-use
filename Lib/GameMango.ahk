@@ -16,15 +16,15 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-    BasicSetup
+
 }
 
 F6:: {
-    MoveForRainVillage()
+
 }
 
 F7:: {
-    DetectHuntMap
+
 }
 
 
