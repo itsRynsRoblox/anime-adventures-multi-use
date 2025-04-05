@@ -2,7 +2,8 @@
 #SingleInstance Force
 #NoTrayIcon
 SendMode "Event"
-#Include %A_ScriptDir%\lib/Image.ahk
+
+#Include %A_ScriptDir%\Lib/Image.ahk
 #Include %A_ScriptDir%\Lib\Toggles.ahk
 #Include %A_ScriptDir%\Lib\Modes\Winter\PriorityPicker.ahk
 #Include %A_ScriptDir%\Lib\Modes\Dungeon\RoutePriorityPicker.ahk

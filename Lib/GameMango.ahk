@@ -1989,7 +1989,9 @@ HandleMapMovement(MapName) {
         case "Spirit Town":
             MoveForSpiritTown()
         case "Ruined City":
-            MoveForRuinedCity()   
+            MoveForRuinedCity()
+        case "Strange Town":
+            MoveForStrangeTown()    
     }
 }
 
