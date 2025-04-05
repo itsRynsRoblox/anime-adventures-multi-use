@@ -3,9 +3,9 @@ MapSkipPrioritySelector.SetFont("s10 bold", "Segoe UI")
 MapSkipPrioritySelector.BackColor := "0c000a"
 MapSkipPrioritySelector.MarginX := 20
 MapSkipPrioritySelector.MarginY := 20
-MapSkipPrioritySelector.Title := "Skipped Maps"
+MapSkipPrioritySelector.Title := "Map Skipper"
 
-MapSkipGroup := MapSkipPrioritySelector.Add("GroupBox", "x30 y25 w180 h260  +Center cWhite", "Skipped Maps")
+MapSkipGroup := MapSkipPrioritySelector.Add("GroupBox", "x30 y25 w180 h260  +Center cWhite", "Maps to Skip")
 
 mapOptions := ["None", "Ant Kingdom", "Magic Hills"]
 
@@ -20,8 +20,7 @@ For index, maps in mapOptions {
     if (index > numDropDowns)
         Break
     yPos := yStart + ((index - 1) * ySpacing)
-    MapSkipPrioritySelector.Add("Text", Format("x38 y{} w30 h17 +0x200 cWhite", yPos), index)
-    dropDown := MapSkipPrioritySelector.Add("DropDownList", Format("x60 y{} w135 Choose1", yPos), mapOptions)
+    dropDown := MapSkipPrioritySelector.Add("DropDownList", Format("x50 y{} w135 Choose1", yPos), mapOptions)
     mapDropDowns.Push(dropDown)
 
     AttachMapDropDownEvent(dropDown, index)

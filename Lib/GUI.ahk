@@ -7,10 +7,10 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.14.8"
+global currentVersion := "1.14.10"
 
 ; Basic Application Info
-global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
+global aaTitle := "Anime Adventures - Ryn's Edition "
 global version := "v" . currentVersion
 global rblxID := "ahk_exe RobloxPlayerBeta.exe"
 ;Coordinate and Positioning Variables

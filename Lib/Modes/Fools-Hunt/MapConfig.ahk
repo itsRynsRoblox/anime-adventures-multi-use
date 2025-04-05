@@ -89,4 +89,5 @@ SaveMapSkipLocal(*) {
 
 LoadMapSkipLocal(*) {
     LoadMapSkipConfigFromFile("Settings\SkippedMaps.txt")
+    UpdateEnabledMapSkips()
 }

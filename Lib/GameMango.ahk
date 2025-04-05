@@ -2101,11 +2101,19 @@ MoveForSnowyTown() {
 }
 
 MoveForNavyBay() {
-    SendInput ("{a down}")
-    SendInput ("{w down}")
-    Sleep (1700)
-    SendInput ("{a up}")
-    SendInput ("{w up}")
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        SendInput ("{d down}")
+        SendInput ("{w down}")
+        Sleep (1000)
+        SendInput ("{d up}")
+        SendInput ("{w up}")
+    } else {
+        SendInput ("{a down}")
+        SendInput ("{w down}")
+        Sleep (1700)
+        SendInput ("{a up}")
+        SendInput ("{w up}")
+    }
 }
 
 MoveForSandVillageOld() {
@@ -2141,7 +2149,7 @@ MoveForSandVillage() {
     KeyWait("a")
     Sleep (1000)
     SendInput ("{s down}")
-    Sleep (1500)
+    Sleep (1800)
     SendInput ("{s up}")
     KeyWait("s")
 
@@ -2164,12 +2172,37 @@ MoveForFiendCity() {
 MoveForSpiritWorld() {
     SendInput ("{d down}")
     SendInput ("{w down}")
-    Sleep(7000)
+    Sleep(4000)
     SendInput ("{d up}")
     SendInput ("{w up}")
-    sleep(500)
-    Fixclick(614, 97, "Right")
-    sleep(4000)
+    KeyWait("d")
+    KeyWait("w")
+    Sleep(1000)
+    SendInput ("{d down}")
+    Sleep (1900)
+    SendInput ("{d up}")
+    KeyWait "d"
+    Sleep (1000)
+    SendInput ("{w down}")
+    Sleep (2000)
+    SendInput ("{w up}")
+    KeyWait "w"
+    Sleep (1000)
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        SendInput ("{a down}")
+        SendInput ("{w down}")
+        Sleep(2500)
+        SendInput ("{a up}")
+        SendInput ("{w up}")
+        KeyWait("a")
+        KeyWait("w")
+        Sleep(1000)
+        SendInput ("{w down}")
+        Sleep (500)
+        SendInput ("{w up}")
+        KeyWait "w"
+        Sleep (1000)
+    }
 }
 
 MoveForAntKingdom() {
@@ -2624,36 +2657,119 @@ MoveForHauntedAcademy() {
 }
 
 MoveForSpaceCenter() {
-    if (ok := FindText(&X, &Y, 248, 402, 283, 438, 0.20, 0.20, SpaceCenterAngle)) {
-        SendInput ("{a up}")
-        Sleep (100)
-        SendInput ("{a down}")
-        Sleep (2000)
-        SendInput ("{a up}")
-        KeyWait "a"
-        Sleep (1000)
-        SendInput ("{w down}")
-        Sleep (600)
-        SendInput ("{w up}")
-        KeyWait "w"
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (ok := FindText(&X, &Y, 248, 402, 283, 438, 0.20, 0.20, SpaceCenterAngle)) {
+            SendInput ("{a down}")
+            Sleep (2000)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (600)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{a down}")
+            Sleep (900)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{s down}")
+            Sleep (2800)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (500)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+        } else {
+            SendInput ("{d down}")
+            Sleep (2000)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{s down}")
+            Sleep (600)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (900)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (2800)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{a down}")
+            Sleep (500)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+        }
     } else {
-        SendInput ("{d up}")
-        Sleep (100)
-        SendInput ("{d down}")
-        Sleep (2000)
-        SendInput ("{d up}")
-        KeyWait "d"
-        Sleep (1000)
-        SendInput ("{s down}")
-        Sleep (600)
-        SendInput ("{s up}")
-        KeyWait "s"
+        if (ok := FindText(&X, &Y, 248, 402, 283, 438, 0.20, 0.20, SpaceCenterAngle)) {
+            SendInput ("{a down}")
+            Sleep (2000)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (600)
+            SendInput ("{w up}")
+            KeyWait "w"
+        } else {
+            SendInput ("{d down}")
+            Sleep (2000)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{s down}")
+            Sleep (600)
+            SendInput ("{s up}")
+            KeyWait "s"
+        }
     }
 }
 
 MoveForMountainTemple() {
-    Fixclick(40, 500, "Right")
-    Sleep (4000)
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (ok := FindText(&X, &Y, 667, 185, 765, 244, 0.15, 0.15, MountainTempleAngle)) {
+            SendInput ("{w down}")
+            Sleep (2000)
+            SendInput ("{w up}")
+            KeyWait "w"
+        } else {
+            SendInput ("{s down}")
+            Sleep (2000)
+            SendInput ("{s up}")
+            KeyWait "s"
+        }
+    } else {
+        if (ok := FindText(&X, &Y, 667, 185, 765, 244, 0.15, 0.15, MountainTempleAngle)) {
+            SendInput ("{w down}")
+            SendInput ("{d down}")
+            Sleep(2000)
+            SendInput ("{w up}")
+            SendInput ("{d up}")
+            KeyWait("w")
+            KeyWait("d")
+            Sleep(1000)
+        } else {
+            SendInput ("{a down}")
+            SendInput ("{s down}")
+            Sleep(2000)
+            SendInput ("{a up}")
+            SendInput ("{s up}")
+            KeyWait("a")
+            KeyWait("s")
+            Sleep(1000)
+        }
+    }
 }
 
 MoveForFabledKingdom() {
@@ -2920,24 +3036,73 @@ MoveForDungeonThrone() {
     }
 }
 
-MoveForCursedFestivalOld(){
-    SendInput ("{d down}")
-    sleep (1800)
-    SendInput ("{d up}")
-    KeyWait "d"
+MoveForStrangeTown() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (ok := FindText(&X, &Y, 34, 483, 82, 512, 0.15, 0.15, StrangeTownAngle)) {
+            /*SendInput ("{a down}") ; Move To Center Garden
+            Sleep (1600)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (600)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)*/
+            SendInput ("{a down}")
+            Sleep (2500)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+        } else {
+            SendInput ("{d down}")
+            Sleep (2500)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+        }
+    }
 }
 
-MoveForCursedFestival(){
-    if (ok := FindText(&X, &Y, 560, 285, 615, 350, 0.15, 0.15, FestivalAngle)) {
-        SendInput ("{d down}")
-        Sleep (1800)
-        SendInput ("{d up}")
-        KeyWait "d"
+MoveForCursedFestival() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (ok := FindText(&X, &Y, 47, 213, 107, 257, 0.15, 0.15, CursedFestivalAngle)) {
+            SendInput ("{d down}")
+            Sleep (1800)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{s down}")
+            Sleep (800)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+        } else {
+            SendInput ("{a down}")
+            Sleep (1800)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (800)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+        }
     } else {
-        SendInput ("{a down}")
-        Sleep (1800)
-        SendInput ("{a up}")
-        KeyWait "a"
+         if (ok := FindText(&X, &Y, 560, 285, 615, 350, 0.15, 0.15, FestivalAngle)) {
+            SendInput ("{d down}")
+            Sleep (1800)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+        } else {
+            SendInput ("{a down}")
+            Sleep (1800)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+        }
     }
 }
 
@@ -3012,12 +3177,106 @@ MoveForAirCraft() {
     }
 }
 
-MoveForHellishOld() {
+MoveForHellishOlder() {
     Fixclick(600, 300, "Right")
     Sleep (7000)
 }
 
 MoveForHellish() {
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (ok := FindText(&X, &Y, 370, 210, 465, 265, 0.15, 0.15, HellishAngle)) {
+            SendInput ("{a down}")
+            Sleep (1250)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (2300)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{a down}")
+            Sleep (1000)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (2000)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (500)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (1000)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (500)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+        } else {
+            SendInput("{d down}")
+            Sleep(1250)
+            SendInput("{d up}")
+            KeyWait("d")
+            Sleep(1000)
+        
+            SendInput("{s down}")
+            Sleep(2300)
+            SendInput("{s up}")
+            KeyWait("s")
+            Sleep(1000)
+        
+            SendInput("{d down}")
+            Sleep(1000)
+            SendInput("{d up}")
+            KeyWait("d")
+            Sleep(1000)
+        
+            SendInput("{s down}")
+            Sleep(2000)
+            SendInput("{s up}")
+            KeyWait("s")
+            Sleep(1000)
+        
+            SendInput("{a down}")
+            Sleep(500)
+            SendInput("{a up}")
+            KeyWait("a")
+            Sleep(1000)
+        
+            SendInput("{s down}")
+            Sleep(1000)
+            SendInput("{s up}")
+            KeyWait("s")
+            Sleep(1000)
+        
+            SendInput("{a down}")
+            Sleep(500)
+            SendInput("{a up}")
+            KeyWait("a")
+            Sleep(1000)
+        }
+    } else {
+        if (ok := FindText(&X, &Y, 370, 210, 465, 265, 0.15, 0.15, HellishAngle)) {
+            SendInput ("{d down}")
+            Sleep (1200)
+            SendInput ("{d up}")
+            KeyWait "d"
+        } else {
+            Fixclick(600, 300, "Right")
+            Sleep (7000)
+        }
+    }
+}
+
+MoveForHellishOld() {
     if (ok := FindText(&X, &Y, 370, 210, 465, 265, 0.15, 0.15, HellishAngle)) {
         SendInput ("{d down}")
         Sleep (1200)
@@ -3103,9 +3362,11 @@ RestartStage() {
     }
 
     if (ModeDropdown.Text = "Fool's Hunt") {
-        if (ShouldSkipMap(currentMap)) {
-            AddToLog("Map is set to be skipped: " currentMap ", returning to lobby")
-            return TpLobby()
+        if (MatchMaking.Value) {
+            if (ShouldSkipMap(currentMap)) {
+                AddToLog("Map is set to be skipped: " currentMap ", returning to lobby")
+                return TpLobby()
+            }
         }
     }
 
@@ -4157,17 +4418,66 @@ CheckForFoolBuffs() {
     CheckForRandomBuff()
     CheckForAstralGate()
     CheckForAstralSummon()
-    ;CheckForMerge()
+    CheckForClone()
+    CheckForMerge()
+    CheckForRefund()
 }
 
 CheckForRandomBuff() {
-    global successfulCoordinates
+    global successfulCoordinates, maxedCoordinates
     if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.35, 0.35, RandomBuff)) {
-        for index, coord in successfulCoordinates {
-            AddToLog("Found buff, applying to unit at X" coord.x " Y" coord.y)
-            FindText().Click(X, Y)
+        ; Prefer maxedCoordinates
+        if maxedCoordinates.Length > 0 {
+            randomIndex := Random(1, maxedCoordinates.Length)
+            coord := maxedCoordinates[randomIndex]
+
+            AddToLog("Found random buff, applying to maxed unit at X" coord.x " Y" coord.y)
+            FixClick(X, Y - 20)
             Sleep(500)
-            Click(coord.x, coord.y)
+            FixClick(coord.x, coord.y)
+            Sleep(250)
+            return true
+        }
+        ; Otherwise use successfulCoordinates
+        else if successfulCoordinates.Length > 0 {
+            randomIndex := Random(1, successfulCoordinates.Length)
+            coord := successfulCoordinates[randomIndex]
+
+            AddToLog("Found random buff, applying to random unit at X" coord.x " Y" coord.y)
+            FixClick(X, Y - 20)
+            Sleep(500)
+            FixClick(coord.x, coord.y)
+            Sleep(250)
+            return true
+        }
+    }
+    return false
+}
+
+CheckForClone() {
+    global successfulCoordinates, maxedCoordinates
+    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.25, 0.25, Clone)) {
+        ; Prefer maxedCoordinates
+        if maxedCoordinates.Length > 0 {
+            randomIndex := Random(1, maxedCoordinates.Length)
+            coord := maxedCoordinates[randomIndex]
+
+            AddToLog("Found clone, applying to maxed unit at X" coord.x " Y" coord.y)
+            FixClick(X, Y - 20)
+            Sleep(500)
+            FixClick(coord.x, coord.y)
+            Sleep(250)
+            return true
+        }
+        ; Otherwise use successfulCoordinates
+        else if successfulCoordinates.Length > 0 {
+            randomIndex := Random(1, successfulCoordinates.Length)
+            coord := successfulCoordinates[randomIndex]
+
+            AddToLog("Found clone, applying to random unit at X" coord.x " Y" coord.y)
+            FixClick(X, Y - 20)
+            Sleep(500)
+            FixClick(coord.x, coord.y)
             Sleep(250)
             return true
         }
@@ -4176,17 +4486,23 @@ CheckForRandomBuff() {
 }
 
 CheckForMerge() {
-    global successfulCoordinates
-
     if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.25, 0.25, Merge)) {
-        for index, coord in successfulCoordinates {
-            AddToLog("Found merge, applying to unit at X" coord.x " Y" coord.y)
-            FindText().Click(X, Y)
-            Sleep(500)
-            Click(coord.x, coord.y)
-            Sleep(250)
-            return true
-        }
+        AddToLog("Found merge, deleting buff...")
+        FixClick(X + 15, Y - 45)
+        Sleep(500)
+        Sleep(250)
+        return true
+    }
+    return false
+}
+
+CheckForRefund() {
+    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.25, 0.25, Refund)) {
+        AddToLog("Found refund, deleting buff...")
+        FixClick(X + 15, Y - 45)
+        Sleep(500)
+        Sleep(250)
+        return true
     }
     return false
 }

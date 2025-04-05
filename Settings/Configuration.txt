@@ -242,36 +242,36 @@ RaidUpgradeLimit5=0
 RaidUpgradeLimit6=0
 
 [WinterEnabled]
-WinterEnabled1=0
-WinterEnabled2=0
-WinterEnabled3=0
-WinterEnabled4=0
-WinterEnabled5=0
-WinterEnabled6=0
+WinterEnabled1=1
+WinterEnabled2=1
+WinterEnabled3=1
+WinterEnabled4=1
+WinterEnabled5=1
+WinterEnabled6=1
 
 [WinterPlacement]
-WinterPlacement1=1
-WinterPlacement2=1
-WinterPlacement3=1
-WinterPlacement4=1
-WinterPlacement5=1
-WinterPlacement6=1
+WinterPlacement1=6
+WinterPlacement2=6
+WinterPlacement3=6
+WinterPlacement4=6
+WinterPlacement5=6
+WinterPlacement6=5
 
 [WinterPriority]
 WinterPriority1=1
-WinterPriority2=1
-WinterPriority3=1
-WinterPriority4=1
-WinterPriority5=1
-WinterPriority6=1
+WinterPriority2=2
+WinterPriority3=3
+WinterPriority4=4
+WinterPriority5=5
+WinterPriority6=6
 
 [WinterUpgradeEnabled]
-WinterUpgradeEnabled1=0
-WinterUpgradeEnabled2=0
-WinterUpgradeEnabled3=0
-WinterUpgradeEnabled4=0
-WinterUpgradeEnabled5=0
-WinterUpgradeEnabled6=0
+WinterUpgradeEnabled1=1
+WinterUpgradeEnabled2=1
+WinterUpgradeEnabled3=1
+WinterUpgradeEnabled4=1
+WinterUpgradeEnabled5=1
+WinterUpgradeEnabled6=1
 
 [WinterUpgradeLimitEnabled]
 WinterUpgradeLimitEnabled1=0
