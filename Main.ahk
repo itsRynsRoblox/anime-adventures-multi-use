@@ -7,10 +7,12 @@ SendMode "Event"
 #Include %A_ScriptDir%\Lib\Modes\Winter\PriorityPicker.ahk
 #Include %A_ScriptDir%\Lib\Modes\Dungeon\RoutePriorityPicker.ahk
 #Include %A_ScriptDir%\Lib\Modes\Dungeon\CursePriorityPicker.ahk
+#Include %A_ScriptDir%\Lib\Modes\Fools-Hunt\MapSkipper.ahk
 #Include %A_ScriptDir%\lib/GUI.ahk
 #Include %A_ScriptDir%\lib/GameMango.ahk
 #Include %A_ScriptDir%\lib/Functions.ahk
 #Include %A_ScriptDir%\lib/Config.ahk
+#Include %A_ScriptDir%\lib/Modes/Fools-Hunt/MapConfig.ahk
 #Include %A_ScriptDir%\lib/WinterConfig.ahk
 #Include %A_ScriptDir%\lib/Modes/Dungeon/DungeonConfig.ahk
 #Include %A_ScriptDir%\lib/webhooksettings.ahk

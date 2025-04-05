@@ -1986,6 +1986,10 @@ HandleMapMovement(MapName) {
             MoveForStormHideout()
         case "Rain Village":
             MoveForRainVillage()
+        case "Spirit Town":
+            MoveForSpiritTown()
+        case "Ruined City":
+            MoveForRuinedCity()   
     }
 }
 
@@ -2797,6 +2801,81 @@ MoveForStormHideout() {
     }
 }
 
+MoveForSpiritTown() {
+    if (ModeDropdown.Text = "Fool's Hunt") { ; Old Spirit Town Angle 224, 354, 300, 419
+        if (ok := FindText(&X, &Y, 648, 284, 740, 336, 0.15, 0.15, SpiritTownAngle2)) {
+            SendInput ("{w down}")
+            Sleep (3000)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (3700)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (500)
+            SendInput ("{w up}")
+            KeyWait "w"
+        } else {
+            SendInput ("{s down}")
+            Sleep (3000)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+            SendInput ("{a down}")
+            Sleep (3700)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{s down}")
+            Sleep (500)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+        }
+    }
+}
+
+MoveForRuinedCity() {
+    if (ModeDropdown.Text = "Fool's Hunt") { 
+        if (ok := FindText(&X, &Y, 37, 515, 129, 588, 0.15, 0.15, RuinedCityAngle)) {
+            SendInput ("{d down}")
+            Sleep (500)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (800)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (4000)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+        } else {
+            SendInput ("{a down}")
+            Sleep (500)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{s down}")
+            Sleep (800)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+            SendInput ("{a down}")
+            Sleep (4000)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+        }
+    }
+}
+
 MoveForRainVillage() {
     if (ok := FindText(&X, &Y, 16, 369, 155, 470, 0.15, 0.15, RainVillageAngle)) {
         SendInput ("{w down}")
@@ -3023,6 +3102,13 @@ RestartStage() {
         }
     }
 
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (ShouldSkipMap(currentMap)) {
+            AddToLog("Map is set to be skipped: " currentMap ", returning to lobby")
+            return TpLobby()
+        }
+    }
+
     ; Do initial setup and map-specific movement during vote timer
     BasicSetup()
     if (currentMap != "no map found") {
@@ -3051,8 +3137,14 @@ Reconnect() {
     ;Credit: @Haie
     color_home := PixelGetColor(10, 10)
     color_reconnect := PixelGetColor(519,329)
-    if (WinExist(rblxID)) { 
-        WinActivate(rblxID)
+    try {
+        if (WinExist(rblxID)) { 
+            WinActivate(rblxID)
+        }
+    } catch {
+        if (debugMessages) {
+            AddToLog("Error: Unable to activate Roblox window.")
+        }
     }
     
     if (color_home == 0x121215 or color_reconnect == 0x393B3D) {
@@ -4065,7 +4157,7 @@ CheckForFoolBuffs() {
     CheckForRandomBuff()
     CheckForAstralGate()
     CheckForAstralSummon()
-    CheckForMerge()
+    ;CheckForMerge()
 }
 
 CheckForRandomBuff() {

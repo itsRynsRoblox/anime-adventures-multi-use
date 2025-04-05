@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.14.5"
+global currentVersion := "1.14.8"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Mist - Ryn's Edition "
@@ -276,6 +276,8 @@ EditCurses.OnEvent("Click", (*) => OpenCursePriorityPicker())
 ;April Fools Event Option
 NewPlacementMethod := aaMainUI.Add("CheckBox", "x1050 y451 cffffff Checked", "Test Unit Method")
 NoMovement := aaMainUI.Add("CheckBox", "x1050 y476 cffffff", "No Movement")
+EditMaps := aaMainUI.Add("Button", "x1200 y470 w80 h25", "Edit Maps")
+EditMaps.OnEvent("Click", (*) => OpenMapSkipPriorityPicker())
 ;Misc Options
 global MiscSettings := aaMainUI.Add("GroupBox", "x110 y630 w290 h60 +Center c" uiTheme[1], "Misc. Settings")
 global RejoinRoblox := aaMainUI.Add("Checkbox", "x115 y650 c" uiTheme[1], "Pending Teleport Failsafe")
@@ -386,6 +388,7 @@ EditCurses.Visible := false
 ;April Fools Event
 NewPlacementMethod.Visible := false
 NoMovement.Visible := false
+EditMaps.Visible := false
 
 ;Portal Farming
 PortalSwap.Visible := false

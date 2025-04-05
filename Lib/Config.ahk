@@ -383,6 +383,7 @@ readInSettings() {
         AddToLog("Configuration settings loaded successfully")
         LoadDungeonLocal
         LoadWinterLocal
+        LoadMapSkipLocal
     } 
 }
 
@@ -754,6 +755,7 @@ SaveSettings(*) {
         AddToLog("Configuration settings saved successfully")
         SaveWinterLocal()
         SaveDungeonLocal()
+        SaveMapSkipLocal()
     }
 }
 

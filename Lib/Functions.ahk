@@ -320,6 +320,7 @@ OnConfirmClick(*) {
         ReturnLobbyBox.Visible := true
         NoMovement.Visible := true
         NewPlacementMethod.Visible := true
+        EditMaps.Visible := true
     }
     ; Winter Event
     else if (ModeDropdown.Text = "Winter Event") {
