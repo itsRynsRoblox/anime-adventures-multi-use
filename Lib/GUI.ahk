@@ -7,7 +7,7 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.14.10"
+global currentVersion := "1.14.12"
 
 ; Basic Application Info
 global aaTitle := "Anime Adventures - Ryn's Edition "

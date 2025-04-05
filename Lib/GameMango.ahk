@@ -20,7 +20,7 @@ F5:: {
 }
 
 F6:: {
-
+    
 }
 
 F7:: {
@@ -2820,25 +2820,54 @@ MoveForFutureCity() {
 
 MoveForSnowyKingdom() {
     if (ModeDropdown.Text = "Fool's Hunt") {
-        SendInput ("{a down}")
-        Sleep (300)
-        SendInput ("{a up}")
-        KeyWait "a"
-        Sleep (1000)
-        SendInput ("{s down}")
-        Sleep (3000)
-        SendInput ("{s up}")
-        KeyWait "s"
-        Sleep (1000)
-        SendInput ("{a down}")
-        Sleep (2800)
-        SendInput ("{a up}")
-        KeyWait "a"
-        Sleep (1000)
-        SendInput ("{s down}")
-        Sleep (2000)
-        SendInput ("{s up}")
-        KeyWait "s"
+        if (ok := FindText(&X, &Y, 126, 420, 200, 452, 0.15, 0.15, SnowyKingdomAngle)) {
+            SendInput ("{d down}")
+            Sleep (300)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (3000)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (2800)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+            SendInput ("{w down}")
+            Sleep (2500)
+            SendInput ("{w up}")
+            KeyWait "w"
+            Sleep (1000)
+            SendInput ("{d down}")
+            Sleep (500)
+            SendInput ("{d up}")
+            KeyWait "d"
+            Sleep (1000)
+        } else {
+            SendInput ("{a down}")
+            Sleep (300)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{s down}")
+            Sleep (3000)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+            SendInput ("{a down}")
+            Sleep (2800)
+            SendInput ("{a up}")
+            KeyWait "a"
+            Sleep (1000)
+            SendInput ("{s down}")
+            Sleep (2000)
+            SendInput ("{s up}")
+            KeyWait "s"
+            Sleep (1000)
+        }
     }
 }
 
