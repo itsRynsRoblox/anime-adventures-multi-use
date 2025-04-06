@@ -7,9 +7,9 @@ MapSkipPrioritySelector.Title := "Map Skipper"
 
 MapSkipGroup := MapSkipPrioritySelector.Add("GroupBox", "x30 y25 w180 h260  +Center cWhite", "Maps to Skip")
 
-mapOptions := ["None", "Ant Kingdom", "Magic Hills"]
+mapOptions := ["None", "Planet Greenie", "Walled City", "Snowy Town", "Sand Village", "Navy Bay", "Fiend City", "Spirit World", "Ant Kingdom", "Magic Town", "Haunted Academy", "Magic Hills", "Space Center", "Alien Spaceship", "Fabled Kingdom", "Ruined City", "Puppet Island", "Virtual Dungeon", "Snowy Kingdom", "Dungeon Throne", "Mountain Temple", "Rain Village", "Shibuya District", "Aircraft", "Hellish City", "Sacred Planet", "Strange Town", "Ruined City"]
 
-numDropDowns := 19
+numDropDowns := 8
 yStart := 50
 ySpacing := 28
 
@@ -30,7 +30,7 @@ OpenMapSkipPriorityPicker() {
     MapSkipPrioritySelector.Show()
 }
 
-global mapSkipPriorityOrder := ["None", "Ant Kingdom", "Magic Hills"]
+global mapSkipPriorityOrder := ["None", "Planet Greenie", "Walled City", "Snowy Town", "Sand Village", "Navy Bay", "Fiend City", "Spirit World", "Ant Kingdom", "Magic Town", "Haunted Academy", "Magic Hills", "Space Center", "Alien Spaceship", "Fabled Kingdom", "Ruined City", "Puppet Island", "Virtual Dungeon", "Snowy Kingdom", "Dungeon Throne", "Mountain Temple", "Rain Village", "Shibuya District", "Aircraft", "Hellish City", "Sacred Planet", "Strange Town", "Ruined City"]
 
 AttachMapDropDownEvent(dropDown, index) {
     dropDown.OnEvent("Change", (*) => OnMapDropDownChange(dropDown, index))

@@ -3571,17 +3571,6 @@ MaxUpgraded(limit) {
     }
 }
 
-
-ReachedUpgradeLimit() {
-
-    ; Search for the dynamic upgrade text
-    if (ok := FindText(&X, &Y, 168, 227, 314, 254, 0, 0, Upgrade3)) {
-        AddToLog("Upgrade: 0")
-        return true
-    }
-    return false
-}
-
 UnitPlaced() {
     if (WaitForUpgradeText(PlacementSpeed())) { ; Wait up to 4.5 seconds for the upgrade text to appear
         AddToLog("Unit Placed Successfully")
