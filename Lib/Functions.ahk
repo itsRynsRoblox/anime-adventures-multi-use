@@ -321,6 +321,7 @@ OnConfirmClick(*) {
         NoMovement.Visible := true
         NewPlacementMethod.Visible := true
         EditMaps.Visible := true
+        BringUnits.Visible := true
     }
     ; Winter Event
     else if (ModeDropdown.Text = "Winter Event") {
@@ -367,6 +368,17 @@ FixClick(x, y, LR := "Left") {
     MouseMove(x, y)
     MouseMove(1, 0, , "R")
     MouseClick(LR, -1, 0, , , , "R")
+    Sleep(50)
+}
+
+TestClick(x, y, sleepTime := 1000, LR := "Left") {
+    MouseMove(x, y)
+    MouseMove(1, 0, , "R")
+    SendEvent("{LButton down}")  ; Hold down left click
+    MouseMove(400, 300)
+    MouseMove(1, 0, , "R")
+    Sleep(sleepTime)
+    SendEvent("{LButton up}")    ; Release
     Sleep(50)
 }
  

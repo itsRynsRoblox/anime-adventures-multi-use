@@ -16,7 +16,7 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-
+    CheckLoaded
 }
 
 F6:: {
@@ -3380,8 +3380,13 @@ RestartStage() {
     setMahoragoStyle := false
 
     currentMap := (ModeDropdown.Text = "Fool's Hunt") ? DetectHuntMap() : DetectMap()
-
     
+    if (ModeDropdown.Text = "Fool's Hunt") {
+        if (BringUnits.Value) {
+            ClickAndHoldExit()
+        }
+    }
+
     ; Wait for loading
     CheckLoaded()
 
@@ -3777,7 +3782,7 @@ CheckLoaded() {
         Sleep(1000)
         
         ; Check for vote screen
-        if (ok := FindText(&X, &Y, 301, 64, 503, 154, 0, 0, VoteStart) or (ok := FindText(&X, &Y, 301, 64, 503, 154, 0, 0, VoteStartLaptop) or PixelGetColor(320, 60) = 0x00EE00)) {
+        if (ok := FindText(&X, &Y, 301, 64, 503, 154, 0, 0, VoteStart) or (ok := FindText(&X, &Y, 301, 64, 503, 154, 0, 0, VoteStartLaptop) or (ok := FindText(&X, &Y, 13, 263, 89, 334, 0.10, 0.10, Units) or PixelGetColor(320, 60) = 0x00EE00))) {
             AddToLog("Successfully Loaded In")
             Sleep(1000)
             break
@@ -4545,4 +4550,16 @@ CheckForAstralSummon() {
         return true
     }
     return false
+}
+
+ClickAndHoldExit() {
+    if WinExist(rblxID) {
+        WinMove(-10, 15, 800, 600, rblxID)
+        WinActivate(rblxID)
+        Sleep 1000
+    }
+    AddToLog("Freezing client for 2 minutes...")
+    TestClick(777, -6, 120000) ; Freeze Client for 2 minutes before resuming
+    AddToLog("Unfroze client")
+    moveRobloxWindow
 }

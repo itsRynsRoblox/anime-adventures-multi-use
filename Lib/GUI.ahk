@@ -7,10 +7,10 @@
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
 global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.14.13"
+global currentVersion := "1.14.16"
 
 ; Basic Application Info
-global aaTitle := "Anime Adventures - Ryn's Edition "
+global aaTitle := "Anime Adventures - Ryn's Edition"
 global version := "v" . currentVersion
 global rblxID := "ahk_exe RobloxPlayerBeta.exe"
 ;Coordinate and Positioning Variables
@@ -216,6 +216,76 @@ ShowSettingsGUI(*) {
     Webhookdiverter.Focus()
 }
 
+OpenDebug(*) {
+    DebugGUI := Gui("+AlwaysOnTop")
+    DebugGUI.SetFont("s10 bold", "Segoe UI")
+    DebugGUI.Title := "DEBUG MODE"
+
+    DebugGUI.BackColor := "0c000a"
+    DebugGUI.MarginX := 20
+    DebugGUI.MarginY := 20
+
+    ; Add Guide content
+    DebugGUI.SetFont("s16 bold", "Segoe UI")
+    DebugGUI.Add("GroupBox","h400 w240 cwhite +Center", "Welcome to Debug")
+    DebugGUI.SetFont("s10 bold", "Segoe UI")
+    ScreenResChecker := DebugGUI.Add("Button", "x40 y100 w200 cWhite +Center", "Screen Resolution")
+    ScreenResChecker.OnEvent("Click", (*) => GetScreenInfo())
+
+    ScreenResChecker1 := DebugGUI.Add("Button", "x40 y140 w200 cWhite +Center", "Mouse")
+    ScreenResChecker1.OnEvent("Click", (*) => MouseMovementDebug())
+
+    ScreenResChecker2 := DebugGUI.Add("Button", "x40 y180 w200 cWhite +Center", "FindText")
+    ScreenResChecker2.OnEvent("Click", (*) => FindTextDebug())
+
+    DebugGUI.Show("w290")
+}
+
+GetScreenInfo() {
+    ScreenInfoGUI := Gui("+AlwaysOnTop")
+    ScreenInfoGUI.BackColor := "0c000a"
+    screenWidth := SysGet(78)  ; Get screen width
+    screenHeight := SysGet(79) ; Get screen height
+    dpi := DllCall("user32\GetDpiForSystem", "UInt")  ; Get system DPI
+    zoom := Round(dpi / 96 * 100)  ; Calculate Zoom %
+     if (screenWidth = 1920 && screenHeight = 1080 && zoom = 100) {
+        ScreenInfoGUI.Add("Text", "w300 cWhite +Center","Your resolution settings are correct! The script should work. Screen Resolution: `n" screenWidth "x" screenHeight "`nZoom Level: " zoom "%`n-----------------`nIf you have vanguard/riot cheat turn it off")
+
+    } else {
+        ScreenInfoGUI.Add("Text","w300 cWhite +Center","Your resolution or zoom is different from what the script needs!`n YOUR SETTING:`nScreen Resolution:`n" screenWidth "x" screenHeight "`nZoom: " zoom "%`n-----------------`nHAS TO BE`n1920x1080`nZoom Level 100%`nFOR MORE HELP CLICK ON THIS TEXT<=`n-----------------`nIf you have vanguard/riot cheat turn it off").OnEvent("Click", (*) => OpenDiscord())
+    }
+    ScreenInfoGUI.Show("w300")
+}
+
+MouseMovementDebug(){
+    MouseMove(0,0)
+    MouseDebug := Gui("+AlwaysOnTop")
+    MouseDebug.BackColor := "0c000a"
+    sleep 1000
+    MouseDebug.Add("Text", "w300 cWhite +Center","If your mouse didnt move its likely due to Riot/Vanguard Anticheat Pleas turn it off")
+    MouseDebug.Show("w300")
+    
+}
+
+MypfpBeru := "|<>*130$71.zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy3kzzzk0zzzzw7VzzXU0zzzzs73zy700zzzzkC7zwC7VzzzzUAC1k4D30s1z0MM1U8S40k1y0EU10E0MVU3w8V333U0zV33sE2D6703k267kk4SAC6704ADVU8MMQC4A8MT3UE0k8Q80Eky70k3kEw80VVwD1kDUVsE133zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+FindtextIMGDEBUg := A_ScriptDir "\Images\FindTextDebugPic.png"
+
+FindTextDebug() {
+    FindTextThing := Gui("+AlwaysOnTop")
+    FindTextThing.BackColor := "0c000a"
+    sleep 1000
+    FindTextThing.Add("Picture", "", FindtextIMGDEBUg)
+    FindTextThing.Show("w300")
+    sleep 1000
+    if (ok := FindText(&X, &Y, 0, 0, 1000, 1000, 0, 0, MypfpBeru)){
+        FindTextThing.Add("Text","cWhite +Center","Image Found This Is A Good Step To Debbuging")
+    } else{
+       FindTextThing.Add("Text","cWhite +Center","Image Not Found Please Contact Support Or Check Resolution Debug")
+    }
+    FindTextThing.Show("w300 h100")
+    
+}
+
 OpenGuide(*) {
     GuideGUI := Gui("+AlwaysOnTop")
     GuideGUI.SetFont("s10 bold", "Segoe UI")
@@ -254,6 +324,10 @@ aaMainUI.SetFont("s9")
 global MaharagaButton := aaMainUI.Add("Button", "x975 y0 w115 h30", "Mahoraga Settings")
 MaharagaButton.OnEvent("Click", (*) => ToggleSettingsVisibility())
 
+;DEBUG
+DebugButton := aaMainUI.Add("Button", "x850 y0 w115 h30 +Center", "Debug Mode")
+DebugButton.OnEvent("Click", (*) => OpenDebug())
+
 ;Normal Options
 global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Next Level")
 global ReturnLobbyBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Return To Lobby")
@@ -276,6 +350,7 @@ EditCurses.OnEvent("Click", (*) => OpenCursePriorityPicker())
 ;April Fools Event Option
 NewPlacementMethod := aaMainUI.Add("CheckBox", "x1050 y451 cffffff Checked", "Test Unit Method")
 NoMovement := aaMainUI.Add("CheckBox", "x1050 y476 cffffff", "No Movement")
+BringUnits := aaMainUI.Add("CheckBox", "x1200 y451 cffffff Checked", "Bring Own Units")
 EditMaps := aaMainUI.Add("Button", "x1200 y470 w80 h25", "Edit Maps")
 EditMaps.OnEvent("Click", (*) => OpenMapSkipPriorityPicker())
 ;Misc Options
@@ -389,6 +464,7 @@ EditCurses.Visible := false
 NewPlacementMethod.Visible := false
 NoMovement.Visible := false
 EditMaps.Visible := false
+BringUnits.Visible := false
 
 ;Portal Farming
 PortalSwap.Visible := false
