@@ -14,7 +14,7 @@ SendMode "Event"
 #Include %A_ScriptDir%\lib/Functions.ahk
 #Include %A_ScriptDir%\lib/Config.ahk
 #Include %A_ScriptDir%\lib/Modes/Fools-Hunt/MapConfig.ahk
-#Include %A_ScriptDir%\lib/WinterConfig.ahk
+#Include %A_ScriptDir%\lib\Modes\Winter\WinterConfig.ahk
 #Include %A_ScriptDir%\lib/Modes/Dungeon/DungeonConfig.ahk
 #Include %A_ScriptDir%\lib/webhooksettings.ahk
 #Include %A_ScriptDir%\Lib\FindText.ahk

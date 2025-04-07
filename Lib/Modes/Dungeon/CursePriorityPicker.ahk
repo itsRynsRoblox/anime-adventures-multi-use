@@ -7,24 +7,20 @@ CursePrioritySelector.Title := "Avoided Curses"
 
 CursePriorityOrder := CursePrioritySelector.Add("GroupBox", "x30 y25 w180 h260  +Center cWhite", "Avoided Curses")
 
-roomOptions := ["None", "Flying", "Wind", "Money", "Health", "Exploding", "Shielding", "Regen"]
+curseOptions := ["None", "Flying", "Wind", "Money", "Health", "Exploding", "Shielding", "Regen"]
 
-numDropDowns := 19
+numDropDowns := curseOptions.Length
 yStart := 50
 ySpacing := 28
 
 global curseDropDowns := []
 global enabledCurses := []
 
-For index, room in roomOptions {
-    if (index > numDropDowns)
-        Break
-    yPos := yStart + ((index - 1) * ySpacing)
-    CursePrioritySelector.Add("Text", Format("x38 y{} w30 h17 +0x200 cWhite", yPos), index)
-    dropDown := CursePrioritySelector.Add("DropDownList", Format("x60 y{} w135 Choose1", yPos), roomOptions)
+Loop numDropDowns {
+    yPos := yStart + ((A_Index - 1) * ySpacing)
+    dropDown := CursePrioritySelector.Add("DropDownList", Format("x60 y{} w135 Choose1", yPos), curseOptions)
     curseDropDowns.Push(dropDown)
-
-    AttachCurseDropDownEvent(dropDown, index)
+    AttachDropDownEvent(dropDown, A_Index, OnCurseDropDownChange)
 }
 
 OpenCursePriorityPicker() {
@@ -33,17 +29,6 @@ OpenCursePriorityPicker() {
 
 global cursePriorityOrder := ["None", "Flying", "Wind", "Money", "Health", "Exploding", "Shielding", "Regen"]
 
-AttachCurseDropDownEvent(dropDown, index) {
-    dropDown.OnEvent("Change", (*) => OnCurseDropDownChange(dropDown, index))
-}
-
-RemoveCurseEmptyStrings(array) {
-    for index, value in array {
-        if (value = "") {
-            array.RemoveAt(index)
-        }
-    }
-}
 
 OnCurseDropDownChange(ctrl, index) {
     if (index >= 0 and index <= 19) {
@@ -51,9 +36,9 @@ OnCurseDropDownChange(ctrl, index) {
         if (debugMessages) {
             AddToLog(Format("Priority {} set to {}", index, ctrl.Text))
         }
-        RemoveCurseEmptyStrings(cursePriorityOrder)
+        RemoveEmptyStrings(cursePriorityOrder)
         UpdateEnabledCurses()
-        SaveDungeonLocal
+        SaveDungeonLocal()
     } else {
         if (debugMessages) {
             AddToLog(Format("Invalid index {} for dropdown", index))
@@ -76,11 +61,11 @@ ShouldSkipCurse(curse) {
     return HasValue(enabledCurses, curse)
 }
 
-HasValue(array, value) {
-    for index, element in array {
-        if (element = value) {
-            return true
-        }
+LogSkippedCurses() {
+    global enabledCurses
+    if (enabledCurses.Length > 0) {
+        AddToLog("Skipped Curses: " . StringJoin(enabledCurses))
+    } else {
+        AddToLog("No curses are skipped.")
     }
-    return false
 }

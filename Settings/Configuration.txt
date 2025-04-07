@@ -1,4 +1,4 @@
-Mode=Fool's Hunt
+Mode=
 
 
 [Enabled]
@@ -50,12 +50,12 @@ UpgradeLimit5=0
 UpgradeLimit6=0
 
 [ChallengeEnabled]
-ChallengeEnabled1=0
-ChallengeEnabled2=0
-ChallengeEnabled3=0
-ChallengeEnabled4=0
-ChallengeEnabled5=0
-ChallengeEnabled6=0
+ChallengeEnabled1=1
+ChallengeEnabled2=1
+ChallengeEnabled3=1
+ChallengeEnabled4=1
+ChallengeEnabled5=1
+ChallengeEnabled6=1
 
 [ChallengePlacement]
 ChallengePlacement1=1
@@ -74,12 +74,12 @@ ChallengePriority5=1
 ChallengePriority6=1
 
 [ChallengeUpgradeEnabled]
-ChallengeUpgradeEnabled1=0
-ChallengeUpgradeEnabled2=0
-ChallengeUpgradeEnabled3=0
-ChallengeUpgradeEnabled4=0
-ChallengeUpgradeEnabled5=0
-ChallengeUpgradeEnabled6=0
+ChallengeUpgradeEnabled1=1
+ChallengeUpgradeEnabled2=1
+ChallengeUpgradeEnabled3=1
+ChallengeUpgradeEnabled4=1
+ChallengeUpgradeEnabled5=1
+ChallengeUpgradeEnabled6=1
 
 [ChallengeUpgradeLimitEnabled]
 ChallengeUpgradeLimitEnabled1=0
@@ -241,53 +241,53 @@ RaidUpgradeLimit4=0
 RaidUpgradeLimit5=0
 RaidUpgradeLimit6=0
 
-[WinterEnabled]
-WinterEnabled1=1
-WinterEnabled2=1
-WinterEnabled3=1
-WinterEnabled4=1
-WinterEnabled5=1
-WinterEnabled6=1
+[EventEnabled]
+EventEnabled1=1
+EventEnabled2=1
+EventEnabled3=1
+EventEnabled4=1
+EventEnabled5=1
+EventEnabled6=1
 
-[WinterPlacement]
-WinterPlacement1=6
-WinterPlacement2=6
-WinterPlacement3=6
-WinterPlacement4=6
-WinterPlacement5=6
-WinterPlacement6=5
+[EventPlacement]
+EventPlacement1=6
+EventPlacement2=6
+EventPlacement3=6
+EventPlacement4=6
+EventPlacement5=6
+EventPlacement6=6
 
-[WinterPriority]
-WinterPriority1=1
-WinterPriority2=2
-WinterPriority3=3
-WinterPriority4=4
-WinterPriority5=5
-WinterPriority6=6
+[EventPriority]
+EventPriority1=1
+EventPriority2=2
+EventPriority3=3
+EventPriority4=4
+EventPriority5=5
+EventPriority6=6
 
-[WinterUpgradeEnabled]
-WinterUpgradeEnabled1=1
-WinterUpgradeEnabled2=1
-WinterUpgradeEnabled3=1
-WinterUpgradeEnabled4=1
-WinterUpgradeEnabled5=1
-WinterUpgradeEnabled6=1
+[EventUpgradeEnabled]
+EventUpgradeEnabled1=1
+EventUpgradeEnabled2=1
+EventUpgradeEnabled3=1
+EventUpgradeEnabled4=1
+EventUpgradeEnabled5=1
+EventUpgradeEnabled6=1
 
-[WinterUpgradeLimitEnabled]
-WinterUpgradeLimitEnabled1=0
-WinterUpgradeLimitEnabled2=0
-WinterUpgradeLimitEnabled3=0
-WinterUpgradeLimitEnabled4=0
-WinterUpgradeLimitEnabled5=0
-WinterUpgradeLimitEnabled6=0
+[EventUpgradeLimitEnabled]
+EventUpgradeLimitEnabled1=0
+EventUpgradeLimitEnabled2=0
+EventUpgradeLimitEnabled3=0
+EventUpgradeLimitEnabled4=0
+EventUpgradeLimitEnabled5=0
+EventUpgradeLimitEnabled6=0
 
-[WinterUpgradeLimit]
-WinterUpgradeLimit1=0
-WinterUpgradeLimit2=0
-WinterUpgradeLimit3=0
-WinterUpgradeLimit4=0
-WinterUpgradeLimit5=0
-WinterUpgradeLimit6=0
+[EventUpgradeLimit]
+EventUpgradeLimit1=0
+EventUpgradeLimit2=0
+EventUpgradeLimit3=0
+EventUpgradeLimit4=0
+EventUpgradeLimit5=0
+EventUpgradeLimit6=0
 
 [PlacementLogic]
 Logic=1

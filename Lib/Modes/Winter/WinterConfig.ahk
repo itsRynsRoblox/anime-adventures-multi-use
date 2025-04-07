@@ -29,7 +29,7 @@ SaveWinterConfigToFile(filePath) {
         return
     }
 
-    File.WriteLine("[CardPriority]")
+    File.WriteLine("[WinterCardPriority]")
     for index, dropDown in dropDowns
     {
         File.WriteLine(Format("Card{}={}", index+1, dropDown.Text))
@@ -67,7 +67,7 @@ LoadWinterConfigFromFile(filePath) {
             }
 
             ; Process the lines based on the section
-            if (section = "CardPriority") {
+            if (section = "WinterCardPriority") {
                 if RegExMatch(line, "Card(\d+)=(\w+)", &match) {
                     slot := match.1
                     value := match.2
@@ -92,9 +92,9 @@ LoadWinterConfigFromFile(filePath) {
 
 
 SaveWinterLocal(*) {
-    SaveWinterConfigToFile("Settings\CardPriority.txt")
+    SaveWinterConfigToFile("Settings\WinterCardPriority.txt")
 }
 
 LoadWinterLocal(*) {
-    LoadWinterConfigFromFile("Settings\CardPriority.txt")
+    LoadWinterConfigFromFile("Settings\WinterCardPriority.txt")
 }

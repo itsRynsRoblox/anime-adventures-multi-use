@@ -511,9 +511,7 @@ PlaceInGrid(startX, startY, slotNum, &placementCount, &successfulCoordinates, &s
         gridY := startY + offset[1] ; Move vertically by 'step' from the initial start location
 
         ; Handle card picker and related logic during grid placement
-        if (ok := FindText(&cardX, &cardY, 196, 204, 568, 278, 0, 0, pick_card)) {
-            cardSelector()
-        }
+        CheckForCardSelection()
         FixClick(284, 400) ; next
         FixClick(60, 450) ; move mouse
         if CheckForXp() {

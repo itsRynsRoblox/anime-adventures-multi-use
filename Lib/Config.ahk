@@ -64,13 +64,14 @@ readInSettings() {
     global raidUpgradeLimitEnabled1, raidUpgradeLimitEnabled2, raidUpgradeLimitEnabled3, raidUpgradeLimitEnabled4, raidUpgradeLimitEnabled5, raidUpgradeLimitEnabled6
     global raidUpgradeLimit1, raidUpgradeLimit2, raidUpgradeLimit3, raidUpgradeLimit4, raidUpgradeLimit5, raidUpgradeLimit6
 
-    ; Winter placements
-    global winterEnabled1, winterEnabled2, winterEnabled3, winterEnabled4, winterEnabled5, winterEnabled6
-    global winterPlacement1, winterPlacement2, winterPlacement3, winterPlacement4, winterPlacement5, winterPlacement6
-    global winterPriority1, winterPriority2, winterPriority3, winterPriority4, winterPriority5, winterPriority6
-    global winterUpgradeEnabled1, winterUpgradeEnabled2, winterUpgradeEnabled3, winterUpgradeEnabled4, winterUpgradeEnabled5, winterUpgradeEnabled6
-    global winterUpgradeLimitEnabled1, winterUpgradeLimitEnabled2, winterUpgradeLimitEnabled3, winterUpgradeLimitEnabled4, winterUpgradeLimitEnabled5, winterUpgradeLimitEnabled6
-    global winterUpgradeLimit1, winterUpgradeLimit2, winterUpgradeLimit3, winterUpgradeLimit4, winterUpgradeLimit5, winterUpgradeLimit6
+    ; Event placements
+    global eventEnabled1, eventEnabled2, eventEnabled3, eventEnabled4, eventEnabled5, eventEnabled6
+    global eventPlacement1, eventPlacement2, eventPlacement3, eventPlacement4, eventPlacement5, eventPlacement6
+    global eventPriority1, eventPriority2, eventPriority3, eventPriority4, eventPriority5, eventPriority6
+    global eventUpgradeEnabled1, eventUpgradeEnabled2, eventUpgradeEnabled3, eventUpgradeEnabled4, eventUpgradeEnabled5, eventUpgradeEnabled6
+    global eventUpgradeLimitEnabled1, eventUpgradeLimitEnabled2, eventUpgradeLimitEnabled3, eventUpgradeLimitEnabled4, eventUpgradeLimitEnabled5, eventUpgradeLimitEnabled6
+    global eventUpgradeLimit1, eventUpgradeLimit2, eventUpgradeLimit3, eventUpgradeLimit4, eventUpgradeLimit5, eventUpgradeLimit6
+
 
 
     ;Dungeon Settings
@@ -309,47 +310,47 @@ readInSettings() {
                 case "RaidUpgradeLimitEnabled5": raidUpgradeLimitEnabled5.Value := parts[2]
                 case "RaidUpgradeLimitEnabled6": raidUpgradeLimitEnabled6.Value := parts[2]
 
-                case "WinterEnabled1": winterEnabled1.Value := parts[2]
-                case "WinterEnabled2": winterEnabled2.Value := parts[2]
-                case "WinterEnabled3": winterEnabled3.Value := parts[2]
-                case "WinterEnabled4": winterEnabled4.Value := parts[2]
-                case "WinterEnabled5": winterEnabled5.Value := parts[2]
-                case "WinterEnabled6": winterEnabled6.Value := parts[2]
+                case "EventEnabled1": eventEnabled1.Value := parts[2]
+                case "EventEnabled2": eventEnabled2.Value := parts[2]
+                case "EventEnabled3": eventEnabled3.Value := parts[2]
+                case "EventEnabled4": eventEnabled4.Value := parts[2]
+                case "EventEnabled5": eventEnabled5.Value := parts[2]
+                case "EventEnabled6": eventEnabled6.Value := parts[2]
 
-                case "WinterPlacement1": winterPlacement1.Text := parts[2]
-                case "WinterPlacement2": winterPlacement2.Text := parts[2]
-                case "WinterPlacement3": winterPlacement3.Text := parts[2]
-                case "WinterPlacement4": winterPlacement4.Text := parts[2]
-                case "WinterPlacement5": winterPlacement5.Text := parts[2]
-                case "WinterPlacement6": winterPlacement6.Text := parts[2]
+                case "EventPlacement1": eventPlacement1.Text := parts[2]
+                case "EventPlacement2": eventPlacement2.Text := parts[2]
+                case "EventPlacement3": eventPlacement3.Text := parts[2]
+                case "EventPlacement4": eventPlacement4.Text := parts[2]
+                case "EventPlacement5": eventPlacement5.Text := parts[2]
+                case "EventPlacement6": eventPlacement6.Text := parts[2]
 
-                case "WinterPriority1": winterPriority1.Text := parts[2]
-                case "WinterPriority2": winterPriority2.Text := parts[2]
-                case "WinterPriority3": winterPriority3.Text := parts[2]
-                case "WinterPriority4": winterPriority4.Text := parts[2]
-                case "WinterPriority5": winterPriority5.Text := parts[2]
-                case "WinterPriority6": winterPriority6.Text := parts[2]
+                case "EventPriority1": eventPriority1.Text := parts[2]
+                case "EventPriority2": eventPriority2.Text := parts[2]
+                case "EventPriority3": eventPriority3.Text := parts[2]
+                case "EventPriority4": eventPriority4.Text := parts[2]
+                case "EventPriority5": eventPriority5.Text := parts[2]
+                case "EventPriority6": eventPriority6.Text := parts[2]
 
-                case "WinterUpgradeLimit1": winterUpgradeLimit1.Text := parts[2]
-                case "WinterUpgradeLimit2": winterUpgradeLimit2.Text := parts[2]
-                case "WinterUpgradeLimit3": winterUpgradeLimit3.Text := parts[2]
-                case "WinterUpgradeLimit4": winterUpgradeLimit4.Text := parts[2]
-                case "WinterUpgradeLimit5": winterUpgradeLimit5.Text := parts[2]
-                case "WinterUpgradeLimit6": winterUpgradeLimit6.Text := parts[2]
+                case "EventUpgradeLimit1": eventUpgradeLimit1.Text := parts[2]
+                case "EventUpgradeLimit2": eventUpgradeLimit2.Text := parts[2]
+                case "EventUpgradeLimit3": eventUpgradeLimit3.Text := parts[2]
+                case "EventUpgradeLimit4": eventUpgradeLimit4.Text := parts[2]
+                case "EventUpgradeLimit5": eventUpgradeLimit5.Text := parts[2]
+                case "EventUpgradeLimit6": eventUpgradeLimit6.Text := parts[2]
 
-                case "WinterUpgradeEnabled1": winterUpgradeEnabled1.Value := parts[2]
-                case "WinterUpgradeEnabled2": winterUpgradeEnabled2.Value := parts[2]
-                case "WinterUpgradeEnabled3": winterUpgradeEnabled3.Value := parts[2]
-                case "WinterUpgradeEnabled4": winterUpgradeEnabled4.Value := parts[2]
-                case "WinterUpgradeEnabled5": winterUpgradeEnabled5.Value := parts[2]
-                case "WinterUpgradeEnabled6": winterUpgradeEnabled6.Value := parts[2]
+                case "EventUpgradeEnabled1": eventUpgradeEnabled1.Value := parts[2]
+                case "EventUpgradeEnabled2": eventUpgradeEnabled2.Value := parts[2]
+                case "EventUpgradeEnabled3": eventUpgradeEnabled3.Value := parts[2]
+                case "EventUpgradeEnabled4": eventUpgradeEnabled4.Value := parts[2]
+                case "EventUpgradeEnabled5": eventUpgradeEnabled5.Value := parts[2]
+                case "EventUpgradeEnabled6": eventUpgradeEnabled6.Value := parts[2]
 
-                case "WinterUpgradeLimitEnabled1": winterUpgradeLimitEnabled1.Value := parts[2]
-                case "WinterUpgradeLimitEnabled2": winterUpgradeLimitEnabled2.Value := parts[2]
-                case "WinterUpgradeLimitEnabled3": winterUpgradeLimitEnabled3.Value := parts[2]
-                case "WinterUpgradeLimitEnabled4": winterUpgradeLimitEnabled4.Value := parts[2]
-                case "WinterUpgradeLimitEnabled5": winterUpgradeLimitEnabled5.Value := parts[2]
-                case "WinterUpgradeLimitEnabled6": winterUpgradeLimitEnabled6.Value := parts[2]
+                case "EventUpgradeLimitEnabled1": eventUpgradeLimitEnabled1.Value := parts[2]
+                case "EventUpgradeLimitEnabled2": eventUpgradeLimitEnabled2.Value := parts[2]
+                case "EventUpgradeLimitEnabled3": eventUpgradeLimitEnabled3.Value := parts[2]
+                case "EventUpgradeLimitEnabled4": eventUpgradeLimitEnabled4.Value := parts[2]
+                case "EventUpgradeLimitEnabled5": eventUpgradeLimitEnabled5.Value := parts[2]
+                case "EventUpgradeLimitEnabled6": eventUpgradeLimitEnabled6.Value := parts[2]
 
                 case "Speed": PlaceSpeed.Value := parts[2] ; Set the dropdown value
                 case "Logic": PlacementPatternDropdown.Value := parts[2] ; Set the dropdown value
@@ -438,13 +439,14 @@ SaveSettings(*) {
     global raidUpgradeLimitEnabled1, raidUpgradeLimitEnabled2, raidUpgradeLimitEnabled3, raidUpgradeLimitEnabled4, raidUpgradeLimitEnabled5, raidUpgradeLimitEnabled6
     global raidUpgradeLimit1, raidUpgradeLimit2, raidUpgradeLimit3, raidUpgradeLimit4, raidUpgradeLimit5, raidUpgradeLimit6
 
-    ; Winter placements
-    global winterEnabled1, winterEnabled2, winterEnabled3, winterEnabled4, winterEnabled5, winterEnabled6
-    global winterPlacement1, winterPlacement2, winterPlacement3, winterPlacement4, winterPlacement5, winterPlacement6
-    global winterPriority1, winterPriority2, winterPriority3, winterPriority4, winterPriority5, winterPriority6
-    global winterUpgradeEnabled1, winterUpgradeEnabled2, winterUpgradeEnabled3, winterUpgradeEnabled4, winterUpgradeEnabled5, winterUpgradeEnabled6
-    global winterUpgradeLimitEnabled1, winterUpgradeLimitEnabled2, winterUpgradeLimitEnabled3, winterUpgradeLimitEnabled4, winterUpgradeLimitEnabled5, winterUpgradeLimitEnabled6
-    global winterUpgradeLimit1, winterUpgradeLimit2, winterUpgradeLimit3, winterUpgradeLimit4, winterUpgradeLimit5, winterUpgradeLimit6
+    ; Event placements
+    global eventEnabled1, eventEnabled2, eventEnabled3, eventEnabled4, eventEnabled5, eventEnabled6
+    global eventPlacement1, eventPlacement2, eventPlacement3, eventPlacement4, eventPlacement5, eventPlacement6
+    global eventPriority1, eventPriority2, eventPriority3, eventPriority4, eventPriority5, eventPriority6
+    global eventUpgradeEnabled1, eventUpgradeEnabled2, eventUpgradeEnabled3, eventUpgradeEnabled4, eventUpgradeEnabled5, eventUpgradeEnabled6
+    global eventUpgradeLimitEnabled1, eventUpgradeLimitEnabled2, eventUpgradeLimitEnabled3, eventUpgradeLimitEnabled4, eventUpgradeLimitEnabled5, eventUpgradeLimitEnabled6
+    global eventUpgradeLimit1, eventUpgradeLimit2, eventUpgradeLimit3, eventUpgradeLimit4, eventUpgradeLimit5, eventUpgradeLimit6
+
 
 
     ;Dungeon Settings
@@ -655,40 +657,40 @@ SaveSettings(*) {
             content .= "`nRaidUpgradeLimit" A_Index "=" RaidUpgradeLimit%A_Index%.Text
         }
 
-        ; Create WinterEnabled section
-        content .= "`n`n[WinterEnabled]"
+        ; Create EventEnabled section
+        content .= "`n`n[EventEnabled]"
         Loop 6 {
-            content .= "`nWinterEnabled" A_Index "=" winterEnabled%A_Index%.Value
+            content .= "`nEventEnabled" A_Index "=" eventEnabled%A_Index%.Value
         }
 
-        ; Create WinterPlacement section
-        content .= "`n`n[WinterPlacement]"
+        ; Create EventPlacement section
+        content .= "`n`n[EventPlacement]"
         Loop 6 {
-            content .= "`nWinterPlacement" A_Index "=" winterPlacement%A_Index%.Text
+            content .= "`nEventPlacement" A_Index "=" eventPlacement%A_Index%.Text
         }
 
-        ; Create WinterPriority section
-        content .= "`n`n[WinterPriority]"
+        ; Create EventPriority section
+        content .= "`n`n[EventPriority]"
         Loop 6 {
-            content .= "`nWinterPriority" A_Index "=" winterPriority%A_Index%.Text
+            content .= "`nEventPriority" A_Index "=" eventPriority%A_Index%.Text
         }
 
-        ; Create WinterUpgradeEnabled section
-        content .= "`n`n[WinterUpgradeEnabled]"
+        ; Create EventUpgradeEnabled section
+        content .= "`n`n[EventUpgradeEnabled]"
         Loop 6 {
-            content .= "`nWinterUpgradeEnabled" A_Index "=" WinterUpgradeEnabled%A_Index%.Value
+            content .= "`nEventUpgradeEnabled" A_Index "=" eventUpgradeEnabled%A_Index%.Value
         }
 
-        ; Create WinterUpgradeLimitEnabled section
-        content .= "`n`n[WinterUpgradeLimitEnabled]"
+        ; Create EventUpgradeLimitEnabled section
+        content .= "`n`n[EventUpgradeLimitEnabled]"
         Loop 6 {
-            content .= "`nWinterUpgradeLimitEnabled" A_Index "=" WinterUpgradeLimitEnabled%A_Index%.Value
+            content .= "`nEventUpgradeLimitEnabled" A_Index "=" eventUpgradeLimitEnabled%A_Index%.Value
         }
 
-        ; Create WinterUpgradeLimit section
-        content .= "`n`n[WinterUpgradeLimit]"
+        ; Create EventUpgradeLimit section
+        content .= "`n`n[EventUpgradeLimit]"
         Loop 6 {
-            content .= "`nWinterUpgradeLimit" A_Index "=" WinterUpgradeLimit%A_Index%.Text
+            content .= "`nEventUpgradeLimit" A_Index "=" eventUpgradeLimit%A_Index%.Text
         }
 
         content .= "`n`n[PlacementLogic]"

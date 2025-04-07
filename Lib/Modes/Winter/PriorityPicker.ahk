@@ -4,7 +4,7 @@ PriorityCardSelector.BackColor := "0c000a"
 PriorityCardSelector.MarginX := 20
 PriorityCardSelector.MarginY := 20
 
-PriorityOrder := PriorityCardSelector.Add("GroupBox", "x30 y25 w180 h570 cWhite", "Modifier Priority Order")
+PriorityOrder := PriorityCardSelector.Add("GroupBox", "x30 y25 w180 h570 cWhite", "Modifier Winter Priority Order")
 
 options := ["new_path", "range_3", "attack_3", "cooldown_3", "range_2", "attack_2", "cooldown_2", "blessing_2", "range_1", "attack_1", "cooldown_1", "blessing_1", "shield", "explosive_death_21", "explosive_death_3", "speed", "health", "regen", "yen"]
 
@@ -14,15 +14,13 @@ ySpacing := 28
 
 global dropDowns := []
 
-For index, card in options {
-    if (index > numDropDowns)
-        Break
-    yPos := yStart + ((index - 1) * ySpacing)
-    PriorityCardSelector.Add("Text", Format("x38 y{} w30 h17 +0x200 cWhite", yPos), index)
-    dropDown := PriorityCardSelector.Add("DropDownList", Format("x60 y{} w135 Choose{}", yPos, index), options)
+Loop numDropDowns {
+    yPos := yStart + ((A_Index - 1) * ySpacing)
+    dropDown := PriorityCardSelector.Add("DropDownList", Format("x60 y{} w135 Choose{}", yPos, A_Index), options)
     dropDowns.Push(dropDown)
 
-    AttachDropDownEvent(dropDown, index)
+    ; Attach the universal event handler with the required parameters
+    AttachDropDownEvent(dropDown, A_Index, OnDropDownChange)
 }
 
 DebuffGroupbox := PriorityCardSelector.Add("GroupBox", "x30 y610 w180 h120 cWhite", "Debuff Priority")
@@ -37,18 +35,6 @@ OpenPriorityPicker() {
 
 global priorityOrder := ["new_path", "range_3", "attack_3", "cooldown_3", "range_2", "attack_2", "cooldown_2", "blessing_2", "range_1", "attack_1", "cooldown_1", "blessing_1", "shield", "explosive_death_21", "explosive_death_3", "speed", "health", "regen", "yen"]
 
-AttachDropDownEvent(dropDown, index) {
-    dropDown.OnEvent("Change", (*) => OnDropDownChange(dropDown, index))
-}
-
-RemoveEmptyStrings(array) {
-    for index, value in array {
-        if (value = "") {
-            array.RemoveAt(index)
-        }
-    }
-}
-
 OnDropDownChange(ctrl, index) {
     if (index >= 0 and index <= 19) {
         priorityOrder[index] := ctrl.Text
@@ -58,4 +44,10 @@ OnDropDownChange(ctrl, index) {
     } else {
         AddToLog(Format("Invalid index {} for dropdown", index))
     }
+}
+
+; Function to log the complete priority order
+LogPriorityOrder() {
+    logText := "Current Priority Order: " . StringJoin(priorityOrder, ", ")
+    AddToLog(logText)
 }

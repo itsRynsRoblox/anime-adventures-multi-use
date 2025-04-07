@@ -9,21 +9,17 @@ RoutePriorityOrder := RoutePrioritySelector.Add("GroupBox", "x30 y25 w180 h200  
 
 roomOptions := ["Rare_Chest", "Chest", "Hoard", "Shop", "Shrine", "Boss"]
 
-numDropDowns := 19
+numDropDowns := roomOptions.Length
 yStart := 50
 ySpacing := 28
 
 global routeDropDowns := []
 
-For index, room in roomOptions {
-    if (index > numDropDowns)
-        Break
-    yPos := yStart + ((index - 1) * ySpacing)
-    RoutePrioritySelector.Add("Text", Format("x38 y{} w30 h17 +0x200 cWhite", yPos), index)
-    dropDown := RoutePrioritySelector.Add("DropDownList", Format("x60 y{} w135 Choose{}", yPos, index), roomOptions)
+Loop numDropDowns {
+    yPos := yStart + ((A_Index - 1) * ySpacing)
+    dropDown := RoutePrioritySelector.Add("DropDownList", Format("x60 y{} w135 Choose1", yPos), roomOptions)
     routeDropDowns.Push(dropDown)
-
-    AttachRouteDropDownEvent(dropDown, index)
+    AttachDropDownEvent(dropDown, A_Index, OnRouteDropDownChange)
 }
 
 OpenRoutePriorityPicker() {
@@ -32,26 +28,14 @@ OpenRoutePriorityPicker() {
 
 global routePriorityOrder := ["Rare_Chest", "Chest", "Hoard", "Shop", "Shrine", "Boss"]
 
-AttachRouteDropDownEvent(dropDown, index) {
-    dropDown.OnEvent("Change", (*) => OnRouteDropDownChange(dropDown, index))
-}
-
-RemoveRouteEmptyStrings(array) {
-    for index, value in array {
-        if (value = "") {
-            array.RemoveAt(index)
-        }
-    }
-}
-
 OnRouteDropDownChange(ctrl, index) {
     if (index >= 0 and index <= 19) {
         routePriorityOrder[index] := ctrl.Text
         if (debugMessages) {
             AddToLog(Format("Priority {} set to {}", index, ctrl.Text))
         }
-        RemoveRouteEmptyStrings(routePriorityOrder)
-        SaveDungeonLocal
+        RemoveEmptyStrings(routePriorityOrder)
+        SaveDungeonLocal()
     } else {
         if (debugMessages) {
             AddToLog(Format("Invalid index {} for dropdown", index))

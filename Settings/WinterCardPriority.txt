@@ -1,4 +1,4 @@
-[CardPriority]
+[WinterCardPriority]
 Card2=new_path
 Card3=range_3
 Card4=attack_3

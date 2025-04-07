@@ -9,22 +9,21 @@ global adaptations := 0
 global setMahoragoStyle := false
 
 LoadKeybindSettings()  ; Load saved keybinds
-;CheckForUpdates()
 Hotkey(F1Key, (*) => moveRobloxWindow())
 Hotkey(F2Key, (*) => StartMacro())
 Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-    CheckLoaded
+    BasicSetup
 }
 
 F6:: {
-    
+    MoveForHellish
 }
 
 F7:: {
-
+    Run (A_ScriptDir "\Lib\FindText.ahk")
 }
 
 
@@ -48,10 +47,10 @@ TogglePause(*) {
 
 GetNameForMode() {
     if (PlacementSelection.Text = "Winter Event") {
-        return "winter"
+        return "event"
     }
     if (PlacementSelection.Text = "Fool's Hunt") {
-        return "winter"
+        return "event"
     }
     if (PlacementSelection.Text = "Default") {
         return ""
@@ -1060,7 +1059,10 @@ HandleStageEnd() {
         loss += 1
     }
 
+    SendInput("{Tab}") ; Open Player leaderboard
     SendWebhookWithTime(isWin, stageLength)
+    SendInput("{Tab}") ; Open Player leaderboard
+    Sleep (500)
 
     if (mode = "Portal") {
         return HandlePortalEnd()           
@@ -2337,27 +2339,6 @@ MoveForAntKingdom() {
     }
 }
 
-MoveForAntKingdomOld() {
-    Fixclick(130, 550, "Right")
-    Sleep (3000)
-    Fixclick(130, 550, "Right")
-    Sleep (4000)
-    Fixclick(30, 450, "Right")
-    Sleep (3000)
-    Fixclick(120, 100, "Right")
-    sleep (3000)
-}
-
-MoveForMagicTownOld() {
-    Fixclick(700, 315, "Right")
-    Sleep (2500)
-    Fixclick(585, 535, "Right")
-    Sleep (3000)
-    SendInput ("{d down}")
-    Sleep (3800) ;was 3800
-    SendInput ("{d up}")
-}
-
 MoveForMagicTown() {
     SendInput ("{d down}")
     Sleep (3000)
@@ -3215,7 +3196,7 @@ MoveForHellishOlder() {
 
 MoveForHellish() {
     if (ModeDropdown.Text = "Fool's Hunt") {
-        if (ok := FindText(&X, &Y, 370, 210, 465, 265, 0.15, 0.15, HellishAngle)) {
+        if (ok := FindText(&X, &Y, 618, 519, 675, 573, 0.15, 0.15, HellishAngle)) {
             SendInput ("{a down}")
             Sleep (1250)
             SendInput ("{a up}")
@@ -3301,21 +3282,11 @@ MoveForHellish() {
             SendInput ("{d up}")
             KeyWait "d"
         } else {
-            Fixclick(600, 300, "Right")
-            Sleep (7000)
+            SendInput ("{a down}")
+            Sleep (1200)
+            SendInput ("{a up}")
+            KeyWait "a"
         }
-    }
-}
-
-MoveForHellishOld() {
-    if (ok := FindText(&X, &Y, 370, 210, 465, 265, 0.15, 0.15, HellishAngle)) {
-        SendInput ("{d down}")
-        Sleep (1200)
-        SendInput ("{d up}")
-        KeyWait "d"
-    } else {
-        Fixclick(600, 300, "Right")
-        Sleep (7000)
     }
 }
 
@@ -3684,16 +3655,9 @@ ChangeMahoragaMode() {
 
 }
 
-CheckForErwin() {
-    if (ok := FindText(&X, &Y, 15, 228, 141, 245, 0, 0, ErwinAbility)) {
-        return true
-    }
-    return false
-}
-
 CheckForCardSelection() {
     if (ok := FindText(&cardX, &cardY, 196, 204, 568, 278, 0, 0, pick_card)) {
-        cardSelector()
+        HandleCards()
     }
 }
 

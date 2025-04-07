@@ -192,7 +192,6 @@ OpenDiscordLink() {
         mode := "Cursed Womb"
     } else if (selected = "Fool's Hunt") {
         mode := "Fool's Hunt"
-        AddToLog("⚠️ Fool's Hunt is still under development! Stay tuned for updates.")
     } else if (selected = "Winter Event") {
         mode := "Winter Event"
         MatchMaking.Visible := true
@@ -503,7 +502,7 @@ FindAndClickHauntedPath(targetColor := (mode = "Story" ? 0x191622 : 0x1D1414), s
     }
 }
 
-cardSelector() {
+HandleCards() {
     AddToLog("Picking card in priority order")
     if (ok := FindText(&X, &Y, 200, 239, 276, 270, 0, 0, UnitExistence)) {
         FixClick(329, 184) ; close upg menu
@@ -789,4 +788,37 @@ WaitFor(Name, timeout := 5000) {
         }
         Sleep 100  ; Fast checks for better responsiveness
     }
+}
+
+HasValue(array, value) {
+    for index, element in array {
+        if (element = value) {
+            return true
+        }
+    }
+    return false
+}
+
+AttachDropDownEvent(dropDown, index, callback) {
+    dropDown.OnEvent("Change", (*) => callback(dropDown, index))
+}
+
+RemoveEmptyStrings(array) {
+    loop array.Length {
+        i := array.Length - A_Index + 1
+        if (array[i] = "") {
+            array.RemoveAt(i)
+        }
+    }
+}
+
+StringJoin(array, delimiter := ", ") {
+    result := ""
+    ; Convert the array to an Object to make it enumerable
+    for index, value in array {
+        if (index > 1)
+            result .= delimiter
+        result .= value
+    }
+    return result
 }
