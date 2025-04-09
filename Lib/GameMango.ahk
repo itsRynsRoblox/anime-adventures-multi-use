@@ -181,7 +181,7 @@ PlaceFoolUnits() {
     ; Collect enabled slots
     enabledSlots := []
     for slotNum in [1, 2, 3, 4, 5, 6] {
-        enabled := "enabled" slotNum
+        enabled := GetNameForMode() "Enabled" slotNum
         enabled := %enabled%
         enabled := enabled.Value
         if (enabled) {
@@ -3405,19 +3405,19 @@ Reconnect() {
     ;Credit: @Haie
     color_home := PixelGetColor(10, 10)
     color_reconnect := PixelGetColor(519,329)
-    try {
-        if (WinExist(rblxID)) { 
-            WinActivate(rblxID)
-        }
-    } catch {
-        if (debugMessages) {
-            AddToLog("Error: Unable to activate Roblox window.")
-        }
-    }
-    
     if (color_home == 0x121215 or color_reconnect == 0x393B3D) {
         AddToLog("Disconnected! Attempting to reconnect...")
         sendDCWebhook()
+
+        try {
+            if (WinExist(rblxID)) { 
+                WinActivate(rblxID)
+            }
+        } catch {
+            if (debugMessages) {
+                AddToLog("Error: Unable to activate Roblox window.")
+            }
+        }
 
         psLink := FileExist("Settings\PrivateServer.txt") ? FileRead("Settings\PrivateServer.txt", "UTF-8") : ""
 
