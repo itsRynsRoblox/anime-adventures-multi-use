@@ -205,65 +205,6 @@ CheckForEnterButton() {
     }
 }
 
-StartDungeonRoute() {
-    CheckDungeonSpecials()
-    Sleep(2000)
-
-    foundRoom := false
-
-    for index, priority in routePriorityOrder {
-        if (!roomTexts.Has(priority)) {		
-            AddToLog(Format("{} room not available in textCards", priority))														
-            continue
-        }
-    
-        if (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom) or (ok := FindText(&X, &Y, 300, 260, 500, 465, 0.10, 0.10, BossRoom2))) {
-            global BossRoomCompleted := true
-            FixClick(X, Y-30)
-            foundRoom := true
-            break
-        }
-    
-        else if (ok := FindText(&X, &Y, 200, 350, 600, 435, 0.20, 0.20, roomTexts.Get(priority))) {
-            if (priority = "Chest") {
-                if (ok := FindText(&searchX, &searchY, 200, 350, 600, 435, 0.20, 0.20 RareChest)) {
-                    AddToLog("Found Room: Rare Chest")
-                    FixClick(X, Y-30)
-                    foundRoom := true
-                    break
-
-                }
-            }
-            AddToLog(Format("Found Room: {}", priority))
-            FixClick(X, Y-30)
-            foundRoom := true
-            break
-        }
-    }
-    
-    if (!foundRoom) {
-        ; If no chest/hoard found, click default positions
-        AddToLog("No chest/hoard found, clicking default positions")
-        FixClick(400, 355)
-        Sleep(500)
-        FixClick(335, 355)
-        WaitFor("Dungeon Room Enter")
-    } else {
-        WaitFor("Dungeon Room Enter")
-    }
-    
-    ; Look for Enter button and click until gone
-    if (ok := FindText(&X, &Y, 120, 425, 680, 500, 0.20, 0.20, Enter)) {
-        AddToLog("Found Enter button, joining dungeon")
-        ClickUntilGone(0, 0, 120, 425, 680, 500, Enter, 0, -30)
-        Sleep(2000)
-        
-        ; Start dungeon run
-        AddToLog("Starting dungeon run")
-        RestartStage()
-    }
-}
-
 ; Function to check for special dungeon elements after replay
 CheckDungeonSpecials() {
     AddToLog("Checking for dungeon shop, shrine, open chest")

@@ -4,7 +4,6 @@
 global Discord := "Images\discord_logo.png"
 global Minimize := "Images\minimizeButton.png" 
 global Exitbutton := "Images\exitButton.png"
-global RareChest := "Images\rare_chest.png"
 
 ;Explaining FindText
 ;AreaText is the area button in the lobby  / 746, 514, 789, 530
@@ -267,7 +266,7 @@ DungeonRoomBorderCursed:="|<>*23$9.zsQ2UI3bzbzz3sTDtzztzDtzU"
 DungeonRoomBorderChestOpen:="|<>*24$13.zzzzsQA+65D3bzztkDk4824DC0b0TU8"
 DungeonRoomBorderBoss:="|<>*9$13.00TjsQA+65D3bzzdkDk4824DC0U"
 
-;Dungeon Chests (Rare Chest: 446, 577, 794, 616)
+;Dungeon Chests
 EmptyCommonChest:="|<>**50$47.xzzzzzzSC400013UI8000250dzzzzz+1m00002QSw00007j80000009s000000wE0000010U0000027000000780000002k0000006U00000090Dzyzy0G0k07070Y7Dzwzn188k0H0u2EF00Y0I4VW0380s92A04k00G4E09000Y8U0G0018FDsY002EWEH8004V7UwE0092AS0U00G404l000Y/sPy0018Ssb8002EFTwE004UW08U009140F000G280W000Y4E1407x88U380DuEF03k3kSUW07vzAT1w0Trysu000FwFwL000U0XsW001016l4003kSDXs004067QU0080CAzj00FwS3lm00zTbz2bzzzzzw5203swVEC400012W"
 EmptyRareChest:="|<>**50$51.yzzzzzzjkQ80002722V0000EcEIzzzzzZ23Y00004sLrU0000xyY0000004bk000001y20000008EE0000012C000000CF0000000Gs0000003l0Dzyzy0G8300Q0Q2F1nzzDwkG88s0HVu2F1602M5EG8Mk0n0y2F2C04s10G8FU0a0A2F2A04k0UG8Fjwa042F2B1gzzUG8FsD4002F2AS0U00G8E0HY002F2y6rU00G8Ssbjzu2F17zlU1EG88zyA0+2F160FU1EG88k2A0+2F160FU1zG88k3g0DuF17zrU71u88U3yzn7r1zzzrysy80017l7l1k00808y82001016l0E00D1sy8y00101Vr4U0080CAsyw017lsDkQU0Drtzm2bzzzzzwEI80DXm523V0000EcLrzzzzzxyU"
 RareChest:="|<>*75$22.Q7Dw70004000000U9zn1bzDyTwztzrzzzzzzwKVb5Oxiw8Etqjvc"
@@ -283,17 +282,14 @@ IceDagger:="|<>*86$59.1zzy7zzzzzDzzwbzzzzyM0DtY800A4nkDn83309tbUzYUEE0nUUVz3UUUV
 ArchmageHat:="|<>*53$71.zzzzzzzzzzzzXztzzzyTzYzi2gEVX6Asz96AYnY10UDVy26M/b8000zVwUBqLUk48Fy7v8Pzzzzzzzzzzzz"
 ;Dungeon Curses
 CurseofFlight:="|<>*44$35.zzzzzzzzUTzzzwzDzzztyDzzzg3DzzzM6DzzwnnDzztbaTzznAnTzzaNaTzzAkAzzwNUMzzvDnBzzqTaNzzAz0nzyNy1XzwnAArzlaMNbzgww3DyNts6Dsn3knT1a7VaQwwD0AttsS0NgD0A3BMS0M6OkD0kArUS1UNgz3z0nTyLy1bzzzzzzzzzzzz3AUkM4mNAantwmN1UntYDtDmH8AmTlkmAA3zzzzzvzzzzzs"
-;CurseOfFlight:="|<>*58$62.zzzzzzzzzzwTzzzttnjjivE8S4SCm0Fapk7hjjiUqwFMHwPvl4BjzzzzzzzzzzU"
 CurseOfFlightLobby:="|<>*38$47.zzzzzzzz2pjgshVaoECdlOZC1UQLiE+zzzzzzzzk"
 CurseOfWind:="|<>*41$67.lzzzzzlwazwmAV6Dsky2MMNmH23t8z1YVAV/k3waTUmEb45kVy7TmEM3"
 CurseOfMoney:="|<>*47$58.VzzzzbVzzyv08S4S003NAQ1vPsAk1k5UDVjg336"
 CurseOfShielding:="|<>*42$38.nzzzzbtc0XsVyu68SYzm1WDXDzzzzzzzzzzzzzWyzCPzsX8m4W62G4d+1WY30EYTzzzzzC"
 CurseOfShieldingLobby:="|<>*39$36.bzzzzDB04T4DR34DGTY34T6Tzzzzzzzzzzzz5xyQrz4N6EYE192IZ0504010zzzzztU"
 CurseofHealth:="|<>*64$37.zzzzzzzwDz7zzzz3zzzrzVzvzw0D03zq07U1jw0000Dy00007z00003zU0001zk0000rs0000Pw0000Dy00007z000k3zU00M1zg0003Ty0001zwk033TzM01Vzzv03nTzzU1tzzzjznTzzzztzzzyznTzzzztzzzzz3TzzzzVzzzzzzzzzzzzzzzsn8CC1vtYmTDtwmNVUwyN3yHzNAYn9zlkrAA3zzzzzzzzzzzzs"
-;CurseOfHealth:="|<>*49$62.zzzzzzzzzzwTzzztvTwuSv08S4S0Fg1Ylk7hjg0PfQ1M3sPv24OrzzzzzzzzzzU"
 CurseOfRegen:="|<>*31$58.vzzzzrXzzy7zzzwS7zztY01s1s001YFU7ZjU00L060S6y0E3M"
 CurseOfExplosion:="|<>*28$38.lzzzza980Vs1WO60SYsk1UDVADzzzTz3zzzzzzVznznzsUAWAWC81+1+9U0U002Tzzzzzy"
-
 
 global roomTexts := Map(
     "Rare_Chest", RareChest,

@@ -4089,7 +4089,7 @@ CheckEndAndRoute() {
     return false
 }
 
-ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
+/*ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
     while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
         
         if (offsetX != 0 || offsetY != 0) {
@@ -4099,18 +4099,15 @@ ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX
         }
         Sleep(1000)
     }
-}
+}*/
 
-ClickUntilGoneWithFailSafe(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
+ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
+    waitTime := A_TickCount ; Start timer
     while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
-        
-        waitTime := A_TickCount ; Start timer
-
         if ((A_TickCount - waitTime) > 300000) { ; 5-minute limit
             AddToLog("5 minute failsafe triggered, trying to open roblox...")
             return RejoinPrivateServer()
         }
-        
         if (offsetX != 0 || offsetY != 0) {
             FixClick(X + offsetX, Y + offsetY)  
         } else {

@@ -361,32 +361,6 @@ CaptchaDetect(x, y, w, h, inputX, inputY) {
     return false
 }
 
-TogglePriorityDropdowns(*) {
-    global PriorityUpgrade, priority1, priority2, priority3, priority4, priority5, priority6
-    global ChallengePriority1, ChallengePriority2, ChallengePriority3, ChallengePriority4, ChallengePriority5, ChallengePriority6
-    isChallenge := (mode = "Challenge")
-    shouldShow := PriorityUpgrade.Value & !isChallenge
-    shouldShowChallenge := PriorityUpgrade.Value & isChallenge
-
-    priority1.Visible := shouldShow
-    priority2.Visible := shouldShow
-    priority3.Visible := shouldShow
-    priority4.Visible := shouldShow
-    priority5.Visible := shouldShow
-    priority6.Visible := shouldShow
-
-    ChallengePriority1.Visible := shouldShowChallenge
-    ChallengePriority2.Visible := shouldShowChallenge
-    ChallengePriority3.Visible := shouldShowChallenge
-    ChallengePriority4.Visible := shouldShowChallenge
-    ChallengePriority5.Visible := shouldShowChallenge
-    ChallengePriority6.Visible := shouldShowChallenge
-
-    for unit in UnitData {
-        unit.PriorityText.Visible := shouldShow
-    }
-}
-
 GetWindowCenter(WinTitle) {
     x := 0 y := 0 Width := 0 Height := 0
     WinGetPos(&X, &Y, &Width, &Height, WinTitle)

@@ -87,7 +87,6 @@ CheckForRefund() {
         AddToLog("Found refund, deleting buff...")
         FixClick(X + 15, Y - 45)
         Sleep(500)
-        Sleep(250)
         return true
     }
     return false

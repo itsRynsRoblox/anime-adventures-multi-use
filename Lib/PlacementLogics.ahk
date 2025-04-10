@@ -50,29 +50,28 @@ GenerateCirclePoints() {
 
 GenerateGridPoints() {
     points := []
-    gridSize := 40  ; Space between points
-    squaresPerSide := 7  ; How many points per row/column (odd number recommended)
-
-    ; Center point coordinates
+    
     centerX := 408
     centerY := 320
 
-    ; Calculate starting position for top-left point of the grid
-    startX := centerX - ((squaresPerSide - 1) / 2 * gridSize)
-    startY := centerY - ((squaresPerSide - 1) / 2 * gridSize)
-
-    ; Generate grid points row by row
-    loop squaresPerSide {
-        currentRow := A_Index
-        y := startY + ((currentRow - 1) * gridSize)
-
-        ; Generate each point in the current row
-        loop squaresPerSide {
-            x := startX + ((A_Index - 1) * gridSize)
-            points.Push({ x: x, y: y })
+    minX := centerX - 180  
+    maxX := centerX + 180  
+    minY := centerY - 140  
+    maxY := centerY + 140  
+    
+    stepX := 25
+    stepY := 28
+    
+    y := minY
+    while (y <= maxY) {
+        x := minX
+        while (x <= maxX) {
+            points.Push({x: x, y: y})
+            x += stepX
         }
+        y += stepY
     }
-
+    
     return points
 }
 
