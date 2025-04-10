@@ -1,69 +1,6 @@
 #Include %A_ScriptDir%\Lib\GUI.ahk
 global confirmClicked := false
 
-CheckBanner(unitName) {
-
-    ; First check if Roblox window exists
-    if !WinExist(rblxID) {
-        AddToLog("Roblox window not found - skipping banner check")
-        return false
-    }
-
-    ; Get Roblox window position
-    WinGetPos(&robloxX, &robloxY, &rblxW, &rblxH, rblxID)
-    
-    detectionCount := 0
-    AddToLog("Checking for: " unitName)
-
-    ; Split unit name into individual words
-    unitName := Trim(unitName)  ; Remove spaces
-    unitWords := StrSplit(unitName, " ")
-
-    Loop 5 {
-        try {
-            result := OCR.FromRect(robloxX + 280, robloxY + 293, 250, 55, "en",
-                {   
-                    grayscale: true,
-                    scale: 2.0
-                })
-            
-            ; Check if all words are found in the text
-            allWordsFound := true
-            for word in unitWords {
-                if !InStr(result.Text, word) {
-                    allWordsFound := false
-                    break
-                }
-            }
-            
-            if (allWordsFound) {
-                detectionCount++
-                Sleep(100)
-            }
-        }
-    }
-
-    if (detectionCount >= 1) {
-        AddToLog("Found " unitName " in banner")
-        try {
-            BannerFound()
-        }
-        return true
-    }
-
-    AddToLog("Did not find " unitName " in banner")
-    return false
-}
-
-SaveBannerSettings(*) {
-    AddToLog("Saving Banner Configuration")
-    
-    if FileExist("Settings\BannerUnit.txt")
-        FileDelete("Settings\BannerUnit.txt")
-    
-    FileAppend(BannerUnitBox.Value, "Settings\BannerUnit.txt", "UTF-8")
-}
-
 SavePsSettings(*) {
     AddToLog("Saving Private Server")
     
@@ -140,7 +77,6 @@ OpenDiscordLink() {
     SaveChestsBox.Visible := false
     StopAfterDefeat.Visible := false
     DenyShrines.Visible := false
-    UseNewDungeonRoute.Visible := false
     EditRoute.Visible := false
     EditCurses.Visible := false
 
@@ -370,10 +306,11 @@ FixClick(x, y, LR := "Left") {
     Sleep(50)
 }
 
-TestClick(x, y, sleepTime := 1000, LR := "Left") {
+FreezeClient(x, y, sleepTime := 1000, LR := "Left") {
     MouseMove(x, y)
     MouseMove(1, 0, , "R")
     SendEvent("{LButton down}")  ; Hold down left click
+    Sleep (500)
     MouseMove(400, 300)
     MouseMove(1, 0, , "R")
     Sleep(sleepTime)

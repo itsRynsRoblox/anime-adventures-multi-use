@@ -15,7 +15,7 @@ setupFilePath() {
 
 readInSettings() {
     ; General settings
-    global mode, UseCustomSettings
+    global mode
 
     ; General Unit Settings
     global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
@@ -30,7 +30,7 @@ readInSettings() {
 
 
     ; General settings
-    global ChallengeBox, PriorityUpgrade, PlaceSpeed, MatchMaking, MaxUpgradeBeforeMoving, RejoinRoblox, ReturnLobbyBox, StoryUINav
+    global ChallengeBox, PriorityUpgrade, PlaceSpeed, MatchMaking, MaxUpgradeBeforeMoving, ReturnLobbyBox, StoryUINav
 
     ; Challenge placements
     global ChallengeEnabled1, ChallengeEnabled2, ChallengeEnabled3, ChallengeEnabled4, ChallengeEnabled5, ChallengeEnabled6
@@ -72,10 +72,8 @@ readInSettings() {
     global eventUpgradeLimitEnabled1, eventUpgradeLimitEnabled2, eventUpgradeLimitEnabled3, eventUpgradeLimitEnabled4, eventUpgradeLimitEnabled5, eventUpgradeLimitEnabled6
     global eventUpgradeLimit1, eventUpgradeLimit2, eventUpgradeLimit3, eventUpgradeLimit4, eventUpgradeLimit5, eventUpgradeLimit6
 
-
-
     ;Dungeon Settings
-    global StopAfterDefeat, DenyShrines, UseNewDungeonRoute, SaveChestsBox
+    global StopAfterDefeat, DenyShrines, SaveChestsBox
 
     ; Team settings
     global PhysicalTeam, MagicTeam, TeamSwap
@@ -362,7 +360,6 @@ readInSettings() {
                 case "PhyTeam": physicalTeam.Text := parts[2]
                 case "MagTeam": magicTeam.Text := parts[2]
 
-                case "FailsafeEnabled": RejoinRoblox.Value := parts[2] ; Set the checkbox value
                 case "ToLobby": ReturnLobbyBox.Value := parts[2] ; Set the checkbox value
                 case "UseNavigation": StoryUINav.Value := parts[2] ; Set the checkbox value
                 case "Upgrade1By1": MaxUpgradeBeforeMoving.Value := parts[2] ; Set the checkbox value
@@ -370,15 +367,12 @@ readInSettings() {
                 ;Dungeon settings
                 case "StopAfterDefeat": StopAfterDefeat.Value := parts[2] ; Set the checkbox value
                 case "SaveChests": SaveChestsBox.Value := parts[2] ; Set the checkbox value
-                case "NewSystem": UseNewDungeonRoute.Value := parts[2] ; Set the checkbox value
                 case "AutoReject": DenyShrines.Value := parts[2] ; Set the checkbox value
 
                 case "FirstAdapt": FirstAdaptation.Value := parts[2] ; Set the checkbox value
                 case "SecondAdapt": SecondAdaptation.Value := parts[2] ; Set the checkbox value
                 case "FinalAdapt": FinalAdaptation.Value := parts[2] ; Set the checkbox value
                 case "Style": MahoragoMode.Value := parts[2] ; Set the checkbox value
-
-                case "CustomSettings": UseCustomSettings.Value := parts[2] ; Set the checkbox value
             }
         }
         AddToLog("Configuration settings loaded successfully")
@@ -391,7 +385,7 @@ readInSettings() {
 
 SaveSettings(*) {
     ; General settings
-    global mode, UseCustomSettings
+    global mode
 
     ; General Unit Settings
     global enabled1, enabled2, enabled3, enabled4, enabled5, enabled6
@@ -405,7 +399,7 @@ SaveSettings(*) {
     global UpgradeLimit1, UpgradeLimit2, UpgradeLimit3, UpgradeLimit4, UpgradeLimit5, UpgradeLimit6
 
     ; General settings
-    global ChallengeBox, PriorityUpgrade, PlaceSpeed, MatchMaking, MaxUpgradeBeforeMoving, RejoinRoblox, ReturnLobbyBox, StoryUINav
+    global ChallengeBox, PriorityUpgrade, PlaceSpeed, MatchMaking, MaxUpgradeBeforeMoving, ReturnLobbyBox, StoryUINav
 
     ; Challenge placements
     global ChallengeEnabled1, ChallengeEnabled2, ChallengeEnabled3, ChallengeEnabled4, ChallengeEnabled5, ChallengeEnabled6
@@ -447,10 +441,8 @@ SaveSettings(*) {
     global eventUpgradeLimitEnabled1, eventUpgradeLimitEnabled2, eventUpgradeLimitEnabled3, eventUpgradeLimitEnabled4, eventUpgradeLimitEnabled5, eventUpgradeLimitEnabled6
     global eventUpgradeLimit1, eventUpgradeLimit2, eventUpgradeLimit3, eventUpgradeLimit4, eventUpgradeLimit5, eventUpgradeLimit6
 
-
-
     ;Dungeon Settings
-    global StopAfterDefeat, DenyShrines, UseNewDungeonRoute, SaveChestsBox
+    global StopAfterDefeat, DenyShrines, SaveChestsBox
 
     ; Team settings
     global PhysicalTeam, MagicTeam, TeamSwap
@@ -724,10 +716,6 @@ SaveSettings(*) {
         content .= "`nStopAfterDefeat=" StopAfterDefeat.Value "`n"
         content .= "`nAutoReject=" DenyShrines.Value "`n"
         content .= "`nSaveChests=" SaveChestsBox.Value "`n"
-        content .= "`nNewSystem=" UseNewDungeonRoute.Value "`n"
-
-        content .= "`n[RejoinFailsafe]"
-        content .= "`nFailsafeEnabled=" RejoinRoblox.Value "`n"
 
         content .= "`n[ReturnToLobby]"
         content .= "`nToLobby=" ReturnLobbyBox.Value "`n"
@@ -749,9 +737,6 @@ SaveSettings(*) {
 
         content .= "`n[MahoragoMode]"
         content .= "`nStyle=" MahoragoMode.Value "`n"
-
-        content .= "`n[UseCustomSettings]"
-        content .= "`nCustomSettings=" UseCustomSettings.Value "`n"
 
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")

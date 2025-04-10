@@ -387,7 +387,6 @@ SaveWebhookBtnClick() {
 
 WebhookScreenshot(title, description, color := 0x0dffff, status := "") {
     global webhook, WebhookURL, DiscordUserID, wins, loss, currentStreak, stageStartTime
-    ; Yap message
 
     footerMessages := Map(
         "win", win_messages,
@@ -408,20 +407,18 @@ WebhookScreenshot(title, description, color := 0x0dffff, status := "") {
     if (!IsSet(stageStartTime)) {
         stageStartTime := A_TickCount
     }
-    
+
     if !(webhookURL ~= 'i)https?:\/\/discord\.com\/api\/webhooks\/(\d{18,19})\/[\w-]{68}') {
         return
     }
-    
+
     ; Select appropriate message based on conditions
     footerText := ""
     messages := footerMessages[status = "win" ? "win" : "lose"]  ; default messages
 
-    ; Check if it's a long run (30+ minutes)
     stageLength := CalculateElapsedTime(stageStartTime)
     stageMinutes := Floor((A_TickCount - stageStartTime) / (1000 * 60))
 
-    ; Helper function to replace placeholders
     ReplaceVars(text, vars) {
         for key, value in vars {
             text := StrReplace(text, "#{" key "}", value)
@@ -430,35 +427,27 @@ WebhookScreenshot(title, description, color := 0x0dffff, status := "") {
     }
 
     if (status = "win") {
-        ; Check for milestone (every 5th win)
         if (Mod(wins, 5) = 0) {
             messages := footerMessages["milestone_win"]
             footerText := ReplaceVars(messages[Random(1, messages.Length)], Map("count", wins))
-        }
-        ; Check for win streak
-        else if (currentStreak >= 3) {
+        } else if (currentStreak >= 3) {
             messages := footerMessages["winstreak"]
             footerText := ReplaceVars(messages[Random(1, messages.Length)], Map("streak", currentStreak))
         }
     } else {
-        ; Check for milestone loss
         if (Mod(loss, 5) = 0) {
             messages := footerMessages["milestone_lose"]
             footerText := ReplaceVars(messages[Random(1, messages.Length)], Map("count", loss))
-        }
-        ; Check for loss streak
-        else if (currentStreak <= -3) {
+        } else if (currentStreak <= -3) {
             messages := footerMessages["losestreak"]
             footerText := ReplaceVars(messages[Random(1, messages.Length)], Map("streak", Abs(currentStreak)))
         }
     }
 
-    ; If no special message was set, use a random regular message
     if (footerText = "") {
         footerText := messages[Random(1, messages.Length)]
     }
 
-    ; Rest of your existing WebhookScreenshot code...
     UserIDSent := (DiscordUserID = "") ? "" : "<@" DiscordUserID ">"
 
     ; Initialize GDI+
@@ -482,25 +471,25 @@ WebhookScreenshot(title, description, color := 0x0dffff, status := "") {
         Gdip_DisposeImage(pBitmap)
         Gdip_Shutdown(pToken)
         return
-    }   
-    
-    ; Prepare and send webhook
-    attachment := AttachmentBuilder(pCroppedBitmap)
-    myEmbed := EmbedBuilder()
-    myEmbed.setTitle(title)
-    myEmbed.setDescription(description)
-    myEmbed.setColor(color)
-    myEmbed.setImage(attachment)
-    myEmbed.setFooter({ text: footerText })
-    
+    }
+
     try {
+        ; Prepare and send webhook
+        attachment := AttachmentBuilder(pCroppedBitmap)
+        myEmbed := EmbedBuilder()
+        myEmbed.setTitle(title)
+        myEmbed.setDescription(description)
+        myEmbed.setColor(color)
+        myEmbed.setImage(attachment)
+        myEmbed.setFooter({ text: footerText })
+
         webhook.send({
             content: UserIDSent,
             embeds: [myEmbed],
             files: [attachment]
         })
     } catch {
-        AddToLog("Unable to send webhook - continuing without sending")
+        AddToLog("Unable to send webhook or build embed - continuing without sending")
     }
 
     ; Cleanup
@@ -508,6 +497,7 @@ WebhookScreenshot(title, description, color := 0x0dffff, status := "") {
     Gdip_DisposeImage(pCroppedBitmap)
     Gdip_Shutdown(pToken)
 }
+
 
 SendWebhookRequest(webhook, params, maxRetries := 3) {
     try {
@@ -553,38 +543,4 @@ sendDCWebhook() {
         AddToLog("Failed to send webhook")
     }
 
-}
-
-SendBanner() {
-    global DiscordUserID, StartTime
-
-    ; Calculate how long it took to find the unit
-    ElapsedTimeMs := A_TickCount - StartTime
-    ElapsedTimeSec := Floor(ElapsedTimeMs / 1000)
-    ElapsedHours := Floor(ElapsedTimeSec / 3600)
-    ElapsedMinutes := Floor(Mod(ElapsedTimeSec, 3600) / 60)
-    Runtime := Format("{:02}h {:02}m", ElapsedHours, ElapsedMinutes)
-
-    ; Build banner alert info
-    bannerInfo := "🎉 **Banner Unit Found!** 🎉`n"
-    . ":stopwatch: Time Taken: " Runtime
-
-    ; If you have BannerUnitBox from settings, show which unit was found
-    if FileExist("Settings\BannerUnit.txt") {
-        bannerUnitName := FileRead("Settings\BannerUnit.txt", "UTF-8")
-        if (bannerUnitName != "")
-            bannerInfo .= "`n:partying_face: Found Unit: " bannerUnitName " :partying_face:"
-    }
-
-    WebhookScreenshot("Special Unit Found!", bannerInfo, 0xFFD700,) 
-}
-
-BannerFound() {
-    global WebhookURL := FileRead(WebhookURLFile, "UTF-8")
-    global DiscordUserID := FileRead(DiscordUserIDFile, "UTF-8")
-
-    if (webhookURL ~= 'i)https?:\/\/discord\.com\/api\/webhooks\/(\d{18,19})\/[\w-]{68}') {
-        global webhook := WebHookBuilder(WebhookURL)
-        SendBanner()
-    }
 }

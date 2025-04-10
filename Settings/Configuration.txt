@@ -1,4 +1,4 @@
-Mode=
+Mode=Fool's Hunt
 
 
 [Enabled]
@@ -323,11 +323,6 @@ AutoReject=1
 
 SaveChests=1
 
-NewSystem=1
-
-[RejoinFailsafe]
-FailsafeEnabled=1
-
 [ReturnToLobby]
 ToLobby=1
 
@@ -348,6 +343,3 @@ FinalAdapt=3
 
 [MahoragoMode]
 Style=1
-
-[UseCustomSettings]
-CustomSettings=1

@@ -525,11 +525,7 @@ MonitorDungeonEnd() {
                 
                 ; Start a new dungeon run
                 AddToLog("Starting next dungeon")
-                if (UseNewDungeonRoute.Value) {
-                    return LookForDungeonRooms()
-                } else {
-                    return StartDungeonRoute()
-                }
+                return LookForDungeonRooms()
             }
             Reconnect()
         }
@@ -584,4 +580,33 @@ DetectCurse() {
         }
         Sleep 1000
     }
+}
+
+CheckForFinishDungeon() {
+    ; Check for the finish dungeon popup
+    if (ok := FindText(&X, &Y, 240, 180, 565, 480, 0.20, 0.20, FinishDungeon) or (ok := FindText(&X, &Y, 310, 395, 495, 440, 0.20, 0.20, EnterDungeon)) or (ok := FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath))) {
+        
+        ; Click the Finish button
+        ClickUntilGone(0, 0, 240, 180, 565, 480, DungeonFinish, -3, -35)
+        Sleep(1500)
+
+        if (!dungeonDeathBroken) {
+            ; Click Dungeon Death if needed
+            ClickDungeonDeathContinue()
+            Sleep(1500)
+        }
+        
+        ; Click the X in the top right
+        ClickUntilGone(0, 0, 640, 175, 700, 205, DungeonRedX, -3, -35)
+        Sleep(1000)
+        
+        ; Return to lobby
+        AddToLog("Returning to lobby after completing dungeon")
+        ClickReturnToLobby()
+        
+        ; Check for lobby and restart
+        return CheckLobby()
+    }
+    
+    return false
 }

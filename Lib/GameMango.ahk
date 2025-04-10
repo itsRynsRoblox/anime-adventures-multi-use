@@ -15,11 +15,11 @@ Hotkey(F3Key, (*) => Reload())
 Hotkey(F4Key, (*) => TogglePause())
 
 F5:: {
-    BasicSetup
+
 }
 
 F6:: {
-    MoveForHellish
+
 }
 
 F7:: {
@@ -808,11 +808,7 @@ DungeonMode() {
     }
     Sleep(1000)
     ; Select dungeon route and enter
-    if (UseNewDungeonRoute.Value) {
-        LookForDungeonRooms()
-    } else {
-        StartDungeonRoute()
-    }
+    LookForDungeonRooms()
 }
 
 CheckForReturnToLobby() {
@@ -1303,7 +1299,7 @@ GetMapData(type, name) {
             "Act 6", {x: 300, y: 385, scrolls: 1}
         ),
         "RaidMap", Map(
-            "The Spider", {x: 630, y: 250, scrolls: 0},
+            "Ant Kingdom", {x: 630, y: 250, scrolls: 0},
             "Sacred Planet", {x: 630, y: 300, scrolls: 0},
             "Strange Town", {x: 630, y: 350, scrolls: 0},
             "Ruined City", {x: 630, y: 400, scrolls: 0},
@@ -1546,18 +1542,12 @@ FindMatch() {
     startTime := A_TickCount
 
     Loop {
-        if (A_TickCount - startTime > 50000) {
-            AddToLog("Matchmaking timeout, restarting mode")
-            FixClick(400, 520)
-            return StartSelectedMode()
-        }
-
         FixClick(400, 435)  ; Play Here or Find Match 
         Sleep(300)
         FixClick(460, 330)  ; Click Find Match
         Sleep(300)
         
-        ; Try captcha    
+        ; Try captcha
         if (!CaptchaDetect(252, 292, 300, 50, 400, 335)) {
             AddToLog("Captcha not detected, retrying...")
             FixClick(585, 190)  ; Click close
@@ -1565,7 +1555,16 @@ FindMatch() {
             continue
         }
         FixClick(300, 385)  ; Enter captcha
-        return true
+        while (A_TickCount - startTime < 30000) {  ; Check for 30 seconds
+            if !(ok := FindText(&X, &Y, 746, 514, 789, 530, 0, 0, AreaText)) {
+                AddToLog("Area text gone - matchmaking successful")
+                return true
+            }
+            Sleep(200)  ; Check every 200ms
+        }
+        AddToLog("Matchmaking timeout, restarting mode")
+        FixClick(400, 520)
+        return StartSelectedMode()
     }
 }
 
@@ -1634,7 +1633,7 @@ GetLegendActDownArrows(LegendActDropdown) {
 
 GetRaidDownArrows(map) {
     switch map {
-        case "The Spider": return 1
+        case "Ant Kingdom": return 1
         case "Sacred Planet": return 2
         case "Strange Town": return 3
         case "Ruined City": return 4
@@ -1964,8 +1963,6 @@ HandleMapMovement(MapName) {
             MoveForHellish()
         case "Contracts":
             MoveForContracts()
-        case "Fools Event":
-            MoveForFoolsEvent()
         case "Winter Event":
             MoveForWinterEventNoClick()
         case "Shibuya District":
@@ -3355,6 +3352,7 @@ RestartStage() {
     if (ModeDropdown.Text = "Fool's Hunt") {
         if (BringUnits.Value) {
             ClickAndHoldExit()
+            Sleep(1000)
         }
     }
 
@@ -3930,9 +3928,9 @@ HandleContractJoin() {
             
         ; Try captcha    
         if (!CaptchaDetect(252, 292, 300, 50, 400, 335)) {
-        AddToLog("Captcha not detected, retrying...")
-        FixClick(585, 190)  ; Click close
-        return
+            AddToLog("Captcha not detected, retrying...")
+            FixClick(585, 190)  ; Click close
+            return
        }
        FixClick(300, 385)  ; Enter captcha
 
@@ -4300,60 +4298,19 @@ MoveToPosition(PosX, PosY) {
 }
 
 ClickReplay() {
-    if (RejoinRoblox.Value) {
-        ClickUntilGoneWithFailSafe(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
-    } else {
-        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
-    }
+    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +120, -35, LobbyText2)
 }
 
 ClickNextLevel() {
-    if (RejoinRoblox.Value) {
-        ClickUntilGoneWithFailSafe(0, 0, 80, 85, 739, 224, LobbyText, +260, -35, LobbyText2)
-    } else {
-        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +260, -35, LobbyText2)
-    }
+    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, +260, -35, LobbyText2)
 }
 
 ClickReturnToLobby() {
-    if (RejoinRoblox.Value) {
-        ClickUntilGoneWithFailSafe(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
-    } else {
-        ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
-    }
+    ClickUntilGone(0, 0, 80, 85, 739, 224, LobbyText, 0, -35, LobbyText2)
 }
 
 ClickStartStory() {
     ClickUntilGone(0, 0, 320, 468, 486, 521, StartStoryButton, 0, -35)
-}
-
-CheckForFinishDungeon() {
-    ; Check for the finish dungeon popup
-    if (ok := FindText(&X, &Y, 240, 180, 565, 480, 0.20, 0.20, FinishDungeon) or (ok := FindText(&X, &Y, 310, 395, 495, 440, 0.20, 0.20, EnterDungeon)) or (ok := FindText(&X, &Y, 370, 225, 545, 300, 0.20, 0.20, DungeonDeath))) {
-        
-        ; Click the Finish button
-        ClickUntilGone(0, 0, 240, 180, 565, 480, DungeonFinish, -3, -35)
-        Sleep(1500)
-
-        if (!dungeonDeathBroken) {
-            ; Click Dungeon Death if needed
-            ClickDungeonDeathContinue()
-            Sleep(1500)
-        }
-        
-        ; Click the X in the top right
-        ClickUntilGone(0, 0, 640, 175, 700, 205, DungeonRedX, -3, -35)
-        Sleep(1000)
-        
-        ; Return to lobby
-        AddToLog("Returning to lobby after completing dungeon")
-        ClickReturnToLobby()
-        
-        ; Check for lobby and restart
-        return CheckLobby()
-    }
-    
-    return false
 }
 
 CheckForUpgrade(upgradeLimit) {
@@ -4389,141 +4346,4 @@ CheckForRobloxApp() {
 
 CheckForNotification() {
     return FindText(&X, &Y, 748, 94, 778, 551, 0, 0, ExitNotification) ? true : false
-}
-
-MoveForFoolsEvent() {
-    FixClick(590, 15) ; click on paths
-    loop 200 {
-        Sleep 100
-
-        if FindAndMoveToPath() {
-            FixClick(590, 15) ; click on paths
-            break
-        }
-    }
-}
-
-CheckForFoolBuffs() {
-    CheckForRandomBuff()
-    CheckForAstralGate()
-    CheckForAstralSummon()
-    CheckForClone()
-    CheckForMerge()
-    CheckForRefund()
-}
-
-CheckForRandomBuff() {
-    global successfulCoordinates, maxedCoordinates
-    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.35, 0.35, RandomBuff)) {
-        ; Prefer maxedCoordinates
-        if maxedCoordinates.Length > 0 {
-            randomIndex := Random(1, maxedCoordinates.Length)
-            coord := maxedCoordinates[randomIndex]
-
-            AddToLog("Found random buff, applying to maxed unit at X" coord.x " Y" coord.y)
-            FixClick(X, Y - 20)
-            Sleep(500)
-            FixClick(coord.x, coord.y)
-            Sleep(250)
-            return true
-        }
-        ; Otherwise use successfulCoordinates
-        else if successfulCoordinates.Length > 0 {
-            randomIndex := Random(1, successfulCoordinates.Length)
-            coord := successfulCoordinates[randomIndex]
-
-            AddToLog("Found random buff, applying to random unit at X" coord.x " Y" coord.y)
-            FixClick(X, Y - 20)
-            Sleep(500)
-            FixClick(coord.x, coord.y)
-            Sleep(250)
-            return true
-        }
-    }
-    return false
-}
-
-CheckForClone() {
-    global successfulCoordinates, maxedCoordinates
-    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.25, 0.25, Clone)) {
-        ; Prefer maxedCoordinates
-        if maxedCoordinates.Length > 0 {
-            randomIndex := Random(1, maxedCoordinates.Length)
-            coord := maxedCoordinates[randomIndex]
-
-            AddToLog("Found clone, applying to maxed unit at X" coord.x " Y" coord.y)
-            FixClick(X, Y - 20)
-            Sleep(500)
-            FixClick(coord.x, coord.y)
-            Sleep(250)
-            return true
-        }
-        ; Otherwise use successfulCoordinates
-        else if successfulCoordinates.Length > 0 {
-            randomIndex := Random(1, successfulCoordinates.Length)
-            coord := successfulCoordinates[randomIndex]
-
-            AddToLog("Found clone, applying to random unit at X" coord.x " Y" coord.y)
-            FixClick(X, Y - 20)
-            Sleep(500)
-            FixClick(coord.x, coord.y)
-            Sleep(250)
-            return true
-        }
-    }
-    return false
-}
-
-CheckForMerge() {
-    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.25, 0.25, Merge)) {
-        AddToLog("Found merge, deleting buff...")
-        FixClick(X + 15, Y - 45)
-        Sleep(500)
-        Sleep(250)
-        return true
-    }
-    return false
-}
-
-CheckForRefund() {
-    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.25, 0.25, Refund)) {
-        AddToLog("Found refund, deleting buff...")
-        FixClick(X + 15, Y - 45)
-        Sleep(500)
-        Sleep(250)
-        return true
-    }
-    return false
-}
-
-CheckForAstralGate() {
-    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.35, 0.35, AstralGate)) {
-        AddToLog("Found astral gate, attempting to use...")
-        FindText().Click(X, Y)
-        Sleep(500)
-        return true
-    }
-    return false
-}
-
-CheckForAstralSummon() {
-    if (ok := FindText(&X, &Y, 255, 561, 551, 605, 0.25, 0.25, AstralSummon)) {
-        AddToLog("Found astral summon, attempting to use...")
-        FindText().Click(X, Y)
-        Sleep(500)
-        return true
-    }
-    return false
-}
-
-ClickAndHoldExit() {
-    if WinExist(rblxID) {
-        WinMove(-10, 15, 800, 600, rblxID)
-        WinActivate(rblxID)
-        Sleep 1000
-    }
-    AddToLog("Freezing client for 2 minutes...")
-    TestClick(777, -6, 120000) ; Freeze Client for 2 minutes before resuming
-    AddToLog("Unfroze client")
-    moveRobloxWindow
 }

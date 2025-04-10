@@ -6,11 +6,11 @@
 
 ;Update Checker
 global repoOwner := "itsRynsRoblox"
-global repoName := "anime-adventures-multi-use"
-global currentVersion := "1.14.17"
+global repoName := "anime-adventures"
+global currentVersion := "1.14.18"
 
 ; Basic Application Info
-global aaTitle := "Anime Adventures - Ryn's Edition "
+global aaTitle := "Anime Adventures - Ryn's Version "
 global version := "v" . currentVersion
 global rblxID := "ahk_exe RobloxPlayerBeta.exe"
 ;Coordinate and Positioning Variables
@@ -24,9 +24,6 @@ global centerX := 408
 global centerY := 320
 global successfulCoordinates := []
 global maxedCoordinates := []
-;State Variables
-global enabledUnits := Map()  
-global placementValues := Map()  
 ;Hotkeys
 global F1Key := "F1"
 global F2Key := "F2"
@@ -65,9 +62,11 @@ global currentOutputFile := A_ScriptDir "\Logs\LogFile.txt"
 global WebhookURLFile := "Settings\WebhookURL.txt"
 global DiscordUserIDFile := "Settings\DiscordUSERID.txt"
 global SendActivityLogsFile := "Settings\SendActivityLogs.txt"
+
 ;Custom Pictures
 GithubImage := "Images\github-logo.png"
 DiscordImage := "Images\another_discord.png"
+WheelImage:= "Images\wheel.png"
 
 if !DirExist(A_ScriptDir "\Logs") {
     DirCreate(A_ScriptDir "\Logs")
@@ -103,8 +102,8 @@ global windowTitle := aaMainUI.Add("Text", "x10 y3 w1200 h29 +BackgroundTrans", 
 aaMainUI.Add("Text", "x805 y501 w558 h25 +Center +BackgroundTrans", "Process") ;Process header
 uiBorders.Push(aaMainUI.Add("Text", "x803 y499 w560 h1 +Background" uiTheme[3])) ;Process Top
 aaMainUI.SetFont("norm s11 c" uiTheme[1]) ;Font
-global process1 := aaMainUI.Add("Text", "x810 y536 w538 h18 +BackgroundTrans c" uiTheme[7], "➤ Original Creator: Mist_Yuu (discord.gg/mistdomain)") ;Processes
-global process2 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "➤ Version edited and maintained by Ryn (@TheRealTension)") ;Processes 
+global process1 := aaMainUI.Add("Text", "x810 y536 w538 h18 +BackgroundTrans c" uiTheme[7], "Original Creator: Mist_Yuu (discord.gg/mistdomain)") ;Processes
+global process2 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "Version edited and maintained by Ryn (@TheRealTension)")
 global process3 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
 global process4 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
 global process5 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
@@ -135,11 +134,11 @@ ShowSettingsGUI(*) {
     ; Window border
     SettingsGUI.Add("Text", "x0 y0 w1 h600 +Background" uiTheme[3])     ; Left
     SettingsGUI.Add("Text", "x599 y0 w1 h600 +Background" uiTheme[3])   ; Right
-    SettingsGUI.Add("Text", "x0 y399 w600 h1 +Background" uiTheme[3])   ; Bottom
+    SettingsGUI.Add("Text", "x0 y280 w600 h1 +Background" uiTheme[3])   ; Bottom
     
     ; Right side sections
     SettingsGUI.SetFont("s10", "Verdana")
-    SettingsGUI.Add("GroupBox", "x310 y5 w280 h160 c" uiTheme[1], "Discord Webhook")  ; Box
+    SettingsGUI.Add("GroupBox", "x310 y5 w280 h160 Center c" uiTheme[1], "Discord Webhook")  ; Box
     
     SettingsGUI.SetFont("s9", "Verdana")
     SettingsGUI.Add("Text", "x320 y30 c" uiTheme[1], "Webhook URL")     ; Webhook Text
@@ -159,40 +158,25 @@ ShowSettingsGUI(*) {
     SettingsGUI.Add("Text", "x20 y200 c" uiTheme[1], "Pause Macro:")
     global F4Box := SettingsGUI.Add("Edit", "x110 y200 w30 h20 c" uiTheme[6], F4Key)
 
-    ; Banner section
-    SettingsGUI.Add("GroupBox", "x310 y175 w280 h100 c" uiTheme[1], "Banner Checker")  ; Box
-    SettingsGUI.Add("Text", "x320 y195 c" uiTheme[1], "Banner Unit Name (Adding later)")  ; Banner Text
-    global BannerUnitBox := SettingsGUI.Add("Edit", "x320 y215 w260 h20 c" uiTheme[6])  ; Store banner
-    testBannerBtn := SettingsGUI.Add("Button", "x320 y240 w120 h25", "Test Banner")
-    testBannerBtn.OnEvent("Click", (*) => CheckBanner(BannerUnitBox.Value))
-
     ; Private Server section
-    SettingsGUI.Add("GroupBox", "x310 y280 w280 h100 c" uiTheme[1], "PS Link")  ; Box
-    SettingsGUI.Add("Text", "x320 y300 c" uiTheme[1], "Private Server Link (optional)")  ; Ps text
-    global PsLinkBox := SettingsGUI.Add("Edit", "x320 y320 w260 h20 c" uiTheme[6])  ;  ecit box
+    SettingsGUI.Add("GroupBox", "x310 y175 w280 h100 Center c" uiTheme[1], "Private Server")  ; Box
+
+    SettingsGUI.Add("Text", "x320 y195 c" uiTheme[1], "Private Server Link (optional)")  ; Ps text
+    global PsLinkBox := SettingsGUI.Add("Edit", "x320 y215 w260 h20 c" uiTheme[6])  ;  ecit box
 
     SettingsGUI.Add("GroupBox", "x10 y10 w115 h70 c" uiTheme[1], "UI Navigation")
     SettingsGUI.Add("Text", "x20 y30 c" uiTheme[1], "Navigation Key")
     global UINavBox := SettingsGUI.Add("Edit", "x20 y50 w20 h20 c" uiTheme[6], "\")
 
-    SettingsGUI.Add("GroupBox", "x160 y10 w115 h70 c" uiTheme[1], "Card Priority")
-    ;SettingsGUI.Add("Text", "x170 y30 c" uiTheme[1], "Navigation Key")
-    PriorityPickerButton := SettingsGUI.Add("Button", "x170 y50 w95 h20", "Edit")
-
-    PriorityPickerButton.OnEvent("Click", (*) => OpenPriorityPicker())
-
     ; Save buttons
     webhookSaveBtn := SettingsGUI.Add("Button", "x460 y135 w120 h25", "Save Webhook")
     webhookSaveBtn.OnEvent("Click", (*) => SaveWebhookSettings())
 
+    PsSaveBtn := SettingsGUI.Add("Button", "x460 y240 w120 h25", "Save PsLink")
+    PsSaveBtn.OnEvent("Click", (*) => SavePsSettings())
+
     keybindSaveBtn := SettingsGUI.Add("Button", "x20 y220 w50 h20", "Save")
     keybindSaveBtn.OnEvent("Click", SaveKeybindSettings)
-
-    bannerSaveBtn := SettingsGUI.Add("Button", "x460 y240 w120 h25", "Save Banner")
-    bannerSaveBtn.OnEvent("Click", (*) => SaveBannerSettings())
-
-    PsSaveBtn := SettingsGUI.Add("Button", "x460 y345 w120 h25", "Save PsLink")
-    PsSaveBtn.OnEvent("Click", (*) => SavePsSettings())
 
     UINavSaveBtn := SettingsGUI.Add("Button", "x50 y50 w60 h20", "Save")
     UINavSaveBtn.OnEvent("Click", (*) => SaveUINavSettings())
@@ -204,22 +188,20 @@ ShowSettingsGUI(*) {
         DiscordUserIDBox.Value := FileRead(DiscordUserIDFile, "UTF-8")
     if FileExist(SendActivityLogsFile)
         SendActivityLogsBox.Value := (FileRead(SendActivityLogsFile, "UTF-8") = "1")   
-    if FileExist("Settings\BannerUnit.txt")
-        BannerUnitBox.Value := FileRead("Settings\BannerUnit.txt", "UTF-8")
     if FileExist("Settings\PrivateServer.txt")
         PsLinkBox.Value := FileRead("Settings\PrivateServer.txt", "UTF-8")
     if FileExist("Settings\UINavigation.txt")
         UINavBox.Value := FileRead("Settings\UINavigation.txt", "UTF-8")
 
     ; Show the settings window
-    SettingsGUI.Show("w600 h400")
+    SettingsGUI.Show("w600 h285")
     Webhookdiverter.Focus()
 }
 
 OpenDebug(*) {
     DebugGUI := Gui("+AlwaysOnTop")
     DebugGUI.SetFont("s10 bold", "Segoe UI")
-    DebugGUI.Title := "DEBUG MODE"
+    DebugGUI.Title := "Debug Mode"
 
     DebugGUI.BackColor := "0c000a"
     DebugGUI.MarginX := 20
@@ -231,12 +213,6 @@ OpenDebug(*) {
     DebugGUI.SetFont("s10 bold", "Segoe UI")
     ScreenResChecker := DebugGUI.Add("Button", "x40 y100 w200 cWhite +Center", "Screen Resolution")
     ScreenResChecker.OnEvent("Click", (*) => GetScreenInfo())
-
-    ScreenResChecker1 := DebugGUI.Add("Button", "x40 y140 w200 cWhite +Center", "Mouse")
-    ScreenResChecker1.OnEvent("Click", (*) => MouseMovementDebug())
-
-    ScreenResChecker2 := DebugGUI.Add("Button", "x40 y180 w200 cWhite +Center", "FindText")
-    ScreenResChecker2.OnEvent("Click", (*) => FindTextDebug())
 
     DebugGUI.Show("w290")
 }
@@ -257,39 +233,10 @@ GetScreenInfo() {
     ScreenInfoGUI.Show("w300")
 }
 
-MouseMovementDebug() {
-    MouseMove(0,0)
-    MouseDebug := Gui("+AlwaysOnTop")
-    MouseDebug.BackColor := "0c000a"
-    sleep 1000
-    MouseDebug.Add("Text", "w300 cWhite +Center","If your mouse didnt move its likely due to Riot/Vanguard Anticheat Pleas turn it off")
-    MouseDebug.Show("w300")
-    
-}
-
-MypfpBeru := "|<>*130$71.zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy3kzzzk0zzzzw7VzzXU0zzzzs73zy700zzzzkC7zwC7VzzzzUAC1k4D30s1z0MM1U8S40k1y0EU10E0MVU3w8V333U0zV33sE2D6703k267kk4SAC6704ADVU8MMQC4A8MT3UE0k8Q80Eky70k3kEw80VVwD1kDUVsE133zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
-FindtextIMGDEBUg := A_ScriptDir "\Images\FindTextDebugPic.png"
-
-FindTextDebug() {
-    FindTextThing := Gui("+AlwaysOnTop")
-    FindTextThing.BackColor := "0c000a"
-    sleep 1000
-    FindTextThing.Add("Picture", "", FindtextIMGDEBUg)
-    FindTextThing.Show("w300")
-    sleep 1000
-    if (ok := FindText(&X, &Y, 0, 0, 1000, 1000, 0, 0, MypfpBeru)){
-        FindTextThing.Add("Text","cWhite +Center","Image Found This Is A Good Step To Debbuging")
-    } else{
-       FindTextThing.Add("Text","cWhite +Center","Image Not Found Please Contact Support Or Check Resolution Debug")
-    }
-    FindTextThing.Show("w300 h100")
-    
-}
-
 OpenGuide(*) {
     GuideGUI := Gui("+AlwaysOnTop")
     GuideGUI.SetFont("s10 bold", "Segoe UI")
-    GuideGUI.Title := "Anime adventures settings (Thank you faxi)"
+    GuideGUI.Title := "Anime Adventures Guide"
 
     GuideGUI.BackColor := "0c000a"
     GuideGUI.MarginX := 20
@@ -302,32 +249,34 @@ OpenGuide(*) {
     GuideGUI.Add("Picture", "x100 w600 h160 cWhite +Center", "Images\aasettings.png")
 
     GuideGUI.Add("Text", "x0 w800 cWhite +Center", "2 - In your ROBLOX settings, make sure your keyboard is set to click to move and your graphics are set to 1 and enable UI navigation")
-    GuideGUI.Add("Picture", "x50 w700   cWhite +Center", "Images\Clicktomove.png")
-    GuideGUI.Add("Picture", "x50 w700   cWhite +Center", "Images\graphics1.png")
+    GuideGUI.Add("Picture", "x50 w700 cWhite +Center", "Images\Clicktomove.png")
+    GuideGUI.Add("Picture", "x50 w700 cWhite +Center", "Images\graphics1.png")
     GuideGUI.Add("Text", "x0 w800 cWhite +Center", "3 - Set up the unit setup however you want, however I'd avoid hill only units       if you can since it might break")
 
-    GuideGUI.Add("Text", "x0 w800 cWhite +Center", "4 - Rejoin Anime Adventures, dont move your camera at all and press F2 to start the macro. Good luck!" )
+    GuideGUI.Add("Text", "x0 w800 cWhite +Center", "4 - Rejoin Anime Adventures to reset the camera and press F2 to start the macro. Good luck!" )
 
     GuideGUI.Show("w800")
 }
 
-aaMainUI.SetFont("s12 Bold c" uiTheme[1])
-global settingsBtn := aaMainUI.Add("Button", "x1200 y0 w90 h30", "Settings")
+aaMainUI.SetFont("s9 Bold c" uiTheme[1])
+
+;DEBUG
+DebugButton := aaMainUI.Add("Button", "x1000 y5 w90 h20 +Center", "Debug")
+DebugButton.OnEvent("Click", (*) => OpenDebug())
+
+global guideBtn := aaMainUI.Add("Button", "x1100 y5 w90 h20", "Guide")
+guideBtn.OnEvent("Click", OpenGuide)
+
+global settingsBtn := aaMainUI.Add("Button", "x1200 y5 w90 h20", "Settings")
 settingsBtn.OnEvent("Click", ShowSettingsGUI)
 
-global guideBtn := aaMainUI.Add("Button", "x1100 y0 w90 h30", "Guide")
-guideBtn.OnEvent("Click", OpenGuide)
+global MaharagaButton := aaMainUI.Add("Picture", "x1308 y30 w55 h55 +BackgroundTrans cffffff", WheelImage)
+MaharagaButton.OnEvent("Click", (*) => ToggleSettingsVisibility())
 
 placementSaveBtn := aaMainUI.Add("Button", "x807 y471 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
+
 aaMainUI.SetFont("s9")
-
-global MaharagaButton := aaMainUI.Add("Button", "x975 y0 w115 h30", "Mahoraga Settings")
-MaharagaButton.OnEvent("Click", (*) => ToggleSettingsVisibility())
-
-;DEBUG
-DebugButton := aaMainUI.Add("Button", "x850 y0 w115 h30 +Center", "Debug Mode")
-DebugButton.OnEvent("Click", (*) => OpenDebug())
 
 ;Normal Options
 global NextLevelBox := aaMainUI.Add("Checkbox", "x900 y451 cffffff Checked", "Next Level")
@@ -343,7 +292,6 @@ global MagicTeam := aaMainUI.Add("DropDownList", "x1270 y471 w45 h180 Choose1 +C
 SaveChestsBox := aaMainUI.Add("CheckBox", "x900 y451 cffffff Checked", "Save Chests For Rukia")
 StopAfterDefeat := aaMainUI.Add("CheckBox", "x900 y476 cffffff Checked", "Stop Upon Defeat") ;x1005 y451
 DenyShrines := aaMainUI.Add("CheckBox", "x1075 y451 cffffff Checked", "Reject Shrines")
-UseNewDungeonRoute := aaMainUI.Add("CheckBox", "x1200 y451 cffffff Checked", "New Route System")
 EditRoute := aaMainUI.Add("Button", "x1050 y470 w80 h25", "Edit Route")
 EditRoute.OnEvent("Click", (*) => OpenRoutePriorityPicker())
 EditCurses := aaMainUI.Add("Button", "x1150 y470 w80 h25", "Edit Curses")
@@ -355,16 +303,12 @@ BringUnits := aaMainUI.Add("CheckBox", "x1200 y451 cffffff Checked", "Bring Own 
 EditMaps := aaMainUI.Add("Button", "x1200 y470 w80 h25", "Edit Maps")
 EditMaps.OnEvent("Click", (*) => OpenMapSkipPriorityPicker())
 ;Misc Options
-global MiscSettings := aaMainUI.Add("GroupBox", "x110 y630 w290 h60 +Center c" uiTheme[1], "Misc. Settings")
-global RejoinRoblox := aaMainUI.Add("Checkbox", "x115 y650 c" uiTheme[1], "Pending Teleport Failsafe")
-global StoryUINav := aaMainUI.Add("Checkbox", "x115 y670 c" uiTheme[1], "UI Navigation")
-global UseCustomSettings := aaMainUI.Add("Checkbox", "x235 y670 Hidden c" uiTheme[1], "Custom Settings")
-
-
+global MiscSettings := aaMainUI.Add("GroupBox", "x180 y630 w135 h60 +Center c" uiTheme[1], "Misc. Settings")
+global StoryUINav := aaMainUI.Add("Checkbox", "x185 y650 c" uiTheme[1], "UI Navigation")
 ;Upgrade Option Testing
-global UpgradeSettings := aaMainUI.Add("GroupBox", "x420 y630 w220 h60 +Center c" uiTheme[1], "Upgrade Settings")
-global PriorityUpgrade := aaMainUI.Add("CheckBox", "x425 y650 cffffff", "Priority Upgrade")
-global MaxUpgradeBeforeMoving := aaMainUI.Add("CheckBox", "x425 y670 cffffff", "Upgrade units one at a time")
+global UpgradeSettings := aaMainUI.Add("GroupBox", "x375 y630 w220 h60 +Center c" uiTheme[1], "Upgrade Settings")
+global PriorityUpgrade := aaMainUI.Add("CheckBox", "x380 y650 cffffff", "Priority Upgrade")
+global MaxUpgradeBeforeMoving := aaMainUI.Add("CheckBox", "x380 y670 cffffff", "Upgrade units one at a time")
 ;Auto Settings
 global AutoSettings := aaMainUI.Add("GroupBox", "x660 y630 w135 h60 +Center c" uiTheme[1], "Auto Settings")
 global AutoAbilityBox := aaMainUI.Add("CheckBox", "x665 y650 cffffff Checked", "Auto Ability")
@@ -385,7 +329,7 @@ MahoragoModeText := aaMainUI.Add("Text", "x1220 y390 w130 h20 +Center", "Attack 
 global MahoragoMode := aaMainUI.Add("DropDownList", "x1235 y410 w100 h180 Choose1", ["Defend", "Boss", "Attack"])
 
 ; General Settings
-PlacementSelectionText := aaMainUI.Add("Text", "x810 y390 w130 h20", "Placement Settings")
+PlacementSelectionText := aaMainUI.Add("Text", "x812 y390 w130 h20", "Placement Profiles")
 PlacementSelection := aaMainUI.Add("DropDownList", "x825 y410 w100 h180 Choose1 +Center", ["Default", "Challenge", "Contract", "Dungeon", "Raid", "Fool's Hunt"])
 
 PlacementPatternText := aaMainUI.Add("Text", "x960 y390 w115 h20", "Placement Type")
@@ -399,14 +343,13 @@ global LobbySleepTimer := aaMainUI.Add("DropDownList", "x1235 y410 w100 h180 Cho
 
 placementSaveText := aaMainUI.Add("Text", "x807 y451 w80 h20", "Save Config")
 
-Hotkeytext := aaMainUI.Add("Text", "x807 y35 w530 h30", "To change keybinds click top right settings, Below are default hotkey settings ")
-Hotkeytext2 := aaMainUI.Add("Text", "x807 y50 w530 h30", "F1:Reposition roblox window|F2:Start Macro|F3:Stop Macro|F4:Pause Macro")
+Hotkeytext := aaMainUI.Add("Text", "x807 y35 w500 h30", "Below are default hotkey settings ")
+Hotkeytext2 := aaMainUI.Add("Text", "x807 y50 w500 h30", "F1:Fix Roblox Window|F2:Start Macro|F3:Stop Macro|F4:Pause Macro")
 GithubButton := aaMainUI.Add("Picture", "x30 y640 w40 h40 +BackgroundTrans cffffff Hidden", GithubImage)
 DiscordButton := aaMainUI.Add("Picture", "x30 y645 w60 h34 +BackgroundTrans cffffff", DiscordImage)
 
 GithubButton.OnEvent("Click", (*) => OpenGithub())
 DiscordButton.OnEvent("Click", (*) => OpenDiscord())
-MaxUpgradeBeforeMoving.OnEvent("Click", (*) => SendWarningMessage())
 
 ;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT
@@ -417,7 +360,7 @@ global StoryDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0
 global StoryActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Act 1", "Act 2", "Act 3", "Act 4", "Act 5", "Act 6", "Infinity"])
 global LegendDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Magic Hills", "Space Center", "Fabled Kingdom", "Virtual Dungeon", "Dungeon Throne", "Rain Village"] )
 global LegendActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Act 1", "Act 2", "Act 3", "Random"])
-global RaidDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["The Spider", "Sacred Planet", "Strange Town", "Ruined City"])
+global RaidDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Ant Kingdom", "Sacred Planet", "Strange Town", "Ruined City"])
 global RaidActDropdown := aaMainUI.Add("DropDownList", "x1128 y53 w80 h180 Choose0 +Center", ["Act 1", "Act 2", "Act 3", "Act 4", "Act 5"])
 global InfinityCastleDropdown := aaMainUI.Add("DropDownList", "x968 y53 w80 h180 Choose0 +Center", ["Normal", "Hard"])
 global PortalDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Alien Portal", "Puppet Portal", "Demon Leader's Portal", "Eclipse Portal", "Noble Portal", "Shibuya Portal"])
@@ -457,7 +400,6 @@ MahoragoMode.Visible := false
 SaveChestsBox.Visible := false
 StopAfterDefeat.Visible := false
 DenyShrines.Visible := false
-UseNewDungeonRoute.Visible := false
 EditRoute.Visible := false
 EditCurses.Visible := false
 
@@ -924,12 +866,17 @@ getElapsedTime() {
 
 sizeDown() {
     global rblxID
-    
+
     if !WinExist(rblxID)
         return
 
-    WinGetPos(&X, &Y, &OutWidth, &OutHeight, rblxID)
-    
+    try {
+        WinGetPos(&X, &Y, &OutWidth, &OutHeight, rblxID)
+    } catch {
+        AddToLog("Failed to get window position.")
+        return ; Safely exit if the window doesn't exist or can't get position
+    }
+
     ; Exit fullscreen if needed
     if (OutWidth >= A_ScreenWidth && OutHeight >= A_ScreenHeight) {
         Send "{F11}"
@@ -938,14 +885,18 @@ sizeDown() {
 
     ; Force the window size and retry if needed
     Loop 3 {
-        WinMove(X, Y, targetWidth, targetHeight, rblxID)
-        Sleep(100)
-        WinGetPos(&X, &Y, &OutWidth, &OutHeight, rblxID)
-        if (OutWidth == targetWidth && OutHeight == targetHeight)
-            break
+        try {
+            WinMove(X, Y, targetWidth, targetHeight, rblxID)
+            Sleep(100)
+            WinGetPos(&X, &Y, &OutWidth, &OutHeight, rblxID)
+            if (OutWidth == targetWidth && OutHeight == targetHeight)
+                break
+        } catch {
+            AddToLog("Failed to get window position.")
+            break ; Stop trying if something goes wrong
+        }
     }
 }
-
 moveRobloxWindow() {
     global aaMainUIHwnd, offsetX, offsetY, rblxID
     
@@ -986,6 +937,7 @@ forceRobloxSize() {
     sizeDown()
     moveRobloxWindow()
 }
+
 ; Function to periodically check window size
 checkRobloxSize() {
     global rblxID
@@ -1018,13 +970,9 @@ checkSizeTimer() {
     }
 }
 
-SendWarningMessage() {
-    AddToLog("This only works in main upgrade phase")
-}
-
 ; Function to toggle visibility of the checkboxes
 ToggleDungeonCheckboxes() {
-    global SaveChestsBox, StopAfterDefeat, DenyShrines, UseNewDungeonRoute, EditRoute, EditCurses
+    global SaveChestsBox, StopAfterDefeat, DenyShrines, EditRoute, EditCurses
     
     ; Check the current visibility state and toggle
     currentState := SaveChestsBox.Visible  ; Use the visibility of the first checkbox to determine the state
@@ -1034,7 +982,6 @@ ToggleDungeonCheckboxes() {
     SaveChestsBox.Visible := newVisibility
     StopAfterDefeat.Visible := newVisibility
     DenyShrines.Visible := newVisibility
-    UseNewDungeonRoute.Visible := newVisibility
     EditRoute.Visible := newVisibility
     EditCurses.Visible := newVisibility
 }

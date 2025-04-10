@@ -436,11 +436,12 @@ SendMode "Event"
 #Include %A_ScriptDir%\lib/Modes/Fools-Hunt/MapConfig.ahk
 #Include %A_ScriptDir%\lib\Modes\Winter\WinterConfig.ahk
 #Include %A_ScriptDir%\lib/Modes/Dungeon/DungeonConfig.ahk
-#Include %A_ScriptDir%\lib/webhooksettings.ahk
-#Include %A_ScriptDir%\Lib\FindText.ahk
-#Include %A_ScriptDir%\Lib\OCR-main\Lib\OCR.ahk
-#Include %A_ScriptDir%\Lib\PlacementLogics.ahk 
-#Include %A_ScriptDir%\Lib\UpdateChecker.ahk
 #Include %A_ScriptDir%\Lib\Modes\Dungeon\Dungeon.ahk
 #Include %A_ScriptDir%\Lib\Modes\Portal.ahk
 #Include %A_ScriptDir%\Lib\Modes\Winter\Winter2024.ahk
+#Include %A_ScriptDir%\Lib\Modes\Fools-Hunt\FoolsHunt.ahk
+#Include %A_ScriptDir%\Lib\FindText.ahk
+#Include %A_ScriptDir%\Lib\OCR-main\Lib\OCR.ahk
+#Include %A_ScriptDir%\Lib\PlacementLogics.ahk
+#Include %A_ScriptDir%\lib/webhooksettings.ahk
+#Include %A_ScriptDir%\Lib\UpdateChecker.ahk
